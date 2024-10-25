@@ -1,4 +1,4 @@
-Function New-PSBlueSkyPost {
+Function New-PSBlueskyPost {
     [CmdletBinding(SupportsShouldProcess)]
     [OutputType([System.String])]
     [Alias("skeet")]
@@ -11,14 +11,14 @@ Function New-PSBlueSkyPost {
         [string]$ImagePath,
         [Parameter(HelpMessage = 'You should include ALT text for the image.')]
         [string]$ImageAlt,
-        [Parameter(Mandatory, HelpMessage = 'A PSCredential with your BlueSky username and password')]
+        [Parameter(Mandatory, HelpMessage = 'A PSCredential with your Bluesky username and password')]
         [PSCredential]$Credential
     )
 
     Begin {
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
-        $token = Get-PSBlueSkyAccessToken -Credential $Credential
+        $token = Get-PSBlueskyAccessToken -Credential $Credential
 
     } #begin
     Process {
@@ -27,7 +27,7 @@ Function New-PSBlueSkyPost {
                 Authorization  = "Bearer $token"
                 'Content-Type' = 'application/json'
             }
-            $apiUrl = "$($global:PDSHOST)/xrpc/com.atproto.repo.createRecord"
+            $apiUrl = "$PDSHOST/xrpc/com.atproto.repo.createRecord"
             Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Posting message to $apiURL"
 
             $record = @{
@@ -39,8 +39,11 @@ Function New-PSBlueSkyPost {
                 if (-not $ImageAlt) {
                     Throw 'You must provide ALT text for the image.'
                 }
-                $image = Add-PSBlueSkyImage -ImagePath $ImagePath -ImageAlt $ImageAlt -Credential $Credential
-                if ($image) {
+                $image = Add-PSBlueskyImage -ImagePath $ImagePath -ImageAlt $ImageAlt -Credential $Credential
+                if ($WhatIfPreference) {
+                    #don't do anything
+                }
+                elseif ($image) {
                     $embed = @{
                         '$type' = 'app.bsky.embed.images'
                         images  = @(
@@ -68,7 +71,7 @@ Function New-PSBlueSkyPost {
                 record     = $record
             } | ConvertTo-Json -Depth 6
 
-            if ($PSCmdlet.ShouldProcess($Message, 'Post to BlueSky')) {
+            if ($PSCmdlet.ShouldProcess($Message, 'Post to Bluesky')) {
                 $response = Invoke-RestMethod -Uri $apiUrl -Method Post -Headers $headers -Body $body
                 $split = $response.uri -split '/' | where { $_ -match '\w' }
                 $publicUri = 'https://bsky.app/profile/'

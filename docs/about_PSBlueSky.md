@@ -1,5 +1,5 @@
-# PSBlueSky
-## about_PSBlueSky
+# PSBluesky
+## about_PSBluesky
 
 ```
 ABOUT TOPIC NOTE:

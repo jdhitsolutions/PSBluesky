@@ -1,20 +1,20 @@
-Function Get-PSBlueSkyProfile {
+Function Get-PSBlueskyProfile {
     [CmdletBinding()]
-    [OutputType('PSBlueSkyProfile')]
+    [OutputType('PSBlueskyProfile')]
     Param(
         [Parameter(Mandatory, HelpMessage = 'Enter the profile or user name.')]
         [ValidateNotNullOrEmpty()]
         [Alias('Profile')]
         [string]$UserName,
-        [Parameter(Mandatory, HelpMessage = 'A PSCredential with your BlueSky username and password')]
+        [Parameter(Mandatory, HelpMessage = 'A PSCredential with your Bluesky username and password')]
         [PSCredential]$Credential
     )
 
-    $token = Get-PSBlueSkyAccessToken -Credential $Credential
+    $token = Get-PSBlueskyAccessToken -Credential $Credential
     If ($token) {
         Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Querying for $Username"
 
-        $apiUrl = "$($global:PDSHOST)/xrpc/app.bsky.actor.getProfile?actor=$UserName"
+        $apiUrl = "$PDSHOST/xrpc/app.bsky.actor.getProfile?actor=$UserName"
         Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] $apiUrl"
         $headers = @{
             Authorization  = "Bearer $token"
@@ -25,7 +25,7 @@ Function Get-PSBlueSkyProfile {
         If ($profile) {
             Write-Information -MessageData ($profile | Out-String) -Tags raw
             [PSCustomObject]@{
-                PSTypeName  = 'PSBlueSkyProfile'
+                PSTypeName  = 'PSBlueskyProfile'
                 Username    = $profile.handle
                 Display     = $profile.displayName
                 Created     = $profile.createdAt

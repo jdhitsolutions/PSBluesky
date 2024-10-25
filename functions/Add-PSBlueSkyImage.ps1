@@ -1,4 +1,4 @@
-Function Add-PSBlueSkyImage {
+Function Add-PSBlueskyImage {
     [CmdletBinding(SupportsShouldProcess)]
     [OutputType('PSCustomObject')]
     param(
@@ -11,7 +11,7 @@ Function Add-PSBlueSkyImage {
         [Parameter(HelpMessage = 'You should include ALT text for the image.')]
         [Alias('Alt')]
         [string]$ImageAlt,
-        [Parameter(Mandatory, HelpMessage = 'A PSCredential with your BlueSky username and password')]
+        [Parameter(Mandatory, HelpMessage = 'A PSCredential with your Bluesky username and password')]
         [PSCredential]$Credential
     )
 
@@ -20,18 +20,18 @@ Function Add-PSBlueSkyImage {
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
         #Convert path to a file system path
         $ImagePath = Convert-Path -Path $ImagePath
-        $token = Get-PSBlueSkyAccessToken -Credential $Credential
+        $token = Get-PSBlueskyAccessToken -Credential $Credential
     } #begin
     Process {
         if ($token) {
             $imageBytes = [System.IO.File]::ReadAllBytes($ImagePath)
             Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Uploading image $ImagePath [$ImageAlt]"
-            $uploadUrl = "$Global:PDSHOST/xrpc/com.atproto.repo.uploadBlob"
+            $uploadUrl = "$PDSHOST/xrpc/com.atproto.repo.uploadBlob"
             $headers = @{
                 Authorization = "Bearer $token"
             }
 
-            if ($PSCmdlet.ShouldProcess($ImagePath, 'Upload BlueSky image')) {
+            if ($PSCmdlet.ShouldProcess($ImagePath, 'Upload Bluesky image')) {
                 $response = Invoke-RestMethod -Uri $uploadUrl -Method Post -Headers $headers -Body $imageBytes
 
                 [PSCustomObject]@{

@@ -1,9 +1,9 @@
-Function Get-PSBlueSkyAccessToken {
+Function Get-PSBlueskyAccessToken {
     [cmdletbinding()]
     [OutputType([System.String])]
 
     Param (
-        [Parameter(Mandatory, HelpMessage = 'A PSCredential with your BlueSky username and password')]
+        [Parameter(Mandatory, HelpMessage = 'A PSCredential with your Bluesky username and password')]
         [PSCredential]$Credential
     )
 
@@ -12,12 +12,12 @@ Function Get-PSBlueSkyAccessToken {
         'Content-Type' = 'application/json'
     }
 
-    $LogonURL = "$($global:PDSHOST)/xrpc/com.atproto.server.createSession"
+    $LogonURL = "$PDSHOST/xrpc/com.atproto.server.createSession"
     $body = @{
         identifier = $Credential.UserName
         password   = $Credential.GetNetworkCredential().Password
     } | ConvertTo-Json
-    Write-Verbose "[$((Get-Date).TimeOfDay)] Creating a BlueSky logon session for $($Credential.UserName)"
+    Write-Verbose "[$((Get-Date).TimeOfDay)] Creating a Bluesky logon session for $($Credential.UserName)"
     $BSkySession = Invoke-RestMethod -Uri $LogonURL -Method Post -Headers $headers -Body $Body
     if ($BSkySession.accessJwt) {
         $BSkySession.accessJwt
