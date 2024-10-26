@@ -26,6 +26,8 @@ New-PSBlueskyPost -Message "Getting close to sharing my #PowerShell Bluesky code
 
 The output is a URL to the post.
 
+If your message contains a URL, it will be converted to a clickable link. Markdown formatted links are not supported, although it is on the wish list.
+
 ## Profiles
 
 The module has a command to retrieve a Bluesky profile.
@@ -34,14 +36,19 @@ The module has a command to retrieve a Bluesky profile.
 Get-PSBlueskyProfile jdhitsolutions.com
 ```
 
+The module uses a custom format file.
+
 ![A Bluesky profile](images/bsky-profile.png)]
+
+The user's profile name should be a clickable link.
 
 ## Roadmap
 
 I have a short list of items to finish before this can be published to the PowerShell Gallery.
 
 - help documentation
-- custom formatting of the profile output
+- A get preferences command
+- support Markdown formatted links in posts
 - localize verbose and other messaging
 
 If you are testing the module and think you've found a bug, please post an [Issue\(https://github.com/jdhitsolutions/PSBlueSky/issues). For all other topics and questions, please use the [Discussions](https://github.com/jdhitsolutions/PSBlueSky/discussions) feature.

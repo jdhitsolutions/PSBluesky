@@ -21,7 +21,7 @@ Function Get-PSBlueskyProfile {
             'Content-Type' = 'application/json'
         }
 
-        $profile = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers
+        $global:rawProfile = $profile = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers
         If ($profile) {
             Write-Information -MessageData ($profile | Out-String) -Tags raw
             [PSCustomObject]@{
@@ -35,6 +35,7 @@ Function Get-PSBlueskyProfile {
                 Followers   = $profile.followersCount
                 Following   = $profile.followsCount
                 Lists       = $profile.associated.lists
+                URL         = "https://bsky.app/profile/$($profile.handle)"
             }
         }
         else {

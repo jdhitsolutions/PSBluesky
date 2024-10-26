@@ -3,7 +3,7 @@
 #
 @{
     RootModule           = 'PSBluesky.psm1'
-    ModuleVersion        = '0.2.0'
+    ModuleVersion        = '0.3.0'
     CompatiblePSEditions = 'Core'
     GUID                 = 'c5c1fd1d-e648-432d-b7d6-bb56f2044c2a'
     Author               = 'Jeff Hicks'
@@ -11,8 +11,17 @@
     Copyright            = '2024 JDH Information Technology Solutions, Inc.'
     Description          = 'A set of PowerShell commands that use the Bluesky API. You can skeet and upload images from a PowerShell prompt.'
     PowerShellVersion    = '7.4'
-    FunctionsToExport    = 'Add-PSBlueskyImage', 'Get-PSBlueskyAccessToken', 'Get-PSBlueskyProfile',
-    'New-PSBlueskyPost'
+    FunctionsToExport    = @(
+        'Add-PSBlueskyImage',
+        'Get-PSBlueskyAccessToken',
+        'Get-PSBlueskyProfile',
+        'Get-PSBlueskyTimeline'
+        'New-PSBlueskyPost'
+    )
+    FormatsToProcess = @(
+        'formats/PSBlueskyTimelinePost.format.ps1xml',
+        'formats/PSBlueskyProfile.format.ps1xml'
+    )
     CmdletsToExport      = ''
     VariablesToExport    = ''
     AliasesToExport      = 'skeet'

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--A custom formatting outline-->
+<Configuration>
+    <ViewDefinitions>
+        <View>
+            <Name>default</Name>
+            <ViewSelectedBy>
+                <TypeName>PSBlueskyProfile</TypeName>
+            </ViewSelectedBy>
+            <CustomControl>
+                <CustomEntries>
+                    <CustomEntry>
+                        <CustomItem>
+                            <ExpressionBinding>
+                                <ScriptBlock>
+                                "{0} [$($PSStyle.Foreground.Brightblue+$PSStyle.Underline){1}$($PSStyle.Reset)]" -f $_.Display,$($PSStyle.FormatHyperLink($_.UserName,$_.Url))
+                                </ScriptBlock>
+                            </ExpressionBinding>
+                            <NewLine/>
+                            <NewLine/>
+                            <ExpressionBinding>
+                                <ScriptBlock>
+                                "{0}{1}{2}" -f ($PSStyle.Foreground.BrightYellow+$PSStyle.Italic),($_.Description.split("`n").foreach({$_.ToString()})|Out-String),$PSStyle.Reset
+                                </ScriptBlock>
+                            </ExpressionBinding>
+                            <NewLine/>
+                            <ExpressionBinding>
+                                <ScriptBlock>
+                                    $_ | Format-Table -property Created,Posts,Followers,Following,Lists | Out-String
+                                </ScriptBlock>
+                            </ExpressionBinding>
+                        </CustomItem>
+                    </CustomEntry>
+                </CustomEntries>
+            </CustomControl>
+        </View>
+    </ViewDefinitions>
+</Configuration>

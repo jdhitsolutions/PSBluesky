@@ -1,7 +1,7 @@
 Function New-PSBlueskyPost {
     [CmdletBinding(SupportsShouldProcess)]
     [OutputType([System.String])]
-    [Alias("skeet")]
+    [Alias('skeet')]
     param(
         [parameter(Position = 0, Mandatory, HelpMessage = 'The text of the post')]
         [ValidateNotNullOrEmpty()]
@@ -19,7 +19,6 @@ Function New-PSBlueskyPost {
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
         $token = Get-PSBlueskyAccessToken -Credential $Credential
-
     } #begin
     Process {
         If ($token) {
@@ -30,9 +29,25 @@ Function New-PSBlueskyPost {
             $apiUrl = "$PDSHOST/xrpc/com.atproto.repo.createRecord"
             Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Posting message to $apiURL"
 
-            $record = @{
+            $global:r = $record = [ordered]@{
+                '$type'   = 'app.bsky.feed.post'
                 text      = $Message
                 createdAt = (Get-Date -Format 'o')
+            }
+
+            #test message for HTML links
+            #a regex pattern to detect https or http links
+            [regex]$pattern = 'https?://\S+'
+            #create a facet if found
+            if ($pattern.IsMatch($Message)) {
+                $matches = $pattern.Matches($Message)
+                $facets = @()
+                foreach ($match in $matches) {
+                    $link = _newFacetLink -Text $match.Value -Uri $match.Value -Message $Message
+                    $facets += $link
+                }
+                #$record.Add('langs', @('en'))
+                $record.Add('facets', $facets)
             }
 
             if ($ImagePath) {
@@ -69,18 +84,15 @@ Function New-PSBlueskyPost {
                 repo       = $Credential.UserName
                 collection = 'app.bsky.feed.post'
                 record     = $record
-            } | ConvertTo-Json -Depth 6
+            } | ConvertTo-Json -Depth 7
 
             if ($PSCmdlet.ShouldProcess($Message, 'Post to Bluesky')) {
                 $response = Invoke-RestMethod -Uri $apiUrl -Method Post -Headers $headers -Body $body
-                $split = $response.uri -split '/' | where { $_ -match '\w' }
-                $publicUri = 'https://bsky.app/profile/'
-                $publicUri += '{0}/post/{1}' -f $split[1], $split[-1]
-                $publicUri
+                _convertAT -at $response.uri
             }
         }
         else {
-            Write-Host 'Failed to authenticate.'
+            Write-Warning 'Failed to authenticate.'
         }
     } #process
     End {
