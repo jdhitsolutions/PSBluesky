@@ -51,5 +51,5 @@ I have a short list of items to finish before this can be published to the Power
 - support Markdown formatted links in posts
 - localize verbose and other messaging
 
-If you are testing the module and think you've found a bug, please post an [Issue\(https://github.com/jdhitsolutions/PSBlueSky/issues). For all other topics and questions, please use the [Discussions](https://github.com/jdhitsolutions/PSBlueSky/discussions) feature.
+If you are testing the module and think you've found a bug, please post an [Issue](https://github.com/jdhitsolutions/PSBlueSky/issues). For all other topics and questions, please use the [Discussions](https://github.com/jdhitsolutions/PSBlueSky/discussions) feature.
 
