@@ -23,12 +23,13 @@ Function Get-PSBlueSkyTimeline {
             Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Getting $limit timeline posts"
             $URL = "$PDSHost/xrpc/app.bsky.feed.getTimeline?limit=$Limit"
             Try {
-                $global:x = $tl = Invoke-RestMethod -Uri $url -Method Get -Headers $headers -ErrorAction Stop
+                $tl = Invoke-RestMethod -Uri $url -Method Get -Headers $headers -ErrorAction Stop
             }
             Catch {
                 Write-Warning "Failed to get timeline. $($_.Exception.Message)"
             }
             if ($tl) {
+                Write-Information -MessageData $tl -Tags raw
                 $timeline = Foreach ($item in $tl.feed) {
                     [PSCustomObject]@{
                         PSTypeName        = 'PSBlueskyTimelinePost'

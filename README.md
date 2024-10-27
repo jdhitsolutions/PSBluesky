@@ -26,7 +26,7 @@ New-PSBlueskyPost -Message "Getting close to sharing my #PowerShell Bluesky code
 
 The output is a URL to the post.
 
-If your message contains a URL, it will be converted to a clickable link. Markdown formatted links are not supported, although it is on the wish list.
+If your message contains a URL, it will be converted to a clickable link. Make sure your link is surrounded by white space. Markdown formatted links are not supported, although it is on the wish list.
 
 ## Profiles
 
@@ -38,18 +38,80 @@ Get-PSBlueskyProfile jdhitsolutions.com
 
 The module uses a custom format file.
 
-![A Bluesky profile](images/bsky-profile.png)]
+![A Bluesky profile](images/bsky-profile.png)
 
 The user's profile name should be a clickable link.
+
+## Followers
+
+You can retrieve a list of your followers
+
+```powershell
+Get-PSBlueskyFollowers -Limit 2
+```
+
+![Bluesky followers](images/bsky-follower.png)
+
+The custom formatting includes a clickable link to the follower's profile if running in Windows Terminal or a console that supports hyperlinks.
+
+You can pipe the follower object to `Get-PSBlueskyProfile` to retrieve more information.
+
+```powershell
+PS C:\>$f= Get-PSBlueskyFollowers
+PS C:\> $f[12] | Get-PSBlueskyProfile
+
+Jess Pomfret [jpomfret.bsky.social]
+
+Database Engineer with a passion for automation, proper football and fitness.
+She/Her.
+
+
+Created              Posts Followers Following Lists
+-------              ----- --------- --------- -----
+8/14/2023 3:58:44 PM   125       236       157     1
+```
+
+You can retrieve between 1 and 100 followers. I don't know if there is a way to enumerate or page through all followers.
+
+## Feed
+
+Use `Get-PSBlueskyFeed` to retrieve the latest posts from your feed. You can query for 1 to 100.
+
+```powershell
+Get-PSBlueskyFeed -Limit 3
+```
+The object output has a custom format file.
+
+![Bluesky feed](images/bsky-feed.png)
+
+The output includes clickable links to the the author, which might be different than you if reposting, and the post.
+
+The current behavior is to get posts and replies.
+
+## Information and Troubleshooting
+
+The commands in this module should write the raw response from the API request to the Information stream.
+
+![Information stream](images/bsky-information.png)
+
+The output will be an object.
+
+```powershell
+PS C:\Scripts\PSBluesky> $v.MessageData | Select-Object did,handle,*count
+
+did            : did:plc:ohgsqpfsbocaaxusxqlgfvd7
+handle         : jdhitsolutions.com
+followersCount : 322
+followsCount   : 177
+postsCount     : 543
+```
 
 ## Roadmap
 
 I have a short list of items to finish before this can be published to the PowerShell Gallery.
 
 - help documentation
-- A get preferences command
 - support Markdown formatted links in posts
 - localize verbose and other messaging
 
 If you are testing the module and think you've found a bug, please post an [Issue](https://github.com/jdhitsolutions/PSBlueSky/issues). For all other topics and questions, please use the [Discussions](https://github.com/jdhitsolutions/PSBlueSky/discussions) feature.
-

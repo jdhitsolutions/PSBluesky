@@ -20,7 +20,7 @@ Function _newFacetLink {
         [PSCustomObject]@{
             index    = [ordered]@{
                 byteStart = $m.index
-                byteEnd   = $m.value.length+$m.length+1
+                byteEnd   = ($m.value.length)+($m.index)
             }
             features = @(
                 [PSCustomObject]@{
@@ -50,5 +50,3 @@ Function _convertAT {
     $publicUri += '{0}/post/{1}' -f $split[1], $split[-1]
     $publicUri
 }
-
-

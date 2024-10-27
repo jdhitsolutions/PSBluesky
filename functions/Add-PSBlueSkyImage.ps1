@@ -33,7 +33,7 @@ Function Add-PSBlueskyImage {
 
             if ($PSCmdlet.ShouldProcess($ImagePath, 'Upload Bluesky image')) {
                 $response = Invoke-RestMethod -Uri $uploadUrl -Method Post -Headers $headers -Body $imageBytes
-
+                Write-Information -MessageData $response -Tags raws
                 [PSCustomObject]@{
                     Type     = $response.blob.'$type'
                     Link     = $response.blob.ref.'$link'

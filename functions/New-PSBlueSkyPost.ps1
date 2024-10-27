@@ -29,7 +29,7 @@ Function New-PSBlueskyPost {
             $apiUrl = "$PDSHOST/xrpc/com.atproto.repo.createRecord"
             Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Posting message to $apiURL"
 
-            $global:r = $record = [ordered]@{
+            $record = [ordered]@{
                 '$type'   = 'app.bsky.feed.post'
                 text      = $Message
                 createdAt = (Get-Date -Format 'o')
@@ -86,9 +86,12 @@ Function New-PSBlueskyPost {
                 record     = $record
             } | ConvertTo-Json -Depth 7
 
+            Write-Information -MessageData $body -Tags raw
+
             if ($PSCmdlet.ShouldProcess($Message, 'Post to Bluesky')) {
                 $response = Invoke-RestMethod -Uri $apiUrl -Method Post -Headers $headers -Body $body
                 _convertAT -at $response.uri
+                Write-Information -MessageData $response -Tags raw
             }
         }
         else {

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--A custom formatting outline-->
+<Configuration>
+    <ViewDefinitions>
+        <View>
+            <Name>default</Name>
+            <ViewSelectedBy>
+                <TypeName>PSBlueskyFeedItem</TypeName>
+            </ViewSelectedBy>
+            <CustomControl>
+                <CustomEntries>
+                    <CustomEntry>
+                        <CustomItem>
+                            <ExpressionBinding>
+                                <ScriptBlock>
+                                "{0} [$($PSStyle.Foreground.Brightblue+$PSStyle.Underline){1}$($PSStyle.Reset)]" -f $_.AuthorDisplay,$($PSStyle.FormatHyperLink($_.Author,$_.Url))
+                                </ScriptBlock>
+                            </ExpressionBinding>
+                            <NewLine/>
+                            <NewLine/>
+                            <ExpressionBinding>
+                                <ScriptBlock>
+                                if ($_.IsRepost) {
+                                    $fg = $PSStyle.Foreground.Cyan
+                                }
+                                else {
+                                    $fg = $PSStyle.Foreground.BrightGreen
+                                }
+                                "{0}{1}{2}" -f ($fg+$PSStyle.Italic),($PSStyle.FormatHyperLink($_.Text,$_.url)),$PSStyle.Reset
+                                </ScriptBlock>
+                            </ExpressionBinding>
+                            <NewLine/>
+                            <ExpressionBinding>
+                                <ScriptBlock>
+                                    $_ | Format-Table -property Date,Liked,Replied,Reposted,Quoted | Out-String
+                                </ScriptBlock>
+                            </ExpressionBinding>
+                        </CustomItem>
+                    </CustomEntry>
+                </CustomEntries>
+            </CustomControl>
+        </View>
+    </ViewDefinitions>
+</Configuration>
