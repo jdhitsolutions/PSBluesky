@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file was created with New-PSPropertySet from the
+PSTypeExtensionTools module which you can install from
+the PowerShell Gallery.
+
+Use Update-TypeData to append this file in your PowerShell session.
+
+Created 10/27/2024 14:10:07
+-->
+<Types>
+  <Type>
+    <Name>PSBlueskyFeedItem</Name>
+    <Members>
+      <PropertySet>
+        <Name>Stats</Name>
+        <ReferencedProperties>
+          <Name>Liked</Name>
+          <Name>Reposted</Name>
+          <Name>Replied</Name>
+          <Name>Quoted</Name>
+        </ReferencedProperties>
+      </PropertySet>
+    </Members>
+  </Type>
+  <Type>
+    <Name>PSBlueskyTimelinePost</Name>
+    <Members>
+      <PropertySet>
+        <Name>Stats</Name>
+        <ReferencedProperties>
+          <Name>Liked</Name>
+          <Name>Reposted</Name>
+          <Name>Quoted</Name>
+        </ReferencedProperties>
+      </PropertySet>
+    </Members>
+  </Type>
+</Types>

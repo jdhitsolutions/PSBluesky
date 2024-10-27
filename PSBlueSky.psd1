@@ -3,7 +3,7 @@
 #
 @{
     RootModule           = 'PSBluesky.psm1'
-    ModuleVersion        = '0.4.0'
+    ModuleVersion        = '0.5.0'
     CompatiblePSEditions = 'Core'
     GUID                 = 'c5c1fd1d-e648-432d-b7d6-bb56f2044c2a'
     Author               = 'Jeff Hicks'
@@ -20,6 +20,9 @@
         'Get-PSBlueskyProfile',
         'Get-PSBlueskyTimeline'
         'New-PSBlueskyPost'
+    )
+    TypesToProcess       = @(
+        'types/PSBluesky.types.ps1xml'
     )
     FormatsToProcess = @(
         'formats/PSBlueskyTimelinePost.format.ps1xml',

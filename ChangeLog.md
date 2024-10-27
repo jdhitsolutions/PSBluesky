@@ -3,6 +3,8 @@
 This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+### Added
+- Added a property set called `Stats` for timeline and feed objects.
 
 ## [0.4.0] - 2024-10-27
 
