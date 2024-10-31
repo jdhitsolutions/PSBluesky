@@ -2,7 +2,7 @@
 
 # https://docs.bsky.app/docs/api/app-bsky-feed-get-author-feed
 
-Function Get-PSBlueskyFeed {
+Function Get-BskyFeed {
     [cmdletbinding()]
     [OutputType('PSBlueskyFeedItem')]
 
@@ -17,7 +17,7 @@ Function Get-PSBlueskyFeed {
     Begin {
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($postSVersionTable.PSVersion)"
-        $token = Get-PSBlueskyAccessToken -Credential $Credential
+        $token = Get-BskyAccessToken -Credential $Credential
         $Username = $Credential.UserName
         <#
         this might become a parameter in a future release

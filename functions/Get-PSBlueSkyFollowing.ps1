@@ -1,5 +1,5 @@
 #https://docs.bsky.app/docs/api/app-bsky-graph-get-follows
-Function Get-PSBlueskyFollowing {
+Function Get-BskyFollowing {
     [CmdletBinding()]
     [OutputType('PSBlueskyFollowProfile')]
     Param(
@@ -13,7 +13,7 @@ Function Get-PSBlueskyFollowing {
     Begin {
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
-        $token = Get-PSBlueskyAccessToken -Credential $Credential
+        $token = Get-BskyAccessToken -Credential $Credential
         $UserName = $Credential.UserName
     } #begin
     Process {
@@ -34,7 +34,7 @@ Function Get-PSBlueskyFollowing {
                     [PSCustomObject]@{
                         PSTypeName  = 'PSBlueskyFollowProfile'
                         Username    = $profile.handle
-                        Display     = $profile.displayName
+                        Display     = ($profile.displayName) ? $profile.displayName : $profile.handle
                         Created     = $profile.createdAt.ToLocalTime()
                         Description = $profile.description
                         URL         = "https://bsky.app/profile/$($profile.handle)"

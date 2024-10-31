@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-PSBlueSkyTimeline
+# Get-BskyTimeline
 
 ## SYNOPSIS
 
@@ -14,7 +14,7 @@ Get your Bluesky timeline
 ## SYNTAX
 
 ```yaml
-Get-PSBlueSkyTimeline [[-Limit] <Int32>] [-Credential] <PSCredential>
+Get-BskyTimeline [[-Limit] <Int32>] [-Credential] <PSCredential>
  [<CommonParameters>]
 ```
 
@@ -27,7 +27,7 @@ This command will return all items on your Bluesky timeline. The items are based
 ### Example 1
 
 ```powershell
-PS C:\> Get-PSBlueSkyTimeline -limit 10
+PS C:\> Get-BskyTimeline -limit 10
 
 Date                Author                       Liked Reposted Quoted Text
 ----                ------                       ----- -------- ------ ----
@@ -87,4 +87,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Get-PSBlueskyFeed](Get-PSBlueskyFeed.md)
+[Get-BskyFeed](Get-BskyFeed.md)

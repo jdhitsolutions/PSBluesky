@@ -20,7 +20,7 @@ Function _newFacetLink {
         [PSCustomObject]@{
             index    = [ordered]@{
                 byteStart = $m.index
-                byteEnd   = ($m.value.length)+($m.index)
+                byteEnd   = ($m.value.length) + ($m.index)
             }
             features = @(
                 [PSCustomObject]@{
@@ -39,7 +39,7 @@ Function _convertAT {
     [cmdletbinding()]
     Param(
         [parameter(Mandatory, HelpMessage = 'The AT string to convert')]
-        [ValidatePattern("^at://")]
+        [ValidatePattern('^at://')]
         [string]$at
     )
 
@@ -50,3 +50,124 @@ Function _convertAT {
     $publicUri += '{0}/post/{1}' -f $split[1], $split[-1]
     $publicUri
 }
+
+Function _newSessionObject {
+<#
+Convert the API response into a structured and type object
+
+did             : did:plc:ohgsqpfsbocaaxusxqlgfvd7
+didDoc          : @{@context=System.Object[]; id=did:plc:ohgsqpfsbocaaxusxqlgfvd7; alsoKnownAs=System.Object[];
+                  verificationMethod=System.Object[]; service=System.Object[]}
+handle          : jdhitsolutions.com
+email           : jhicks@jdhitsolutions.com
+emailConfirmed  : True
+emailAuthFactor : False
+accessJwt       : eyJ0eXAiOiJhdCtqd3QiLCJhbGciOiJFUzI1NksifQ.eyJzY29wZSI...
+refreshJwt      : eyJ0eXAiOiJyZWZyZXNoK2p3dCIsImFsZyI6IkVTMjU2SyJ9.eyJz...
+active          : True
+Date            : 10/29/2024 9:56:40 AM
+Age             : 01:09:58.6486840
+#>
+
+    [CmdletBinding()]
+    Param(
+        [Parameter(
+            Position = 0,
+            Mandatory,
+            HelpMessage = 'The Bluesky session object',
+            ValueFromPipeline
+        )]
+        [object]$InputObject
+    )
+    Begin {
+        #not used
+    }
+    Process {
+        [PSCustomObject]@{
+            PSTypeName = 'PSBlueskySession'
+            Handle     = $InputObject.handle
+            Email      = $InputObject.email
+            Active     = $InputObject.active
+            AccessJwt  = $InputObject.accessJwt
+            RefreshJwt = $InputObject.refreshJwt
+            DiD        = $InputObject.did
+            DidDoc     = $InputObject.didDoc
+            Date       = Get-Date
+        }
+    } #process
+    End {
+        Update-TypeData -TypeName 'PSBlueskySession' -MemberType AliasProperty -MemberName UserName -Value handle -Force
+        Update-TypeData -TypeName 'PSBlueskySession' -MemberType ScriptProperty -MemberName Age -Value { (Get-Date) - $this.Date } -Force
+    }
+}
+
+Function _CreateSession {
+    [CmdletBinding()]
+    Param (
+        [Parameter(Mandatory, HelpMessage = 'A PSCredential with your Bluesky username and password')]
+        [PSCredential]$Credential
+    )
+
+    #Create a logon session
+    $headers = @{
+        'Content-Type' = 'application/json'
+    }
+
+    $LogonURL = "$PDSHOST/xrpc/com.atproto.server.createSession"
+    $body = @{
+        identifier = $Credential.UserName
+        password   = $Credential.GetNetworkCredential().Password
+    } | ConvertTo-Json
+    Write-Verbose "[$((Get-Date).TimeOfDay)] Creating a Bluesky logon session for $($Credential.UserName)"
+
+    $splat = @{
+        Uri         = $LogonURL
+        Method      = 'Post'
+        Headers     = $headers
+        Body        = $Body
+        ErrorAction = 'Stop'
+    }
+    Try {
+        $script:BSkySession = Invoke-RestMethod @splat | _newSessionObject
+        $script:accessJwt = $script:BSkySession.accessJwt
+        $script:refreshJwt = $script:BSkySession.refreshJwt
+    } #try
+    Catch {
+        throw $_co
+    }
+    if ($script:accessJwt) {
+        $script:accessJwt
+    }
+    else {
+        Write-Warning 'Failed to authenticate.'
+    }
+}
+
+Function _RefreshSession {
+    [CmdletBinding()]
+    Param (
+        [Parameter(Mandatory, HelpMessage = 'The refresh token')]
+        [string]$RefreshToken
+    )
+
+    #Refresh a Bluesky session
+    Write-Verbose "[$((Get-Date).TimeOfDay)] Refreshing a Bluesky logon session for $($Credential.UserName)"
+    $headers = @{
+        Authorization  = "Bearer $RefreshToken"
+        'Content-Type' = 'application/json'
+    }
+    $RefreshUrl = "$PDSHost/xrpc/com.atproto.server.refreshSession"
+    $script:BSkySession = Invoke-RestMethod -Uri $RefreshUrl -Method Post -Headers $headers -errorAction Stop | _newSessionObject
+
+    $script:accessJwt = $script:BSkySession.accessJwt
+    $script:refreshJwt = $script:BSkySession.refreshJwt
+
+    if ($script:accessJwt) {
+        #return the session
+        $script:BSkySession
+    }
+    else {
+        Write-Warning 'Failed to authenticate.'
+    }
+}
+

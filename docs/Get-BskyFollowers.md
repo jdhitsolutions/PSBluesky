@@ -5,39 +5,39 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-PSBlueskyFollowing
+# Get-BskyFollowers
 
 ## SYNOPSIS
 
-Get a list of Bluesky accounts that you follow
+Get your Bluesky followers
 
 ## SYNTAX
 
 ```yaml
-Get-PSBlueskyFollowing [[-Limit] <Int32>] [-Credential] <PSCredential> [<CommonParameters>]
+Get-BskyFollowers [[-Limit] <Int32>] [-Credential] <PSCredential> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-This command will return a list of Bluesky accounts that you follow. You can get between 1 and 100. Research into enumerating all accounts is ongoing.
+This command will return a list of your Bluesky followers, You can get between 1 and 100. The default is 50. Research into enumerating all followers is ongoing.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> Get-PSBlueskyFollowing -Limit 2
+PS C:\> Get-BskyFollowers -Limit 2
 
-Display      Username                   Description
--------      --------                   -----------
-Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teacher |
-                                        Board member of the .NET Foundation 💜
-                                        | Proud dad joke lover
-             mikeshepard70.bsky.social
+Display       Username           Description
+-------       --------           -----------
+Jonathan Lank jpluk.bsky.social
+Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
+                                 Wallet and Passkey enthusiast. Duke fan.
+                                 Dweller of Seattle exurbia.
 
 ```
 
-The default output includes clickable links to the user's profile. This example assumes the credential has been set in $PSDefaultParameterValues.
+The default output includes clickable links. This example assumes the credential has been set in $PSDefaultParameterValues.
 
 ## PARAMETERS
 
@@ -59,7 +59,7 @@ Accept wildcard characters: False
 
 ### -Limit
 
-Enter the number of accounts that you follow to retrieve between 1 and 100.
+Enter the number of followers to retrieve between 1 and 100.
 Default is 50.
 
 ```yaml
@@ -90,4 +90,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Get-PSBlueskyFollowers](Get-PSBlueskyFollowers.md)
+[Get-BskyFollowing](Get-BskyFollowing.md)

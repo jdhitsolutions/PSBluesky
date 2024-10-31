@@ -5,59 +5,43 @@ online version:
 schema: 2.0.0
 ---
 
-# Add-PSBlueskyImage
+# New-BskyPost
 
 ## SYNOPSIS
 
-Upload an image to Bluesky
+Create a Bluesky post
 
 ## SYNTAX
 
 ```yaml
-Add-PSBlueskyImage [-ImagePath] <String> [-ImageAlt <String>] -Credential <PSCredential>
- [-WhatIf] [-Confirm] [<CommonParameters>]
+New-BskyPost [-Message] <String> [-ImagePath <String>] [-ImageAlt <String>] -Credential <PSCredential> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-This command will upload an image to Bluesky and return a link that you can use in your post. This command will be called when you create a new post and specify an image. You shouldn't need to call this command directly.
+Use this command to post to Bluesky from PowerShell. You can optionally include images. If you include an image you should include an ALT text value. If your message includes URL links, they will be converted into hyperlinks. Be sure that your links have a whitespace on both sides in your message text.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> Add-PSBlueskyImage -ImagePath "C:\Users\user\Documents\image.png" -ImageAlt "alt tet here" -credential $credential
+PS C:\> New-BskyPost "Adding help documentation to my Bluesky #PowerShell module."
+https://bsky.app/profile/did:plc:ohgsqpfsbocaaxusxqlgfvd7/post/3l7j3u7zu6n2w
 ```
 
-You should use ALT text for images.
+The output is a URL to the post. This example assumes the credential has been set in $PSDefaultParameterValues.
 
 ## PARAMETERS
 
-### -ImagePath
+### -Confirm
 
-The path to the image file.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases: Path
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ImageAlt
-
-You should include ALT text for the image.
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: Alt
+Aliases: cf
 
 Required: False
 Position: Named
@@ -82,17 +66,49 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Confirm
+### -ImageAlt
 
-Prompts you for confirmation before running the cmdlet.
+You should include ALT text for the image.
 
 ```yaml
-Type: SwitchParameter
+Type: String
 Parameter Sets: (All)
-Aliases: cf
+Aliases:
 
 Required: False
 Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ImagePath
+
+The path to the image file.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Message
+
+The text of the post
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -114,7 +130,6 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -131,5 +146,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[New-PSBlueskyPost](New-PSBlueskyPost.md)
+[Get-BskyFeed](Get-BskyFeed.md)
 
+[Add-BskyImage](Add-BskyImage.md)

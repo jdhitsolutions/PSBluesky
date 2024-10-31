@@ -1,5 +1,5 @@
 #https://docs.bsky.app/docs/api/app-bsky-feed-get-timeline
-Function Get-PSBlueSkyTimeline {
+Function Get-BskyTimeline {
     [CmdletBinding()]
     [OutputType('PSBlueskyTimelinePost')]
     Param(
@@ -12,7 +12,7 @@ Function Get-PSBlueSkyTimeline {
     Begin {
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
-        $token = Get-PSBlueskyAccessToken -Credential $Credential
+        $token = Get-BskyAccessToken -Credential $Credential
     } #begin
     Process {
         If ($token) {
@@ -34,7 +34,7 @@ Function Get-PSBlueSkyTimeline {
                     [PSCustomObject]@{
                         PSTypeName        = 'PSBlueskyTimelinePost'
                         Author            = $item.post.author.handle
-                        AuthorDisplayName = $item.post.author.displayName
+                        AuthorDisplay     = $item.post.author.displayName
                         Date              = $item.post.record.createdAt.ToLocalTime()
                         Text              = $item.post.record.text
                         Liked             = $item.post.likeCount

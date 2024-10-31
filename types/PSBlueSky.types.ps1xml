@@ -36,4 +36,30 @@ Created 10/27/2024 14:10:07
       </PropertySet>
     </Members>
   </Type>
+  <Type>
+    <Name>PSBlueskyProfile</Name>
+    <Members>
+      <AliasProperty>
+        <Name>Name</Name>
+        <ReferencedMemberName>Username</ReferencedMemberName>
+      </AliasProperty>
+      <ScriptProperty>
+        <Name>Age</Name>
+        <GetScriptBlock>(Get-Date) - $this.Created</GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+  <Type>
+    <Name>PSBlueskyFollowProfile</Name>
+    <Members>
+      <AliasProperty>
+        <Name>Name</Name>
+        <ReferencedMemberName>Username</ReferencedMemberName>
+      </AliasProperty>
+      <ScriptProperty>
+        <Name>Age</Name>
+        <GetScriptBlock>(Get-Date) - $this.Created</GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
 </Types>

@@ -1,24 +1,40 @@
-# Changelog
+# PSBluesky Changelog
 
 This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+
+## [0.5.0] - 2024-10-31
+
 ### Added
+
+- Added command `Get-BskySession`.
+- Added a ScriptProperty called `Age` for the profile type objects.
+- Added an Alias property of `Name` for `UserName` in the profile type objects.
 - Added a property set called `Stats` for timeline and feed objects.
+
+### Changed
+
+- Updated the module to re-use and refresh Bluesky sessions. This should help with API rate limits since the commands aren't creating a new session for each request. [[Issue #7](https://github.com/jdhitsolutions/PSBluesky/issues/7)] __This is a breaking change__.
+- Modified `Get-BskyProfile` to default the username to the specified credential. [[Issue #8](https://github.com/jdhitsolutions/PSBluesky/issues/8)]
+- Renamed module commands. Example `Get-PSBlueskyProfile` is now `Get-BskyProfile`. __This is a breaking change__
+- Documentation updates and corrections.
+- Modified commands that write Profile type objects to use the accounts username for the DisplayName, if the `DisplayName` is not defined.
+- Updated Pester tests.
 
 ## [0.4.0] - 2024-10-27
 
 ### Added
 
-- Added command help documentation. [Issue #4](https://github.com/jdhitsolutions/PSBluesky/issues/4)
-- Added command `Get-PSBlueskyFollowers` and associated format file
-- Added command `Get-PSBlueskyFollowing` which uses the same format file as `Get-PSBlueskyFollowers`.
-- Added command `Get-PSBlueskyFeed` and associated custom format file.
+- Added command help documentation. [[Issue #4](https://github.com/jdhitsolutions/PSBluesky/issues/4)]
+- Added command `Get-BskyFollowers` and associated format file
+- Added command `Get-BskyFollowing` which uses the same format file as `Get-BskyFollowers`.
+- Added command `Get-BskyFeed` and associated custom format file.
 
 ### Changed
 
 - Updated `README.md`.
-- Modified `Get-PSBlueskyProfile` to accept user name as pipeline input.
+- Modified `Get-BskyProfile` to accept user name as pipeline input.
 
 ### Fixed
 
@@ -29,7 +45,7 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.
 ### Added
 
 - Added custom format file for profiles.
-- Added command `Get-PSBlueskyTimeline` and corresponding format file.
+- Added command `Get-BskyTimeline` and corresponding format file.
 
 ### Changed
 
@@ -51,6 +67,7 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.4.0..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.5.0..HEAD
+[0.5.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.4.0..v0.5.0
 [0.4.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.3.0..v0.4.0
 [0.3.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.2.0...v0.3.0

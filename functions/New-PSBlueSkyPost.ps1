@@ -1,4 +1,4 @@
-Function New-PSBlueskyPost {
+Function New-BskyPost {
     [CmdletBinding(SupportsShouldProcess)]
     [OutputType([System.String])]
     [Alias('skeet')]
@@ -18,7 +18,7 @@ Function New-PSBlueskyPost {
     Begin {
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
-        $token = Get-PSBlueskyAccessToken -Credential $Credential
+        $token = Get-BskyAccessToken -Credential $Credential
     } #begin
     Process {
         If ($token) {
@@ -54,7 +54,7 @@ Function New-PSBlueskyPost {
                 if (-not $ImageAlt) {
                     Throw 'You must provide ALT text for the image.'
                 }
-                $image = Add-PSBlueskyImage -ImagePath $ImagePath -ImageAlt $ImageAlt -Credential $Credential
+                $image = Add-BskyImage -ImagePath $ImagePath -ImageAlt $ImageAlt -Credential $Credential
                 if ($WhatIfPreference) {
                     #don't do anything
                 }

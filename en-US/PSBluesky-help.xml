@@ -2,9 +2,9 @@
 <helpItems schema="maml" xmlns="http://msh">
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Add-PSBlueskyImage</command:name>
+      <command:name>Add-BskyImage</command:name>
       <command:verb>Add</command:verb>
-      <command:noun>PSBlueskyImage</command:noun>
+      <command:noun>BskyImage</command:noun>
       <maml:description>
         <maml:para>Upload an image to Bluesky</maml:para>
       </maml:description>
@@ -14,7 +14,7 @@
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Add-PSBlueskyImage</maml:name>
+        <maml:name>Add-BskyImage</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="Path">
           <maml:name>ImagePath</maml:name>
           <maml:description>
@@ -165,7 +165,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Add-PSBlueskyImage -ImagePath "C:\Users\user\Documents\image.png" -ImageAlt "alt tet here" -credential $credential</dev:code>
+        <dev:code>PS C:\&gt; Add-BskyImage -ImagePath "C:\Users\user\Documents\image.png" -ImageAlt "alt tet here" -credential $credential</dev:code>
         <dev:remarks>
           <maml:para>You should use ALT text for images.</maml:para>
         </dev:remarks>
@@ -173,16 +173,16 @@
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>New-PSBlueskyPost</maml:linkText>
+        <maml:linkText>New-BskyPost</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-PSBlueskyAccessToken</command:name>
+      <command:name>Get-BskyAccessToken</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>PSBlueskyAccessToken</command:noun>
+      <command:noun>BskyAccessToken</command:noun>
       <maml:description>
         <maml:para>Get a Bluesky access token</maml:para>
       </maml:description>
@@ -192,7 +192,7 @@
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-PSBlueskyAccessToken</maml:name>
+        <maml:name>Get-BskyAccessToken</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>Credential</maml:name>
           <maml:description>
@@ -249,7 +249,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-PSBlueskyAccessToken
+        <dev:code>PS C:\&gt; Get-BskyAccessToken
 eyJ0eXAiOi....</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
@@ -260,9 +260,9 @@ eyJ0eXAiOi....</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-PSBlueskyFeed</command:name>
+      <command:name>Get-BskyFeed</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>PSBlueskyFeed</command:noun>
+      <command:noun>BskyFeed</command:noun>
       <maml:description>
         <maml:para>Get your Bluesky feed.</maml:para>
       </maml:description>
@@ -272,7 +272,7 @@ eyJ0eXAiOi....</dev:code>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-PSBlueskyFeed</maml:name>
+        <maml:name>Get-BskyFeed</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>Limit</maml:name>
           <maml:description>
@@ -353,7 +353,7 @@ eyJ0eXAiOi....</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-PSBlueskyFeed -Limit 3
+        <dev:code>PS C:\&gt; Get-BskyFeed -Limit 3
 
 Jeff Hicks [jdhitsolutions.com]
 
@@ -376,7 +376,7 @@ Date                   Liked Replied Reposted Quoted
 
 Jeff Hicks [jdhitsolutions.com]
 
-Adding a Get-PSBlueskyFollowers command to my #PowerShell module.
+Adding a Get-BskyFollowers command to my #PowerShell module.
 
 Date                  Liked Replied Reposted Quoted
 ----                  ----- ------- -------- ------
@@ -388,16 +388,16 @@ Date                  Liked Replied Reposted Quoted
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Get-PSBlueskyTimeline</maml:linkText>
+        <maml:linkText>Get-BskyTimeline</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-PSBlueskyFollowers</command:name>
+      <command:name>Get-BskyFollowers</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>PSBlueskyFollowers</command:noun>
+      <command:noun>BskyFollowers</command:noun>
       <maml:description>
         <maml:para>Get your Bluesky followers</maml:para>
       </maml:description>
@@ -407,7 +407,7 @@ Date                  Liked Replied Reposted Quoted
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-PSBlueskyFollowers</maml:name>
+        <maml:name>Get-BskyFollowers</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>Limit</maml:name>
           <maml:description>
@@ -488,7 +488,7 @@ Date                  Liked Replied Reposted Quoted
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-PSBlueskyFollowers -Limit 2
+        <dev:code>PS C:\&gt; Get-BskyFollowers -Limit 2
 
 Display       Username           Description
 -------       --------           -----------
@@ -503,16 +503,16 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Get-PSBlueskyFollowing</maml:linkText>
+        <maml:linkText>Get-BskyFollowing</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-PSBlueskyFollowing</command:name>
+      <command:name>Get-BskyFollowing</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>PSBlueskyFollowing</command:noun>
+      <command:noun>BskyFollowing</command:noun>
       <maml:description>
         <maml:para>Get a list of Bluesky accounts that you follow</maml:para>
       </maml:description>
@@ -522,7 +522,7 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-PSBlueskyFollowing</maml:name>
+        <maml:name>Get-BskyFollowing</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>Limit</maml:name>
           <maml:description>
@@ -603,7 +603,7 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-PSBlueskyFollowing -Limit 2
+        <dev:code>PS C:\&gt; Get-BskyFollowing -Limit 2
 
 Display      Username                   Description
 -------      --------                   -----------
@@ -618,27 +618,27 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Get-PSBlueskyFollowers</maml:linkText>
+        <maml:linkText>Get-BskyFollowers</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-PSBlueskyProfile</command:name>
+      <command:name>Get-BskyProfile</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>PSBlueskyProfile</command:noun>
+      <command:noun>BskyProfile</command:noun>
       <maml:description>
-        <maml:para>Get your Bluesky profile</maml:para>
+        <maml:para>Get a Bluesky profile</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Use this command to retrieve your Bluesky profile. You can get any profile if you know the user name. The default output includes clickable links.</maml:para>
+      <maml:para>Use this command to retrieve a Bluesky profile. The default will be your profile based on the credential you use, buty ou can get any profile if you know the user name. The default output includes clickable links.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-PSBlueskyProfile</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="Profile">
+        <maml:name>Get-BskyProfile</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="Profile">
           <maml:name>UserName</maml:name>
           <maml:description>
             <maml:para>Enter the profile or user name.</maml:para>
@@ -677,7 +677,7 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="Profile">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="Profile">
         <maml:name>UserName</maml:name>
         <maml:description>
           <maml:para>Enter the profile or user name.</maml:para>
@@ -718,7 +718,7 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-PSBlueskyProfile jdhitsolutions.com
+        <dev:code>PS C:\&gt; Get-BskyProfile
 
 Jeff Hicks [jdhitsolutions.com]
 
@@ -738,7 +738,7 @@ Created               Posts Followers Following Lists
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-PSBlueskyProfile jsnover.bsky.social
+        <dev:code>PS C:\&gt; Get-BskyProfile jsnover.bsky.social
 
 Jeffrey Snover [jsnover.bsky.social]
 
@@ -757,9 +757,76 @@ Created              Posts Followers Following Lists
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-PSBlueSkyTimeline</command:name>
+      <command:name>Get-BskySession</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>PSBlueSkyTimeline</command:noun>
+      <command:noun>BskySession</command:noun>
+      <maml:description>
+        <maml:para>Show your current Bluesky session.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This command will display API information about your current Bluesky session. This is useful for troubleshooting and debugging but otherwise, you shouldn't need to use this command.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-BskySession</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>PSBlueskySession</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-BskySession
+
+Handle     : jdhitsolutions.com
+Email      : jhicks@jdhitsolutions.com
+Active     : True
+AccessJwt  : eyJ0eXAiOiJhdCtqd3QiLCJhbGciOiJFUzI1NksifQ....
+RefreshJwt : eyJ0eXAiOiJyZWZyZXNoK2p3dCIsImFsZyI6IkVTMj...
+DiD        : did:plc:ohgsqpfsbocaaxusxqlgfvd7
+DidDoc     : @{@context=System.Object[]; id=did:plc:ohgsqpfsbocaaxusxqlgfvd7;
+             alsoKnownAs=System.Object[]; verificationMethod=System.Object[];
+             service=System.Object[]}
+Date       : 10/31/2024 1:56:04 PM
+UserName   : jdhitsolutions.com
+Age        : 00:03:32.8493629</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-BskyTimeline</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>BskyTimeline</command:noun>
       <maml:description>
         <maml:para>Get your Bluesky timeline</maml:para>
       </maml:description>
@@ -769,7 +836,7 @@ Created              Posts Followers Following Lists
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-PSBlueSkyTimeline</maml:name>
+        <maml:name>Get-BskyTimeline</maml:name>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>Limit</maml:name>
           <maml:description>
@@ -850,7 +917,7 @@ Created              Posts Followers Following Lists
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-PSBlueSkyTimeline -limit 10
+        <dev:code>PS C:\&gt; Get-BskyTimeline -limit 10
 
 Date                Author                       Liked Reposted Quoted Text
 ----                ------                       ----- -------- ------ ----
@@ -863,16 +930,16 @@ Date                Author                       Liked Reposted Quoted Text
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Get-PSBlueskyFeed</maml:linkText>
+        <maml:linkText>Get-BskyFeed</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>New-PSBlueskyPost</command:name>
+      <command:name>New-BskyPost</command:name>
       <command:verb>New</command:verb>
-      <command:noun>PSBlueskyPost</command:noun>
+      <command:noun>BskyPost</command:noun>
       <maml:description>
         <maml:para>Create a Bluesky post</maml:para>
       </maml:description>
@@ -882,7 +949,7 @@ Date                Author                       Liked Reposted Quoted Text
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>New-PSBlueskyPost</maml:name>
+        <maml:name>New-BskyPost</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>Message</maml:name>
           <maml:description>
@@ -1057,7 +1124,7 @@ Date                Author                       Liked Reposted Quoted Text
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; New-PSBlueskyPost "Adding help documenation to my Bluesky #PowerShell module."
+        <dev:code>PS C:\&gt; New-BskyPost "Adding help documentation to my Bluesky #PowerShell module."
 https://bsky.app/profile/did:plc:ohgsqpfsbocaaxusxqlgfvd7/post/3l7j3u7zu6n2w</dev:code>
         <dev:remarks>
           <maml:para>The output is a URL to the post. This example assumes the credential has been set in $PSDefaultParameterValues.</maml:para>
@@ -1066,11 +1133,11 @@ https://bsky.app/profile/did:plc:ohgsqpfsbocaaxusxqlgfvd7/post/3l7j3u7zu6n2w</de
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Get-PSBlueskyFeed</maml:linkText>
+        <maml:linkText>Get-BskyFeed</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Add-PSBlueskyImage</maml:linkText>
+        <maml:linkText>Add-BskyImage</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>

@@ -1,4 +1,4 @@
-Function Get-PSBlueskyAccessToken {
+Function Get-BskyAccessToken {
     [cmdletbinding()]
     [OutputType([System.String])]
 
@@ -7,23 +7,17 @@ Function Get-PSBlueskyAccessToken {
         [PSCredential]$Credential
     )
 
-    #Create a logon session
-    $headers = @{
-        'Content-Type' = 'application/json'
+    if ($Null -eq $script:BSkySession) {
+        Write-Verbose "Creating a new Bluesky session for $($Credential.UserName)"
+         _CreateSession -Credential $Credential
     }
-
-    $LogonURL = "$PDSHOST/xrpc/com.atproto.server.createSession"
-    $body = @{
-        identifier = $Credential.UserName
-        password   = $Credential.GetNetworkCredential().Password
-    } | ConvertTo-Json
-    Write-Verbose "[$((Get-Date).TimeOfDay)] Creating a Bluesky logon session for $($Credential.UserName)"
-    $BSkySession = Invoke-RestMethod -Uri $LogonURL -Method Post -Headers $headers -Body $Body
-    if ($BSkySession.accessJwt) {
-        $BSkySession.accessJwt
+    elseif (-Not ($script:BSkySession.active)) {
+        Write-Verbose "Refreshing the Bluesky session for $($Credential.UserName)"
+        _RefreshSession -RefreshToken $script:BSkySession.refreshJwt
     }
     else {
-        Write-Warning 'Failed to authenticate.'
+        Write-Verbose "Using the existing Bluesky session for $($Credential.UserName)"
+        $script:BSkySession.accessJwt
     }
 
 }

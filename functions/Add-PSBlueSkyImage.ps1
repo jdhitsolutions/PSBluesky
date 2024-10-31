@@ -1,4 +1,4 @@
-Function Add-PSBlueskyImage {
+Function Add-BskyImage {
     [CmdletBinding(SupportsShouldProcess)]
     [OutputType('PSCustomObject')]
     param(
@@ -20,7 +20,7 @@ Function Add-PSBlueskyImage {
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
         #Convert path to a file system path
         $ImagePath = Convert-Path -Path $ImagePath
-        $token = Get-PSBlueskyAccessToken -Credential $Credential
+        $token = Get-BskyAccessToken -Credential $Credential
     } #begin
     Process {
         if ($token) {

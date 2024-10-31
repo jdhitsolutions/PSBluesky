@@ -5,29 +5,28 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-PSBlueskyProfile
+# Get-BskyProfile
 
 ## SYNOPSIS
 
-Get your Bluesky profile
+Get a Bluesky profile
 
 ## SYNTAX
 
 ```yaml
-Get-PSBlueskyProfile [-UserName] <String> -Credential <PSCredential>
- [<CommonParameters>]
+Get-BskyProfile [[-UserName] <String>] -Credential <PSCredential> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Use this command to retrieve your Bluesky profile. You can get any profile if you know the user name. The default output includes clickable links.
+Use this command to retrieve a Bluesky profile. The default will be your profile based on the credential you use, buty ou can get any profile if you know the user name. The default output includes clickable links.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> Get-PSBlueskyProfile jdhitsolutions.com
+PS C:\> Get-BskyProfile
 
 Jeff Hicks [jdhitsolutions.com]
 
@@ -48,7 +47,7 @@ The default output includes clickable links. This example assumes the credential
 ### Example 2
 
 ```powershell
-PS C:\> Get-PSBlueskyProfile jsnover.bsky.social
+PS C:\> Get-BskyProfile jsnover.bsky.social
 
 Jeffrey Snover [jsnover.bsky.social]
 
@@ -89,7 +88,7 @@ Type: String
 Parameter Sets: (All)
 Aliases: Profile
 
-Required: True
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)

@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-PSBlueskyFeed
+# Get-BskyFeed
 
 ## SYNOPSIS
 
@@ -14,7 +14,7 @@ Get your Bluesky feed.
 ## SYNTAX
 
 ```yaml
-Get-PSBlueskyFeed [[-Limit] <Int32>] [-Credential] <PSCredential>
+Get-BskyFeed [[-Limit] <Int32>] [-Credential] <PSCredential>
  [<CommonParameters>]
 ```
 
@@ -27,7 +27,7 @@ This command will return your posts and replies. The default output should featu
 ### Example 1
 
 ```powershell
-PS C:\> Get-PSBlueskyFeed -Limit 3
+PS C:\> Get-BskyFeed -Limit 3
 
 Jeff Hicks [jdhitsolutions.com]
 
@@ -50,7 +50,7 @@ Date                   Liked Replied Reposted Quoted
 
 Jeff Hicks [jdhitsolutions.com]
 
-Adding a Get-PSBlueskyFollowers command to my #PowerShell module.
+Adding a Get-BskyFollowers command to my #PowerShell module.
 
 Date                  Liked Replied Reposted Quoted
 ----                  ----- ------- -------- ------
@@ -110,5 +110,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Get-PSBlueskyTimeline](Get-PSBlueskyTimeline.md)
+[Get-BskyTimeline](Get-BskyTimeline.md)
 

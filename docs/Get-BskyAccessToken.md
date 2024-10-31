@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-PSBlueskyAccessToken
+# Get-BskyAccessToken
 
 ## SYNOPSIS
 
@@ -14,7 +14,7 @@ Get a Bluesky access token
 ## SYNTAX
 
 ```yaml
-Get-PSBlueskyAccessToken [-Credential] <PSCredential> [<CommonParameters>]
+Get-BskyAccessToken [-Credential] <PSCredential> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,7 +26,7 @@ This command is called by PSBluesky module commands to authenticate you and retu
 ### Example 1
 
 ```powershell
-PS C:\> Get-PSBlueskyAccessToken
+PS C:\> Get-BskyAccessToken
 eyJ0eXAiOi....
 ```
 

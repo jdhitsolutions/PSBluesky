@@ -8,7 +8,7 @@ The module is written for PowerShell 7, although it might work as written in Win
 
 ## Authentication
 
-In order to send data, you must authenticate. The `Get-PSBlueskyAccessToken` function will retrieve an access token. You shouldn't need to call this command directly. The other module commands will call it and pass the authentication token as needed. Technically, the token has a time limit and it could be re-used. But it is just as easy to get a token with each request since it is assumed you will be using the module commands intermittently.
+In order to send data, you must authenticate. The `Get-BskyAccessToken` function will retrieve an access token. You shouldn't need to call this command directly. The other module commands will call it and pass the authentication token as needed. Technically, the token has a time limit and it could be re-used. But it is just as easy to get a token with each request since it is assumed you will be using the module commands intermittently.
 
 You will need to create a PSCredential object with your Bluesky username and password. For automation purposes, you can use the Secrets management module to store your credential. Write your own code to retrieve the credential and pass it to the module commands. You might want to use `PSDefaultParameterValues` to set the credential for all commands.
 
@@ -16,12 +16,18 @@ You will need to create a PSCredential object with your Bluesky username and pas
 $PSDefaultParameterValues['*-PSBluesky*:Credential'] = $BlueskyCredential
 ```
 
+## Rate Limits
+
+The commands in this module use the public Bluesky API which means there are [rate limits](https://docs.bsky.app/docs/advanced-guides/rate-limits). If you exceed the rate limit, you will get an error message. You will need to wait until the rate limit resets. The module attempts to refresh and re-use Bluesky sessions. You can run `Get-BskySession` to see your current session information.
+
+:warning: There is a rate limit of 300 new sessions per day. If you reload the module you will end up creating a new session which could affect your rate limit.
+
 ## Posting
 
-Use `New-PSBlueskyPost` or its alias `skeet` to post a message to Bluesky. There are parameter to include an image. If you include an image, the `New-PSBlueskyPost` command will call `Add-PSBlueskyImage` to upload the image. It is recommended that you included ALT text for the image.
+:email: Use `New-BskyPost`, or its alias `skeet`, to post a message to Bluesky. There are parameters to include an image. If you include an image, the `New-BskyPost` command will call `Add-BskyImage` to upload the image. It is strongly recommended that you included ALT text for the image.
 
 ```powershell
-New-PSBlueskyPost -Message "Getting close to sharing my #PowerShell Bluesky code. I'm assuming a few of you are interested." -ImagePath C:\work\MsPowerShell.jpg -ImageAlt "Ms. PowerShell" -Verbose
+New-BskyPost -Message "Getting close to sharing my #PowerShell Bluesky code. I'm assuming a few of you are interested." -ImagePath C:\work\MsPowerShell.jpg -ImageAlt "Ms. PowerShell" -Verbose
 ```
 
 The output is a URL to the post.
@@ -33,7 +39,7 @@ If your message contains a URL, it will be converted to a clickable link. Make s
 The module has a command to retrieve a Bluesky profile.
 
 ```powershell
-Get-PSBlueskyProfile jdhitsolutions.com
+Get-BskyProfile jdhitsolutions.com
 ```
 
 The module uses a custom format file.
@@ -42,23 +48,23 @@ The module uses a custom format file.
 
 The user's profile name should be a clickable link.
 
-## Followers
+## :couple: Followers
 
 You can retrieve a list of your followers
 
 ```powershell
-Get-PSBlueskyFollowers -Limit 2
+Get-BskyFollowers -Limit 2
 ```
 
 ![Bluesky followers](images/bsky-follower.png)
 
 The custom formatting includes a clickable link to the follower's profile if running in Windows Terminal or a console that supports hyperlinks.
 
-You can pipe the follower object to `Get-PSBlueskyProfile` to retrieve more information.
+You can pipe the follower object to `Get-BskyProfile` to retrieve more information.
 
 ```powershell
-PS C:\>$f= Get-PSBlueskyFollowers
-PS C:\> $f[12] | Get-PSBlueskyProfile
+PS C:\>$f= Get-BskyFollowers
+PS C:\> $f[12] | Get-BskyProfile
 
 Jess Pomfret [jpomfret.bsky.social]
 
@@ -73,12 +79,12 @@ Created              Posts Followers Following Lists
 
 You can retrieve between 1 and 100 followers. I don't know if there is a way to enumerate or page through all followers.
 
-## Feed
+## Feed :newspaper:
 
-Use `Get-PSBlueskyFeed` to retrieve the latest posts from your feed. You can query for 1 to 100.
+Use `Get-BskyFeed` to retrieve the latest posts from your feed. You can query for 1 to 100.
 
 ```powershell
-Get-PSBlueskyFeed -Limit 3
+Get-BskyFeed -Limit 3
 ```
 The object output has a custom format file.
 
@@ -88,7 +94,7 @@ The output includes clickable links to the the author, which might be different 
 
 The current behavior is to get posts and replies.
 
-## Information and Troubleshooting
+## :information_source: Information and Troubleshooting
 
 The commands in this module should write the raw response from the API request to the Information stream.
 
@@ -106,12 +112,13 @@ followsCount   : 177
 postsCount     : 543
 ```
 
-## Roadmap
+## Roadmap :world_map:
 
 I have a short list of items to finish before this can be published to the PowerShell Gallery.
 
 - help documentation
 - support Markdown formatted links in posts
+- support posting multiple images
 - localize verbose and other messaging
 
 If you are testing the module and think you've found a bug, please post an [Issue](https://github.com/jdhitsolutions/PSBlueSky/issues). For all other topics and questions, please use the [Discussions](https://github.com/jdhitsolutions/PSBlueSky/discussions) feature.

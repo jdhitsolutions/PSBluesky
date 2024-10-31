@@ -1,10 +1,9 @@
-Function Get-PSBlueskyProfile {
+Function Get-BskyProfile {
     [CmdletBinding()]
     [OutputType('PSBlueskyProfile')]
     Param(
         [Parameter(
             Position = 0,
-            Mandatory,
             ValueFromPipeline,
             ValueFromPipelineByPropertyName,
             HelpMessage = 'Enter the profile or user name.'
@@ -22,10 +21,16 @@ Function Get-PSBlueskyProfile {
     Begin {
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
-        $token = Get-PSBlueskyAccessToken -Credential $Credential
+        $token = Get-BskyAccessToken -Credential $Credential
+        Write-Information $script:BSkySession -Tags raw
     } #begin
 
     Process {
+        #use the credential username if the username is not provided
+        if (-Not ($PSBoundParameters.ContainsKey('UserName'))) {
+            $Username = $Credential.UserName
+        }
+
         If ($token) {
             Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Querying for $Username"
 
@@ -36,13 +41,14 @@ Function Get-PSBlueskyProfile {
                 'Content-Type' = 'application/json'
             }
 
-            $profile = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers
+            Try {
+            $profile = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers -ErrorAction Stop
             If ($profile) {
                 Write-Information -MessageData $profile -Tags raw
                 [PSCustomObject]@{
                     PSTypeName  = 'PSBlueskyProfile'
                     Username    = $profile.handle
-                    Display     = $profile.displayName
+                    Display     = ($profile.displayName) ? $profile.displayName : $profile.handle
                     Created     = $profile.createdAt.ToLocalTime()
                     Description = $profile.description
                     Avatar      = $profile.avatar
@@ -56,6 +62,10 @@ Function Get-PSBlueskyProfile {
             else {
                 Write-Warning "Failed to retrieve profile for $Username."
             }
+        } #Try
+        Catch {
+            Write-Error $_
+        }
         }
         else {
             Write-Warning 'Failed to authenticate.'

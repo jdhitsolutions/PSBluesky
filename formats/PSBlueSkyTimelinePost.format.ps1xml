@@ -57,7 +57,7 @@ https://github.com/jdhitsolutions/PSScriptTools
                 <ScriptBlock>$_.Date.ToString("g")</ScriptBlock>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>AuthorDisplayName</PropertyName>
+                <PropertyName>AuthorDisplay</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Liked</PropertyName>
