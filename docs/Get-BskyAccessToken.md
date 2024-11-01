@@ -19,7 +19,7 @@ Get-BskyAccessToken [-Credential] <PSCredential> [<CommonParameters>]
 
 ## DESCRIPTION
 
-This command is called by PSBluesky module commands to authenticate you and return an access token.
+This command is called by PSBluesky module commands to authenticate you and return an access token. This command will also create a a PSBluesky session object which you can view using Get-BskySession.
 
 ## EXAMPLES
 
@@ -63,3 +63,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Get-BskySession](Get-BskySession.md)

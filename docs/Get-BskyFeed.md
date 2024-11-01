@@ -9,13 +9,12 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Get your Bluesky feed.
+Get your Bluesky feed
 
 ## SYNTAX
 
 ```yaml
-Get-BskyFeed [[-Limit] <Int32>] [-Credential] <PSCredential>
- [<CommonParameters>]
+Get-BskyFeed [[-Limit] <Int32>] [-Credential] <PSCredential> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -111,4 +110,3 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Get-BskyTimeline](Get-BskyTimeline.md)
-

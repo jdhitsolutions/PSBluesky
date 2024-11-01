@@ -14,8 +14,7 @@ Get your Bluesky timeline
 ## SYNTAX
 
 ```yaml
-Get-BskyTimeline [[-Limit] <Int32>] [-Credential] <PSCredential>
- [<CommonParameters>]
+Get-BskyTimeline [[-Limit] <Int32>] [-Credential] <PSCredential> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -67,7 +66,7 @@ Aliases:
 
 Required: False
 Position: 0
-Default value: None
+Default value: 50
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

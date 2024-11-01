@@ -1,10 +1,10 @@
 # PSBluesky
 
-__This module is a work in progress. Expect things to change__
+![](images/BlueskyLogo-medium.png)
 
-This PowerShell module is a set of PowerShell functions designed to let you interact with Bluesky API from PowerShell. Technically, the module commands are wrappers around the [atproto protocols](https://docs.bsky.app/docs/category/http-reference).
+This module is a set of PowerShell functions designed to let you interact with Bluesky API from PowerShell. Technically, the module commands are wrappers around the [atproto protocols](https://docs.bsky.app/docs/category/http-reference).
 
-The module is written for PowerShell 7, although it might work as written in Windows PowerShell or with minimal changes.
+The module is written for PowerShell 7, although it might work as written in Windows PowerShell with minimal changes. Commands have not been tested for cross-platform compatibility.
 
 ## Authentication
 
@@ -13,7 +13,7 @@ In order to send data, you must authenticate. The `Get-BskyAccessToken` function
 You will need to create a PSCredential object with your Bluesky username and password. For automation purposes, you can use the Secrets management module to store your credential. Write your own code to retrieve the credential and pass it to the module commands. You might want to use `PSDefaultParameterValues` to set the credential for all commands.
 
 ```powershell
-$PSDefaultParameterValues['*-PSBluesky*:Credential'] = $BlueskyCredential
+$PSDefaultParameterValues['*-Bsky*:Credential'] = $BlueskyCredential
 ```
 
 ## Rate Limits
@@ -96,14 +96,15 @@ The current behavior is to get posts and replies.
 
 ## :information_source: Information and Troubleshooting
 
-The commands in this module should write the raw response from the API request to the Information stream.
+The commands in this module should write the raw response from the API request to the Information stream. Some commands might include additional information.
 
+```powershell
 ![Information stream](images/bsky-information.png)
 
 The output will be an object.
 
 ```powershell
-PS C:\Scripts\PSBluesky> $v.MessageData | Select-Object did,handle,*count
+PS C:\> $v.MessageData | Select-Object did,handle,*count
 
 did            : did:plc:ohgsqpfsbocaaxusxqlgfvd7
 handle         : jdhitsolutions.com
@@ -112,13 +113,19 @@ followsCount   : 177
 postsCount     : 543
 ```
 
+You might want to set a default parameter value.
+
+```powershell
+$PSDefaultParameterValues['*-*Sky*:InformationVariable'] = "iv"
+```
+
 ## Roadmap :world_map:
 
 I have a short list of items to finish before this can be published to the PowerShell Gallery.
 
-- help documentation
 - support Markdown formatted links in posts
 - support posting multiple images
 - localize verbose and other messaging
+- maybe create a TUI-base reader for your timeline
 
 If you are testing the module and think you've found a bug, please post an [Issue](https://github.com/jdhitsolutions/PSBlueSky/issues). For all other topics and questions, please use the [Discussions](https://github.com/jdhitsolutions/PSBlueSky/discussions) feature.

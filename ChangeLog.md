@@ -4,6 +4,20 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.
 
 ## [Unreleased]
 
+## [0.6.0] - 2024-11-01
+
+This is the first version published to the PowerShell Gallery.
+
+### Added
+
+- Added command `Open-BskyHelp` to open a PDF version of the module's `README.md` file.
+- Added custom format file for `PSBlueskySession` objects.
+- Added alias properties `AccessToken` and `RefreshToken` for the `PSBlueskySession` object.
+
+### Changed
+
+- Updated help documentation
+
 ## [0.5.0] - 2024-10-31
 
 ### Added
@@ -67,7 +81,8 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.5.0..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.6.0..HEAD
+[0.6.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.5.0..v0.6.0
 [0.5.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.4.0..v0.5.0
 [0.4.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.3.0..v0.4.0
 [0.3.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.2.0...v0.3.0

@@ -188,7 +188,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This command is called by PSBluesky module commands to authenticate you and return an access token.</maml:para>
+      <maml:para>This command is called by PSBluesky module commands to authenticate you and return an access token. This command will also create a a PSBluesky session object which you can view using Get-BskySession.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -256,7 +256,12 @@ eyJ0eXAiOi....</dev:code>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-BskySession</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -264,7 +269,7 @@ eyJ0eXAiOi....</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>BskyFeed</command:noun>
       <maml:description>
-        <maml:para>Get your Bluesky feed.</maml:para>
+        <maml:para>Get your Bluesky feed</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -418,7 +423,7 @@ Date                  Liked Replied Reposted Quoted
             <maml:name>Int32</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>50</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>Credential</maml:name>
@@ -457,7 +462,7 @@ Date                  Liked Replied Reposted Quoted
           <maml:name>Int32</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <dev:defaultValue>50</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>
@@ -518,7 +523,7 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This command will return a list of Bluesky accounts that you follow. You can get between 1 and 100. Research into enumerating all accounts is ongoing.</maml:para>
+      <maml:para>This command will return a list of Bluesky accounts that you follow. You can get between 1 and 100. The default is 50.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -533,7 +538,7 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
             <maml:name>Int32</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>50</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>Credential</maml:name>
@@ -572,7 +577,7 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
           <maml:name>Int32</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <dev:defaultValue>50</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>
@@ -633,7 +638,7 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Use this command to retrieve a Bluesky profile. The default will be your profile based on the credential you use, buty ou can get any profile if you know the user name. The default output includes clickable links.</maml:para>
+      <maml:para>Use this command to retrieve a Bluesky profile. The default will be your profile based on the credential you use, but you can get any profile if you know the user name. The default output includes clickable links.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -765,7 +770,7 @@ Created              Posts Followers Following Lists
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This command will display API information about your current Bluesky session. This is useful for troubleshooting and debugging but otherwise, you shouldn't need to use this command.</maml:para>
+      <maml:para>This command will display API information about your current Bluesky session. The object will be created when your run any module command or create a Bluesky access token. The output object includes alias properties you might find helpful. This is useful for troubleshooting and debugging but otherwise, you shouldn't need to use this command.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -803,24 +808,22 @@ Created              Posts Followers Following Lists
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-BskySession
 
-Handle     : jdhitsolutions.com
-Email      : jhicks@jdhitsolutions.com
-Active     : True
-AccessJwt  : eyJ0eXAiOiJhdCtqd3QiLCJhbGciOiJFUzI1NksifQ....
-RefreshJwt : eyJ0eXAiOiJyZWZyZXNoK2p3dCIsImFsZyI6IkVTMj...
-DiD        : did:plc:ohgsqpfsbocaaxusxqlgfvd7
-DidDoc     : @{@context=System.Object[]; id=did:plc:ohgsqpfsbocaaxusxqlgfvd7;
-             alsoKnownAs=System.Object[]; verificationMethod=System.Object[];
-             service=System.Object[]}
-Date       : 10/31/2024 1:56:04 PM
-UserName   : jdhitsolutions.com
-Age        : 00:03:32.8493629</dev:code>
+   User: jdhitsolutions.com
+
+Active AccessToken             RefreshToken            Age
+------ -----------             ------------            ---
+True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:21:56.7958913</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Default output is a formatted table. Pipe the command to Select-Object to see all of object properties.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-BskyAccessToken</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -847,7 +850,7 @@ Age        : 00:03:32.8493629</dev:code>
             <maml:name>Int32</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>50</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Credential</maml:name>
@@ -886,7 +889,7 @@ Age        : 00:03:32.8493629</dev:code>
           <maml:name>Int32</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <dev:defaultValue>50</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>
@@ -986,9 +989,9 @@ Date                Author                       Liked Reposted Quoted Text
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>ImageAlt</maml:name>
+          <maml:name>ImagePath</maml:name>
           <maml:description>
-            <maml:para>You should include ALT text for the image.</maml:para>
+            <maml:para>The path to the image file.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -998,9 +1001,9 @@ Date                Author                       Liked Reposted Quoted Text
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>ImagePath</maml:name>
+          <maml:name>ImageAlt</maml:name>
           <maml:description>
-            <maml:para>The path to the image file.</maml:para>
+            <maml:para>You should include ALT text for the image.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1048,9 +1051,9 @@ Date                Author                       Liked Reposted Quoted Text
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>ImageAlt</maml:name>
+        <maml:name>ImagePath</maml:name>
         <maml:description>
-          <maml:para>You should include ALT text for the image.</maml:para>
+          <maml:para>The path to the image file.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1060,9 +1063,9 @@ Date                Author                       Liked Reposted Quoted Text
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>ImagePath</maml:name>
+        <maml:name>ImageAlt</maml:name>
         <maml:description>
-          <maml:para>The path to the image file.</maml:para>
+          <maml:para>You should include ALT text for the image.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1141,5 +1144,59 @@ https://bsky.app/profile/did:plc:ohgsqpfsbocaaxusxqlgfvd7/post/3l7j3u7zu6n2w</de
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Open-BskyHelp</command:name>
+      <command:verb>Open</command:verb>
+      <command:noun>BskyHelp</command:noun>
+      <maml:description>
+        <maml:para>Open the Bluesky help document</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Use this command to open the README document for the PSBluesky module with the associated application for PDF files.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Open-BskyHelp</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Open-BskyHelp</dev:code>
+        <dev:remarks>
+          <maml:para>The file should open in the default application for PDF files.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
   </command:command>
 </helpItems>

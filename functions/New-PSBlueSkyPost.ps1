@@ -55,6 +55,7 @@ Function New-BskyPost {
                     Throw 'You must provide ALT text for the image.'
                 }
                 $image = Add-BskyImage -ImagePath $ImagePath -ImageAlt $ImageAlt -Credential $Credential
+                Write-Information -MessageData $image -Tags raw
                 if ($WhatIfPreference) {
                     #don't do anything
                 }

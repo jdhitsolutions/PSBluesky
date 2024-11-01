@@ -14,7 +14,8 @@ Create a Bluesky post
 ## SYNTAX
 
 ```yaml
-New-BskyPost [-Message] <String> [-ImagePath <String>] [-ImageAlt <String>] -Credential <PSCredential> [-WhatIf] [-Confirm] [<CommonParameters>]
+New-BskyPost [-Message] <String> [-ImagePath <String>] [-ImageAlt <String>]
+-Credential <PSCredential> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -66,9 +67,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ImageAlt
+### -ImagePath
 
-You should include ALT text for the image.
+The path to the image file.
 
 ```yaml
 Type: String
@@ -82,9 +83,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ImagePath
+### -ImageAlt
 
-The path to the image file.
+You should include ALT text for the image.
 
 ```yaml
 Type: String

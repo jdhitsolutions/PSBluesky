@@ -7,6 +7,6 @@ Function Get-BskySession {
         $script:BSkySession
     }
     else {
-        Write-Warning 'No Existing Bluesky session found. Have you logged in and created a session?'
+        Write-Warning 'No Existing Bluesky session found. Have you created an access token or run a module command like Get-BskyFeed?'
     }
 }

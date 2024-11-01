@@ -19,7 +19,7 @@ Get-BskyFollowing [[-Limit] <Int32>] [-Credential] <PSCredential> [<CommonParame
 
 ## DESCRIPTION
 
-This command will return a list of Bluesky accounts that you follow. You can get between 1 and 100. Research into enumerating all accounts is ongoing.
+This command will return a list of Bluesky accounts that you follow. You can get between 1 and 100. The default is 50.
 
 ## EXAMPLES
 
@@ -69,7 +69,7 @@ Aliases:
 
 Required: False
 Position: 0
-Default value: None
+Default value: 50
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

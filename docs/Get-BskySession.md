@@ -19,7 +19,7 @@ Get-BskySession [<CommonParameters>]
 
 ## DESCRIPTION
 
-This command will display API information about your current Bluesky session. This is useful for troubleshooting and debugging but otherwise, you shouldn't need to use this command.
+This command will display API information about your current Bluesky session. The object will be created when your run any module command or create a Bluesky access token. The output object includes alias properties you might find helpful. This is useful for troubleshooting and debugging but otherwise, you shouldn't need to use this command.
 
 ## EXAMPLES
 
@@ -28,19 +28,14 @@ This command will display API information about your current Bluesky session. Th
 ```powershell
 PS C:\> Get-BskySession
 
-Handle     : jdhitsolutions.com
-Email      : jhicks@jdhitsolutions.com
-Active     : True
-AccessJwt  : eyJ0eXAiOiJhdCtqd3QiLCJhbGciOiJFUzI1NksifQ....
-RefreshJwt : eyJ0eXAiOiJyZWZyZXNoK2p3dCIsImFsZyI6IkVTMj...
-DiD        : did:plc:ohgsqpfsbocaaxusxqlgfvd7
-DidDoc     : @{@context=System.Object[]; id=did:plc:ohgsqpfsbocaaxusxqlgfvd7;
-             alsoKnownAs=System.Object[]; verificationMethod=System.Object[];
-             service=System.Object[]}
-Date       : 10/31/2024 1:56:04 PM
-UserName   : jdhitsolutions.com
-Age        : 00:03:32.8493629
+   User: jdhitsolutions.com
+
+Active AccessToken             RefreshToken            Age
+------ -----------             ------------            ---
+True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:21:56.7958913
 ```
+
+Default output is a formatted table. Pipe the command to Select-Object to see all of object properties.
 
 ## PARAMETERS
 
@@ -58,3 +53,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Get-BskyAccessToken](Get-BskyAccessToken.md)
