@@ -4,6 +4,15 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.
 
 ## [Unreleased]
 
+## [1.0.0] - 2024-11-02
+
+### Changed
+
+- Renamed help PDF file to `PSBlueSky-Help.pdf`. This is probably a break change but since the expectation is to run `Open-BskyHelp` (which has been updated with the new file name) to open the file, it shouldn't be an issue.
+- Updated `New-BskyPost` to support Markdown style links. [[Issue #6](https://github.com/jdhitsolutions/PSBluesky/issues/6)]
+- Updated `README.md`.
+- Updated module manifest to version `1.0.0`. This should be a very stable version with almost all of the intended functionality.
+
 ## [0.6.0] - 2024-11-01
 
 This is the first version published to the PowerShell Gallery.
@@ -81,7 +90,8 @@ This is the first version published to the PowerShell Gallery.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.6.0..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.0.0..HEAD
+[1.0.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.6.0..v1.0.0
 [0.6.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.5.0..v0.6.0
 [0.5.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.4.0..v0.5.0
 [0.4.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.3.0..v0.4.0

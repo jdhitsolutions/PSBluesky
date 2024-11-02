@@ -13,6 +13,10 @@ Function _newFacetLink {
     )
 
     Write-Verbose "[Helper] Creating a new facet link for $uri [$Text] in '$Message'"
+    if ($text -match "\[|\]|\(\)") {
+        Write-Verbose "[Helper] Regex Escaping the text"
+        $text = [regex]::Escape($text)
+    }
     #the comparison test is case-sensitive
     if (([regex]$Text).IsMatch($Message)) {
         #properties of the facet object are also case-sensitive

@@ -34,12 +34,37 @@ Function New-BskyPost {
                 text      = $Message
                 createdAt = (Get-Date -Format 'o')
             }
-
+#TODO: Process multiple Markdown links in a single message
             #test message for HTML links
-            #a regex pattern to detect https or http links
-            [regex]$pattern = 'https?://\S+'
+            #test for Markdown style links first
             #create a facet if found
-            if ($pattern.IsMatch($Message)) {
+            [regex]$pattern = "(?<text>(?<=\[)[^\]]+(?=\]))\]\((?<uri>http(s)?:\/\/\S+(?=\)))"
+            #"(?<text>(?<=\[).*(?=\]))\]\((?<uri>http(s)?:\/\/\S+(?=\)))"
+            if ($pattern.IsMatch($record.text)) {
+                Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Processing Markdown style links"
+                $matches = $pattern.Matches($record.text)
+                #strip off the [ ] from text and the url from the message
+                foreach ($match in $matches) {
+                    $text = $match.Groups['text'].Value
+                    $uri = $match.Groups['uri'].Value
+                    #revise the text to be displayed
+                    $record.text = ($record.text).replace("[$text]",$text).replace("($uri)","")
+                }
+
+                #now create the facets
+                $facets = @()
+                foreach ($match in $matches) {
+                    $text = $match.Groups['text'].Value
+                    $uri = $match.Groups['uri'].Value
+                    $link = _newFacetLink -Text $text -Uri $uri -Message $record.text
+                    $facets += $link
+                }
+                $record.Add('facets', $facets)
+            }
+            elseif (([regex]$pattern = 'http(s)?:\/\/\S+').IsMatch($Message)) {
+                #a regex pattern to detect https or http links
+                #1 Nov 2024 - made the regex more specific
+                 Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Processing URL links"
                 $matches = $pattern.Matches($Message)
                 $facets = @()
                 foreach ($match in $matches) {

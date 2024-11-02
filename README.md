@@ -1,16 +1,50 @@
 # PSBluesky
 
-![](images/BlueskyLogo-medium.png)
+[![PSGallery Version](https://img.shields.io/powershellgallery/v/PSBluesky.png?style=for-the-badge&label=PowerShell%20Gallery)](https://www.powershellgallery.com/packages/PSBluesky/) [![PSGallery Downloads](https://img.shields.io/powershellgallery/dt/PSBluesky.png?style=for-the-badge&label=Downloads)](https://www.powershellgallery.com/packages/PSBluesky/)
 
-This module is a set of PowerShell functions designed to let you interact with Bluesky API from PowerShell. Technically, the module commands are wrappers around the [atproto protocols](https://docs.bsky.app/docs/category/http-reference).
+![](images/BlueskyLogo-small.png)
 
-The module is written for PowerShell 7, although it might work as written in Windows PowerShell with minimal changes. Commands have not been tested for cross-platform compatibility.
+This module is a set of PowerShell functions designed to let you interact with Bluesky API from PowerShell. Technically, the module commands are wrappers around the [atproto protocols](https://docs.bsky.app/docs/category/http-reference). The module is written for PowerShell 7, although it might work as written in Windows PowerShell with minimal changes. Commands have not been tested for cross-platform compatibility.
+
+## Installation
+
+You can install the module from the PowerShell Gallery.
+
+```powershell
+Install-Module -Name PSBluesky
+```
+
+Or using `Install-PSResource` from the [Microsoft.PowerShell.PSResourceGet](https://go.microsoft.com/fwlink/?LinkId=828955) module.
+
+```powershell
+Install-PSResource -Name PSBluesky -Repository PSGallery -TrustRepository
+```
+
+You might want to also install the following modules or related modules to securely store your Bluesky credentials:
+
+- [Microsoft.PowerShell.SecretManagement]( https://github.com/powershell/secretmanagement)
+- [Microsoft.PowerShell.SecretStore](https://github.com/powershell/secretstore)
+
+After installing this module, you should end up with these PSBluesky commands:
+
+- [Add-BskyImage](docs/Add-BskyImage.md)
+- [Get-BskyAccessToken](docs/Get-BskyAccessToken.md)
+- [Get-BskyFeed](docs/Get-BskyFeed.md)
+- [Get-BskyFollowers](docs/Get-BskyFollowers.md)
+- [Get-BskyFollowing](docs/Get-BskyFollowing.md)
+- [Get-BskyProfile](docs/Get-BskyProfile.md)
+- [Get-BskySession](docs/Get-BskySession.md)
+- [Get-BskyTimeline](docs/Get-BskyTimeline.md)
+- [New-BskyPost](docs/New-BskyPost.md)
+- [Open-BskyHelp](docs/Open-BskyHelp.md)
 
 ## Authentication
 
 In order to send data, you must authenticate. The `Get-BskyAccessToken` function will retrieve an access token. You shouldn't need to call this command directly. The other module commands will call it and pass the authentication token as needed. Technically, the token has a time limit and it could be re-used. But it is just as easy to get a token with each request since it is assumed you will be using the module commands intermittently.
 
-You will need to create a PSCredential object with your Bluesky username and password. For automation purposes, you can use the Secrets management module to store your credential. Write your own code to retrieve the credential and pass it to the module commands. You might want to use `PSDefaultParameterValues` to set the credential for all commands.
+You will need to create a PSCredential object with your Bluesky username and password. For automation purposes, you can use the Secrets management module to store your credential. Write your own code to retrieve the credential and pass it to the module commands.
+
+You might want to use `PSDefaultParameterValues` to set the credential for all commands.
 
 ```powershell
 $PSDefaultParameterValues['*-Bsky*:Credential'] = $BlueskyCredential
@@ -27,12 +61,29 @@ The commands in this module use the public Bluesky API which means there are [ra
 :email: Use `New-BskyPost`, or its alias `skeet`, to post a message to Bluesky. There are parameters to include an image. If you include an image, the `New-BskyPost` command will call `Add-BskyImage` to upload the image. It is strongly recommended that you included ALT text for the image.
 
 ```powershell
-New-BskyPost -Message "Getting close to sharing my #PowerShell Bluesky code. I'm assuming a few of you are interested." -ImagePath C:\work\MsPowerShell.jpg -ImageAlt "Ms. PowerShell" -Verbose
+$param = @{
+    Message = "Getting close to sharing my #PowerShell Bluesky code."
+    ImagePath = "C:\work\MsPowerShell.jpg"
+    ImageAlt = "Ms. PowerShell"
+    Verbose = $true
+}
+New-BskyPost @param
 ```
 
 The output is a URL to the post.
 
-If your message contains a URL, it will be converted to a clickable link. Make sure your link is surrounded by white space. Markdown formatted links are not supported, although it is on the wish list.
+If your message contains a URL, it will be converted to a clickable link. Make sure your link is surrounded by white space. Beginning with v1.0.0, you can post Markdown style links.
+
+```powershell
+PS C:\> $m = "Testing multiple Markdown style links from my [#PowerShell PSBluesky
+module](https://github.com/jdhitsolutions/PSBluesky) which you can find on the
+[PowerShell Gallery](https://www.powershellgallery.com/packages/PSBlueSky/0.6.0)"
+PS C:\> skeet $m
+```
+
+![Markdown links in a Bluesky post](images/markdown-links.png)
+
+This example is using the `skeet` alias for `New-BskyPost`.
 
 ## Profiles
 
@@ -123,9 +174,8 @@ $PSDefaultParameterValues['*-*Sky*:InformationVariable'] = "iv"
 
 I have a short list of items to finish before this can be published to the PowerShell Gallery.
 
-- support Markdown formatted links in posts
 - support posting multiple images
-- localize verbose and other messaging
+- localized verbose and other messaging
 - maybe create a TUI-base reader for your timeline
 
 If you are testing the module and think you've found a bug, please post an [Issue](https://github.com/jdhitsolutions/PSBlueSky/issues). For all other topics and questions, please use the [Discussions](https://github.com/jdhitsolutions/PSBlueSky/discussions) feature.

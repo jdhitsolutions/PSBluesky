@@ -1133,6 +1133,21 @@ https://bsky.app/profile/did:plc:ohgsqpfsbocaaxusxqlgfvd7/post/3l7j3u7zu6n2w</de
           <maml:para>The output is a URL to the post. This example assumes the credential has been set in $PSDefaultParameterValues.</maml:para>
         </dev:remarks>
       </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; $m = "Testing multiple Markdown style links from my [#PowerShell PSBluesky module](https://github.com/jdhitsolutions/PSBluesky) which you can find on the [PowerShell Gallery](https://www.powershellgallery.com/packages/PSBlueSky/0.6.0)"
+PS C:\&gt; skeet $m</dev:code>
+        <dev:remarks>
+          <maml:para>You can insert markdown style links in your message text. This example is using the `skeet` alias for `New-BskyPost`.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; New-BskyPost -Message "This is awesomeL https://microsoft.com/powershell" -ImagePath c:\images\awesome.jpg -ImageAlt "Awesomeness"</dev:code>
+        <dev:remarks>
+          <maml:para>An example that posts an image. The URL will be formatted as a clickable hyperlink.</maml:para>
+        </dev:remarks>
+      </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
@@ -1151,11 +1166,11 @@ https://bsky.app/profile/did:plc:ohgsqpfsbocaaxusxqlgfvd7/post/3l7j3u7zu6n2w</de
       <command:verb>Open</command:verb>
       <command:noun>BskyHelp</command:noun>
       <maml:description>
-        <maml:para>Open the Bluesky help document</maml:para>
+        <maml:para>Open the PSBluesky help document</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Use this command to open the README document for the PSBluesky module with the associated application for PDF files.</maml:para>
+      <maml:para>Use this command to open the PDF help document for the PSBluesky module with the associated application for PDF files.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>

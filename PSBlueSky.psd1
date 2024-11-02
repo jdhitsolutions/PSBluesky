@@ -3,7 +3,7 @@
 #
 @{
     RootModule           = 'PSBluesky.psm1'
-    ModuleVersion        = '0.6.0'
+    ModuleVersion        = '1.0.0'
     CompatiblePSEditions = 'Core'
     GUID                 = 'c5c1fd1d-e648-432d-b7d6-bb56f2044c2a'
     Author               = 'Jeff Hicks'
@@ -26,7 +26,7 @@
     TypesToProcess       = @(
         'types/PSBluesky.types.ps1xml'
     )
-    FormatsToProcess = @(
+    FormatsToProcess     = @(
         'formats/PSBlueskyTimelinePost.format.ps1xml',
         'formats/PSBlueskyProfile.format.ps1xml',
         'formats/PSBlueskyFollower.format.ps1xml',
@@ -38,27 +38,21 @@
     AliasesToExport      = 'skeet'
     PrivateData          = @{
         PSData = @{
-             Tags = @("Bluesky","skeet")
-             LicenseUri = 'https://github.com/jdhitsolutions/PSBlueSky/blob/main/LICENSE.txt'
-             ProjectUri = 'https://github.com/jdhitsolutions/PSBluesky'
-            # IconUri = ''
-            ReleaseNotes = @'
-## [0.6.0] - 2024-11-01
-
-This is the first version published to the PowerShell Gallery.
-
-### Added
-
-- Added command `Open-BskyHelp` to open a PDF version of the module's `README.md` file.
-- Added custom format file for `PSBlueskySession` objects.
-- Added alias properties `AccessToken` and `RefreshToken` for the `PSBlueskySession` object.
+            Tags                       = @('Bluesky', 'skeet')
+            LicenseUri                 = 'https://github.com/jdhitsolutions/PSBlueSky/blob/main/LICENSE.txt'
+            ProjectUri                 = 'https://github.com/jdhitsolutions/PSBluesky'
+            IconUri                    = 'https://raw.githubusercontent.com/jdhitsolutions/PSBlueSky/main/images/Blueskylogo-icon.png'
+            ReleaseNotes               = @'
+## [1.0.0] - 2024-11-02
 
 ### Changed
 
-- Updated help documentation
+- Renamed help PDF file to `PSBlueSky-Help.pdf`. This is probably a break change but since the expectation is to run `Open-BskyHelp` (which has been updated with the new file name) to open the file, it shouldn't be an issue.
+- Updated `New-BskyPost` to support Markdown style links. [[Issue #6](https://github.com/jdhitsolutions/PSBluesky/issues/6)]
+- Updated `README.md`.
+- Updated module manifest to version `1.0.0`. This should be a very stable version with almost all of the intended functionality.
 '@
-            # Prerelease = ''
-            RequireLicenseAcceptance = $false
+            RequireLicenseAcceptance   = $false
             ExternalModuleDependencies = @()
         } # End of PSData hashtable
     } # End of PrivateData hashtable

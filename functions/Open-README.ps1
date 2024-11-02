@@ -4,7 +4,7 @@ Function Open-BskyHelp {
     Param()
 
     Try {
-        $pdfPath = "$PSScriptRoot\..\README.pdf"
+        $pdfPath = "$PSScriptRoot\..\PSBlueSky-Help.pdf"
         Write-Verbose "Attempting to open $pdfPath with the default PDF viewer."
         Invoke-Item -Path $pdfPath -ErrorAction Stop
     }

@@ -33,6 +33,23 @@ https://bsky.app/profile/did:plc:ohgsqpfsbocaaxusxqlgfvd7/post/3l7j3u7zu6n2w
 
 The output is a URL to the post. This example assumes the credential has been set in $PSDefaultParameterValues.
 
+### Example 2
+
+```powershell
+PS C:\> $m = "Testing multiple Markdown style links from my [#PowerShell PSBluesky module](https://github.com/jdhitsolutions/PSBluesky) which you can find on the [PowerShell Gallery](https://www.powershellgallery.com/packages/PSBlueSky/0.6.0)"
+PS C:\> skeet $m
+```
+
+You can insert markdown style links in your message text. This example is using the `skeet` alias for `New-BskyPost`.
+
+### Example 3
+
+```powershell
+PS C:\> New-BskyPost -Message "This is awesomeL https://microsoft.com/powershell" -ImagePath c:\images\awesome.jpg -ImageAlt "Awesomeness"
+```
+
+An example that posts an image. The URL will be formatted as a clickable hyperlink.
+
 ## PARAMETERS
 
 ### -Confirm

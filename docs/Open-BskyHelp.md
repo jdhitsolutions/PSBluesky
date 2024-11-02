@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Open the Bluesky help document
+Open the PSBluesky help document
 
 ## SYNTAX
 
@@ -19,7 +19,7 @@ Open-BskyHelp [<CommonParameters>]
 
 ## DESCRIPTION
 
-Use this command to open the README document for the PSBluesky module with the associated application for PDF files.
+Use this command to open the PDF help document for the PSBluesky module with the associated application for PDF files.
 
 ## EXAMPLES
 
