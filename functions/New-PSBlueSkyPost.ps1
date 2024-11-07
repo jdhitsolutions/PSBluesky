@@ -3,13 +3,18 @@ Function New-BskyPost {
     [OutputType([System.String])]
     [Alias('skeet')]
     param(
-        [parameter(Position = 0, Mandatory, HelpMessage = 'The text of the post')]
+        [parameter(
+            Position = 0,
+            Mandatory,
+            HelpMessage = 'The text of the post',
+            ValueFromPipelineByPropertyName
+            )]
         [ValidateNotNullOrEmpty()]
         [string]$Message,
-        [parameter(HelpMessage = 'The path to the image file.')]
+        [parameter(HelpMessage = 'The path to the image file.',ValueFromPipelineByPropertyName)]
         [ValidatePattern('.*\.(jpg|jpeg|png|gif)$')]
         [string]$ImagePath,
-        [Parameter(HelpMessage = 'You should include ALT text for the image.')]
+        [Parameter(HelpMessage = 'You should include ALT text for the image.',ValueFromPipelineByPropertyName)]
         [string]$ImageAlt,
         [Parameter(Mandatory, HelpMessage = 'A PSCredential with your Bluesky username and password')]
         [PSCredential]$Credential

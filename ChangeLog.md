@@ -4,6 +4,21 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.
 
 ## [Unreleased]
 
+## [1.1.0] - 2024-11-07
+
+### Added
+
+- Moved the helper function `_RefreshSession` to a public function, `Update-BskySession`.
+
+### Changed
+
+- Modified `New-BSkyPost` to accept pipeline input.
+- Updated default formatting for Bluesky timeline items to use a custom format. The Table definition remains as a named view.
+- Modified session code to refresh the session if the age is greater than 60 minutes.
+- Updated `README.md`.
+- Revised the PDF help document formatting.
+- Help documentation updates.
+
 ## [1.0.0] - 2024-11-02
 
 ### Changed
@@ -90,7 +105,8 @@ This is the first version published to the PowerShell Gallery.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.0.0..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.1.0..HEAD
+[1.1.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.0.0..v1.1.0
 [1.0.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.6.0..v1.0.0
 [0.6.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.5.0..v0.6.0
 [0.5.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.4.0..v0.5.0

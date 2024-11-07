@@ -9,15 +9,14 @@ Function Get-BskyAccessToken {
 
     if ($Null -eq $script:BSkySession) {
         Write-Verbose "Creating a new Bluesky session for $($Credential.UserName)"
-         _CreateSession -Credential $Credential
+        _CreateSession -Credential $Credential
     }
-    elseif (-Not ($script:BSkySession.active)) {
+    elseif ((-Not ($script:BSkySession.active)) -OR ($script.BSkySession.Age.TotalMinutes -ge 60)) {
         Write-Verbose "Refreshing the Bluesky session for $($Credential.UserName)"
-        _RefreshSession -RefreshToken $script:BSkySession.refreshJwt
+        Update-BskySession -RefreshToken $script:BSkySession.refreshJwt
     }
     else {
         Write-Verbose "Using the existing Bluesky session for $($Credential.UserName)"
         $script:BSkySession.accessJwt
     }
-
 }

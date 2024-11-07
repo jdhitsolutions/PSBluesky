@@ -55,3 +55,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Get-BskyAccessToken](Get-BskyAccessToken.md)
+
+[Update-BskySession](Update-BskySession.md)

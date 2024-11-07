@@ -104,10 +104,12 @@ Age             : 01:09:58.6486840
         Update-TypeData -TypeName 'PSBlueskySession' -MemberType AliasProperty -MemberName AccessToken -Value AccessJwt -Force
         Update-TypeData -TypeName 'PSBlueskySession' -MemberType AliasProperty -MemberName RefreshToken -Value RefreshJwt -Force
         Update-TypeData -TypeName 'PSBlueskySession' -MemberType ScriptProperty -MemberName Age -Value { (Get-Date) - $this.Date } -Force
+        Update-TypeData -TypeName 'PSBlueskySession' -MemberType ScriptMethod -MemberName Refresh -Value {Update-BskySession -RefreshToken $this.RefreshJwt} -Force
     }
 }
 
 Function _CreateSession {
+    #there is an API limit of 300 per day for this endpoint
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory, HelpMessage = 'A PSCredential with your Bluesky username and password')]
@@ -139,7 +141,7 @@ Function _CreateSession {
         $script:refreshJwt = $script:BSkySession.refreshJwt
     } #try
     Catch {
-        throw $_co
+        throw $_
     }
     if ($script:accessJwt) {
         $script:accessJwt
@@ -149,7 +151,8 @@ Function _CreateSession {
     }
 }
 
-Function _RefreshSession {
+# 4 Nov 2024 -moved this to a public function, Update-BskySession
+Function X_RefreshSession {
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory, HelpMessage = 'The refresh token')]
@@ -157,23 +160,22 @@ Function _RefreshSession {
     )
 
     #Refresh a Bluesky session
-    Write-Verbose "[$((Get-Date).TimeOfDay)] Refreshing a Bluesky logon session for $($Credential.UserName)"
+    Write-Verbose "[$((Get-Date).TimeOfDay)] Refreshing a Bluesky logon session for $($script:BSkySession.handle)"
     $headers = @{
         Authorization  = "Bearer $RefreshToken"
         'Content-Type' = 'application/json'
     }
     $RefreshUrl = "$PDSHost/xrpc/com.atproto.server.refreshSession"
-    $script:BSkySession = Invoke-RestMethod -Uri $RefreshUrl -Method Post -Headers $headers -errorAction Stop | _newSessionObject
+    Try {
+        $script:BSkySession = Invoke-RestMethod -Uri $RefreshUrl -Method Post -Headers $headers -errorAction Stop | _newSessionObject
 
-    $script:accessJwt = $script:BSkySession.accessJwt
-    $script:refreshJwt = $script:BSkySession.refreshJwt
-
-    if ($script:accessJwt) {
+        $script:accessJwt = $script:BSkySession.accessJwt
+        $script:refreshJwt = $script:BSkySession.refreshJwt
         #return the session
         $script:BSkySession
-    }
-    else {
-        Write-Warning 'Failed to authenticate.'
+    } #try
+    Catch {
+        Write-Warning "Failed to authenticate or refresh the session. $($_.Exception.Message)"
     }
 }
 

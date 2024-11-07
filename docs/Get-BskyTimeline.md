@@ -26,15 +26,18 @@ This command will return all items on your Bluesky timeline. The items are based
 ### Example 1
 
 ```powershell
-PS C:\> Get-BskyTimeline -limit 10
+PS C:\> Get-BskyTimeline -Limit 10
 
-Date                Author                       Liked Reposted Quoted Text
-----                ------                       ----- -------- ------ ----
-10/27/2024 1:05 PM  jamelle                      1     0        0      fair enough
+► 11/4/2024 11:38:45 AM ◄ 🦋 Christian Buckley [buckleyplanet.bsky.social]
+
+ Be sure to check out Episode 288 of the #MVPbuzzChat interview series with
+Business Applications MVP Stefan Maroń (@StefanMaron) sharing his origin story
+on becoming a Microsoft MVP https://buff.ly/4fa3iv7 #MVPBuzz
+❤ 0  📧0  💬0
 ...
 ```
 
-The text should be a clickable link that will open the timeline item. This example assumes the credential has been set in $PSDefaultParameterValues.
+The default output uses a custom format file that includes emojis and $PSStyle formatting. The text and account name should be clickable links that will open the timeline item. This example assumes the credential has been set in $PSDefaultParameterValues.
 
 ## PARAMETERS
 

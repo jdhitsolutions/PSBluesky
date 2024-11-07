@@ -4,7 +4,7 @@
 
 ![](images/BlueskyLogo-small.png)
 
-This module is a set of PowerShell functions designed to let you interact with Bluesky API from PowerShell. Technically, the module commands are wrappers around the [atproto protocols](https://docs.bsky.app/docs/category/http-reference). The module is written for PowerShell 7, although it might work as written in Windows PowerShell with minimal changes. Commands have not been tested for cross-platform compatibility.
+This module is a set of PowerShell functions designed to let you interact with Bluesky API from PowerShell. Technically, the module commands are wrappers around the [atproto protocols](https://docs.bsky.app/docs/category/http-reference). The module is written for PowerShell 7, although it might work as written in Windows PowerShell with minimal changes. Commands *have not* been thoroughly tested for cross-platform compatibility.
 
 ## Installation
 
@@ -37,6 +37,7 @@ After installing this module, you should end up with these PSBluesky commands:
 - [Get-BskyTimeline](docs/Get-BskyTimeline.md)
 - [New-BskyPost](docs/New-BskyPost.md)
 - [Open-BskyHelp](docs/Open-BskyHelp.md)
+- [Update-BskySession](docs/Update-BskySession.md)
 
 ## Authentication
 
@@ -62,10 +63,10 @@ The commands in this module use the public Bluesky API which means there are [ra
 
 ```powershell
 $param = @{
-    Message = "Getting close to sharing my #PowerShell Bluesky code."
+    Message   = "Getting close to sharing my #PowerShell Bluesky code."
     ImagePath = "C:\work\MsPowerShell.jpg"
-    ImageAlt = "Ms. PowerShell"
-    Verbose = $true
+    ImageAlt  = "Ms. PowerShell"
+    Verbose   = $true
 }
 New-BskyPost @param
 ```
@@ -95,13 +96,13 @@ Get-BskyProfile jdhitsolutions.com
 
 The module uses a custom format file.
 
-![A Bluesky profile](images/bsky-profile.png)
+![A Bluesky user profile](images/bsky-profile.png)
 
 The user's profile name should be a clickable link.
 
 ## :couple: Followers
 
-You can retrieve a list of your followers
+You can retrieve a list of your followers. You can specify a number of followers between 1 and 100. The default is 50.
 
 ```powershell
 Get-BskyFollowers -Limit 2
@@ -132,18 +133,31 @@ You can retrieve between 1 and 100 followers. I don't know if there is a way to 
 
 ## Feed :newspaper:
 
-Use `Get-BskyFeed` to retrieve the latest posts from your feed. You can query for 1 to 100.
+Use `Get-BskyFeed` to retrieve the latest posts from *your* feed. You can query for 1 to 100.
 
 ```powershell
 Get-BskyFeed -Limit 3
 ```
-The object output has a custom format file.
+The default output uses a custom format file. The current behavior is to get posts and replies.
 
-![Bluesky feed](images/bsky-feed.png)
 
-The output includes clickable links to the the author, which might be different than you if reposting, and the post.
+![Getting your Bluesky feed](images/bsky-feed.png)
 
-The current behavior is to get posts and replies.
+The formatted output includes clickable links to the the author, which might be different than you if reposting, and the post. For best results, run PowerShell 7 in Windows Terminal.
+
+## Timeline :calendar:
+
+If you want to view items from your timeline, use the `Get-BskyTimeline` command. You can specify a limit of 1 to 100.The default is 50.
+
+```powershell
+Get-BskyTimeline -Limit 25
+```
+
+The command uses a custom format file.
+
+![Getting your Bluesky timeline](images/bsky-timeline.png)
+
+The default formatted output includes clickable links to the author and the post.
 
 ## :information_source: Information and Troubleshooting
 

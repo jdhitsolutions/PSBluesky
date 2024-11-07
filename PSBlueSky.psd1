@@ -3,7 +3,7 @@
 #
 @{
     RootModule           = 'PSBluesky.psm1'
-    ModuleVersion        = '1.0.0'
+    ModuleVersion        = '1.1.0'
     CompatiblePSEditions = 'Core'
     GUID                 = 'c5c1fd1d-e648-432d-b7d6-bb56f2044c2a'
     Author               = 'Jeff Hicks'
@@ -21,7 +21,8 @@
         'Get-BskySession',
         'Get-BskyTimeline'
         'New-BskyPost',
-        'Open-BskyHelp'
+        'Open-BskyHelp',
+        'Update-BskySession'
     )
     TypesToProcess       = @(
         'types/PSBluesky.types.ps1xml'
@@ -43,14 +44,20 @@
             ProjectUri                 = 'https://github.com/jdhitsolutions/PSBluesky'
             IconUri                    = 'https://raw.githubusercontent.com/jdhitsolutions/PSBlueSky/main/images/BlueskyLogo-icon.png'
             ReleaseNotes               = @'
-## [1.0.0] - 2024-11-02
+## [1.1.0] - 2024-11-07
+
+### Added
+
+- Moved the helper function `_RefreshSession` to a public function, `Update-BskySession`.
 
 ### Changed
 
-- Renamed help PDF file to `PSBlueSky-Help.pdf`. This is probably a break change but since the expectation is to run `Open-BskyHelp` (which has been updated with the new file name) to open the file, it shouldn't be an issue.
-- Updated `New-BskyPost` to support Markdown style links. [[Issue #6](https://github.com/jdhitsolutions/PSBluesky/issues/6)]
+- Modified `New-BSkyPost` to accept pipeline input.
+- Updated default formatting for Bluesky timeline items to use a custom format. The Table definition remains as a named view.
+- Modified session code to refresh the session if the age is greater than 60 minutes.
 - Updated `README.md`.
-- Updated module manifest to version `1.0.0`. This should be a very stable version with almost all of the intended functionality.
+- Revised the PDF help document formatting.
+- Help documentation updates.
 '@
             RequireLicenseAcceptance   = $false
             ExternalModuleDependencies = @()
