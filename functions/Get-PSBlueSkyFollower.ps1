@@ -1,5 +1,3 @@
-#https://docs.bsky.app/docs/api/app-bsky-graph-get-followers
-
 Function Get-BskyFollowers {
     [CmdletBinding()]
     [OutputType('PSBlueskyFollowProfile')]
@@ -7,6 +5,8 @@ Function Get-BskyFollowers {
         [Parameter(HelpMessage = "Enter the number of followers to retrieve between 1 and 100. Default is 50.")]
         [ValidateRange(1,100)]
         [int]$Limit = 50,
+        [Parameter(HelpMessage = "Return All followers")]
+        [switch]$All,
         [Parameter(Mandatory, HelpMessage = 'A PSCredential with your Bluesky username and password')]
         [PSCredential]$Credential
     )
@@ -21,17 +21,31 @@ Function Get-BskyFollowers {
         If ($token) {
             Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Querying $limit followers for $Username"
 
-            $apiUrl = "$PDSHOST/xrpc/app.bsky.graph.getFollowers?limit=$Limit&actor=$UserName"
+            if (!$All.IsPresent) {
+                $apiUrl = "$PDSHOST/xrpc/app.bsky.graph.getFollowers?limit=$Limit&actor=$UserName"
+            } else {
+                $apiUrl = "$PDSHOST/xrpc/app.bsky.graph.getFollowers?limit=100&actor=$UserName"
+            }
             Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Processing: $apiUrl"
             $headers = @{
                 Authorization  = "Bearer $token"
                 'Content-Type' = 'application/json'
             }
 
-            $Followers = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers
-            If ($Followers) {
+            $results = @()
+            $response = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers
+            If ($response) {
+                $results += $response.followers
+                # iterate remaining pages using 'cursor' response value
+                while ($response.cursor) {
+                    $url = $apiUrl+"&cursor=$($response.cursor)"
+                    $response = Invoke-RestMethod -Uri $url -Method Get -Headers $headers
+                    If ($response.followers) {
+                        $results += $response.followers
+                    }
+                }
                 Write-Information -MessageData $Followers -Tags raw
-                foreach ($profile in $Followers.Followers) {
+                foreach ($profile in $results) {
                     [PSCustomObject]@{
                         PSTypeName  = 'PSBlueskyFollowProfile'
                         Username    = $profile.handle
@@ -55,4 +69,3 @@ Function Get-BskyFollowers {
         Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
 }
-
