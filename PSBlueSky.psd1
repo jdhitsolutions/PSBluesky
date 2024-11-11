@@ -36,29 +36,14 @@
     )
     CmdletsToExport      = ''
     VariablesToExport    = ''
-    AliasesToExport      = 'skeet'
+    AliasesToExport      = 'skeet','Refresh-BskySession'
     PrivateData          = @{
         PSData = @{
             Tags                       = @('Bluesky', 'skeet')
             LicenseUri                 = 'https://github.com/jdhitsolutions/PSBlueSky/blob/main/LICENSE.txt'
             ProjectUri                 = 'https://github.com/jdhitsolutions/PSBluesky'
             IconUri                    = 'https://raw.githubusercontent.com/jdhitsolutions/PSBlueSky/main/images/BlueskyLogo-icon.png'
-            ReleaseNotes               = @'
-## [1.1.0] - 2024-11-07
-
-### Added
-
-- Moved the helper function `_RefreshSession` to a public function, `Update-BskySession`.
-
-### Changed
-
-- Modified `New-BSkyPost` to accept pipeline input.
-- Updated default formatting for Bluesky timeline items to use a custom format. The Table definition remains as a named view.
-- Modified session code to refresh the session if the age is greater than 60 minutes.
-- Updated `README.md`.
-- Revised the PDF help document formatting.
-- Help documentation updates.
-'@
+            ReleaseNotes               = ''
             RequireLicenseAcceptance   = $false
             ExternalModuleDependencies = @()
         } # End of PSData hashtable

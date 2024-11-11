@@ -3,6 +3,8 @@
 This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+### Added
+- Added alias `Refresh-BskySession` for `Update-BskySession`
 
 ## [1.1.0] - 2024-11-07
 

@@ -1,5 +1,6 @@
 Function Update-BskySession {
     [CmdletBinding()]
+    [Alias("Refresh-BskySession")]
     [OutputType("PSBlueskySession")]
     Param (
         [Parameter(
