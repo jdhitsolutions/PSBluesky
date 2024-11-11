@@ -2,8 +2,8 @@
 # Module manifest for module 'PSBluesky'
 #
 @{
-    RootModule           = 'PSBluesky.psm1'
-    ModuleVersion        = '1.1.0'
+    RootModule           = 'PSBlueSky.psm1'
+    ModuleVersion        = '1.1.1'
     CompatiblePSEditions = 'Core'
     GUID                 = 'c5c1fd1d-e648-432d-b7d6-bb56f2044c2a'
     Author               = 'Jeff Hicks'
@@ -25,10 +25,10 @@
         'Update-BskySession'
     )
     TypesToProcess       = @(
-        'types/PSBluesky.types.ps1xml'
+        'types/PSBlueSky.types.ps1xml'
     )
     FormatsToProcess     = @(
-        'formats/PSBlueskyTimelinePost.format.ps1xml',
+        'formats/PSBlueSkyTimelinePost.format.ps1xml',
         'formats/PSBlueskyProfile.format.ps1xml',
         'formats/PSBlueskyFollower.format.ps1xml',
         'formats/PSBlueskyFeed.format.ps1xml',
