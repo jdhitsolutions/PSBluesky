@@ -1,3 +1,5 @@
+# https://docs.bsky.app/docs/api/com-atproto-repo-create-record
+
 Function New-BskyPost {
     [CmdletBinding(SupportsShouldProcess)]
     [OutputType([System.String])]
@@ -15,6 +17,7 @@ Function New-BskyPost {
         [ValidatePattern('.*\.(jpg|jpeg|png|gif)$')]
         [string]$ImagePath,
         [Parameter(HelpMessage = 'You should include ALT text for the image.',ValueFromPipelineByPropertyName)]
+        [Alias('Alt')]
         [string]$ImageAlt,
         [Parameter(Mandatory, HelpMessage = 'A PSCredential with your Bluesky username and password')]
         [PSCredential]$Credential
@@ -22,7 +25,12 @@ Function New-BskyPost {
 
     Begin {
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
-        Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
+        if ($MyInvocation.CommandOrigin -eq 'Runspace') {
+            #Hide this metadata when the command is called from another command
+            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running module version $ModuleVersion"
+            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
+            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running on $($PSVersionTable.OS)"
+        }
         $token = Get-BskyAccessToken -Credential $Credential
     } #begin
     Process {
@@ -39,9 +47,22 @@ Function New-BskyPost {
                 text      = $Message
                 createdAt = (Get-Date -Format 'o')
             }
-#TODO: Process multiple Markdown links in a single message
-            #test message for HTML links
-            #test for Markdown style links first
+
+            #test message for links and mentions
+            #test for @mentions first and update the text
+            #Added 12 Nov 2024 Issue #14
+            [regex]$rxMention = "@(?<name>[\w+-]*(\.[\w+-]+)+)"
+            if ($rxMention.IsMatch($record.text)) {
+                $matches = $rxMention.Matches($record.text)
+                $matches | ForEach-Object {
+                    #$_.Groups['name'].Value
+                    $url = "https://bsky.app/profile/{0}" -f $_.Groups['name'].Value
+                    $replace = "[$($_.value)]($url)"
+                    Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Replacing mention $($_.Value) with $replace"
+                    $record.text = $record.text -replace $_.Value, $replace
+                }
+            }
+            #test for Markdown style links
             #create a facet if found
             [regex]$pattern = "(?<text>(?<=\[)[^\]]+(?=\]))\]\((?<uri>http(s)?:\/\/\S+(?=\)))"
             #"(?<text>(?<=\[).*(?=\]))\]\((?<uri>http(s)?:\/\/\S+(?=\)))"

@@ -1,5 +1,5 @@
 ---
-external help file: PSBluesky-help.xml
+external help file: PSBlueSky-help.xml
 Module Name: PSBlueSky
 online version:
 schema: 2.0.0
@@ -13,13 +13,21 @@ Get a list of Bluesky accounts that you follow
 
 ## SYNTAX
 
+### Limit (Default)
+
 ```yaml
 Get-BskyFollowing [[-Limit] <Int32>] [-Credential] <PSCredential> [<CommonParameters>]
 ```
 
+### All
+
+```yaml
+Get-BskyFollowing [-All] [-Credential] <PSCredential> [<CommonParameters>]
+```
+
 ## DESCRIPTION
 
-This command will return a list of Bluesky accounts that you follow. You can get between 1 and 100. The default is 50.
+This command will return a list of Bluesky accounts that you follow. You can get between 1 and 100. The default is 50. Or use -All to get all accounts that you follow.
 
 ## EXAMPLES
 
@@ -34,7 +42,6 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
                                         Board member of the .NET Foundation 💜
                                         | Proud dad joke lover
              mikeshepard70.bsky.social
-
 ```
 
 The default output includes clickable links to the user's profile. This example assumes the credential has been set in $PSDefaultParameterValues.
@@ -64,7 +71,7 @@ Default is 50.
 
 ```yaml
 Type: Int32
-Parameter Sets: (All)
+Parameter Sets: Limit
 Aliases:
 
 Required: False
@@ -74,8 +81,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### CommonParameters
+### -All
 
+Return All followers
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: All
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS

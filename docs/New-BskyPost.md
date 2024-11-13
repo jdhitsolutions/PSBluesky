@@ -21,6 +21,8 @@ New-BskyPost [-Message] <String> [-ImagePath <String>] [-ImageAlt <String>] -Cre
 
 Use this command to post to Bluesky from PowerShell. You can optionally include images. If you include an image you should include an ALT text value. If your message includes URL links, they will be converted into hyperlinks. Be sure that your links have a whitespace on both sides in your message text.
 
+If your message includes a reference to another account, you should use the `@` symbol followed by the account name. For example, `@jdhitsolutions.com`. The reference will be turned into a clickable inline link. This command WILL NOT validate any references or links.
+
 ## EXAMPLES
 
 ### Example 1
@@ -44,10 +46,10 @@ You can insert markdown style links in your message text. This example is using 
 ### Example 3
 
 ```powershell
-PS C:\> New-BskyPost -Message "This is awesomeL https://microsoft.com/powershell" -ImagePath c:\images\awesome.jpg -ImageAlt "Awesomeness"
+PS C:\> New-BskyPost -Message "This is awesome https://microsoft.com/powershell" -ImagePath c:\images\awesome.jpg -ImageAlt "Awesomeness"
 ```
 
-An example that posts an image. The URL will be formatted as a clickable hyperlink.
+An example that posts an image. The URL will be formatted as a clickable hyperlink. While not technically required, you should include ALT text for the image.
 
 ## PARAMETERS
 
@@ -106,7 +108,7 @@ You should include ALT text for the image.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: Alt
 
 Required: False
 Position: Named

@@ -3,8 +3,24 @@
 This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+
+## [1.2.0] - 2024-11-13
+
 ### Added
+
+- Added the alias `Alt` for `ImageAlt` in `New-BskyPost`.
 - Added alias `Refresh-BskySession` for `Update-BskySession`
+- Accepted [PR #12](https://github.com/jdhitsolutions/PSBluesky/pull/12) to fix casing issues which were causing problems loading the module on Linux. Thanks [@Skatterbrainz](https://github.com/Skatterbrainz)!
+- Added additional verbose messaging to commands to show what platform is being used and the module version.
+- Added command `Get-BskyNotification` and corresponding format file.
+
+### Changed
+
+- Updated `Get-BskyFollowers` to use paging to get all followers. [PR #11](https://github.com/jdhitsolutions/PSBluesky/pull/12) Thanks to [@Skatterbrainz](https://github.com/Skatterbrainz) for solving an issue on my to do list.
+- Updated `New-BskyPost` to properly handle mentions and format as inline links. [[Issue #14](https://github.com/jdhitsolutions/PSBluesky/issues/14)]
+- Update `Get-BskyFollowing` to allow the user to get all accounts. [[Issue #16](https://github.com/jdhitsolutions/PSBluesky/issues/16)]
+- Major update to the way the module handles the session object and tokens. The module uses a background runspace to update the session object every 15 minutes. This should keep your Bluesky access tokens good for as long as the module is loaded without having to worrying about refreshing the module. __This is a breaking change__.
+- Updated `README.md` to reflect changes and new features.
 
 ## [1.1.0] - 2024-11-07
 
@@ -107,7 +123,8 @@ This is the first version published to the PowerShell Gallery.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.1.0..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.2.0..HEAD
+[1.2.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.1.0..v1.2.0
 [1.1.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.0.0..v1.1.0
 [1.0.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.6.0..v1.0.0
 [0.6.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.5.0..v0.6.0

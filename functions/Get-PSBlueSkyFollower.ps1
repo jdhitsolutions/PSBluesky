@@ -1,11 +1,15 @@
 Function Get-BskyFollowers {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = "Limit")]
     [OutputType('PSBlueskyFollowProfile')]
     Param(
-        [Parameter(HelpMessage = "Enter the number of followers to retrieve between 1 and 100. Default is 50.")]
+        [Parameter(
+            Position = 0,
+            HelpMessage = "Enter the number of followers to retrieve between 1 and 100. Default is 50.",
+            ParameterSetName = "Limit"
+        )]
         [ValidateRange(1,100)]
         [int]$Limit = 50,
-        [Parameter(HelpMessage = "Return All followers")]
+        [Parameter(ParameterSetName = "All",HelpMessage = "Return All followers")]
         [switch]$All,
         [Parameter(Mandatory, HelpMessage = 'A PSCredential with your Bluesky username and password')]
         [PSCredential]$Credential
@@ -13,7 +17,12 @@ Function Get-BskyFollowers {
 
     Begin {
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
-        Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
+        if ($MyInvocation.CommandOrigin -eq 'Runspace') {
+            #Hide this metadata when the command is called from another command
+            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running module version $ModuleVersion"
+            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
+            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running on $($PSVersionTable.OS)"
+        }
         $token = Get-BskyAccessToken -Credential $Credential
         $UserName = $Credential.UserName
     } #begin
@@ -21,7 +30,7 @@ Function Get-BskyFollowers {
         If ($token) {
             Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Querying $limit followers for $Username"
 
-            if (!$All.IsPresent) {
+            if ($PSCmdlet.ParameterSetName -eq 'Limit') {
                 $apiUrl = "$PDSHOST/xrpc/app.bsky.graph.getFollowers?limit=$Limit&actor=$UserName"
             } else {
                 $apiUrl = "$PDSHOST/xrpc/app.bsky.graph.getFollowers?limit=100&actor=$UserName"
@@ -36,15 +45,19 @@ Function Get-BskyFollowers {
             $response = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers
             If ($response) {
                 $results += $response.followers
-                # iterate remaining pages using 'cursor' response value
-                while ($response.cursor) {
-                    $url = $apiUrl+"&cursor=$($response.cursor)"
-                    $response = Invoke-RestMethod -Uri $url -Method Get -Headers $headers
-                    If ($response.followers) {
-                        $results += $response.followers
+                Write-Information -MessageData $response -Tags raw
+                if ($PSCmdlet.ParameterSetName -eq 'All') {
+                    Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS]  Getting all followers from $($response.cursor)"
+                    # iterate remaining pages using 'cursor' response value
+                    while ($response.cursor) {
+                        $url = $apiUrl+"&cursor=$($response.cursor)"
+                        $response = Invoke-RestMethod -Uri $url -Method Get -Headers $headers
+                        If ($response.followers) {
+                            Write-Information -MessageData $response -Tags raw
+                            $results += $response.followers
+                        }
                     }
-                }
-                Write-Information -MessageData $Followers -Tags raw
+                } #If All
                 foreach ($profile in $results) {
                     [PSCustomObject]@{
                         PSTypeName  = 'PSBlueskyFollowProfile'
@@ -55,7 +68,7 @@ Function Get-BskyFollowers {
                         URL         = "https://bsky.app/profile/$($profile.handle)"
                     }
                 }
-            }
+            } #if response
             else {
                 Write-Warning 'Failed to retrieve followers.'
             }

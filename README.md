@@ -2,6 +2,7 @@
 
 [![PSGallery Version](https://img.shields.io/powershellgallery/v/PSBluesky.png?style=for-the-badge&label=PowerShell%20Gallery)](https://www.powershellgallery.com/packages/PSBluesky/) [![PSGallery Downloads](https://img.shields.io/powershellgallery/dt/PSBluesky.png?style=for-the-badge&label=Downloads)](https://www.powershellgallery.com/packages/PSBluesky/)
 
+
 ![](images/BlueskyLogo-small.png)
 
 This module is a set of PowerShell functions designed to let you interact with Bluesky API from PowerShell. Technically, the module commands are wrappers around the [atproto protocols](https://docs.bsky.app/docs/category/http-reference). The module is written for PowerShell 7, although it might work as written in Windows PowerShell with minimal changes. Commands *have not* been thoroughly tested for cross-platform compatibility.
@@ -33,6 +34,7 @@ After installing this module, you should end up with these PSBluesky commands:
 - [Get-BskyFollowers](docs/Get-BskyFollowers.md)
 - [Get-BskyFollowing](docs/Get-BskyFollowing.md)
 - [Get-BskyProfile](docs/Get-BskyProfile.md)
+- [Get-BskyNotification](docs/Get-BskyNotification.md)
 - [Get-BskySession](docs/Get-BskySession.md)
 - [Get-BskyTimeline](docs/Get-BskyTimeline.md)
 - [New-BskyPost](docs/New-BskyPost.md)
@@ -41,9 +43,41 @@ After installing this module, you should end up with these PSBluesky commands:
 
 ## Authentication
 
-In order to send data, you must authenticate. The `Get-BskyAccessToken` function will retrieve an access token. You shouldn't need to call this command directly. The other module commands will call it and pass the authentication token as needed. Technically, the token has a time limit and it could be re-used. But it is just as easy to get a token with each request since it is assumed you will be using the module commands intermittently.
+### Tokens
 
-You will need to create a PSCredential object with your Bluesky username and password. For automation purposes, you can use the Secrets management module to store your credential. Write your own code to retrieve the credential and pass it to the module commands.
+:coin: In order to send data, you must authenticate. The `Get-BskyAccessToken` function will retrieve an access token. You shouldn't need to call this command directly. Other module commands will call it and pass the authentication token as needed. The access token has a limited lifetime unless it is refreshed. Beginning with version 1.2.0, the module will refresh the token every 15 minutes through a background runspace using a synchronized hashtable. If you remove the module, the runspace will be removed as well.
+
+Run `Get-BskySession` to see your current session information.
+
+```powershell
+PS C:\> Get-BskySession
+
+   User: jdhitsolutions.com
+
+Active AccessToken             RefreshToken            Age
+------ -----------             ------------            ---
+True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:05:41.5115796
+```
+
+If you want to manually test the Bluesky API in your own code, you can use the access and refresh token properties from this object.
+
+```powershell
+PS C:\> $bskySession = Get-BskySession
+PS C:\> $access = $bskySession.AccessToken
+PS C:\> $refresh = $bskySession.RefreshToken
+```
+
+However, it is still possible you will encounter an expired token error message.. If you do, you can run `Update-BskySession` to refresh the token.
+
+```powershell
+Get-BSkySession | Update-BskySession
+```
+
+If this also fails, remove the module, re-import and start a new Bluesky session.
+
+### Credentials :passport_control:
+
+You will need to create a PSCredential object with your Bluesky username and password. __The username is case-sensitive__. For automation purposes, you can use the Secrets management module to store your credential. Write your own code to retrieve the credential and pass it to the module commands.
 
 You might want to use `PSDefaultParameterValues` to set the credential for all commands.
 
@@ -53,9 +87,9 @@ $PSDefaultParameterValues['*-Bsky*:Credential'] = $BlueskyCredential
 
 ## Rate Limits
 
-The commands in this module use the public Bluesky API which means there are [rate limits](https://docs.bsky.app/docs/advanced-guides/rate-limits). If you exceed the rate limit, you will get an error message. You will need to wait until the rate limit resets. The module attempts to refresh and re-use Bluesky sessions. You can run `Get-BskySession` to see your current session information.
+The commands in this module use the public Bluesky API which means there are [rate limits](https://docs.bsky.app/docs/advanced-guides/rate-limits). If you exceed the rate limit, you will get an error message. You will need to wait until the rate limit resets.
 
-:warning: There is a rate limit of 300 new sessions per day. If you reload the module you will end up creating a new session which could affect your rate limit.
+:warning: There is a rate limit of 300 new sessions per day. This shouldn't be an issue for most people unless you are testing code or running some sort of high-volume automation.
 
 ## Posting
 
@@ -129,7 +163,19 @@ Created              Posts Followers Following Lists
 8/14/2023 3:58:44 PM   125       236       157     1
 ```
 
-You can retrieve between 1 and 100 followers. I don't know if there is a way to enumerate or page through all followers.
+The default behavior is to retrieve between 1 and 100 followers. Or you can use the `-All` parameter to retrieve all followers.
+
+## Following
+
+Likewise, you can get a list of all the accounts you are following.
+
+```powershell
+Get-BskyFollowing -limit 3
+```
+
+![Bluesky following](images/bsky-following.png)
+
+As with followers, the default behavior is to retrieve between 1 and 100 accounts you are following. Or you can use the `-All` parameter to retrieve all accounts you are following.
 
 ## Feed :newspaper:
 
@@ -159,6 +205,18 @@ The command uses a custom format file.
 
 The default formatted output includes clickable links to the author and the post.
 
+## Notifications :bell:
+
+You can retrieve your notifications with `Get-BskyNotification`. You can specify a limit of 1 to 100. The default is 50.
+
+```powershell
+ Get-BskyNotification -limit 10
+ ```
+
+The default formatted output includes clickable links to the author and the liked post.
+
+![Getting your Bluesky notifications](images/bsky-notification.png)
+
 ## :information_source: Information and Troubleshooting
 
 The commands in this module should write the raw response from the API request to the Information stream. Some commands might include additional information.
@@ -186,10 +244,11 @@ $PSDefaultParameterValues['*-*Sky*:InformationVariable'] = "iv"
 
 ## Roadmap :world_map:
 
-I have a short list of items to finish before this can be published to the PowerShell Gallery.
+I have a short list of items on my wish list:
 
 - support posting multiple images
 - localized verbose and other messaging
+- commands to work with direct messages, aka chat
 - maybe create a TUI-base reader for your timeline
 
-If you are testing the module and think you've found a bug, please post an [Issue](https://github.com/jdhitsolutions/PSBlueSky/issues). For all other topics and questions, please use the [Discussions](https://github.com/jdhitsolutions/PSBlueSky/discussions) feature.
+If you are testing the module and think you've found a bug, please post an __[Issue](https://github.com/jdhitsolutions/PSBlueSky/issues)__. For all other topics and questions, including feature requests, please use the repository's __[Discussions](https://github.com/jdhitsolutions/PSBlueSky/discussions)__ section.

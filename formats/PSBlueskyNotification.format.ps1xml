@@ -1,0 +1,51 @@
+<!--
+Format type data generated 11/13/2024 08:22:37 by PROSPERO\Jeff
+
+This file was created using the New-PSFormatXML command that is part
+of the PSScriptTools module.
+
+https://github.com/jdhitsolutions/PSScriptTools
+-->
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <!--Created 11/13/2024 08:22:37 by PROSPERO\Jeff-->
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PSBlueSkyNotification</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <!--Delete the AutoSize node if you want to use the defined widths.
+        <AutoSize />-->
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Date</Label>
+            <Width>22</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Account</Label>
+            <Width>58</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <ScriptBlock>"{0:g}" -f $_.Date</ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>
+                  [string]$Name = ($_.Author -match "\w+") ? $_.Author : $_.AuthorHandle
+                  $glyph = ($_.notification -eq 'like') ? "$($PSStyle.Underline)$($PSStyle.FormatHyperLink('👍',$_.Subject))$($PSStyle.Reset)" : '➡ '
+                  "$($PSStyle.Foreground.BrightGreen){0}$($PSStyle.Reset) $($PSStyle.Italic){1}$($PSStyle.Reset)" -f $glyph,$($PSStyle.FormatHyperLink($Name,$_.AuthorUrl))
+                </ScriptBlock>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

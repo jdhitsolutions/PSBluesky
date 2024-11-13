@@ -408,7 +408,7 @@ Date                  Liked Replied Reposted Quoted
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This command will return a list of your Bluesky followers, You can get between 1 and 100. The default is 50. Research into enumerating all followers is ongoing.</maml:para>
+      <maml:para>This command will return a list of your Bluesky followers, You can get between 1 and 100. The default is 50. Or use the All parameter to page through all followers.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -438,6 +438,32 @@ Date                  Liked Replied Reposted Quoted
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-BskyFollowers</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>Credential</maml:name>
+          <maml:description>
+            <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+          <dev:type>
+            <maml:name>PSCredential</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>All</maml:name>
+          <maml:description>
+            <maml:para>Return All followers</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
@@ -463,6 +489,18 @@ Date                  Liked Replied Reposted Quoted
           <maml:uri />
         </dev:type>
         <dev:defaultValue>50</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>All</maml:name>
+        <maml:description>
+          <maml:para>Return All followers</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>
@@ -523,7 +561,7 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This command will return a list of Bluesky accounts that you follow. You can get between 1 and 100. The default is 50.</maml:para>
+      <maml:para>This command will return a list of Bluesky accounts that you follow. You can get between 1 and 100. The default is 50. Or use -All to get all accounts that you follow.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -553,6 +591,32 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-BskyFollowing</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>Credential</maml:name>
+          <maml:description>
+            <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+          <dev:type>
+            <maml:name>PSCredential</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>All</maml:name>
+          <maml:description>
+            <maml:para>Return All followers</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
@@ -578,6 +642,18 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
           <maml:uri />
         </dev:type>
         <dev:defaultValue>50</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>All</maml:name>
+        <maml:description>
+          <maml:para>Return All followers</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>
@@ -630,6 +706,117 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-BskyNotification</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>BskyNotification</command:noun>
+      <maml:description>
+        <maml:para>Get Bluesky notifications.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Use this command to retrieve Bluesky notifications. You can limit the number of notifications returned up to 100. The default is 50. The default output uses a custom format file to display the notifications. The Account name is displayed as a hyperlink to the account's Bluesky profile. If the notification is a like, the emoji is a clickable link to the post that was liked.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-BskyNotification</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Limit</maml:name>
+          <maml:description>
+            <maml:para>Enter the number of notifications to retrieve between 1 and 100. Default is 50.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Credential</maml:name>
+          <maml:description>
+            <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+          <dev:type>
+            <maml:name>PSCredential</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Credential</maml:name>
+        <maml:description>
+          <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+        <dev:type>
+          <maml:name>PSCredential</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Limit</maml:name>
+        <maml:description>
+          <maml:para>Enter the number of notifications to retrieve between 1 and 100. Default is 50.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>PSBlueskyNotification</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-bskyNotification -Limit 5
+
+Date               Account
+----               -------
+11/13/2024 8:51 AM ➡ Radu Bogdan
+11/13/2024 8:42 AM ➡ Emanuel Palm
+11/13/2024 8:34 AM ➡ Anthony Zoko
+11/13/2024 8:23 AM ➡ robm82.bsky.social
+11/13/2024 8:13 AM ➡ Jimmy Kumblad</dev:code>
+        <dev:remarks>
+          <maml:para>The default output includes emojis and clickable links.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-BskyProfile</command:name>
       <command:verb>Get</command:verb>
       <command:noun>BskyProfile</command:noun>
@@ -638,7 +825,7 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Use this command to retrieve a Bluesky profile. The default will be your profile based on the credential you use, but you can get any profile if you know the user name. The default output includes clickable links.</maml:para>
+      <maml:para>Use this command to retrieve a Bluesky profile. The default will be your profile based on the credential you use, but you can get any profile if you know the user name. The user name is case-sensitive. The default output includes clickable links.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -956,6 +1143,7 @@ on becoming a Microsoft MVP https://buff.ly/4fa3iv7 #MVPBuzz
     </command:details>
     <maml:description>
       <maml:para>Use this command to post to Bluesky from PowerShell. You can optionally include images. If you include an image you should include an ALT text value. If your message includes URL links, they will be converted into hyperlinks. Be sure that your links have a whitespace on both sides in your message text.</maml:para>
+      <maml:para>If your message includes a reference to another account, you should use the `@` symbol followed by the account name. For example, `@jdhitsolutions.com`. The reference will be turned into a clickable inline link. This command WILL NOT validate any references or links.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1007,7 +1195,7 @@ on becoming a Microsoft MVP https://buff.ly/4fa3iv7 #MVPBuzz
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="Alt">
           <maml:name>ImageAlt</maml:name>
           <maml:description>
             <maml:para>You should include ALT text for the image.</maml:para>
@@ -1069,7 +1257,7 @@ on becoming a Microsoft MVP https://buff.ly/4fa3iv7 #MVPBuzz
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="Alt">
         <maml:name>ImageAlt</maml:name>
         <maml:description>
           <maml:para>You should include ALT text for the image.</maml:para>
@@ -1150,9 +1338,9 @@ PS C:\&gt; skeet $m</dev:code>
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 3 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; New-BskyPost -Message "This is awesomeL https://microsoft.com/powershell" -ImagePath c:\images\awesome.jpg -ImageAlt "Awesomeness"</dev:code>
+        <dev:code>PS C:\&gt; New-BskyPost -Message "This is awesome https://microsoft.com/powershell" -ImagePath c:\images\awesome.jpg -ImageAlt "Awesomeness"</dev:code>
         <dev:remarks>
-          <maml:para>An example that posts an image. The URL will be formatted as a clickable hyperlink.</maml:para>
+          <maml:para>An example that posts an image. The URL will be formatted as a clickable hyperlink. While not technically required, you should include ALT text for the image.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

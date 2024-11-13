@@ -19,7 +19,7 @@ Get-BskyProfile [[-UserName] <String>] -Credential <PSCredential> [<CommonParame
 
 ## DESCRIPTION
 
-Use this command to retrieve a Bluesky profile. The default will be your profile based on the credential you use, but you can get any profile if you know the user name. The default output includes clickable links.
+Use this command to retrieve a Bluesky profile. The default will be your profile based on the credential you use, but you can get any profile if you know the user name. The user name is case-sensitive. The default output includes clickable links.
 
 ## EXAMPLES
 

@@ -1,7 +1,7 @@
 Function Update-BskySession {
     [CmdletBinding()]
-    [Alias("Refresh-BskySession")]
-    [OutputType("PSBlueskySession")]
+    [Alias('Refresh-BskySession')]
+    [OutputType('PSBlueskySession')]
     Param (
         [Parameter(
             Position = 0,
@@ -14,7 +14,12 @@ Function Update-BskySession {
 
     Begin {
         Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
-        Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
+        if ($MyInvocation.CommandOrigin -eq 'Runspace') {
+            #Hide this metadata when the command is called from another command
+            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running module version $ModuleVersion"
+            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
+            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running on $($PSVersionTable.OS)"
+        }
     } #begin
 
     Process {
@@ -32,16 +37,17 @@ Function Update-BskySession {
                 Headers     = $headers
                 ErrorAction = 'Stop'
             }
-            $script:BSkySession = Invoke-RestMethod @splat | _newSessionObject
+            $script:BSkySession = Invoke-RestMethod @splat
             $script:accessJwt = $script:BSkySession.accessJwt
             $script:refreshJwt = $script:BSkySession.refreshJwt
             #return the session
-            $script:BSkySession
+            $script:BSkySession | _newSessionObject
         } #try
         Catch {
             Write-Warning "Failed to authenticate or refresh the session. $($_.Exception.Message)"
         }
     } #process
+
     End {
         Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
