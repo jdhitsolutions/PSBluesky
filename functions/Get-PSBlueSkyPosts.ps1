@@ -24,6 +24,7 @@ Function Get-BskyFeed {
         }
         $token = Get-BskyAccessToken -Credential $Credential
         $Username = $Credential.UserName
+        $did = $script:BskySession.did
         <#
         this might become a parameter in a future release
         Possible values:
@@ -39,14 +40,15 @@ Function Get-BskyFeed {
         If ($token) {
             Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Querying $limit feed items for $Username"
             $filter = 'posts_with_replies'
-            $apiUrl = "$PDSHost/xrpc/app.bsky.feed.getAuthorFeed?actor=$Username&limit=$Limit&filter=$filter"
+            $apiUrl = "$PDSHost/xrpc/app.bsky.feed.getAuthorFeed?actor=$did&limit=$Limit&filter=$filter"
             Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Processing: $apiUrl"
             $headers = @{
                 Authorization  = "Bearer $token"
                 'Content-Type' = 'application/json'
             }
             Try {
-                $feed = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers -ErrorAction Stop
+                $feed = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers -ErrorAction Stop -ResponseHeadersVariable rh
+                Write-Information -MessageData $rh -tags ResponseHeader
             }
             Catch {
                 Write-Warning "Failed to retrieve feed items for $username. $($_.Exception.Message)"

@@ -32,6 +32,7 @@ Function New-BskyPost {
             Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running on $($PSVersionTable.OS)"
         }
         $token = Get-BskyAccessToken -Credential $Credential
+        $did = $script:BskySession.did
     } #begin
     Process {
         If ($token) {
@@ -132,8 +133,9 @@ Function New-BskyPost {
                 }
             }
 
+            #15 Nov 2024 Use the accounts DiD to post and not the user's handle
             $body = @{
-                repo       = $Credential.UserName
+                repo       = $did
                 collection = 'app.bsky.feed.post'
                 record     = $record
             } | ConvertTo-Json -Depth 7

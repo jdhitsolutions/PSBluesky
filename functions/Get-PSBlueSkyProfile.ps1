@@ -47,7 +47,15 @@ Function Get-BskyProfile {
             }
 
             Try {
-            $profile = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers -ErrorAction Stop
+                $splat = @{
+                    Uri         = $apiUrl
+                    Method      = 'Get'
+                    Headers     = $headers
+                    ErrorAction = 'Stop'
+                    ResponseHeadersVariable = 'rh'
+                }
+            $profile = Invoke-RestMethod @splat
+            Write-Information -MessageData $rh -tags ResponseHeader
             If ($profile) {
                 Write-Information -MessageData $profile -Tags raw
                 [PSCustomObject]@{
@@ -62,6 +70,7 @@ Function Get-BskyProfile {
                     Following   = $profile.followsCount
                     Lists       = $profile.associated.lists
                     URL         = "https://bsky.app/profile/$($profile.handle)"
+                    DID         = $profile.did
                 }
             }
             else {

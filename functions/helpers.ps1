@@ -39,6 +39,19 @@ Function _newFacetLink {
     }
 }
 
+Function _convertDidToAt {
+    [cmdletbinding()]
+    Param(
+        [parameter(Mandatory, HelpMessage = 'The DID to convert')]
+        [ValidatePattern('^did:plc:')]
+        [string]$did
+    )
+
+    #did:plc:qrllvid7s54k4hnwtqxwetrf
+    $at = $did.replace("did:", "at://")
+    $at
+}
+
 Function _convertAT {
     [cmdletbinding()]
     Param(
@@ -53,6 +66,19 @@ Function _convertAT {
     $publicUri = 'https://bsky.app/profile/'
     $publicUri += '{0}/post/{1}' -f $split[1], $split[-1]
     $publicUri
+}
+
+function _getPostText {
+    [cmdletbinding()]
+    param (
+        [string]$AT,
+        [hashtable]$Headers
+    )
+    if ($AT) {
+        $url = "$script:PDSHost/xrpc/app.bsky.feed.getPosts?uris=$at"
+        $r = Invoke-RestMethod -Uri $url -Method Get -Headers $headers
+        $r.posts.record.text
+    }
 }
 
 Function _newSessionObject {

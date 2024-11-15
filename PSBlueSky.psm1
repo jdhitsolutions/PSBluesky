@@ -3,8 +3,14 @@
 Get-ChildItem -path $PSScriptRoot\functions\*.ps1 |
 ForEach-Object { . $_.FullName}
 
-#define a module scoped variable
+#define module scoped variables
 $PDSHOST = 'https://bsky.social'
+<#
+initialize a caching hashtable for post texts.
+The key will be an AT value like at://did:plc:ohgsqpfsbocaaxusxqlgfvd7/app.bsky.feed.post/3larqyjbyzl2a
+and the value will the text of the post
+#>
+$PostCache = @{}
 
 $ModuleVersion = (Import-PowerShellDataFile -Path $PSScriptRoot\PSBlueSky.psd1).ModuleVersion
 #write-host "importing module version $ModuleVersion" -ForegroundColor Green

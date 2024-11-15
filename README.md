@@ -29,6 +29,7 @@ You might want to also install the following modules or related modules to secur
 After installing this module, you should end up with these PSBluesky commands:
 
 - [Add-BskyImage](docs/Add-BskyImage.md)
+- [Find-BskyUser](docs/Find-BskyUser.md)
 - [Get-BskyAccessToken](docs/Get-BskyAccessToken.md)
 - [Get-BskyFeed](docs/Get-BskyFeed.md)
 - [Get-BskyFollowers](docs/Get-BskyFollowers.md)
@@ -165,6 +166,49 @@ Created              Posts Followers Following Lists
 
 The default behavior is to retrieve between 1 and 100 followers. Or you can use the `-All` parameter to retrieve all followers.
 
+## Searching for Users
+
+You can search for Bluesky users with `Find-BskyUser`. The default behavior is to search for a user by name. The search is case-insensitive
+
+```powershell
+Find-BskyUser -UserName "jeff h" -Limit 3
+```
+
+![Bluesky user search](images/find-bskyuser.png)
+
+The default output includes clickable links to the user's profile.
+
+The value you specify for the user name will also search the user's description property. This is a handy way of finding users with similar interests.
+
+```powershell
+Find-BskyUser powershell
+```
+
+![Find Bluesky users via their description](images/find-bskyuser-topic.png)
+
+You can pipe the search results to `Get-BskyProfile` to retrieve more information.
+
+```powershell
+PS C:\> $p = Find-BskyUser powershell -Limit 10
+PS C:\> $p | Get-BskyProfile
+
+Chrissy LeMaire [funbucket.dev]
+
+Dual Microsoft MVP, GitHub Star, creator of dbatools, author
+http://dbatools.io/book 🏳️‍🌈
+
+Totally into PowerShell, SQL Server and AI.
+
+📍 North of France
+
+
+Created               Posts Followers Following Lists
+-------               ----- --------- --------- -----
+4/24/2023 12:12:00 PM   688      1435       614     0
+
+...
+```
+
 ## Following
 
 Likewise, you can get a list of all the accounts you are following.
@@ -213,9 +257,14 @@ You can retrieve your notifications with `Get-BskyNotification`. You can specify
  Get-BskyNotification -limit 10
  ```
 
-The default formatted output includes clickable links to the author and the liked post.
+The default formatted output includes clickable links to the author and the liked or reposted skeet. Long account names will be truncated in the formatted output.
 
 ![Getting your Bluesky notifications](images/bsky-notification.png)
+
+- 👍 Like
+- ➡ Follow
+- 🔄 Repost
+- ↩  Reply
 
 ## :information_source: Information and Troubleshooting
 
@@ -252,3 +301,5 @@ I have a short list of items on my wish list:
 - maybe create a TUI-base reader for your timeline
 
 If you are testing the module and think you've found a bug, please post an __[Issue](https://github.com/jdhitsolutions/PSBlueSky/issues)__. For all other topics and questions, including feature requests, please use the repository's __[Discussions](https://github.com/jdhitsolutions/PSBlueSky/discussions)__ section.
+
+> *You can find me on Bluesky as [jdhitsolutions.com](https://bsky.app/profile/jdhitsolutions.com).*

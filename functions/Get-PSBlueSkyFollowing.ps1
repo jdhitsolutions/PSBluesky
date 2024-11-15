@@ -26,16 +26,17 @@ Function Get-BskyFollowing {
         }
         $token = Get-BskyAccessToken -Credential $Credential
         $UserName = $Credential.UserName
+        $did = $script:BskySession.did
     } #begin
     Process {
         If ($token) {
             Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Querying $limit response accounts for $Username"
 
             if ($PSCmdlet.ParameterSetName -eq 'Limit') {
-                $apiUrl = "$PDSHOST/xrpc/app.bsky.graph.getFollows?limit=$Limit&actor=$UserName"
+                $apiUrl = "$PDSHOST/xrpc/app.bsky.graph.getFollows?limit=$Limit&actor=$did"
             }
             else {
-                $apiUrl = "$PDSHOST/xrpc/app.bsky.graph.getFollows?limit=100&actor=$UserName"
+                $apiUrl = "$PDSHOST/xrpc/app.bsky.graph.getFollows?limit=100&actor=$did"
             }
             Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Processing: $apiUrl"
             $headers = @{
@@ -44,7 +45,15 @@ Function Get-BskyFollowing {
             }
 
             $results = @()
-            $response = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers
+            $splat = @{
+                Uri         = $apiUrl
+                Method      = 'Get'
+                Headers     = $headers
+                ErrorAction = 'Stop'
+                ResponseHeadersVariable = 'rh'
+            }
+            $response = Invoke-RestMethod @splat
+            Write-Information -MessageData $rh -tags ResponseHeader
             If ($response) {
                 $results += $response.follows
                 Write-Information -MessageData $response -Tags raw

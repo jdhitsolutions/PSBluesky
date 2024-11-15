@@ -180,6 +180,133 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Find-BskyUser</command:name>
+      <command:verb>Find</command:verb>
+      <command:noun>BskyUser</command:noun>
+      <maml:description>
+        <maml:para>Search for Bluesky user accounts</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>You can use this command to search for Bluesky user accounts. The assumption is that you will be searching by name, but the value you enter for the UserName parameter will also search the user's description.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Find-BskyUser</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="Profile">
+          <maml:name>UserName</maml:name>
+          <maml:description>
+            <maml:para>Enter a search string. This will be used to search the user's name and description.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Limit</maml:name>
+          <maml:description>
+            <maml:para>Enter the number of results to retrieve between 1 and 100. Default is 50.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Limit</maml:name>
+        <maml:description>
+          <maml:para>Enter the number of results to retrieve between 1 and 100. Default is 50.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="Profile">
+        <maml:name>UserName</maml:name>
+        <maml:description>
+          <maml:para>Enter a search string. This will be used to search the user's name and description.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>PSBlueskySearchResult</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Find-BskyUser -UserName "dave carroll"
+
+   Username: Dave Carroll [thedavecarroll.com]
+
+Created              Description
+-------              -----------
+4/29/2023 6:52:59 AM #PowerShell #Developer and enthusiast with a side of
+                     #DevOps, #Python, infrastructure, and #RetroComputing.
+                     Lifelong #cinephile and #punster.
+
+                     #Aspie #INTJ #9w1
+                     He/Him
+
+                     https://thedavecarroll.com
+
+   Username: Dave Carroll [davecarroll01.bsky.social]
+
+Created               Description
+-------               -----------
+12/17/2023 3:17:42 PM</dev:code>
+        <dev:remarks>
+          <maml:para>The default output includes clickable links to the user's profile.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-BskyProfile</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-BskyAccessToken</command:name>
       <command:verb>Get</command:verb>
       <command:noun>BskyAccessToken</command:noun>
@@ -714,7 +841,8 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Use this command to retrieve Bluesky notifications. You can limit the number of notifications returned up to 100. The default is 50. The default output uses a custom format file to display the notifications. The Account name is displayed as a hyperlink to the account's Bluesky profile. If the notification is a like, the emoji is a clickable link to the post that was liked.</maml:para>
+      <maml:para>Use this command to retrieve Bluesky notifications. You can limit the number of notifications returned up to 100. The default is 50. There is a filtering option based on type, but the filtering is applied after the specified number of notifications are retrieved. The parameter is a convenience so that you don't need to construct an expression using Where-Object.</maml:para>
+      <maml:para>The default output uses a custom format file to display the notifications. The Account name is displayed as a hyperlink to the account's Bluesky profile. Referenced text should also be clickable. The default output includes emojis.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -743,6 +871,18 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Filter</maml:name>
+          <maml:description>
+            <maml:para>Enter the type of notifications to retrieve. Default is All. Possible values are "Like","Follow","Repost","Mention", and "Reply".</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -766,6 +906,18 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
           <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Filter</maml:name>
+        <maml:description>
+          <maml:para>Enter the type of notifications to retrieve. Default is All. Possible values are "Like","Follow","Repost","Mention", and "Reply".</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -799,17 +951,39 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-bskyNotification -Limit 5
+        <dev:code>PS C:\&gt; Get-BskyNotification -Limit 5
 
-Date               Account
-----               -------
-11/13/2024 8:51 AM ➡ Radu Bogdan
-11/13/2024 8:42 AM ➡ Emanuel Palm
-11/13/2024 8:34 AM ➡ Anthony Zoko
-11/13/2024 8:23 AM ➡ robm82.bsky.social
-11/13/2024 8:13 AM ➡ Jimmy Kumblad</dev:code>
+Date               Account                    Subject
+----               -------                    -------
+11/13/2024 1:36 PM ➡  mscommunity.bsky.social
+11/13/2024 1:24 PM ➡  Oscar
+11/13/2024 1:18 PM ➡  dirteam.bsky.social
+11/13/2024 1:04 PM ➡  Hoang Chu
+11/13/2024 1:01 PM 👍 Madhu PERERA            I have published v1.2.0 of the
+                                              PSBluesky module to the
+                                              #PowerShell Gallery. Run
+                                              Open-BskyHelp to read the help PDF</dev:code>
         <dev:remarks>
-          <maml:para>The default output includes emojis and clickable links.</maml:para>
+          <maml:para>The default output includes emojis and clickable links. Long account names will be truncated in the formatted output.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-BskyNotification -Limit 10 -Filter Follow
+
+Date               Account                    Subject
+----               -------                    -------
+11/14/2024 9:12 AM ➡  Master Packager
+11/14/2024 9:06 AM ➡  Reed M. Wiedower (CT...
+11/14/2024 8:34 AM ➡  foontzoot 🇨🇦
+11/14/2024 8:19 AM ➡  Hanna
+11/14/2024 7:52 AM ➡  Gavin Ashton
+11/14/2024 6:58 AM ➡  Michel Zehnder
+11/14/2024 5:59 AM ➡  handle.invalid
+11/14/2024 5:48 AM ➡  lsdima.bsky.social
+11/14/2024 5:32 AM ➡  romanoj.bsky.social</dev:code>
+        <dev:remarks>
+          <maml:para>Filter the notifications to only show Follow notifications from the last 10 notifications.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -945,7 +1119,12 @@ Created              Posts Followers Following Lists
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Find-BskyUser</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -1407,7 +1586,12 @@ PS C:\&gt; skeet $m</dev:code>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>PSBluesky GitHub Repository:</maml:linkText>
+        <maml:uri>https://github.com/jdhitsolutions/PSBluesky</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>

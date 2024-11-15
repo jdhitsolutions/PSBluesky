@@ -15,8 +15,8 @@ https://github.com/jdhitsolutions/PSScriptTools
         <TypeName>PSBlueSkyNotification</TypeName>
       </ViewSelectedBy>
       <TableControl>
-        <!--Delete the AutoSize node if you want to use the defined widths.
-        <AutoSize />-->
+        <!--Delete the AutoSize node if you want to use the defined widths.-->
+        <AutoSize />
         <TableHeaders>
           <TableColumnHeader>
             <Label>Date</Label>
@@ -28,9 +28,15 @@ https://github.com/jdhitsolutions/PSScriptTools
             <Width>58</Width>
             <Alignment>left</Alignment>
           </TableColumnHeader>
+           <TableColumnHeader>
+            <Label>Subject</Label>
+            <Width>58</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
+          <Wrap/>
             <TableColumnItems>
               <TableColumnItem>
                 <ScriptBlock>"{0:g}" -f $_.Date</ScriptBlock>
@@ -38,10 +44,26 @@ https://github.com/jdhitsolutions/PSScriptTools
               <TableColumnItem>
                 <ScriptBlock>
                   [string]$Name = ($_.Author -match "\w+") ? $_.Author : $_.AuthorHandle
-                  $glyph = ($_.notification -eq 'like') ? "$($PSStyle.Underline)$($PSStyle.FormatHyperLink('👍',$_.Subject))$($PSStyle.Reset)" : '➡ '
+                  <!--shorten the name if over 23 characters-->
+                  if ($Name.length -gt 23) {
+                    $Name = "{0}..." -f $Name.Substring(0, 20)
+                  }
+                  $glyph = Switch ($_.notification) {
+                    "like" { '👍'}
+                    "follow" { '➡ '}
+                    "repost" {'🔄' }
+                    "mention" { '💬' }
+                    "reply" {'↩ '}
+                    "default" {$_.notification}
+                  }
                   "$($PSStyle.Foreground.BrightGreen){0}$($PSStyle.Reset) $($PSStyle.Italic){1}$($PSStyle.Reset)" -f $glyph,$($PSStyle.FormatHyperLink($Name,$_.AuthorUrl))
                 </ScriptBlock>
               </TableColumnItem>
+               <TableColumnItem>
+                  <ScriptBlock>
+                    "$($PSStyle.Underline)$($PSStyle.Italic)$($PSStyle.FormatHyperLink($($_.subject),$($_.SubjectUrl)))$($PSStyle.Reset)"
+                  </ScriptBlock>
+                </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
         </TableRowEntries>

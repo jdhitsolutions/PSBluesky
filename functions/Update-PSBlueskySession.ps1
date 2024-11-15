@@ -32,12 +32,14 @@ Function Update-BskySession {
         $RefreshUrl = "$PDSHost/xrpc/com.atproto.server.refreshSession"
         Try {
             $splat = @{
-                Uri         = $RefreshUrl
-                Method      = 'Post'
-                Headers     = $headers
-                ErrorAction = 'Stop'
+                Uri                     = $RefreshUrl
+                Method                  = 'Post'
+                Headers                 = $headers
+                ErrorAction             = 'Stop'
+                ResponseHeadersVariable = 'rh'
             }
             $script:BSkySession = Invoke-RestMethod @splat
+            Write-Information -MessageData $rh -Tags ResponseHeader
             $script:accessJwt = $script:BSkySession.accessJwt
             $script:refreshJwt = $script:BSkySession.refreshJwt
             #return the session

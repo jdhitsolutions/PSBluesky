@@ -28,7 +28,15 @@ Function Get-BskyTimeline {
             Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Getting $limit timeline posts"
             $URL = "$PDSHost/xrpc/app.bsky.feed.getTimeline?limit=$Limit"
             Try {
-                $tl = Invoke-RestMethod -Uri $url -Method Get -Headers $headers -ErrorAction Stop
+                $splat = @{
+                    Uri         = $URL
+                    Method      = 'Get'
+                    Headers     = $headers
+                    ErrorAction = 'Stop'
+                    ResponseHeadersVariable = 'rh'
+                }
+                $tl = Invoke-RestMethod @splat
+                Write-Information -MessageData $rh -tags ResponseHeader
             }
             Catch {
                 Write-Warning "Failed to get timeline. $($_.Exception.Message)"

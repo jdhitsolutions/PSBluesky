@@ -4,6 +4,29 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.
 
 ## [Unreleased]
 
+## [1.3.0] - 2024-11-15
+
+### Added
+
+- Added command `Find-BSkyUser` and corresponding format file.
+- Added code to get the text of referenced posts and cache them in a hashtable. The caching hashtable is referenced by a module-scoped variable.
+
+### Changed
+
+- Modified commands to use a user's DID instead of the username or handle. Some API endpoints don't work well with handles. __This is a possible breaking change__ [[Issue #18](https://github.com/jdhitsolutions/PSBluesky/issues/18)]
+- Minor code cleanup and refactoring. Increased the use of splatting to improve code readability.
+- Updated the profile object to include the account DID.
+- Modified formatting and the default object for Bluesky notifications to include the text of a reference post that is either liked or reposted. __This is a breaking change.__
+- Updated `Get-BskyNotification` to allow filtering by notification type.
+- Updated formatting file for notifications to support additional notification types.
+- Updated help documentation.
+- Updated `README.md`
+
+### Fixed
+
+- Added support for `repost` and `reply` notifications in the `PSBlueskyNotification.format.ps1xml` file. [[Issue #17](https://github.com/jdhitsolutions/PSBluesky/issues/17)]
+- Fixed notification hyperlinks in `PSBlueskyNotification.format.ps1xml`.
+
 ## [1.2.0] - 2024-11-13
 
 ### Added
@@ -123,7 +146,8 @@ This is the first version published to the PowerShell Gallery.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.2.0..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.3.0..HEAD
+[1.3.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.2.0..v1.3.0
 [1.2.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.1.0..v1.2.0
 [1.1.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.0.0..v1.1.0
 [1.0.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v0.6.0..v1.0.0

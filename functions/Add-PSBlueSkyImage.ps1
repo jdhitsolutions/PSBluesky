@@ -37,7 +37,8 @@ Function Add-BskyImage {
             }
 
             if ($PSCmdlet.ShouldProcess($ImagePath, 'Upload Bluesky image')) {
-                $response = Invoke-RestMethod -Uri $uploadUrl -Method Post -Headers $headers -Body $imageBytes
+                $response = Invoke-RestMethod -Uri $uploadUrl -Method Post -Headers $headers -Body $imageBytes -ResponseHeadersVariable rh
+                Write-Information -MessageData $rh -tags ResponseHeader
                 Write-Information -MessageData $response -Tags raws
                 [PSCustomObject]@{
                     Type     = $response.blob.'$type'
