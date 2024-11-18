@@ -116,7 +116,6 @@ Get-BSkySession | Update-BskySession
 
 If this also fails, remove the module, re-import and start a new Bluesky session, including re-running `Start-BskySession`.
 
-
 ### Credentials :passport_control:
 
 You will need to create a PSCredential object with your Bluesky username and password. __The username is case-sensitive__. For automation purposes, you can use the Secrets management module to store your credential. Write your own code to retrieve the credential and pass it to the module commands.
@@ -128,6 +127,8 @@ $PSDefaultParameterValues['*-Bsky*:Credential'] = $BlueskyCredential
 ```
 
 You should only need this credential for `Start-BskySession`.
+
+__This module does not use 2FA__. It is possible this module will move to using app passwords which would require a different authentication process but eliminate the need for credentials.
 
 ## Rate Limits
 
