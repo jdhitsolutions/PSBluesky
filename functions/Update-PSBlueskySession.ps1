@@ -13,18 +13,23 @@ Function Update-BskySession {
     )
 
     Begin {
-        Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
+        $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
+        $PSDefaultParameterValues['_verbose:block'] = 'Begin'
+        _verbose -message $strings.Starting
+
         if ($MyInvocation.CommandOrigin -eq 'Runspace') {
             #Hide this metadata when the command is called from another command
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running module version $ModuleVersion"
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running on $($PSVersionTable.OS)"
+            _verbose -message ($strings.PSVersion -f $PSVersionTable.PSVersion)
+            _verbose -message ($strings.UsingHost -f $host.Name)
+            _verbose -message ($strings.UsingOS -f $PSVersionTable.OS)
+            _verbose -message ($strings.UsingModule -f $ModuleVersion)
         }
     } #begin
 
     Process {
+        $PSDefaultParameterValues['_verbose:block'] = 'Process'
         #Refresh a Bluesky session
-        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS ] Refreshing a Bluesky logon session for $($script:BSkySession.handle)"
+        _verbose -message ($strings.RefreshSession -f $script:BSkySession.handle)
         $headers = @{
             Authorization  = "Bearer $RefreshToken"
             'Content-Type' = 'application/json'
@@ -46,12 +51,14 @@ Function Update-BskySession {
             $script:BSkySession | _newSessionObject
         } #try
         Catch {
-            Write-Warning "Failed to authenticate or refresh the session. $($_.Exception.Message)"
+            Write-Warning ($strings.FailRefresh -f $_.Exception.Message)
         }
     } #process
 
     End {
-        Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Ending $($MyInvocation.MyCommand)"
+        $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
+        $PSDefaultParameterValues['_verbose:block'] = 'End'
+        _verbose $strings.Ending
     } #end
 
 }

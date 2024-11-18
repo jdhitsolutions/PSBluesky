@@ -1,6 +1,6 @@
 Function Add-BskyImage {
     [CmdletBinding(SupportsShouldProcess)]
-    [OutputType('PSCustomObject')]
+    [OutputType('PSBlueskyImageUpLoad')]
     param(
         [parameter(Position = 0, Mandatory, HelpMessage = 'The path to the image file.')]
         [ValidateNotNullOrEmpty()]
@@ -10,49 +10,60 @@ Function Add-BskyImage {
         [string]$ImagePath,
         [Parameter(HelpMessage = 'You should include ALT text for the image.')]
         [Alias('Alt')]
-        [string]$ImageAlt,
-        [Parameter(Mandatory, HelpMessage = 'A PSCredential with your Bluesky username and password')]
-        [PSCredential]$Credential
+        [string]$ImageAlt
     )
 
     Begin {
-        Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
-        if ($MyInvocation.CommandOrigin -eq 'Runspace') {
+        $PSDefaultParameterValues["_verbose:Command"] = $MyInvocation.MyCommand
+        $PSDefaultParameterValues["_verbose:block"] = "Begin"
+        _verbose -message $strings.Starting
+
+        if ($MyInvocation.CommandOrigin -eq "Runspace") {
             #Hide this metadata when the command is called from another command
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running module version $ModuleVersion"
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running on $($PSVersionTable.OS)"
+            _verbose -message ($strings.PSVersion -f $PSVersionTable.PSVersion)
+            _verbose -message ($strings.UsingHost -f $host.Name)
+            _verbose -message ($strings.UsingOS -f $PSVersionTable.OS)
+            _verbose -message ($strings.UsingModule -f $ModuleVersion)
         }
         #Convert path to a file system path
         $ImagePath = Convert-Path -Path $ImagePath
-        $token = Get-BskyAccessToken -Credential $Credential
-    } #begin
-    Process {
-        if ($token) {
-            $imageBytes = [System.IO.File]::ReadAllBytes($ImagePath)
-            Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Uploading image $ImagePath [$ImageAlt]"
-            $uploadUrl = "$PDSHOST/xrpc/com.atproto.repo.uploadBlob"
+        if ($script:BSkySession.accessJwt) {
+            $token = $script:BSkySession.accessJwt
+
             $headers = @{
                 Authorization = "Bearer $token"
             }
+            Write-Information $script:BSkySession -Tags raw
+        }
+        else {
+            Write-Warning $strings.NoSession
+        }
+    } #begin
+    Process {
+        $PSDefaultParameterValues["_verbose:block"] = "Process"
+
+        if ($headers) {
+            $imageBytes = [System.IO.File]::ReadAllBytes($ImagePath)
+            _verbose -message ($strings.UploadImage -f $ImagePath, $ImageAlt)
+            $uploadUrl = "$PDSHOST/xrpc/com.atproto.repo.uploadBlob"
 
             if ($PSCmdlet.ShouldProcess($ImagePath, 'Upload Bluesky image')) {
                 $response = Invoke-RestMethod -Uri $uploadUrl -Method Post -Headers $headers -Body $imageBytes -ResponseHeadersVariable rh
-                Write-Information -MessageData $rh -tags ResponseHeader
+                Write-Information -MessageData $rh -Tags ResponseHeader
                 Write-Information -MessageData $response -Tags raws
                 [PSCustomObject]@{
-                    Type     = $response.blob.'$type'
-                    Link     = $response.blob.ref.'$link'
-                    MimeType = $response.blob.mimeType
-                    Size     = $response.blob.size
+                    PSTypeName = 'PSBlueskyImageUpLoad'
+                    Type       = $response.blob.'$type'
+                    Link       = $response.blob.ref.'$link'
+                    MimeType   = $response.blob.mimeType
+                    Size       = $response.blob.size
                 }
             }    #WhatIf
         }
-        else {
-            Write-Host 'Failed to authenticate.'
-        }
     } #process
     End {
-        Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Ending $($MyInvocation.MyCommand)"
+        $PSDefaultParameterValues["_verbose:Command"] = $MyInvocation.MyCommand
+        $PSDefaultParameterValues["_verbose:block"] = "End"
+        _verbose $strings.Ending
     } #end
 }

@@ -39,18 +39,6 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Credential</maml:name>
-          <maml:description>
-            <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-          <dev:type>
-            <maml:name>PSCredential</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:description>
@@ -100,18 +88,6 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Credential</maml:name>
-        <maml:description>
-          <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-        <dev:type>
-          <maml:name>PSCredential</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
         <maml:name>Confirm</maml:name>
         <maml:description>
@@ -150,7 +126,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.String</maml:name>
+          <maml:name>PSBlueskyImageUpLoad</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -165,7 +141,7 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Add-BskyImage -ImagePath "C:\Users\user\Documents\image.png" -ImageAlt "alt tet here" -credential $credential</dev:code>
+        <dev:code>PS C:\&gt; Add-BskyImage -ImagePath "C:\Users\user\Documents\image.png" -ImageAlt "alt tet here"</dev:code>
         <dev:remarks>
           <maml:para>You should use ALT text for images.</maml:para>
         </dev:remarks>
@@ -189,6 +165,7 @@
     </command:details>
     <maml:description>
       <maml:para>You can use this command to search for Bluesky user accounts. The assumption is that you will be searching by name, but the value you enter for the UserName parameter will also search the user's description.</maml:para>
+      <maml:para>This command does not require authentication.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -307,91 +284,6 @@ Created               Description
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-BskyAccessToken</command:name>
-      <command:verb>Get</command:verb>
-      <command:noun>BskyAccessToken</command:noun>
-      <maml:description>
-        <maml:para>Get a Bluesky access token</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>This command is called by PSBluesky module commands to authenticate you and return an access token. This command will also create a a PSBluesky session object which you can view using Get-BskySession.</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-BskyAccessToken</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-          <maml:name>Credential</maml:name>
-          <maml:description>
-            <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-          <dev:type>
-            <maml:name>PSCredential</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-        <maml:name>Credential</maml:name>
-        <maml:description>
-          <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-        <dev:type>
-          <maml:name>PSCredential</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.String</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para></maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-BskyAccessToken
-eyJ0eXAiOi....</dev:code>
-        <dev:remarks>
-          <maml:para></maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Get-BskySession</maml:linkText>
-        <maml:uri></maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
       <command:name>Get-BskyFeed</command:name>
       <command:verb>Get</command:verb>
       <command:noun>BskyFeed</command:noun>
@@ -415,35 +307,11 @@ eyJ0eXAiOi....</dev:code>
             <maml:name>Int32</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>Credential</maml:name>
-          <maml:description>
-            <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-          <dev:type>
-            <maml:name>PSCredential</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>50</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>Credential</maml:name>
-        <maml:description>
-          <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-        <dev:type>
-          <maml:name>PSCredential</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>Limit</maml:name>
         <maml:description>
@@ -454,7 +322,7 @@ eyJ0eXAiOi....</dev:code>
           <maml:name>Int32</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <dev:defaultValue>50</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>
@@ -514,7 +382,7 @@ Date                  Liked Replied Reposted Quoted
 ----                  ----- ------- -------- ------
 10/27/2024 9:54:53 AM     3       0        0      0</dev:code>
         <dev:remarks>
-          <maml:para>The default is 50 feed items. The default output includes clickable links. This example assumes the credential has been set in $PSDefaultParameterValues.</maml:para>
+          <maml:para>The default is 50 feed items. The default output includes clickable links.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -552,33 +420,9 @@ Date                  Liked Replied Reposted Quoted
           </dev:type>
           <dev:defaultValue>50</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>Credential</maml:name>
-          <maml:description>
-            <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-          <dev:type>
-            <maml:name>PSCredential</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Get-BskyFollowers</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>Credential</maml:name>
-          <maml:description>
-            <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-          <dev:type>
-            <maml:name>PSCredential</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>All</maml:name>
           <maml:description>
@@ -593,18 +437,6 @@ Date                  Liked Replied Reposted Quoted
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>Credential</maml:name>
-        <maml:description>
-          <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-        <dev:type>
-          <maml:name>PSCredential</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>Limit</maml:name>
         <maml:description>
@@ -667,7 +499,7 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
                                  Wallet and Passkey enthusiast. Duke fan.
                                  Dweller of Seattle exurbia.</dev:code>
         <dev:remarks>
-          <maml:para>The default output includes clickable links. This example assumes the credential has been set in $PSDefaultParameterValues.</maml:para>
+          <maml:para>The default output includes clickable links.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -705,33 +537,9 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
           </dev:type>
           <dev:defaultValue>50</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>Credential</maml:name>
-          <maml:description>
-            <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-          <dev:type>
-            <maml:name>PSCredential</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Get-BskyFollowing</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>Credential</maml:name>
-          <maml:description>
-            <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-          <dev:type>
-            <maml:name>PSCredential</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>All</maml:name>
           <maml:description>
@@ -746,18 +554,6 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>Credential</maml:name>
-        <maml:description>
-          <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-        <dev:type>
-          <maml:name>PSCredential</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>Limit</maml:name>
         <maml:description>
@@ -820,7 +616,7 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
                                         | Proud dad joke lover
              mikeshepard70.bsky.social</dev:code>
         <dev:remarks>
-          <maml:para>The default output includes clickable links to the user's profile. This example assumes the credential has been set in $PSDefaultParameterValues.</maml:para>
+          <maml:para>The default output includes clickable links to the user's profile.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -830,6 +626,80 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-BskyModuleInfo</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>BskyModuleInfo</command:noun>
+      <maml:description>
+        <maml:para>Get a summary of the PSBlueSky module.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Use this command to get a summary of the PSBlueSky module showing functions, aliases and a help synopsis. The default output includes clickable links to online command help and the module's GitHub repository.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-BskyModuleInfo</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>PSBlueskyModuleInfo</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-BskyModuleInfo
+
+   Module: PSBlueSky [v2.0.0]
+
+Name                 Alias               Synopsis
+----                 -----               --------
+Add-BskyImage                            Upload an image to Bluesky
+Find-BskyUser        bsu                 Search for Bluesky user accounts
+Get-BskyFeed         bsfeed              Get your Bluesky feed
+Get-BskyFollowers    bsfollower          Get your Bluesky followers
+Get-BskyFollowing    bsfollow            Get a list of Bluesky accounts that
+                                         you follow
+Get-BskyModuleInfo                       Get a summary of the PSBlueSky module.
+Get-BskyNotification bsn                 Get Bluesky notifications.
+Get-BskyProfile      bsp                 Get a Bluesky profile
+Get-BskySession                          Show your current Bluesky session.
+Get-BskyTimeline     bst                 Get your Bluesky timeline
+New-BskyPost         skeet               Create a Bluesky post
+Open-BskyHelp        bshelp              Open the PSBluesky help document
+Start-BSkySession                        Start a new Bluesky session
+Update-BskySession   Refresh-BskySession Refresh the Bluesky session token</dev:code>
+        <dev:remarks>
+          <maml:para>The default output includes clickable hyperlinks.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -857,19 +727,7 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
             <maml:name>Int32</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Credential</maml:name>
-          <maml:description>
-            <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-          <dev:type>
-            <maml:name>PSCredential</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>50</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Filter</maml:name>
@@ -886,18 +744,6 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Credential</maml:name>
-        <maml:description>
-          <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-        <dev:type>
-          <maml:name>PSCredential</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>Limit</maml:name>
         <maml:description>
@@ -908,7 +754,7 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
           <maml:name>Int32</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <dev:defaultValue>50</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Filter</maml:name>
@@ -999,7 +845,7 @@ Date               Account                    Subject
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Use this command to retrieve a Bluesky profile. The default will be your profile based on the credential you use, but you can get any profile if you know the user name. The user name is case-sensitive. The default output includes clickable links.</maml:para>
+      <maml:para>Use this command to retrieve a Bluesky profile. The default will be your profile based on the credential you used to start your Bluesky session, but you can get any profile if you know the user name. The user name is case-sensitive. The default output includes clickable links.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1016,33 +862,9 @@ Date               Account                    Subject
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Credential</maml:name>
-          <maml:description>
-            <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-          <dev:type>
-            <maml:name>PSCredential</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Credential</maml:name>
-        <maml:description>
-          <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-        <dev:type>
-          <maml:name>PSCredential</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="Profile">
         <maml:name>UserName</maml:name>
         <maml:description>
@@ -1099,7 +921,7 @@ Created               Posts Followers Following Lists
 -------               ----- --------- --------- -----
 5/21/2023 10:44:48 AM   544       322       177     0</dev:code>
         <dev:remarks>
-          <maml:para>The default output includes clickable links. This example assumes the credential has been set in $PSDefaultParameterValues.</maml:para>
+          <maml:para>The default output includes clickable links.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
@@ -1205,7 +1027,7 @@ True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:21:56.7958913</dev:cod
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This command will return all items on your Bluesky timeline. The items are based on the credential you use to authenticate.</maml:para>
+      <maml:para>This command will return all items on your Bluesky timeline.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1222,33 +1044,9 @@ True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:21:56.7958913</dev:cod
           </dev:type>
           <dev:defaultValue>50</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>Credential</maml:name>
-          <maml:description>
-            <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-          <dev:type>
-            <maml:name>PSCredential</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>Credential</maml:name>
-        <maml:description>
-          <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-        <dev:type>
-          <maml:name>PSCredential</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>Limit</maml:name>
         <maml:description>
@@ -1300,7 +1098,7 @@ on becoming a Microsoft MVP https://buff.ly/4fa3iv7 #MVPBuzz
 ❤ 0  📧0  💬0
 ...</dev:code>
         <dev:remarks>
-          <maml:para>The default output uses a custom format file that includes emojis and $PSStyle formatting. The text and account name should be clickable links that will open the timeline item. This example assumes the credential has been set in $PSDefaultParameterValues.</maml:para>
+          <maml:para>The default output uses a custom format file that includes emojis and $PSStyle formatting. The text and account name should be clickable links that will open the timeline item.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1323,6 +1121,7 @@ on becoming a Microsoft MVP https://buff.ly/4fa3iv7 #MVPBuzz
     <maml:description>
       <maml:para>Use this command to post to Bluesky from PowerShell. You can optionally include images. If you include an image you should include an ALT text value. If your message includes URL links, they will be converted into hyperlinks. Be sure that your links have a whitespace on both sides in your message text.</maml:para>
       <maml:para>If your message includes a reference to another account, you should use the `@` symbol followed by the account name. For example, `@jdhitsolutions.com`. The reference will be turned into a clickable inline link. This command WILL NOT validate any references or links.</maml:para>
+      <maml:para>Any text preceded by a # will be treated as a tag.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1349,18 +1148,6 @@ on becoming a Microsoft MVP https://buff.ly/4fa3iv7 #MVPBuzz
             <maml:uri />
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>Credential</maml:name>
-          <maml:description>
-            <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-          <dev:type>
-            <maml:name>PSCredential</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
           <maml:name>ImagePath</maml:name>
@@ -1411,18 +1198,6 @@ on becoming a Microsoft MVP https://buff.ly/4fa3iv7 #MVPBuzz
           <maml:uri />
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>Credential</maml:name>
-        <maml:description>
-          <maml:para>A PSCredential with your Bluesky username and password.</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
-        <dev:type>
-          <maml:name>PSCredential</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none">
         <maml:name>ImagePath</maml:name>
@@ -1504,15 +1279,15 @@ on becoming a Microsoft MVP https://buff.ly/4fa3iv7 #MVPBuzz
         <dev:code>PS C:\&gt; New-BskyPost "Adding help documentation to my Bluesky #PowerShell module."
 https://bsky.app/profile/did:plc:ohgsqpfsbocaaxusxqlgfvd7/post/3l7j3u7zu6n2w</dev:code>
         <dev:remarks>
-          <maml:para>The output is a URL to the post. This example assumes the credential has been set in $PSDefaultParameterValues.</maml:para>
+          <maml:para>The output is a URL to the post. The post will create a tag like for #PowerShell.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; $m = "Testing multiple Markdown style links from my [#PowerShell PSBluesky module](https://github.com/jdhitsolutions/PSBluesky) which you can find on the [PowerShell Gallery](https://www.powershellgallery.com/packages/PSBlueSky/0.6.0)"
+        <dev:code>PS C:\&gt; $m = "Testing multiple Markdown style links from my #PowerShell [PSBluesky module](https://github.com/jdhitsolutions/PSBluesky) which you can find on the [PowerShell Gallery](https://www.powershellgallery.com/packages/PSBlueSky/0.6.0)"
 PS C:\&gt; skeet $m</dev:code>
         <dev:remarks>
-          <maml:para>You can insert markdown style links in your message text. This example is using the `skeet` alias for `New-BskyPost`.</maml:para>
+          <maml:para>You can insert markdown style links in your message text. This example is using the `skeet` alias for `New-BskyPost`. Avoid nesting tags inside of links.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
@@ -1544,14 +1319,38 @@ PS C:\&gt; skeet $m</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Use this command to open the PDF help document for the PSBluesky module with the associated application for PDF files.</maml:para>
+      <maml:para>Use this command to open the PDF help document for the PSBluesky module with the associated application for PDF files. As an alternative you can view the documentation as a markdown document.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Open-BskyHelp</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="md">
+          <maml:name>AsMarkdown</maml:name>
+          <maml:description>
+            <maml:para>Open the help file as markdown.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
-    <command:parameters />
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="md">
+        <maml:name>AsMarkdown</maml:name>
+        <maml:description>
+          <maml:para>Open the help file as markdown.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
     <command:inputTypes>
       <command:inputType>
         <dev:type>
@@ -1571,6 +1370,14 @@ PS C:\&gt; skeet $m</dev:code>
           <maml:para></maml:para>
         </maml:description>
       </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
@@ -1585,11 +1392,102 @@ PS C:\&gt; skeet $m</dev:code>
           <maml:para>The file should open in the default application for PDF files.</maml:para>
         </dev:remarks>
       </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Open-BskyHelp -AsMarkdown | more</dev:code>
+        <dev:remarks>
+          <maml:para>View the help file a markdown document.</maml:para>
+        </dev:remarks>
+      </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>PSBluesky GitHub Repository:</maml:linkText>
         <maml:uri>https://github.com/jdhitsolutions/PSBluesky</maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Start-BSkySession</command:name>
+      <command:verb>Start</command:verb>
+      <command:noun>BSkySession</command:noun>
+      <maml:description>
+        <maml:para>Start a new Bluesky session</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Before you can run any PSBluesky module command, you need to initialize or start a Bluesky session. Specify a credential with your Bluesky username and password.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Start-BSkySession</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Credential</maml:name>
+          <maml:description>
+            <maml:para>A PSCredential with your Bluesky username and password</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+          <dev:type>
+            <maml:name>PSCredential</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Credential</maml:name>
+        <maml:description>
+          <maml:para>A PSCredential with your Bluesky username and password</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+        <dev:type>
+          <maml:name>PSCredential</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>PSBlueskySession</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Start-BSkySession -Credential $cred</dev:code>
+        <dev:remarks>
+          <maml:para>You might want to store the credential in a Secrets management vault and pass to the command as a variable.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-BskySession</maml:linkText>
+        <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1603,7 +1501,7 @@ PS C:\&gt; skeet $m</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>You can use this command if you want to manually refresh your Bluesky access token. Module commands should automatically attempt to refresh it if the age is over 60 minutes.</maml:para>
+      <maml:para>You can use this command if you want to manually refresh your Bluesky access token. Module commands should automatically attempt to refresh it if the age is over 60 minutes. You should rarely need to call this command as the session token is refreshed automatically every 15 minutes.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1672,17 +1570,17 @@ Active AccessToken             RefreshToken            Age
 ------ -----------             ------------            ---
 True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:00:00.0072880</dev:code>
         <dev:remarks>
-          <maml:para>If you see an error message about an expired session, this is the best command to run. If you can't refresh the session, you'll need to re-authenticate by running Get-BskyAccessToken.</maml:para>
+          <maml:para>If you see an error message about an expired session, this is the best command to run. If you can't refresh the session, you'll need to re-authenticate, start a new session by running Start-BskySession.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>Get-BskySession</maml:linkText>
+        <maml:linkText>Start-BskySession</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
-        <maml:linkText>Get-BskyAccessToken</maml:linkText>
+        <maml:linkText>Get-BskySession</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>

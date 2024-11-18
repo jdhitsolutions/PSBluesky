@@ -1,5 +1,5 @@
 ---
-external help file: PSBluesky-help.xml
+external help file: PSBlueSky-help.xml
 Module Name: PSBlueSky
 online version:
 schema: 2.0.0
@@ -14,8 +14,7 @@ Upload an image to Bluesky
 ## SYNTAX
 
 ```yaml
-Add-BskyImage [-ImagePath] <String> [-ImageAlt <String>] -Credential <PSCredential>
- [-WhatIf] [-Confirm] [<CommonParameters>]
+Add-BskyImage [-ImagePath] <String> [-ImageAlt <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -27,7 +26,7 @@ This command will upload an image to Bluesky and return a link that you can use 
 ### Example 1
 
 ```powershell
-PS C:\> Add-BskyImage -ImagePath "C:\Users\user\Documents\image.png" -ImageAlt "alt tet here" -credential $credential
+PS C:\> Add-BskyImage -ImagePath "C:\Users\user\Documents\image.png" -ImageAlt "alt tet here"
 ```
 
 You should use ALT text for images.
@@ -60,22 +59,6 @@ Parameter Sets: (All)
 Aliases: Alt
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Credential
-
-A PSCredential with your Bluesky username and password.
-
-```yaml
-Type: PSCredential
-Parameter Sets: (All)
-Aliases:
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -116,7 +99,6 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -125,7 +107,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.String
+### PSBlueskyImageUpLoad
 
 ## NOTES
 

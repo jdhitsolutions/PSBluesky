@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PSBlueskyModuleInfo</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <ScriptBlock>
+          "$($PSStyle.Underline){0}$($PSStyle.Reset) [v{1}]" -f $($PSStyle.FormatHyperLink($_.ModuleName,"https://github.com/jdhitsolutions/PSBluesky")),$_.Version
+        </ScriptBlock>
+        <Label>Module</Label>
+      </GroupBy>
+      <TableControl>
+        <!--Delete the AutoSize node if you want to use the defined widths.-->
+        <AutoSize />
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Name</Label>
+            <Width>13</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Alias</Label>
+            <Width>13</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Synopsis</Label>
+            <Width>40</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <Wrap />
+            <TableColumnItems>
+              <TableColumnItem>
+                <ScriptBlock>
+                  $md = "$($_.Name).md"
+                  $url = "https://github.com/jdhitsolutions/PSBluesky/blob/main/docs/$md"
+                  "{0}" -f $PSStyle.FormatHyperLink($_.Name,$url)
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <ScriptBlock>
+                  "$($PSStyle.Italic)$($PSStyle.Foreground.BrightYellow)$($_.Alias)$($PSStyle.Reset)"
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Synopsis</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>List</Name>
+      <ViewSelectedBy>
+        <TypeName>PSBlueskyModuleInfo</TypeName>
+      </ViewSelectedBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <ListItem>
+                <Label>ModuleName</Label>
+                <PropertyName>ModuleName</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Name</Label>
+                <PropertyName>Name</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Alias</Label>
+                <PropertyName>Alias</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Synopsis</Label>
+                <PropertyName>Synopsis</PropertyName>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

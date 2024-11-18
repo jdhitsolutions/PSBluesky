@@ -14,12 +14,12 @@ Get a Bluesky profile
 ## SYNTAX
 
 ```yaml
-Get-BskyProfile [[-UserName] <String>] -Credential <PSCredential> [<CommonParameters>]
+Get-BskyProfile [[-UserName] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Use this command to retrieve a Bluesky profile. The default will be your profile based on the credential you use, but you can get any profile if you know the user name. The user name is case-sensitive. The default output includes clickable links.
+Use this command to retrieve a Bluesky profile. The default will be your profile based on the credential you used to start your Bluesky session, but you can get any profile if you know the user name. The user name is case-sensitive. The default output includes clickable links.
 
 ## EXAMPLES
 
@@ -42,7 +42,7 @@ Created               Posts Followers Following Lists
 5/21/2023 10:44:48 AM   544       322       177     0
 ```
 
-The default output includes clickable links. This example assumes the credential has been set in $PSDefaultParameterValues.
+The default output includes clickable links.
 
 ### Example 2
 
@@ -62,22 +62,6 @@ Created              Posts Followers Following Lists
 You can get any profile if you know the user name.
 
 ## PARAMETERS
-
-### -Credential
-
-A PSCredential with your Bluesky username and password.
-
-```yaml
-Type: PSCredential
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -UserName
 

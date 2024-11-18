@@ -4,6 +4,36 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.
 
 ## [Unreleased]
 
+## [2.0.0] - 2024-11-18
+
+### Added
+
+- Added script property called `Age` for types `PSBlueskyProfile`, `PSBlueskyFollowProfile`, and `PSBlueskySearchResult`.
+- Added custom verbose messaging and localized string data.
+- Added typename `PSBlueskyImageUpload` to `Add-BskyImage`.
+- Added command `Get-BskyModuleInfo` and corresponding formatting file.
+- Added a parameter to `Open-BskyHelp` to view the file as a markdown document.
+- Added support for proper notifications and tags in new messages. [[Issue #19](https://github.com/jdhitsolutions/PSBluesky/issues/19)]
+- Added command aliases:
+    - bsfeed --> `Get-BskyFeed`
+    - bsfollow --> `Get-BskyFollowing`
+    - bsfollower --> `Get-BskyFollowers`
+    - bshelp --> `Open-BskyHelp`
+    - bsn --> `Get-BskyNotification`
+    - bsp --> `Get-BskyProfile`
+    - bst --> `Get-BskyTimeline`
+    - bsu --> `Find-BskyUser`
+    - Refresh-BskySession --> `Update-BskySession`
+    - skeet --> `New-BskyPost`
+
+### Changed
+
+- Modified commands to __not__ require a credential except for `Start-BskySession`. Commands will get the access token from the session object. __This is a breaking change__ [[Issue #20](https://github.com/jdhitsolutions/PSBluesky/issues/20)]
+
+### Removed
+
+- Removed `Get-BskyAccessToken` and replaced it with `Start-BskySession`. __This is a breaking change__
+
 ## [1.3.0] - 2024-11-15
 
 ### Added
@@ -146,7 +176,8 @@ This is the first version published to the PowerShell Gallery.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.3.0..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.0.0..HEAD
+[2.0.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.3.0..v2.0.0
 [1.3.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.2.0..v1.3.0
 [1.2.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.1.0..v1.2.0
 [1.1.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.0.0..v1.1.0

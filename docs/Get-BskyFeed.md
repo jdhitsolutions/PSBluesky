@@ -14,7 +14,7 @@ Get your Bluesky feed
 ## SYNTAX
 
 ```yaml
-Get-BskyFeed [[-Limit] <Int32>] [-Credential] <PSCredential> [<CommonParameters>]
+Get-BskyFeed [[-Limit] <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -56,25 +56,9 @@ Date                  Liked Replied Reposted Quoted
 10/27/2024 9:54:53 AM     3       0        0      0
 ```
 
-The default is 50 feed items. The default output includes clickable links. This example assumes the credential has been set in $PSDefaultParameterValues.
+The default is 50 feed items. The default output includes clickable links.
 
 ## PARAMETERS
-
-### -Credential
-
-A PSCredential with your Bluesky username and password.
-
-```yaml
-Type: PSCredential
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Limit
 
@@ -88,7 +72,7 @@ Aliases:
 
 Required: False
 Position: 0
-Default value: None
+Default value: 50
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

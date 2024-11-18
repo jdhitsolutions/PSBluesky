@@ -10,38 +10,48 @@ Function New-BskyPost {
             Mandatory,
             HelpMessage = 'The text of the post',
             ValueFromPipelineByPropertyName
-            )]
+        )]
         [ValidateNotNullOrEmpty()]
         [string]$Message,
-        [parameter(HelpMessage = 'The path to the image file.',ValueFromPipelineByPropertyName)]
+        [parameter(HelpMessage = 'The path to the image file.', ValueFromPipelineByPropertyName)]
         [ValidatePattern('.*\.(jpg|jpeg|png|gif)$')]
         [string]$ImagePath,
-        [Parameter(HelpMessage = 'You should include ALT text for the image.',ValueFromPipelineByPropertyName)]
+        [Parameter(HelpMessage = 'You should include ALT text for the image.', ValueFromPipelineByPropertyName)]
         [Alias('Alt')]
-        [string]$ImageAlt,
-        [Parameter(Mandatory, HelpMessage = 'A PSCredential with your Bluesky username and password')]
-        [PSCredential]$Credential
+        [string]$ImageAlt
     )
 
     Begin {
-        Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
+        $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
+        $PSDefaultParameterValues['_verbose:block'] = 'Begin'
+        _verbose -message $strings.Starting
+
         if ($MyInvocation.CommandOrigin -eq 'Runspace') {
             #Hide this metadata when the command is called from another command
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running module version $ModuleVersion"
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running on $($PSVersionTable.OS)"
+            _verbose -message ($strings.PSVersion -f $PSVersionTable.PSVersion)
+            _verbose -message ($strings.UsingHost -f $host.Name)
+            _verbose -message ($strings.UsingOS -f $PSVersionTable.OS)
+            _verbose -message ($strings.UsingModule -f $ModuleVersion)
         }
-        $token = Get-BskyAccessToken -Credential $Credential
-        $did = $script:BskySession.did
-    } #begin
-    Process {
-        If ($token) {
+
+        $apiUrl = "$PDSHOST/xrpc/com.atproto.repo.createRecord"
+        if ($script:BSkySession.accessJwt) {
+            $token = $script:BSkySession.accessJwt
+            $did = $script:BskySession.did
             $headers = @{
                 Authorization  = "Bearer $token"
                 'Content-Type' = 'application/json'
             }
-            $apiUrl = "$PDSHOST/xrpc/com.atproto.repo.createRecord"
-            Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Posting message to $apiURL"
+            Write-Information $script:BSkySession -Tags raw
+        }
+        else {
+            Write-Warning $strings.NoSession
+        }
+    } #begin
+    Process {
+        $PSDefaultParameterValues['_verbose:block'] = 'Process'
+        If ($headers) {
+            _verbose $strings.PostingMessage
 
             $record = [ordered]@{
                 '$type'   = 'app.bsky.feed.post'
@@ -49,64 +59,86 @@ Function New-BskyPost {
                 createdAt = (Get-Date -Format 'o')
             }
 
-            #test message for links and mentions
+            #now create the facets
+            $facets = @()
+
             #test for @mentions first and update the text
             #Added 12 Nov 2024 Issue #14
-            [regex]$rxMention = "@(?<name>[\w+-]*(\.[\w+-]+)+)"
+            [regex]$rxMention = '(?<name>@[\w+-]*(\.[\w+-]+)+)'
             if ($rxMention.IsMatch($record.text)) {
                 $matches = $rxMention.Matches($record.text)
                 $matches | ForEach-Object {
-                    #$_.Groups['name'].Value
+                    #17 Nov 2024 Create a mention facet
+                    #
+                    <#
                     $url = "https://bsky.app/profile/{0}" -f $_.Groups['name'].Value
                     $replace = "[$($_.value)]($url)"
                     Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Replacing mention $($_.Value) with $replace"
                     $record.text = $record.text -replace $_.Value, $replace
+                    #>
+                    $text = $_.Groups['name'].Value
+                    _verbose -message ($strings.ResolveDID -f $text)
+                    $mentionDid = (Get-BskyProfile $text.SubString(1)).did
+                    $mention = _newFacetLink -Text $text -did $mentionDid -Message $record.text -FacetType mention
+                    $facets += $mention
                 }
             }
+
+            #test for tags
+            [regex]$rxTag = '(?<tag>#[\w+-]+)'
+            if ($rxTag.IsMatch($record.text)) {
+                $matches = $rxTag.Matches($record.text)
+                $matches | ForEach-Object {
+                    $tag = $_.Groups['tag'].Value
+                    $tagName = $tag.SubString(1)
+                    $tagFacet = _newFacetLink -Text $tag -Message $record.text -FacetType tag -Tag $tagName
+                    $facets += $tagFacet
+                }
+            } #if tags
+
             #test for Markdown style links
             #create a facet if found
-            [regex]$pattern = "(?<text>(?<=\[)[^\]]+(?=\]))\]\((?<uri>http(s)?:\/\/\S+(?=\)))"
+            [regex]$pattern = '(?<text>(?<=\[)[^\]]+(?=\]))\]\((?<uri>http(s)?:\/\/\S+(?=\)))'
             #"(?<text>(?<=\[).*(?=\]))\]\((?<uri>http(s)?:\/\/\S+(?=\)))"
             if ($pattern.IsMatch($record.text)) {
-                Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Processing Markdown style links"
+                _verbose $string.ProcessMD
                 $matches = $pattern.Matches($record.text)
                 #strip off the [ ] from text and the url from the message
                 foreach ($match in $matches) {
                     $text = $match.Groups['text'].Value
                     $uri = $match.Groups['uri'].Value
                     #revise the text to be displayed
-                    $record.text = ($record.text).replace("[$text]",$text).replace("($uri)","")
+                    $record.text = ($record.text).replace("[$text]", $text).replace("($uri)", '')
                 }
 
-                #now create the facets
-                $facets = @()
                 foreach ($match in $matches) {
                     $text = $match.Groups['text'].Value
                     $uri = $match.Groups['uri'].Value
-                    $link = _newFacetLink -Text $text -Uri $uri -Message $record.text
+                    $link = _newFacetLink -Text $text -Uri $uri -Message $record.text -FacetType link
                     $facets += $link
                 }
-                $record.Add('facets', $facets)
             }
             elseif (([regex]$pattern = 'http(s)?:\/\/\S+').IsMatch($Message)) {
                 #a regex pattern to detect https or http links
                 #1 Nov 2024 - made the regex more specific
-                 Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Processing URL links"
+
+                _verbose -message $string.ProcessUrl
                 $matches = $pattern.Matches($Message)
-                $facets = @()
+                #$facets = @()
                 foreach ($match in $matches) {
                     $link = _newFacetLink -Text $match.Value -Uri $match.Value -Message $Message
                     $facets += $link
                 }
                 #$record.Add('langs', @('en'))
-                $record.Add('facets', $facets)
             }
+            _verbose -message $strings.AddFacets
+            $record.Add('facets', $facets)
 
             if ($ImagePath) {
                 if (-not $ImageAlt) {
-                    Throw 'You must provide ALT text for the image.'
+                    Throw $strings.MissingAlt
                 }
-                $image = Add-BskyImage -ImagePath $ImagePath -ImageAlt $ImageAlt -Credential $Credential
+                $image = Add-BskyImage -ImagePath $ImagePath -ImageAlt $ImageAlt
                 Write-Information -MessageData $image -Tags raw
                 if ($WhatIfPreference) {
                     #don't do anything
@@ -129,10 +161,11 @@ Function New-BskyPost {
                     $record.Add('embed', $embed)
                 }
                 else {
-                    Throw "Failed to upload image $ImagePath. $($_.Exception.Message)"
+                    Throw ($strings.FailUpload -f $ImagePath, $_.Exception.Message)
                 }
             }
 
+            Write-Information -MessageData $record -Tags record
             #15 Nov 2024 Use the accounts DiD to post and not the user's handle
             $body = @{
                 repo       = $did
@@ -148,11 +181,10 @@ Function New-BskyPost {
                 Write-Information -MessageData $response -Tags raw
             }
         }
-        else {
-            Write-Warning 'Failed to authenticate.'
-        }
     } #process
     End {
-        Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Ending $($MyInvocation.MyCommand)"
+        $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
+        $PSDefaultParameterValues['_verbose:block'] = 'End'
+        _verbose $strings.Ending
     } #end
 }

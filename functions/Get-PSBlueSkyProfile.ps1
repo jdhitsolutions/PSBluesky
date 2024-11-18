@@ -1,5 +1,7 @@
+#https://docs.bsky.app/docs/api/app-bsky-actor-get-profile
 Function Get-BskyProfile {
     [CmdletBinding()]
+    [Alias('bsp')]
     [OutputType('PSBlueskyProfile')]
     Param(
         [Parameter(
@@ -10,83 +12,89 @@ Function Get-BskyProfile {
         )]
         [ValidateNotNullOrEmpty()]
         [Alias('Profile')]
-        [string]$UserName,
-        [Parameter(
-            Mandatory,
-            HelpMessage = 'A PSCredential with your Bluesky username and password'
-        )]
-        [PSCredential]$Credential
+        [string]$UserName
     )
 
     Begin {
-        Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
+        $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
+        $PSDefaultParameterValues['_verbose:block'] = 'Begin'
+        _verbose -message $strings.Starting
+
         if ($MyInvocation.CommandOrigin -eq 'Runspace') {
             #Hide this metadata when the command is called from another command
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running module version $ModuleVersion"
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running on $($PSVersionTable.OS)"
-        }
-        $token = Get-BskyAccessToken -Credential $Credential
-        Write-Information $script:BSkySession -Tags raw
-    } #begin
-
-    Process {
-        #use the credential username if the username is not provided
-        if (-Not ($PSBoundParameters.ContainsKey('UserName'))) {
-            $Username = $Credential.UserName
+            _verbose -message ($strings.PSVersion -f $PSVersionTable.PSVersion)
+            _verbose -message ($strings.UsingHost -f $host.Name)
+            _verbose -message ($strings.UsingOS -f $PSVersionTable.OS)
+            _verbose -message ($strings.UsingModule -f $ModuleVersion)
         }
 
-        If ($token) {
-            Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Querying for $Username"
-
-            $apiUrl = "$PDSHOST/xrpc/app.bsky.actor.getProfile?actor=$UserName"
-            Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] $apiUrl"
+        if ($script:BSkySession.accessJwt) {
+            $token = $script:BSkySession.accessJwt
             $headers = @{
                 Authorization  = "Bearer $token"
                 'Content-Type' = 'application/json'
             }
+            Write-Information $script:BSkySession -Tags raw
+        }
+        else {
+            Write-Warning $strings.NoSession
+        }
+    } #begin
+
+    Process {
+        $PSDefaultParameterValues['_verbose:block'] = 'Process'
+        If ($headers) {
+            #use the session handle if the username is not provided
+            if (-Not ($PSBoundParameters.ContainsKey('UserName'))) {
+                $Username = $script:bSkySession.handle
+            }
+
+            _verbose ($strings.UserSearch -f $Username)
+
+            $apiUrl = "$PDSHOST/xrpc/app.bsky.actor.getProfile?actor=$UserName"
+
+            _verbose $apiUrl
 
             Try {
                 $splat = @{
-                    Uri         = $apiUrl
-                    Method      = 'Get'
-                    Headers     = $headers
-                    ErrorAction = 'Stop'
+                    Uri                     = $apiUrl
+                    Method                  = 'Get'
+                    Headers                 = $headers
+                    ErrorAction             = 'Stop'
                     ResponseHeadersVariable = 'rh'
                 }
-            $profile = Invoke-RestMethod @splat
-            Write-Information -MessageData $rh -tags ResponseHeader
-            If ($profile) {
-                Write-Information -MessageData $profile -Tags raw
-                [PSCustomObject]@{
-                    PSTypeName  = 'PSBlueskyProfile'
-                    Username    = $profile.handle
-                    Display     = ($profile.displayName) ? $profile.displayName : $profile.handle
-                    Created     = $profile.createdAt.ToLocalTime()
-                    Description = $profile.description
-                    Avatar      = $profile.avatar
-                    Posts       = $profile.postsCount
-                    Followers   = $profile.followersCount
-                    Following   = $profile.followsCount
-                    Lists       = $profile.associated.lists
-                    URL         = "https://bsky.app/profile/$($profile.handle)"
-                    DID         = $profile.did
+                $profile = Invoke-RestMethod @splat
+                Write-Information -MessageData $rh -Tags ResponseHeader
+                If ($profile) {
+                    Write-Information -MessageData $profile -Tags raw
+                    [PSCustomObject]@{
+                        PSTypeName  = 'PSBlueskyProfile'
+                        Username    = $profile.handle
+                        Display     = ($profile.displayName) ? $profile.displayName : $profile.handle
+                        Created     = $profile.createdAt.ToLocalTime()
+                        Description = $profile.description
+                        Avatar      = $profile.avatar
+                        Posts       = $profile.postsCount
+                        Followers   = $profile.followersCount
+                        Following   = $profile.followsCount
+                        Lists       = $profile.associated.lists
+                        URL         = "https://bsky.app/profile/$($profile.handle)"
+                        DID         = $profile.did
+                    }
                 }
+                else {
+                    Write-Warning ($strings.FailProfile -f $Username)
+                }
+            } #Try
+            Catch {
+                Write-Error $_
             }
-            else {
-                Write-Warning "Failed to retrieve profile for $Username."
-            }
-        } #Try
-        Catch {
-            Write-Error $_
-        }
-        }
-        else {
-            Write-Warning 'Failed to authenticate.'
         }
     } #process
 
     End {
-        Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Ending $($MyInvocation.MyCommand)"
+        $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
+        $PSDefaultParameterValues['_verbose:block'] = 'End'
+        _verbose $strings.Ending
     } #end
 }

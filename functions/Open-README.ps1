@@ -1,28 +1,53 @@
 Function Open-BskyHelp {
     [CmdletBinding()]
+    [Alias('bshelp')]
     [OutputType('None')]
-    Param()
+    Param(
+        [Parameter(HelpMessage = 'Open the help file as markdown.')]
+        [Alias('md')]
+        [switch]$AsMarkdown
+    )
 
     Begin {
-        Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
+        $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
+        $PSDefaultParameterValues['_verbose:block'] = 'Begin'
+        _verbose -message $strings.Starting
+
         if ($MyInvocation.CommandOrigin -eq 'Runspace') {
             #Hide this metadata when the command is called from another command
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running module version $ModuleVersion"
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running on $($PSVersionTable.OS)"
+            _verbose -message ($strings.PSVersion -f $PSVersionTable.PSVersion)
+            _verbose -message ($strings.UsingHost -f $host.Name)
+            _verbose -message ($strings.UsingOS -f $PSVersionTable.OS)
+            _verbose -message ($strings.UsingModule -f $ModuleVersion)
         }
+
+        if ($AsMarkdown) {
+            $docPath = "$PSScriptRoot\..\README.md"
+        }
+        else {
+            $docPath = "$PSScriptRoot\..\PSBlueSky-Help.pdf"
+        }
+
     } #begin
     Process {
-        Try {
-            $pdfPath = "$PSScriptRoot\..\PSBlueSky-Help.pdf"
-            Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS ] Attempting to open $pdfPath with the default PDF viewer."
-            Invoke-Item -Path $pdfPath -ErrorAction Stop
+        $PSDefaultParameterValues['_verbose:block'] = 'Process'
+        if ($AsMarkdown) {
+            _verbose -Message $strings.OpenMarkdownHelp
+            Show-Markdown -Path $docPath
         }
-        Catch {
-            Write-Warning "Failed to open the help file. ($_.Exception.Message)"
+        else {
+            Try {
+                _verbose -message ($strings.OpenPDFHelp -f $docPath)
+                Invoke-Item -Path $docPath -ErrorAction Stop
+            }
+            Catch {
+                Write-Warning ($strings.FailPDF -f $_.Exception.Message)
+            }
         }
     } #process
     End {
-        Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Ending $($MyInvocation.MyCommand)"
+        $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
+        $PSDefaultParameterValues['_verbose:block'] = 'End'
+        _verbose $strings.Ending
     } #end
 }

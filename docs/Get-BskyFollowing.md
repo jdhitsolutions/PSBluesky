@@ -16,13 +16,13 @@ Get a list of Bluesky accounts that you follow
 ### Limit (Default)
 
 ```yaml
-Get-BskyFollowing [[-Limit] <Int32>] [-Credential] <PSCredential> [<CommonParameters>]
+Get-BskyFollowing [[-Limit] <Int32>] [<CommonParameters>]
 ```
 
 ### All
 
 ```yaml
-Get-BskyFollowing [-All] [-Credential] <PSCredential> [<CommonParameters>]
+Get-BskyFollowing [-All] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,25 +44,9 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
              mikeshepard70.bsky.social
 ```
 
-The default output includes clickable links to the user's profile. This example assumes the credential has been set in $PSDefaultParameterValues.
+The default output includes clickable links to the user's profile.
 
 ## PARAMETERS
-
-### -Credential
-
-A PSCredential with your Bluesky username and password.
-
-```yaml
-Type: PSCredential
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Limit
 

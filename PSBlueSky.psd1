@@ -3,7 +3,7 @@
 #
 @{
     RootModule           = 'PSBlueSky.psm1'
-    ModuleVersion        = '1.3.0'
+    ModuleVersion        = '2.0.0'
     CompatiblePSEditions = 'Core'
     GUID                 = 'c5c1fd1d-e648-432d-b7d6-bb56f2044c2a'
     Author               = 'Jeff Hicks'
@@ -14,33 +14,46 @@
     FunctionsToExport    = @(
         'Add-BskyImage',
         'Find-BskyUser'
-        'Get-BskyAccessToken',
         'Get-BskyFeed',
         'Get-BskyFollowers',
         'Get-BskyFollowing',
         'Get-BskyNotification'
         'Get-BskyProfile',
         'Get-BskySession',
+        'Get-BskyModuleInfo',
         'Get-BskyTimeline'
         'New-BskyPost',
         'Open-BskyHelp',
+        'Start-BskySession'
         'Update-BskySession'
     )
     TypesToProcess       = @(
         'types/PSBlueSky.types.ps1xml'
     )
     FormatsToProcess     = @(
-        'formats/PSBlueSkyTimelinePost.format.ps1xml',
-        'formats/PSBlueskyProfile.format.ps1xml',
-        'formats/PSBlueskyFollower.format.ps1xml',
-        'formats/PSBlueskyFeed.format.ps1xml',
-        'formats/PSBlueskySession.format.ps1xml',
-        'formats/PSBlueskyNotification.format.ps1xml',
-        'formats/PSBlueskySearchResult.format.ps1xml'
+        'formats\PSBlueSkyTimelinePost.format.ps1xml',
+        'formats\PSBlueskyProfile.format.ps1xml',
+        'formats\PSBlueskyFollower.format.ps1xml',
+        'formats\PSBlueskyFeed.format.ps1xml',
+        'formats\PSBlueskySession.format.ps1xml',
+        'formats\PSBlueskyNotification.format.ps1xml',
+        'formats\PSBlueskySearchResult.format.ps1xml',
+        'formats\PSBlueskyModuleInfo.format.ps1xml'
     )
     CmdletsToExport      = ''
     VariablesToExport    = ''
-    AliasesToExport      = 'skeet','Refresh-BskySession'
+    AliasesToExport      = @(
+        'skeet',
+        'Refresh-BskySession',
+        'bshelp',
+        'bsn',
+        'bsp',
+        'bsfeed',
+        'bsfollow',
+        'bsfollower',
+        'bst',
+        'bsu'
+    )
     PrivateData          = @{
         PSData = @{
             Tags                       = @('Bluesky', 'skeet','API', 'adprotocol')
@@ -48,28 +61,35 @@
             ProjectUri                 = 'https://github.com/jdhitsolutions/PSBluesky'
             IconUri                    = 'https://raw.githubusercontent.com/jdhitsolutions/PSBlueSky/main/images/BlueskyLogo-icon.png'
             ReleaseNotes               = @'
-## [1.3.0] - 2024-11-15
+## [2.0.0] - 2024-11-18
 
 ### Added
 
-- Added command `Find-BSkyUser` and corresponding format file.
-- Added code to get the text of referenced posts and cache them in a hashtable. The caching hashtable is referenced by a module-scoped variable.
+- Added script property called `Age` for types `PSBlueskyProfile`, `PSBlueskyFollowProfile`, and `PSBlueskySearchResult`.
+- Added custom verbose messaging and localized string data.
+- Added typename `PSBlueskyImageUpload` to `Add-BskyImage`.
+- Added command `Get-BskyModuleInfo` and corresponding formatting file.
+- Added a parameter to `Open-BskyHelp` to view the file as a markdown document.
+- Added support for proper notifications and tags in new messages. [[Issue #19](https://github.com/jdhitsolutions/PSBluesky/issues/19)]
+- Added command aliases:
+    - bsfeed --> `Get-BskyFeed`
+    - bsfollow --> `Get-BskyFollowing`
+    - bsfollower --> `Get-BskyFollowers`
+    - bshelp --> `Open-BskyHelp`
+    - bsn --> `Get-BskyNotification`
+    - bsp --> `Get-BskyProfile`
+    - bst --> `Get-BskyTimeline`
+    - bsu --> `Find-BskyUser`
+    - Refresh-BskySession --> `Update-BskySession`
+    - skeet --> `New-BskyPost`
 
 ### Changed
 
-- Modified commands to use a user's DID instead of the username or handle. Some API endpoints don't work well with handles. __This is a possible breaking change__ [[Issue #18](https://github.com/jdhitsolutions/PSBluesky/issues/18)]
-- Minor code cleanup and refactoring. Increased the use of splatting to improve code readability.
-- Updated the profile object to include the account DID.
-- Modified formatting and the default object for Bluesky notifications to include the text of a reference post that is either liked or reposted. __This is a breaking change.__
-- Updated `Get-BskyNotification` to allow filtering by notification type.
-- Updated formatting file for notifications to support additional notification types.
-- Updated help documentation.
-- Updated `README.md`
+- Modified commands to __not__ require a credential except for `Start-BskySession`. Commands will get the access token from the session object. __This is a breaking change__ [[Issue #20](https://github.com/jdhitsolutions/PSBluesky/issues/20)]
 
-### Fixed
+### Removed
 
-- Added support for `repost` and `reply` notifications in the `PSBlueskyNotification.format.ps1xml` file. [[Issue #17](https://github.com/jdhitsolutions/PSBluesky/issues/17)]
-- Fixed notification hyperlinks in `PSBlueskyNotification.format.ps1xml`.
+- Removed `Get-BskyAccessToken` and replaced it with `Start-BskySession`. __This is a breaking change__
 '@
             RequireLicenseAcceptance   = $false
             ExternalModuleDependencies = @()

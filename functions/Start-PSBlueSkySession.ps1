@@ -1,7 +1,11 @@
-Function Get-BskySession {
+Function Start-BSkySession {
     [cmdletbinding()]
     [OutputType('PSBlueskySession')]
-    Param()
+
+    Param (
+        [Parameter(Mandatory, HelpMessage = 'A PSCredential with your Bluesky username and password')]
+        [PSCredential]$Credential
+    )
 
     Begin {
         $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
@@ -18,15 +22,8 @@ Function Get-BskySession {
     } #begin
     Process {
         $PSDefaultParameterValues['_verbose:block'] = 'Process'
-        if ($script:BSkySession) {
-            _verbose ($strings.SessionFound -f $script:BSkySession.handle)
-            Write-Information -MessageData $script:BSkySession -tag data
-            $script:BSkySession | _newSessionObject
-        }
-        else {
-            Write-Warning $strings.NoSession
-
-        }
+        _verbose -message ($strings.NewSession -f $Credential.UserName)
+        _CreateSession -Credential $Credential
     } #process
     End {
         $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand

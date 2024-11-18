@@ -97,12 +97,48 @@ Describe "Module $ModuleName" -Tag Module {
 
 InModuleScope $ModuleName {
 
-    Describe New-BskyPost {
+    Describe Start-BskySession {
         It 'Should have help documentation' {
-        (Get-Help New-BskyPost).Description | Should -Not -BeNullOrEmpty
+            (Get-Help Start-BskySession).Description | Should -Not -BeNullOrEmpty
         }
         It 'Should have a defined output type' {
-        (Get-Command -CommandType function -Name New-BskyPost).OutputType | Should -Not -BeNullOrEmpty
+            (Get-Command -CommandType function -Name Start-BskySession).OutputType | Should -Not -BeNullOrEmpty
+        }
+        It 'Should run without error' {
+            <#
+        mock and set mandatory parameters as needed
+        this test is marked as pending since it
+        most likely needs to be refined
+        #>
+            { Start-BskySession } | Should -Not -Throw
+        } -Pending
+        #insert additional command-specific tests
+
+    } -Tag function
+    Describe Update-BskySession {
+        It 'Should have help documentation' {
+            (Get-Help Update-BskySession).Description | Should -Not -BeNullOrEmpty
+        }
+        It 'Should have a defined output type' {
+            (Get-Command -CommandType function -Name Update-BskySession).OutputType | Should -Not -BeNullOrEmpty
+        }
+        It 'Should run without error' {
+            <#
+        mock and set mandatory parameters as needed
+        this test is marked as pending since it
+        most likely needs to be refined
+        #>
+            { Update-BskySession } | Should -Not -Throw
+        } -Pending
+        #insert additional command-specific tests
+
+    } -Tag function
+    Describe New-BskyPost {
+        It 'Should have help documentation' {
+            (Get-Help New-BskyPost).Description | Should -Not -BeNullOrEmpty
+        }
+        It 'Should have a defined output type' {
+            (Get-Command -CommandType function -Name New-BskyPost).OutputType | Should -Not -BeNullOrEmpty
         }
         It 'Should run without error' {
             <#
@@ -117,10 +153,10 @@ InModuleScope $ModuleName {
     } -Tag function
     Describe Get-BskyTimeline {
         It 'Should have help documentation' {
-        (Get-Help Get-BskyTimeline).Description | Should -Not -BeNullOrEmpty
+            (Get-Help Get-BskyTimeline).Description | Should -Not -BeNullOrEmpty
         }
         It 'Should have a defined output type' {
-        (Get-Command -CommandType function -Name Get-BskyTimeline).OutputType | Should -Not -BeNullOrEmpty
+            (Get-Command -CommandType function -Name Get-BskyTimeline).OutputType | Should -Not -BeNullOrEmpty
         }
         It 'Should run without error' {
             <#
@@ -135,10 +171,10 @@ InModuleScope $ModuleName {
     } -Tag function
     Describe Get-BskySession {
         It 'Should have help documentation' {
-        (Get-Help Get-BskySession).Description | Should -Not -BeNullOrEmpty
+            (Get-Help Get-BskySession).Description | Should -Not -BeNullOrEmpty
         }
         It 'Should have a defined output type' {
-        (Get-Command -CommandType function -Name Get-BskySession).OutputType | Should -Not -BeNullOrEmpty
+            (Get-Command -CommandType function -Name Get-BskySession).OutputType | Should -Not -BeNullOrEmpty
         }
         It 'Should run without error' {
             <#
@@ -153,10 +189,10 @@ InModuleScope $ModuleName {
     } -Tag function
     Describe Get-BskyProfile {
         It 'Should have help documentation' {
-        (Get-Help Get-BskyProfile).Description | Should -Not -BeNullOrEmpty
+            (Get-Help Get-BskyProfile).Description | Should -Not -BeNullOrEmpty
         }
         It 'Should have a defined output type' {
-        (Get-Command -CommandType function -Name Get-BskyProfile).OutputType | Should -Not -BeNullOrEmpty
+            (Get-Command -CommandType function -Name Get-BskyProfile).OutputType | Should -Not -BeNullOrEmpty
         }
         It 'Should run without error' {
             <#
@@ -169,12 +205,30 @@ InModuleScope $ModuleName {
         #insert additional command-specific tests
 
     } -Tag function
-    Describe Get-BskyFollowing {
+    Describe Find-BskyUser {
         It 'Should have help documentation' {
-        (Get-Help Get-BskyFollowing).Description | Should -Not -BeNullOrEmpty
+            (Get-Help Find-BskyUser).Description | Should -Not -BeNullOrEmpty
         }
         It 'Should have a defined output type' {
-        (Get-Command -CommandType function -Name Get-BskyFollowing).OutputType | Should -Not -BeNullOrEmpty
+            (Get-Command -CommandType function -Name Find-BskyUser).OutputType | Should -Not -BeNullOrEmpty
+        }
+        It 'Should run without error' {
+            <#
+        mock and set mandatory parameters as needed
+        this test is marked as pending since it
+        most likely needs to be refined
+        #>
+            { Find-BskyUser } | Should -Not -Throw
+        } -Pending
+        #insert additional command-specific tests
+
+    } -Tag function
+    Describe Get-BskyFollowing {
+        It 'Should have help documentation' {
+            (Get-Help Get-BskyFollowing).Description | Should -Not -BeNullOrEmpty
+        }
+        It 'Should have a defined output type' {
+            (Get-Command -CommandType function -Name Get-BskyFollowing).OutputType | Should -Not -BeNullOrEmpty
         }
         It 'Should run without error' {
             <#
@@ -189,10 +243,10 @@ InModuleScope $ModuleName {
     } -Tag function
     Describe Get-BskyFollowers {
         It 'Should have help documentation' {
-        (Get-Help Get-BskyFollowers).Description | Should -Not -BeNullOrEmpty
+            (Get-Help Get-BskyFollowers).Description | Should -Not -BeNullOrEmpty
         }
         It 'Should have a defined output type' {
-        (Get-Command -CommandType function -Name Get-BskyFollowers).OutputType | Should -Not -BeNullOrEmpty
+            (Get-Command -CommandType function -Name Get-BskyFollowers).OutputType | Should -Not -BeNullOrEmpty
         }
         It 'Should run without error' {
             <#
@@ -205,12 +259,30 @@ InModuleScope $ModuleName {
         #insert additional command-specific tests
 
     } -Tag function
-    Describe Get-BskyFeed {
+    Describe Get-BskyNotification {
         It 'Should have help documentation' {
-        (Get-Help Get-BskyFeed).Description | Should -Not -BeNullOrEmpty
+            (Get-Help Get-BskyNotification).Description | Should -Not -BeNullOrEmpty
         }
         It 'Should have a defined output type' {
-        (Get-Command -CommandType function -Name Get-BskyFeed).OutputType | Should -Not -BeNullOrEmpty
+            (Get-Command -CommandType function -Name Get-BskyNotification).OutputType | Should -Not -BeNullOrEmpty
+        }
+        It 'Should run without error' {
+            <#
+        mock and set mandatory parameters as needed
+        this test is marked as pending since it
+        most likely needs to be refined
+        #>
+            { Get-BskyNotification } | Should -Not -Throw
+        } -Pending
+        #insert additional command-specific tests
+
+    } -Tag function
+    Describe Get-BskyFeed {
+        It 'Should have help documentation' {
+            (Get-Help Get-BskyFeed).Description | Should -Not -BeNullOrEmpty
+        }
+        It 'Should have a defined output type' {
+            (Get-Command -CommandType function -Name Get-BskyFeed).OutputType | Should -Not -BeNullOrEmpty
         }
         It 'Should run without error' {
             <#
@@ -223,30 +295,12 @@ InModuleScope $ModuleName {
         #insert additional command-specific tests
 
     } -Tag function
-    Describe Get-BskyAccessToken {
-        It 'Should have help documentation' {
-        (Get-Help Get-BskyAccessToken).Description | Should -Not -BeNullOrEmpty
-        }
-        It 'Should have a defined output type' {
-        (Get-Command -CommandType function -Name Get-BskyAccessToken).OutputType | Should -Not -BeNullOrEmpty
-        }
-        It 'Should run without error' {
-            <#
-        mock and set mandatory parameters as needed
-        this test is marked as pending since it
-        most likely needs to be refined
-        #>
-            { Get-BskyAccessToken } | Should -Not -Throw
-        } -Pending
-        #insert additional command-specific tests
-
-    } -Tag function
     Describe Add-BskyImage {
         It 'Should have help documentation' {
-        (Get-Help Add-BskyImage).Description | Should -Not -BeNullOrEmpty
+            (Get-Help Add-BskyImage).Description | Should -Not -BeNullOrEmpty
         }
         It 'Should have a defined output type' {
-        (Get-Command -CommandType function -Name Add-BskyImage).OutputType | Should -Not -BeNullOrEmpty
+            (Get-Command -CommandType function -Name Add-BskyImage).OutputType | Should -Not -BeNullOrEmpty
         }
         It 'Should run without error' {
             <#
@@ -255,6 +309,42 @@ InModuleScope $ModuleName {
         most likely needs to be refined
         #>
             { Add-BskyImage } | Should -Not -Throw
+        } -Pending
+        #insert additional command-specific tests
+
+    } -Tag function
+    Describe Open-BskyHelp {
+        It 'Should have help documentation' {
+            (Get-Help Open-BskyHelp).Description | Should -Not -BeNullOrEmpty
+        }
+        It 'Should have a defined output type' {
+            (Get-Command -CommandType function -Name Open-BskyHelp).OutputType | Should -Not -BeNullOrEmpty
+        }
+        It 'Should run without error' {
+            <#
+        mock and set mandatory parameters as needed
+        this test is marked as pending since it
+        most likely needs to be refined
+        #>
+            { Open-BskyHelp } | Should -Not -Throw
+        } -Pending
+        #insert additional command-specific tests
+
+    } -Tag function
+    Describe Get-BSkyModuleInfo {
+        It 'Should have help documentation' {
+            (Get-Help Get-BSkyModuleInfo).Description | Should -Not -BeNullOrEmpty
+        }
+        It 'Should have a defined output type' {
+            (Get-Command -CommandType function -Name Get-BSkyModuleInfo).OutputType | Should -Not -BeNullOrEmpty
+        }
+        It 'Should run without error' {
+            <#
+        mock and set mandatory parameters as needed
+        this test is marked as pending since it
+        most likely needs to be refined
+        #>
+            { Get-BSkyModuleInfo } | Should -Not -Throw
         } -Pending
         #insert additional command-specific tests
 

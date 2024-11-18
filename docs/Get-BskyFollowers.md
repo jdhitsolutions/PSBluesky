@@ -1,4 +1,3 @@
-
 ---
 external help file: PSBlueSky-help.xml
 Module Name: PSBlueSky
@@ -15,13 +14,15 @@ Get your Bluesky followers
 ## SYNTAX
 
 ### Limit (Default)
-```
-Get-BskyFollowers [[-Limit] <Int32>] [-Credential] <PSCredential> [<CommonParameters>]
+
+```yaml
+Get-BskyFollowers [[-Limit] <Int32>] [<CommonParameters>]
 ```
 
 ### All
-```
-Get-BskyFollowers [-All] [-Credential] <PSCredential> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+
+```yaml
+Get-BskyFollowers [-All] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,25 +44,9 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
                                  Dweller of Seattle exurbia.
 ```
 
-The default output includes clickable links. This example assumes the credential has been set in $PSDefaultParameterValues.
+The default output includes clickable links.
 
 ## PARAMETERS
-
-### -Credential
-
-A PSCredential with your Bluesky username and password.
-
-```yaml
-Type: PSCredential
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Limit
 

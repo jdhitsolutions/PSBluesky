@@ -1,5 +1,5 @@
 ---
-external help file: PSBluesky-help.xml
+external help file: PSBlueSky-help.xml
 Module Name: PSBlueSky
 online version:
 schema: 2.0.0
@@ -13,8 +13,8 @@ Create a Bluesky post
 
 ## SYNTAX
 
-```yaml
-New-BskyPost [-Message] <String> [-ImagePath <String>] [-ImageAlt <String>] -Credential <PSCredential> [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+New-BskyPost [-Message] <String> [-ImagePath <String>] [-ImageAlt <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -22,6 +22,8 @@ New-BskyPost [-Message] <String> [-ImagePath <String>] [-ImageAlt <String>] -Cre
 Use this command to post to Bluesky from PowerShell. You can optionally include images. If you include an image you should include an ALT text value. If your message includes URL links, they will be converted into hyperlinks. Be sure that your links have a whitespace on both sides in your message text.
 
 If your message includes a reference to another account, you should use the `@` symbol followed by the account name. For example, `@jdhitsolutions.com`. The reference will be turned into a clickable inline link. This command WILL NOT validate any references or links.
+
+Any text preceded by a # will be treated as a tag.
 
 ## EXAMPLES
 
@@ -32,16 +34,16 @@ PS C:\> New-BskyPost "Adding help documentation to my Bluesky #PowerShell module
 https://bsky.app/profile/did:plc:ohgsqpfsbocaaxusxqlgfvd7/post/3l7j3u7zu6n2w
 ```
 
-The output is a URL to the post. This example assumes the credential has been set in $PSDefaultParameterValues.
+The output is a URL to the post. The post will create a tag like for #PowerShell.
 
 ### Example 2
 
 ```powershell
-PS C:\> $m = "Testing multiple Markdown style links from my [#PowerShell PSBluesky module](https://github.com/jdhitsolutions/PSBluesky) which you can find on the [PowerShell Gallery](https://www.powershellgallery.com/packages/PSBlueSky/0.6.0)"
+PS C:\> $m = "Testing multiple Markdown style links from my #PowerShell [PSBluesky module](https://github.com/jdhitsolutions/PSBluesky) which you can find on the [PowerShell Gallery](https://www.powershellgallery.com/packages/PSBlueSky/0.6.0)"
 PS C:\> skeet $m
 ```
 
-You can insert markdown style links in your message text. This example is using the `skeet` alias for `New-BskyPost`.
+You can insert markdown style links in your message text. This example is using the `skeet` alias for `New-BskyPost`. Avoid nesting tags inside of links.
 
 ### Example 3
 
@@ -63,22 +65,6 @@ Parameter Sets: (All)
 Aliases: cf
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Credential
-
-A PSCredential with your Bluesky username and password.
-
-```yaml
-Type: PSCredential
-Parameter Sets: (All)
-Aliases:
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -151,7 +137,6 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS

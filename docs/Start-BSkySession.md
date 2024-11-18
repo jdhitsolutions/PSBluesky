@@ -1,40 +1,41 @@
 ---
-external help file: PSBluesky-help.xml
+external help file: PSBlueSky-help.xml
 Module Name: PSBlueSky
 online version:
 schema: 2.0.0
 ---
 
-# Get-BskyAccessToken
+# Start-BSkySession
 
 ## SYNOPSIS
 
-Get a Bluesky access token
+Start a new Bluesky session
 
 ## SYNTAX
 
 ```yaml
-Get-BskyAccessToken [-Credential] <PSCredential> [<CommonParameters>]
+Start-BSkySession [-Credential] <PSCredential> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-This command is called by PSBluesky module commands to authenticate you and return an access token. This command will also create a a PSBluesky session object which you can view using Get-BskySession.
+Before you can run any PSBluesky module command, you need to initialize or start a Bluesky session. Specify a credential with your Bluesky username and password.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> Get-BskyAccessToken
-eyJ0eXAiOi....
+PS C:\> Start-BSkySession -Credential $cred
 ```
+
+You might want to store the credential in a Secrets management vault and pass to the command as a variable.
 
 ## PARAMETERS
 
 ### -Credential
 
-A PSCredential with your Bluesky username and password.
+A PSCredential with your Bluesky username and password
 
 ```yaml
 Type: PSCredential
@@ -49,7 +50,6 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -58,10 +58,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.String
+### PSBlueskySession
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Get-BskySession](Get-BskySession.md)
+[Get-BskySession](Get-BSkySession.md)

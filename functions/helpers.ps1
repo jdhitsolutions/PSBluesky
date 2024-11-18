@@ -8,13 +8,45 @@ Function _newFacetLink {
         [string]$Message,
         [Parameter(Mandatory, HelpMessage = 'The text of the link')]
         [string]$Text,
-        [Parameter(Mandatory, HelpMessage = 'The URI of the link')]
-        [string]$Uri
+        [Parameter(HelpMessage = 'The URI of the link')]
+        [string]$Uri,
+        [Parameter(HelpMessage = 'The DID of the mention')]
+        [string]$DiD,
+        [Parameter(HelpMessage = 'The Tag text')]
+        [string]$Tag,
+        [ValidateSet('link', 'mention', 'tag')]
+        [string]$FacetType = 'link'
     )
 
-    Write-Verbose "[$((Get-Date).TimeOfDay) PRIVATE] Creating a new facet link for $uri [$Text] in '$Message'"
-    if ($text -match "\[|\]|\(\)") {
-        Write-Verbose "[Helper] Regex Escaping the text"
+
+    $PSDefaultParameterValues['_verbose:block'] = 'PRIVATE'
+    _verbose -Message ($strings.NewFacet -f $FacetType, $Text, $Message)
+    $feature = Switch ($FacetType) {
+        'link' {
+            _verbose -Message ($strings.FacetLink -f $Uri)
+            [PSCustomObject]@{
+                '$type' = 'app.bsky.richtext.facet#link'
+                uri     = $Uri
+            }
+        }
+        'mention' {
+            _verbose -Message ($strings.FacetMention -f $DID)
+            [PSCustomObject]@{
+                '$type' = 'app.bsky.richtext.facet#mention'
+                did     = $DiD
+            }
+        }
+        'tag' {
+            _verbose -Message ($strings.FacetTag -f $Tag)
+            [PSCustomObject]@{
+                '$type' = 'app.bsky.richtext.facet#tag'
+                tag     = $Tag
+            }
+        }
+    }
+
+    if ($text -match '\[|\]|\(\)') {
+        _verbose -Message $strings.RxEscape
         $text = [regex]::Escape($text)
     }
     #the comparison test is case-sensitive
@@ -27,15 +59,12 @@ Function _newFacetLink {
                 byteEnd   = ($m.value.length) + ($m.index)
             }
             features = @(
-                [PSCustomObject]@{
-                    '$type' = 'app.bsky.richtext.facet#link'
-                    uri     = $Uri
-                }
+                $feature
             )
         }
     }
     else {
-        Write-Warning "The text $Text was not found in the message $Message."
+        Write-Warning ($strings.TextNotFound -f $Text, $Message)
     }
 }
 
@@ -48,7 +77,7 @@ Function _convertDidToAt {
     )
 
     #did:plc:qrllvid7s54k4hnwtqxwetrf
-    $at = $did.replace("did:", "at://")
+    $at = $did.replace('did:', 'at://')
     $at
 }
 
@@ -82,7 +111,7 @@ function _getPostText {
 }
 
 Function _newSessionObject {
-<#
+    <#
 Convert the API response into a structured and type object
 
 did             : did:plc:ohgsqpfsbocaaxusxqlgfvd7
@@ -127,7 +156,7 @@ Age             : 01:09:58.6486840
     } #process
     End {
         #11 Nov  2024 Move these definitions to the root module
-       <#
+        <#
         Update-TypeData -TypeName 'PSBlueskySession' -MemberType AliasProperty -MemberName UserName -Value handle -Force
         Update-TypeData -TypeName 'PSBlueskySession' -MemberType AliasProperty -MemberName AccessToken -Value AccessJwt -Force
         Update-TypeData -TypeName 'PSBlueskySession' -MemberType AliasProperty -MemberName RefreshToken -Value RefreshJwt -Force
@@ -145,6 +174,7 @@ Function _CreateSession {
         [PSCredential]$Credential
     )
 
+    $PSDefaultParameterValues['_verbose:block'] = 'PRIVATE'
     #Create a logon session
     $headers = @{
         'Content-Type' = 'application/json'
@@ -155,7 +185,8 @@ Function _CreateSession {
         identifier = $Credential.UserName
         password   = $Credential.GetNetworkCredential().Password
     } | ConvertTo-Json
-    Write-Verbose "[$((Get-Date).TimeOfDay) PRIVATE] Creating a Bluesky logon session for $($Credential.UserName)"
+
+    _verbose -Message ($strings.NewSession -f $credential.UserName)
 
     $splat = @{
         Uri         = $LogonURL
@@ -169,16 +200,17 @@ Function _CreateSession {
         # to update the session every 15 minutes
 
         $r = Invoke-RestMethod @splat
+        _verbose -Message $strings.DefineSyncHash
         $script:BSkySession = [hashtable]::Synchronized(@{
-            Handle     = $r.handle
-            Email      = $r.email
-            Active     = $r.active
-            AccessJwt  = $r.accessJwt
-            RefreshJwt = $r.refreshJwt
-            DiD        = $r.did
-            DidDoc     = $r.didDoc
-            Date       = Get-Date
-        })
+                Handle     = $r.handle
+                Email      = $r.email
+                Active     = $r.active
+                AccessJwt  = $r.accessJwt
+                RefreshJwt = $r.refreshJwt
+                DiD        = $r.did
+                DidDoc     = $r.didDoc
+                Date       = Get-Date
+            })
 
         $script:accessJwt = $script:BSkySession.accessJwt
         $script:refreshJwt = $script:BSkySession.refreshJwt
@@ -186,101 +218,133 @@ Function _CreateSession {
         $script:BSkySession | _newSessionObject
 
         #create a runspace to update the session every 15 minutes
-        $newRunspace =[RunspaceFactory]::CreateRunspace()
-        $newRunspace.ApartmentState = "STA"
-        $newRunspace.ThreadOptions = "ReuseThread"
+        _verbose -message $strings.NewRunspace
+        $newRunspace = [RunspaceFactory]::CreateRunspace()
+        $newRunspace.ApartmentState = 'STA'
+        $newRunspace.ThreadOptions = 'ReuseThread'
         $newRunspace.Open()
-        $newRunspace.SessionStateProxy.SetVariable("BSkySession",$script:BSkySession)
+        $newRunspace.SessionStateProxy.SetVariable('BSkySession', $script:BSkySession)
 
         $script:PSCmd = [PowerShell]::Create().AddScript({
-            $PDSHOST = 'https://bsky.social'
-            $i=0
-            #!!!!!!! MY DEBUG CODE
-            # $debugFile = "d:\temp\debug.log"
-            Do {
-                $ts = New-TimeSpan -Start $BSkySession.Date -End (Get-Date)
-                if ($ts.TotalMinutes -ge 15) {
-                    $i++
-                    #refresh
-                    $headers = @{
-                        Authorization  = "Bearer $($BSkySession.refreshJwt)"
-                        'Content-Type' = 'application/json'
-                    }
-                    $RefreshUrl = "$PDSHost/xrpc/com.atproto.server.refreshSession"
-                    Try {
-                        $splat = @{
-                            Uri         = $RefreshUrl
-                            Method      = 'Post'
-                            Headers     = $headers
-                            ErrorAction = 'Stop'
-                            ErrorVariable = 'e'
+                $PDSHOST = 'https://bsky.social'
+                $i = 0
+                #!!!!!!! MY DEBUG CODE
+                # $debugFile = "d:\temp\debug.log"
+                Do {
+                    $ts = New-TimeSpan -Start $BSkySession.Date -End (Get-Date)
+                    if ($ts.TotalMinutes -ge 15) {
+                        $i++
+                        #refresh
+                        $headers = @{
+                            Authorization  = "Bearer $($BSkySession.refreshJwt)"
+                            'Content-Type' = 'application/json'
                         }
-                        $r = Invoke-RestMethod @splat
-                        #!!!!!!! DEBUG CODE
-                         # "[$((Get-Date).TimeOfDay)] Refreshing session" | Out-File -FilePath $debugFile -Append
-                         # $r | Out-File -FilePath $debugFile -Append
-                        #!!!!!!! DEBUG CODE
-                        $BSkySession.accessJwt = $r.accessJwt
-                        $BSkySession.refreshJwt = $r.refreshJwt
-                        $BSkySession.Active = $r.active
-                        $BSkySession.Date = Get-Date
-                        $BsKySession["RunspaceOperation"] = $i
-                    } #try
-                    Catch {
-                        #!!!!!!! DEBUG CODE
-                       #"[$(Get-Date)] Failed to authenticate or refresh the session. $($_.Exception.Message)" | out-file $debugFile -Append
-                        #$e.message | out-file $debugFile -Append
-                    } #catch
-                }
-                Start-Sleep -Seconds 60
-            } While ($True)
-            Exit
-        })
+                        $RefreshUrl = "$PDSHost/xrpc/com.atproto.server.refreshSession"
+                        Try {
+                            $splat = @{
+                                Uri           = $RefreshUrl
+                                Method        = 'Post'
+                                Headers       = $headers
+                                ErrorAction   = 'Stop'
+                                ErrorVariable = 'e'
+                            }
+                            $r = Invoke-RestMethod @splat
+                            #!!!!!!! DEBUG CODE
+                            # "[$((Get-Date).TimeOfDay)] Refreshing session" | Out-File -FilePath $debugFile -Append
+                            # $r | Out-File -FilePath $debugFile -Append
+                            #!!!!!!! DEBUG CODE
+                            $BSkySession.accessJwt = $r.accessJwt
+                            $BSkySession.refreshJwt = $r.refreshJwt
+                            $BSkySession.Active = $r.active
+                            $BSkySession.Date = Get-Date
+                            $BsKySession['RunspaceOperation'] = $i
+                        } #try
+                        Catch {
+                            #!!!!!!! DEBUG CODE
+                            #"[$(Get-Date)] Failed to authenticate or refresh the session. $($_.Exception.Message)" | out-file $debugFile -Append
+                            #$e.message | out-file $debugFile -Append
+                        } #catch
+                    }
+                    Start-Sleep -Seconds 60
+                } While ($True)
+                Exit
+            })
 
         $script:PSCmd.runspace = $newRunspace
+        _verbose -Message $strings.StartRunspace
         [Void]($psCmd.BeginInvoke())
-
-        #$script:BSkySession = Invoke-RestMethod @splat | _newSessionObject
-        #$script:accessJwt = $script:BSkySession.accessJwt
-        #$script:refreshJwt = $script:BSkySession.refreshJwt
 
     } #try
     Catch {
         throw $_
     }
-    if ($script:accessJwt) {
-        $script:accessJwt
-    }
-    else {
-        Write-Warning 'Failed to authenticate.'
+    if ($null -eq $script:accessJwt) {
+        Write-Warning $strings.FailAuthenticate
     }
 }
 
+#a private function to display customized verbose messages
+function _verbose {
+    [CmdletBinding()]
+    param(
+        [Parameter(Position = 0)]
+        [string]$Message,
+        [string]$Block = 'PROCESS',
+        [string]$Command
+    )
+
+    #Display each command name in a different color sequence
+    if ($script:VerboseANSI.ContainsKey($Command)) {
+        [string]$ANSI = $script:VerboseANSI[$Command]
+    }
+    else {
+        [string]$ANSI = $script:VerboseANSI['DEFAULT']
+    }
+
+    $BlockString = $Block.ToUpper().PadRight(7, ' ')
+    $Reset = "$([char]27)[0m"
+    $ToD = (Get-Date).TimeOfDay
+    $AnsiCommand = "$([char]27)$Ansi$($command)"
+    $Italic = "$([char]27)[3m"
+    if ($Host.Name -eq 'Windows PowerShell ISE Host') {
+        $msg = '[{0:hh\:mm\:ss\:ffff} {1}] {2}-> {3}' -f $Tod, $BlockString, $Command, $Message
+    }
+    else {
+        $msg = '[{0:hh\:mm\:ss\:ffff} {1}] {2}{3}-> {4} {5}{3}' -f $Tod, $BlockString, $AnsiCommand, $Reset, $Italic, $Message
+    }
+    #use the built-in Write-Verbose cmdlet
+    Microsoft.PowerShell.Utility\Write-Verbose -Message $msg
+
+}
+
+######
 # 4 Nov 2024 -moved this to a public function, Update-BskySession
+<#
 Function X_RefreshSession {
     [CmdletBinding()]
     Param (
         [Parameter(Mandatory, HelpMessage = 'The refresh token')]
         [string]$RefreshToken
-    )
+        )
 
-    #Refresh a Bluesky session
-    Write-Verbose "[$((Get-Date).TimeOfDay)] Refreshing a Bluesky logon session for $($script:BSkySession.handle)"
-    $headers = @{
-        Authorization  = "Bearer $RefreshToken"
-        'Content-Type' = 'application/json'
+        #Refresh a Bluesky session
+        Write-Verbose "[$((Get-Date).TimeOfDay)] Refreshing a Bluesky logon session for $($script:BSkySession.handle)"
+        $headers = @{
+            Authorization  = "Bearer $RefreshToken"
+            'Content-Type' = 'application/json'
+        }
+        $RefreshUrl = "$PDSHost/xrpc/com.atproto.server.refreshSession"
+        Try {
+            $script:BSkySession = Invoke-RestMethod -Uri $RefreshUrl -Method Post -Headers $headers -ErrorAction Stop | _newSessionObject
+
+            $script:accessJwt = $script:BSkySession.accessJwt
+            $script:refreshJwt = $script:BSkySession.refreshJwt
+            #return the session
+            $script:BSkySession
+        } #try
+        Catch {
+            Write-Warning "Failed to authenticate or refresh the session. $($_.Exception.Message)"
+        }
     }
-    $RefreshUrl = "$PDSHost/xrpc/com.atproto.server.refreshSession"
-    Try {
-        $script:BSkySession = Invoke-RestMethod -Uri $RefreshUrl -Method Post -Headers $headers -errorAction Stop | _newSessionObject
 
-        $script:accessJwt = $script:BSkySession.accessJwt
-        $script:refreshJwt = $script:BSkySession.refreshJwt
-        #return the session
-        $script:BSkySession
-    } #try
-    Catch {
-        Write-Warning "Failed to authenticate or refresh the session. $($_.Exception.Message)"
-    }
-}
-
+#>

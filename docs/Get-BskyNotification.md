@@ -14,8 +14,7 @@ Get Bluesky notifications.
 ## SYNTAX
 
 ```yaml
-Get-BskyNotification [[-Limit] <Int32>] [-Filter <String>] -Credential <PSCredential>
-[<CommonParameters>]
+Get-BskyNotification [[-Limit] <Int32>] [-Filter <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -67,22 +66,6 @@ Filter the notifications to only show Follow notifications from the last 10 noti
 
 ## PARAMETERS
 
-### -Credential
-
-A PSCredential with your Bluesky username and password.
-
-```yaml
-Type: PSCredential
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Limit
 
 Enter the number of notifications to retrieve between 1 and 100.
@@ -95,7 +78,7 @@ Aliases:
 
 Required: False
 Position: 0
-Default value: None
+Default value: 50
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

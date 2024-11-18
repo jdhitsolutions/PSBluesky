@@ -1,6 +1,7 @@
 # https://docs.bsky.app/docs/api/app-bsky-notification-list-notifications
 Function Get-BskyNotification {
     [cmdletbinding()]
+    [Alias('bsn')]
     [OutputType('PSBlueskyNotification')]
     Param(
         [Parameter(
@@ -11,23 +12,31 @@ Function Get-BskyNotification {
         [ValidateRange(1, 100)]
         [int]$Limit = 50,
         [Parameter(HelpMessage = 'Enter the type of notifications to retrieve. Default is All.')]
-        [ValidateSet("All","Like","Follow","Repost","Mention","Reply")]
-        [string]$Filter = "All",
-        [Parameter(Mandatory, HelpMessage = 'A PSCredential with your Bluesky username and password')]
-        [PSCredential]$Credential
+        [ValidateSet('All', 'Like', 'Follow', 'Repost', 'Mention', 'Reply')]
+        [string]$Filter = 'All'
     )
     Begin {
-        Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
+        $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
+        $PSDefaultParameterValues['_verbose:block'] = 'Begin'
+        _verbose -message $strings.Starting
+
         if ($MyInvocation.CommandOrigin -eq 'Runspace') {
             #Hide this metadata when the command is called from another command
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running module version $ModuleVersion"
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Using PowerShell version $($PSVersionTable.PSVersion)"
-            Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Running on $($PSVersionTable.OS)"
+            _verbose -message ($strings.PSVersion -f $PSVersionTable.PSVersion)
+            _verbose -message ($strings.UsingHost -f $host.Name)
+            _verbose -message ($strings.UsingOS -f $PSVersionTable.OS)
+            _verbose -message ($strings.UsingModule -f $ModuleVersion)
         }
-        $token = Get-BskyAccessToken -Credential $Credential
-        $headers = @{
-            Authorization  = "Bearer $token"
-            'Content-Type' = 'application/json'
+        if ($script:BSkySession.accessJwt) {
+            $token = $script:BSkySession.accessJwt
+            $headers = @{
+                Authorization  = "Bearer $token"
+                'Content-Type' = 'application/json'
+            }
+            Write-Information $script:BSkySession -Tags raw
+        }
+        else {
+            Write-Warning $strings.NoSession
         }
 
         #initialize a collection to store all notifications
@@ -35,16 +44,18 @@ Function Get-BskyNotification {
     } #begin
 
     Process {
-        If ($token) {
-            Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Retrieving $limit notifications"
+        $PSDefaultParameterValues['_verbose:block'] = 'Process'
+        If ($headers) {
+
+            _verbose -message ($strings.GetNotification -f $limit)
             $url = "$PDSHOST/xrpc/app.bsky.notification.listNotifications?limit=$Limit"
 
             Try {
                 $response = Invoke-RestMethod -Uri $url -Method Get -Headers $headers -ErrorAction Stop -ResponseHeadersVariable rh
-                Write-Information -MessageData $rh -tags ResponseHeader
+                Write-Information -MessageData $rh -Tags ResponseHeader
             }
             Catch {
-                Write-Warning "Failed to retrieve notifications. $($_.Exception.Message)"
+                Write-Warning ($strings.FailNotification -f $_.Exception.Message)
             }
             If ($response.notifications) {
                 Write-Information -MessageData $response -Tags raw
@@ -56,7 +67,7 @@ Function Get-BskyNotification {
                     }
                     elseif ($notification.reasonSubject) {
                         #get the text of the post
-                        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Resolving post text for $($notification.reasonSubject)"
+                        _verbose -message ($strings.ResolveText -f $notification.reasonSubject)
                         $refText = _getPostText -AT $notification.reasonSubject -Headers $headers
                         #update the caching hashtable
                         $script:PostCache[$notification.reasonSubject] = $refText
@@ -90,21 +101,20 @@ Function Get-BskyNotification {
                     [Void]($all.Add($object))
                 } #foreach notification
             } #if notifications
-        } #if token
-        else {
-            Write-Warning 'Failed to authenticate.'
-        }
+        } #if headers
     } #process
 
     End {
+        $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
+        $PSDefaultParameterValues['_verbose:block'] = 'End'
         #filter the notifications by type if specified
         if ($Filter -ne 'All') {
-            Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Filtering notifications by type: $Filter"
+            _verbose -message ($strings.FilterNotification -f $Filter)
             $all | Where-Object { $_.Notification -eq $Filter }
         }
         else {
             $all
         }
-        Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Ending $($MyInvocation.MyCommand)"
+        _verbose $strings.Ending
     } #end
 }

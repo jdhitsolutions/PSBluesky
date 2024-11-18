@@ -19,7 +19,7 @@ Update-BskySession [-RefreshToken] <String> [<CommonParameters>]
 
 ## DESCRIPTION
 
-You can use this command if you want to manually refresh your Bluesky access token. Module commands should automatically attempt to refresh it if the age is over 60 minutes.
+You can use this command if you want to manually refresh your Bluesky access token. Module commands should automatically attempt to refresh it if the age is over 60 minutes. You should rarely need to call this command as the session token is refreshed automatically every 15 minutes.
 
 ## EXAMPLES
 
@@ -35,7 +35,7 @@ Active AccessToken             RefreshToken            Age
 True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:00:00.0072880
 ```
 
-If you see an error message about an expired session, this is the best command to run. If you can't refresh the session, you'll need to re-authenticate by running Get-BskyAccessToken.
+If you see an error message about an expired session, this is the best command to run. If you can't refresh the session, you'll need to re-authenticate, start a new session by running Start-BskySession.
 
 ## PARAMETERS
 
@@ -70,6 +70,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Get-BskySession](Get-BskySession.md)
+[Start-BskySession](Start-BSkySession.md)
 
-[Get-BskyAccessToken](Get-BskyAccessToken.md)
+[Get-BskySession](Get-BskySession.md)

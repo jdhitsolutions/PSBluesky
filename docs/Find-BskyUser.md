@@ -21,6 +21,8 @@ Find-BskyUser [[-UserName] <String>] [-Limit <Int32>] [<CommonParameters>]
 
 You can use this command to search for Bluesky user accounts. The assumption is that you will be searching by name, but the value you enter for the UserName parameter will also search the user's description.
 
+This command does not require authentication.
+
 ## EXAMPLES
 
 ### Example 1
