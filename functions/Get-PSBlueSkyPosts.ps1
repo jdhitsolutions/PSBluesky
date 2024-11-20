@@ -10,7 +10,11 @@ Function Get-BskyFeed {
     Param(
         [Parameter(HelpMessage = 'Enter the number of accounts that you follow to retrieve between 1 and 100. Default is 50.')]
         [ValidateRange(1, 100)]
-        [int]$Limit = 50
+        [int]$Limit = 50,
+
+        [ValidateNotNullOrEmpty()]
+        [Alias('Profile')]
+        [string]$UserName
     )
 
     Begin {
@@ -27,7 +31,9 @@ Function Get-BskyFeed {
         }
         if ($script:BSkySession.accessJwt) {
             $token = $script:BSkySession.accessJwt
-            $UserName = $script:BSkySession.handle
+            if (-not $PSBoundParameters.ContainsKey('UserName')) {
+                $UserName = $script:BSkySession.handle
+            }
             $did = $script:BskySession.did
             $headers = @{
                 Authorization  = "Bearer $token"
@@ -54,7 +60,12 @@ Function Get-BskyFeed {
         If ($headers) {
             _verbose -message ($strings.QueryFeed -f $limit, $Username)
             $filter = 'posts_with_replies'
-            $apiUrl = "$PDSHost/xrpc/app.bsky.feed.getAuthorFeed?actor=$did&limit=$Limit&filter=$filter"
+            if ($PSBoundParameters.ContainsKey('UserName')) {
+                $apiUrl = "$PDSHost/xrpc/app.bsky.feed.getAuthorFeed?actor=$UserName&limit=$Limit&filter=$filter"
+            }
+            else {
+                $apiUrl = "$PDSHost/xrpc/app.bsky.feed.getAuthorFeed?actor=$did&limit=$Limit&filter=$filter"
+            }
 
             _verbose $apiUrl
 
