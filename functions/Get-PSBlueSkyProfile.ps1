@@ -63,23 +63,23 @@ Function Get-BskyProfile {
                     ErrorAction             = 'Stop'
                     ResponseHeadersVariable = 'rh'
                 }
-                $profile = Invoke-RestMethod @splat
+                $bSkyProfile = Invoke-RestMethod @splat
                 Write-Information -MessageData $rh -Tags ResponseHeader
-                If ($profile) {
-                    Write-Information -MessageData $profile -Tags raw
+                If ($bSkyProfile) {
+                    Write-Information -MessageData $bSkyProfile -Tags raw
                     [PSCustomObject]@{
                         PSTypeName  = 'PSBlueskyProfile'
-                        Username    = $profile.handle
-                        Display     = ($profile.displayName) ? $profile.displayName : $profile.handle
-                        Created     = $profile.createdAt.ToLocalTime()
-                        Description = $profile.description
-                        Avatar      = $profile.avatar
-                        Posts       = $profile.postsCount
-                        Followers   = $profile.followersCount
-                        Following   = $profile.followsCount
-                        Lists       = $profile.associated.lists
-                        URL         = "https://bsky.app/profile/$($profile.handle)"
-                        DID         = $profile.did
+                        Username    = $bSkyProfile.handle
+                        Display     = ($bSkyProfile.displayName) ? $bSkyProfile.displayName : $bSkyProfile.handle
+                        Created     = $bSkyProfile.createdAt.ToLocalTime()
+                        Description = $bSkyProfile.description
+                        Avatar      = $bSkyProfile.avatar
+                        Posts       = $bSkyProfile.postsCount
+                        Followers   = $bSkyProfile.followersCount
+                        Following   = $bSkyProfile.followsCount
+                        Lists       = $bSkyProfile.associated.lists
+                        URL         = "https://bsky.app/profile/$($bSkyProfile.handle)"
+                        DID         = $bSkyProfile.did
                     }
                 }
                 else {
