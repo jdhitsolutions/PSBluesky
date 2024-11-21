@@ -18,7 +18,9 @@ Function New-BskyPost {
         [string]$ImagePath,
         [Parameter(HelpMessage = 'You should include ALT text for the image.', ValueFromPipelineByPropertyName)]
         [Alias('Alt')]
-        [string]$ImageAlt
+        [string]$ImageAlt,
+        [Parameter(HelpMessage = 'The details of the post to reply to.', ValueFromPipelineByPropertyName)]
+        [hashtable]$ReplyTo
     )
 
     Begin {
@@ -165,13 +167,19 @@ Function New-BskyPost {
                 }
             }
 
+            if ($ReplyTo) {
+                $record.Add('reply', $ReplyTo)
+            }
+
             Write-Information -MessageData $record -Tags record
             #15 Nov 2024 Use the accounts DiD to post and not the user's handle
             $body = @{
                 repo       = $did
                 collection = 'app.bsky.feed.post'
                 record     = $record
-            } | ConvertTo-Json -Depth 7
+            }
+            
+            $body = $body | ConvertTo-Json -Depth 7
 
             Write-Information -MessageData $body -Tags raw
 

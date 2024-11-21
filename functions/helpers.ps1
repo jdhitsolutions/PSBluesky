@@ -68,6 +68,35 @@ Function _newFacetLink {
     }
 }
 
+Function _getReplyTo {
+    [CmdletBinding()]
+    param (
+        [object]$post
+    )
+
+    # Default root is just the post itself
+    $root = @{
+        uri = $post.post.uri
+        cid = $post.post.cid
+    }
+    
+    # If the post is a reply, set the root to the root post
+    if ($post.reply.root) {
+        $root = @{
+            uri = $post.reply.root.uri
+            cid = $post.reply.root.cid
+        }
+    }
+    
+    @{
+        parent = @{
+            uri = $post.post.uri
+            cid = $post.post.cid
+        }
+        root = $root
+    }
+}
+
 Function _convertDidToAt {
     [cmdletbinding()]
     Param(

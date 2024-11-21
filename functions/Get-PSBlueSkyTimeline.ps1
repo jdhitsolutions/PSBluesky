@@ -6,7 +6,9 @@ Function Get-BskyTimeline {
     Param(
         [Parameter(HelpMessage = 'Enter the number of timeline posts to retrieve between 1 and 100. Default is 50.')]
         [ValidateRange(1, 100)]
-        [int]$Limit = 50
+        [int]$Limit = 50,
+        [Parameter(HelpMessage = 'Return the raw timeline data')]
+        [switch]$Raw
     )
     Begin {
         $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
@@ -54,6 +56,12 @@ Function Get-BskyTimeline {
             }
             if ($tl) {
                 Write-Information -MessageData $tl -Tags raw
+
+                if ($Raw) {
+                    # TODO figure out which fields are actually needed for threading and replies
+                    return $tl.feed
+                }
+
                 $timeline = Foreach ($item in $tl.feed) {
                     [PSCustomObject]@{
                         PSTypeName    = 'PSBlueskyTimelinePost'

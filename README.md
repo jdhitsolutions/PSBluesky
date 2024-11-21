@@ -11,6 +11,14 @@ The commands in the module are __not__ intended to provide complete coverage of 
 
 For best results, you should run this module in a PowerShell console that supports emojis and ANSI formatting like Windows Terminal.
 
+# TUI Hacks
+
+```pwsh
+.\Invoke-BskyTui.ps1
+```
+
+![alt text](images/tui.png)
+
 ## Installation
 
 You can install the module from the PowerShell Gallery.

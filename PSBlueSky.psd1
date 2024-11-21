@@ -13,19 +13,20 @@
     PowerShellVersion    = '7.4'
     FunctionsToExport    = @(
         'Add-BskyImage',
-        'Find-BskyUser'
+        'Find-BskyUser',
         'Get-BskyFeed',
         'Get-BskyFollowers',
         'Get-BskyFollowing',
-        'Get-BskyNotification'
+        'Get-BskyNotification',
         'Get-BskyProfile',
         'Get-BskySession',
         'Get-BskyModuleInfo',
-        'Get-BskyTimeline'
+        'Get-BskyTimeline',
         'New-BskyPost',
         'Open-BskyHelp',
-        'Start-BskySession'
-        'Update-BskySession'
+        'Start-BskySession',
+        'Update-BskySession',
+        'Invoke-BskyTui'
     )
     TypesToProcess       = @(
         'types/PSBlueSky.types.ps1xml'

@@ -56,14 +56,23 @@ Function Get-BskyProfile {
             _verbose $apiUrl
 
             Try {
-                $splat = @{
-                    Uri                     = $apiUrl
-                    Method                  = 'Get'
-                    Headers                 = $headers
-                    ErrorAction             = 'Stop'
-                    ResponseHeadersVariable = 'rh'
+                # Cache profiles for the session
+                if (!$script:ProfileCache.ContainsKey($UserName)) {
+                    $splat = @{
+                        Uri                     = $apiUrl
+                        Method                  = 'Get'
+                        Headers                 = $headers
+                        ErrorAction             = 'Stop'
+                        ResponseHeadersVariable = 'rh'
+                    }
+                    $profile = Invoke-RestMethod @splat
+                    if ($profile) {
+                        $script:ProfileCache[$UserName] = $profile
+                    }
                 }
-                $profile = Invoke-RestMethod @splat
+
+                $profile = $script:ProfileCache[$UserName]
+
                 Write-Information -MessageData $rh -Tags ResponseHeader
                 If ($profile) {
                     Write-Information -MessageData $profile -Tags raw
