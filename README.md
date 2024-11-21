@@ -5,9 +5,9 @@
 
 ![](images/BlueskyLogo-small.png)
 
-This module is a set of PowerShell functions designed to let you interact with Bluesky API from PowerShell. Technically, the module commands are wrappers around the [atproto protocols](https://docs.bsky.app/docs/category/http-reference). The module is written for *__PowerShell 7__*, although it might work as written in Windows PowerShell with minimal changes if you wish to fork the GitHub repository. Commands *have not* been thoroughly tested for cross-platform compatibility.
+This module is a set of PowerShell functions designed to let you interact with Bluesky API from PowerShell. Technically, the module commands are wrappers around the [AT protocol](https://docs.bsky.app/docs/category/http-reference). The module is written for *__PowerShell 7__*, although it might work as written in Windows PowerShell with minimal changes if you wish to fork the GitHub repository. Commands *have not* been thoroughly tested for cross-platform compatibility, so please post an Issue if you encounter a problem.
 
-The commands in the module are __not__ intended to provide complete coverage of the Bluesky API. Instead, the module focuses on the most common tasks you might want to do with Bluesky from a PowerShell prompt.
+The commands in this module are __not__ intended to provide complete coverage of the Bluesky API or user experience. Instead, the module focuses on the most common tasks you might want to do with Bluesky from a PowerShell prompt.
 
 For best results, you should run this module in a PowerShell console that supports emojis and ANSI formatting like Windows Terminal.
 
@@ -61,12 +61,10 @@ Name                 Alias               Synopsis
 ----                 -----               --------
 Add-BskyImage                            Upload an image to Bluesky
 Find-BskyUser        bsu                 Search for Bluesky user accounts
-Get-BskyAccountDID                       Resolve a Bluesky account name to its
-                                         DID
+Get-BskyAccountDID                       Resolve a Bluesky account name to its DID
 Get-BskyFeed         bsfeed              Get your Bluesky feed
 Get-BskyFollowers    bsfollower          Get your Bluesky followers
-Get-BskyFollowing    bsfollow            Get a list of Bluesky accounts that
-                                         you follow
+Get-BskyFollowing    bsfollow            Get a list of Bluesky accounts that you follow
 Get-BskyModuleInfo                       Get a summary of the PSBlueSky module.
 Get-BskyNotification bsn                 Get Bluesky notifications.
 Get-BskyProfile      bsp                 Get a Bluesky profile
