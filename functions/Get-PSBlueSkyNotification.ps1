@@ -61,16 +61,16 @@ Function Get-BskyNotification {
                 Write-Information -MessageData $response -Tags raw
                 foreach ($notification in $response.notifications) {
                     #resolve the subject text if available
-                    # $script:PostCache is defined in the root module file
-                    if (($notification.reasonSubject) -AND ($script:PostCache.ContainsKey($notification.reasonSubject))) {
-                        $refText = $script:PostCache[$notification.reasonSubject]
+                    # $global:PostCache is defined in the root module file
+                    if (($notification.reasonSubject) -AND ($global:PostCache.ContainsKey($notification.reasonSubject))) {
+                        $refText = $global:PostCache[$notification.reasonSubject]
                     }
                     elseif ($notification.reasonSubject) {
                         #get the text of the post
                         _verbose -message ($strings.ResolveText -f $notification.reasonSubject)
                         $refText = _getPostText -AT $notification.reasonSubject -Headers $headers
                         #update the caching hashtable
-                        $script:PostCache[$notification.reasonSubject] = $refText
+                        $global:PostCache[$notification.reasonSubject] = $refText
                     }
                     elseif ($notification.record.text) {
                         #the text is included in a mention

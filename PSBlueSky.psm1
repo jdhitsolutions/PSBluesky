@@ -24,12 +24,13 @@ $PDSHOST = 'https://bsky.social'
 initialize a caching hashtable for post texts.
 The key will be an AT value like at://did:plc:ohgsqpfsbocaaxusxqlgfvd7/app.bsky.feed.post/3larqyjbyzl2a
 and the value will the text of the post
+Shaun: global caches are easier for testing because you can reload the module and the cache survives. A file based cache might be better because loading profile data from the live api all the time is slow.
 #>
-if ($null -eq $script:PostCache) {
-    $script:PostCache = @{}
+if ($null -eq $global:PostCache) {
+    $global:PostCache = @{}
 }
-if ($null -eq $script:ProfileCache) {
-    $script:ProfileCache = @{}
+if ($null -eq $global:ProfileCache) {
+    $global:ProfileCache = @{}
 }
 
 $ModuleVersion = (Import-PowerShellDataFile -Path $PSScriptRoot\PSBlueSky.psd1).ModuleVersion
