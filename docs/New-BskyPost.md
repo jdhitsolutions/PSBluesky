@@ -103,6 +103,22 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
+### -Label
+
+When posting an image it can be labeled as e.g. for 'sexual' for sexually suggestive but non-nude, 'nudity' for artistic / non-erotic nude, and 'porn' for adult content
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: false
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
+Accept wildcard characters: False
+```
+
 ### -Message
 
 The text of the post
