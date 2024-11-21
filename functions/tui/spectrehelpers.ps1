@@ -207,6 +207,15 @@ Function _getEmbedThumbnails {
     }
 }
 
+function _removeBadEmoji {
+    param (
+        [Parameter(HelpMessage = 'The text to remove the bad emoji from text, they cause janky flickering', ValueFromPipeline = $true)]
+        [string] $Text
+    )
+
+    return $Text -replace "(⚛️|❤️)", ""
+}
+
 function _formatSpectrePost {
     param (
         [object] $RawPost,
@@ -226,7 +235,7 @@ function _formatSpectrePost {
     $reposted = $Reason.'$type' -eq "app.bsky.feed.defs#reasonRepost"
     $authorHandle = $RawPost.author.handle
     $author = Get-BskyProfile $authorHandle
-    $authorName = $author.Display.Trim() | Get-SpectreEscapedText
+    $authorName = $author.Display.Trim() | _removeBadEmoji | Get-SpectreEscapedText
     $avatarWidth = 10
     $avatarUrl = ([string]::IsNullOrEmpty($author.Avatar)) ? "$PSScriptRoot/../../images/fallback-avatar.png" : $author.Avatar
     $avatarImage = Get-SpectreSixelImage -ImagePath $avatarUrl -MaxWidth $avatarWidth
@@ -244,7 +253,7 @@ function _formatSpectrePost {
 
     $postMessageRows += Write-SpectreHost "" -PassThru
 
-    $postText = _getSpectreFacetedMessage -Message $Text -Facets $Facets | Write-SpectreHost -PassThru | Format-SpectrePadded -Top 0 -Bottom 1 -Left 0 -Right 0
+    $postText = _getSpectreFacetedMessage -Message $Text -Facets $Facets | _removeBadEmoji | Write-SpectreHost -PassThru | Format-SpectrePadded -Top 0 -Bottom 1 -Left 0 -Right 0
     if (![string]::IsNullOrWhiteSpace($postText)) {
         $postMessageRows += $postText
     }
@@ -261,7 +270,7 @@ function _formatSpectrePost {
             $quotedText = "Starter Pack [DeepSkyBlue3_1 link=$($RawPost.embed.record.uri)]$($RawPost.embed.record.record.name | Get-SpectreEscapedText) :up_right_arrow:[/]"
         }
         
-        $postMessageRows += $quotedText | Format-SpectrePadded -Padding 1 | Format-SpectrePanel -Color Grey30 -Title $quotedTitle | Format-SpectrePadded -Top 0 -Bottom 1 -Left 0 -Right 0
+        $postMessageRows += $quotedText | _removeBadEmoji | Format-SpectrePadded -Padding 1 | Format-SpectrePanel -Color Grey30 -Title $quotedTitle | Format-SpectrePadded -Top 0 -Bottom 1 -Left 0 -Right 0
     }
 
     $webEmbed = _getSpectreWebEmbed -Embed $RawPost.embed
