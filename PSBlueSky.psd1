@@ -3,7 +3,7 @@
 #
 @{
     RootModule           = 'PSBlueSky.psm1'
-    ModuleVersion        = '2.0.0'
+    ModuleVersion        = '2.1.0'
     CompatiblePSEditions = 'Core'
     GUID                 = 'c5c1fd1d-e648-432d-b7d6-bb56f2044c2a'
     Author               = 'Jeff Hicks'
@@ -13,7 +13,8 @@
     PowerShellVersion    = '7.4'
     FunctionsToExport    = @(
         'Add-BskyImage',
-        'Find-BskyUser'
+        'Find-BskyUser',
+        'Get-BskyAccountDID'
         'Get-BskyFeed',
         'Get-BskyFollowers',
         'Get-BskyFollowing',
@@ -60,37 +61,7 @@
             LicenseUri                 = 'https://github.com/jdhitsolutions/PSBlueSky/blob/main/LICENSE.txt'
             ProjectUri                 = 'https://github.com/jdhitsolutions/PSBluesky'
             IconUri                    = 'https://raw.githubusercontent.com/jdhitsolutions/PSBlueSky/main/images/BlueskyLogo-icon.png'
-            ReleaseNotes               = @'
-## [2.0.0] - 2024-11-18
-
-### Added
-
-- Added script property called `Age` for types `PSBlueskyProfile`, `PSBlueskyFollowProfile`, and `PSBlueskySearchResult`.
-- Added custom verbose messaging and localized string data.
-- Added typename `PSBlueskyImageUpload` to `Add-BskyImage`.
-- Added command `Get-BskyModuleInfo` and corresponding formatting file.
-- Added a parameter to `Open-BskyHelp` to view the file as a markdown document.
-- Added support for proper notifications and tags in new messages. [[Issue #19](https://github.com/jdhitsolutions/PSBluesky/issues/19)]
-- Added command aliases:
-    - bsfeed --> `Get-BskyFeed`
-    - bsfollow --> `Get-BskyFollowing`
-    - bsfollower --> `Get-BskyFollowers`
-    - bshelp --> `Open-BskyHelp`
-    - bsn --> `Get-BskyNotification`
-    - bsp --> `Get-BskyProfile`
-    - bst --> `Get-BskyTimeline`
-    - bsu --> `Find-BskyUser`
-    - Refresh-BskySession --> `Update-BskySession`
-    - skeet --> `New-BskyPost`
-
-### Changed
-
-- Modified commands to __not__ require a credential except for `Start-BskySession`. Commands will get the access token from the session object. __This is a breaking change__ [[Issue #20](https://github.com/jdhitsolutions/PSBluesky/issues/20)]
-
-### Removed
-
-- Removed `Get-BskyAccessToken` and replaced it with `Start-BskySession`. __This is a breaking change__
-'@
+            ReleaseNotes               = ''
             RequireLicenseAcceptance   = $false
             ExternalModuleDependencies = @()
         } # End of PSData hashtable

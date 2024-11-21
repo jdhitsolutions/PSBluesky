@@ -34,6 +34,7 @@ After installing this module, you should end up with these PSBluesky commands:
 
 - [Add-BskyImage](docs/Add-BskyImage.md)
 - [Find-BskyUser](docs/Find-BskyUser.md)
+- [Get-BskyAccountDID](docs/Get-BskyAccountDID.md)
 - [Get-BskyFeed](docs/Get-BskyFeed.md)
 - [Get-BskyFollowers](docs/Get-BskyFollowers.md)
 - [Get-BskyFollowing](docs/Get-BskyFollowing.md)
@@ -54,16 +55,19 @@ You can use `Get-BskyModuleInfo` to get a summary of the module. The default out
 ```powershell
 PS C:\> Get-BskyModuleInfo
 
-   Module: PSBlueSky [v2.0.0]
+   Module: PSBlueSky [v2.1.0]
 
 Name                 Alias               Synopsis
 ----                 -----               --------
 Add-BskyImage                            Upload an image to Bluesky
 Find-BskyUser        bsu                 Search for Bluesky user accounts
+Get-BskyAccountDID                       Resolve a Bluesky account name to its
+                                         DID
 Get-BskyFeed         bsfeed              Get your Bluesky feed
 Get-BskyFollowers    bsfollower          Get your Bluesky followers
-Get-BskyFollowing    bsfollow            Get a list of Bluesky accounts...
-Get-BskyModuleInfo                       Get a summary of the PSBlueSky...
+Get-BskyFollowing    bsfollow            Get a list of Bluesky accounts that
+                                         you follow
+Get-BskyModuleInfo                       Get a summary of the PSBlueSky module.
 Get-BskyNotification bsn                 Get Bluesky notifications.
 Get-BskyProfile      bsp                 Get a Bluesky profile
 Get-BskySession                          Show your current Bluesky session.
@@ -84,7 +88,7 @@ Update-BskySession   Refresh-BskySession Refresh the Bluesky session token
 Start-BskySession -credential $cred
 ```
 
-The credential should be a PSCredential object representing your Bluesky username (handle) and password.
+The credential should be a PSCredential object representing your Bluesky username (handle) and password. (*See below*)
 
 This command will create a hidden session object that will be called from other module commands to get the necessary authentication token for the `Invoke-ResetMethod` header. The access token has a limited lifetime unless it is refreshed. Beginning with version 1.2.0, the module will refresh the token every 15 minutes through a background runspace using a synchronized hashtable. If you remove the module, the runspace will be removed as well.
 
@@ -128,7 +132,52 @@ $PSDefaultParameterValues['*-Bsky*:Credential'] = $BlueskyCredential
 
 You should only need this credential for `Start-BskySession`.
 
-__This module does not use 2FA__. It is possible this module will move to using app passwords which would require a different authentication process but eliminate the need for credentials.
+__This module does not use 2FA at this time__.
+
+### App Passwords :key:
+
+While this module does not use your credential object for anything other than establishing a Bluesky session, you may elect to take a more secure approach and use an app password. This password can be revoked at any time without affecting your main account password. Follow these steps if you want to use an app password with this module.
+
+In the Bluesky app, go to your profile and select `Settings`. Then select `App Passwords`.
+
+![Bluesky app passwords](images/settings-appPasswords.png)
+
+You will need to create a new app password. Give it a meaningful name.
+
+![Bluesky creating an app password](images/create-appPassword.png)
+
+Click the button to create the app password.
+
+![Bluesky app password](images/bluesky-appPassword.png)
+
+You will only see the password once. Copy the password and save it in a secure location such as a secrets management vault.
+
+Next, you need to create a credential object in PowerShell. The user name will be the DID (decentralized identifier) for your account. The password will be the app password you just created. You can run `Get-BskyAccountDID` to get your DID. This command does not require authentication.
+
+```powershell
+$did = Get-BskyAccountDID jdhitsolutions.com
+```
+
+Now you can create a credential object.
+
+```powershell
+PS C:\> $cred = Get-Credential $did
+
+PowerShell credential request
+Enter your credentials.
+Password for user did:plc:ohgsqpfsbocaaxusxqlgfvd7:
+```
+
+Enter the app password. You will use this credential object with `Start-BskySession`. I recommend you save the credential in a secrets management vault and retrieve it when you need to start a Bluesky session.
+
+```powershell
+$cred = Get-Secret -Name PSBlueskyCredential
+$PSDefaultParameterValues['*-*Sky*:Credential'] = $cred
+```
+
+You can revoke an app password at any time. If you do, you will need to create a new app password and update your credential object.
+
+:sparkle: I recommend you use an app password with this module and protect your primary account password.
 
 ## Rate Limits
 

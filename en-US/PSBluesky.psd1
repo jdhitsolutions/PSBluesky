@@ -15,6 +15,7 @@ FailNotification = Failed to retrieve notifications. {0}
 FailPDF = Failed to open the help file. {0}. You can try opening the help as markdown.
 FailProfile = Failed to retrieve profile for {0}
 FailRefresh = Failed to refresh or authenticate the Bluesky session. {0}. You might need to start a new session.
+FailResolve = Failed to resolve {0}. {1} [{2}]
 FailTimeline = Failed to retrieve timeline. {0}
 FailUpload = Failed to upload image {0}. {1}
 FilterNotification = Filtering notifications by type: {0}

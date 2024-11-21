@@ -3,6 +3,12 @@
 This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+### Added
+- Added command `Get-BskyAccountDID`. This command does not require authentication.
+
+### Changed
+- Updated `README` with documentation about setting up a credential using an app password.
+- Revised `OnRemove` handler to remove type customizations. This should eliminate errors on module re-import in the same session.
 
 ## [2.0.0] - 2024-11-18
 

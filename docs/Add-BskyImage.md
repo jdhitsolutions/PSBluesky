@@ -21,6 +21,8 @@ Add-BskyImage [-ImagePath] <String> [-ImageAlt <String>] [-WhatIf] [-Confirm] [<
 
 This command will upload an image to Bluesky and return a link that you can use in your post. This command will be called when you create a new post and specify an image. You shouldn't need to call this command directly.
 
+The image must be less than 1MB in size and the recommended format is PNG. Avoid transparent backgrounds.
+
 ## EXAMPLES
 
 ### Example 1

@@ -73,7 +73,7 @@ Accept wildcard characters: False
 
 ### -ImagePath
 
-The path to the image file.
+The path to the image file. The image must be less than 1MB in size and the recommended format is PNG. Avoid transparent backgrounds.
 
 ```yaml
 Type: String
