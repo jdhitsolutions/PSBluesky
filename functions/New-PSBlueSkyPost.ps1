@@ -18,9 +18,12 @@ Function New-BskyPost {
         [string]$ImagePath,
         [Parameter(HelpMessage = 'You should include ALT text for the image.', ValueFromPipelineByPropertyName)]
         [Alias('Alt')]
-        [string]$ImageAlt
+        [string]$ImageAlt,
+        [Parameter(HelpMessage = 'Label for an image e.g. sexual,nudity,porn', ValueFromPipelineByPropertyName)]
+        [string]$Label
     )
-
+#"labels": {         "$type": "com.atproto.label.defs#selfLabels",         "values": [          {            "val": "nudity"           }         ]
+#                                                                           values : [{val: "sexual"}]
     Begin {
         $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
         $PSDefaultParameterValues['_verbose:block'] = 'Begin'
@@ -66,8 +69,8 @@ Function New-BskyPost {
             #Added 12 Nov 2024 Issue #14
             [regex]$rxMention = '(?<name>@[\w+-]*(\.[\w+-]+)+)'
             if ($rxMention.IsMatch($record.text)) {
-                $matches = $rxMention.Matches($record.text)
-                $matches | ForEach-Object {
+                $rxMatches = $rxMention.Matches($record.text)
+                $rxMatches | ForEach-Object {
                     #17 Nov 2024 Create a mention facet
                     #
                     <#
@@ -87,8 +90,8 @@ Function New-BskyPost {
             #test for tags
             [regex]$rxTag = '(?<tag>#[\w+-]+)'
             if ($rxTag.IsMatch($record.text)) {
-                $matches = $rxTag.Matches($record.text)
-                $matches | ForEach-Object {
+                $rxMatches = $rxTag.Matches($record.text)
+                $rxMatches | ForEach-Object {
                     $tag = $_.Groups['tag'].Value
                     $tagName = $tag.SubString(1)
                     $tagFacet = _newFacetLink -Text $tag -Message $record.text -FacetType tag -Tag $tagName
@@ -102,16 +105,16 @@ Function New-BskyPost {
             #"(?<text>(?<=\[).*(?=\]))\]\((?<uri>http(s)?:\/\/\S+(?=\)))"
             if ($pattern.IsMatch($record.text)) {
                 _verbose $string.ProcessMD
-                $matches = $pattern.Matches($record.text)
+                $rxMatches = $pattern.Matches($record.text)
                 #strip off the [ ] from text and the url from the message
-                foreach ($match in $matches) {
+                foreach ($match in $rxMatches) {
                     $text = $match.Groups['text'].Value
                     $uri = $match.Groups['uri'].Value
                     #revise the text to be displayed
                     $record.text = ($record.text).replace("[$text]", $text).replace("($uri)", '')
                 }
 
-                foreach ($match in $matches) {
+                foreach ($match in $rxMatches) {
                     $text = $match.Groups['text'].Value
                     $uri = $match.Groups['uri'].Value
                     $link = _newFacetLink -Text $text -Uri $uri -Message $record.text -FacetType link
@@ -123,9 +126,9 @@ Function New-BskyPost {
                 #1 Nov 2024 - made the regex more specific
 
                 _verbose -message $string.ProcessUrl
-                $matches = $pattern.Matches($Message)
+                $rxMatches = $pattern.Matches($Message)
                 #$facets = @()
-                foreach ($match in $matches) {
+                foreach ($match in $rxMatches) {
                     $link = _newFacetLink -Text $match.Value -Uri $match.Value -Message $Message
                     $facets += $link
                 }
@@ -163,6 +166,14 @@ Function New-BskyPost {
                 else {
                     Throw ($strings.FailUpload -f $ImagePath, $_.Exception.Message)
                 }
+            }
+
+            if ($label) {
+                   $labels = @{
+                       '$type'  = 'com.atproto.label.defs#selfLabels'
+                       'values' = @( @{'val' = $label } )
+                    }
+                    $record.add('labels',$labels)
             }
 
             Write-Information -MessageData $record -Tags record

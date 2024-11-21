@@ -53,8 +53,8 @@ Update-TypeData -TypeName 'PSBlueskySession' -MemberType ScriptProperty -MemberN
 Update-TypeData -TypeName 'PSBlueskySession' -MemberType ScriptMethod -MemberName Refresh -Value { Update-BskySession -RefreshToken $this.RefreshJwt } -Force
 
 Update-TypeData -TypeName 'PSBlueskySearchResult' -MemberType ScriptProperty -MemberName Age -Value { (Get-Date) - $this.Created } -Force
-Update-TypeData -TypeName 'PSBlueskyProfile' -MemberType ScriptProperty -MemberName Age -Value { (Get-Date) - $this.Created } -Force
-Update-TypeData -TypeName 'PSBlueskyFollowProfile' -MemberType ScriptProperty -MemberName Age -Value { (Get-Date) - $this.Created } -Force
+#Update-TypeData -TypeName 'PSBlueskyProfile' -MemberType ScriptProperty -MemberName Age -Value { (Get-Date) - $this.Created } -Force
+#Update-TypeData -TypeName 'PSBlueskyFollowProfile' -MemberType ScriptProperty -MemberName Age -Value { (Get-Date) - $this.Created } -Force
 #endregion
 
 #region verbose command highlighting
