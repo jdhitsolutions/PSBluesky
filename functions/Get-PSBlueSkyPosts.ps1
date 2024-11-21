@@ -12,8 +12,9 @@ Function Get-BskyFeed {
         [ValidateRange(1, 100)]
         [int]$Limit = 50,
 
+        [Parameter(HelpMessage = 'Enter the username of an account to retrieve their feed. The default is your feed.')]
         [ValidateNotNullOrEmpty()]
-        [Alias('Profile')]
+        [Alias('Profile','Handle')]
         [string]$UserName
     )
 

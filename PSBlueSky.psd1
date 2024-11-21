@@ -53,7 +53,8 @@
         'bsfollow',
         'bsfollower',
         'bst',
-        'bsu'
+        'bsu',
+        'bss'
     )
     PrivateData          = @{
         PSData = @{
@@ -61,7 +62,32 @@
             LicenseUri                 = 'https://github.com/jdhitsolutions/PSBlueSky/blob/main/LICENSE.txt'
             ProjectUri                 = 'https://github.com/jdhitsolutions/PSBluesky'
             IconUri                    = 'https://raw.githubusercontent.com/jdhitsolutions/PSBlueSky/main/images/BlueskyLogo-icon.png'
-            ReleaseNotes               = ''
+            ReleaseNotes               = @'
+## [2.1.0] - 2024-11-21
+
+### Added
+
+- Added alias `bss` for `Get-BskySession`.
+- Added function `Get-BskyAccountDID`.
+- Added parameter validation on image uploads to verify the image file size is less than 1MB.
+- Merged [PR #23](https://github.com/jdhitsolutions/PSBluesky/pull/23) from [@jhoneill](https://github.com/jhoneill) to add label support for `New-BskyPost` and `-Username` to `Get-BskyFeed`.
+- Added command `Get-BskyAccountDID`. This command does not require authentication.
+
+### Changed
+
+- Made `PostCache` a global-scoped variable and renamed it to `BskyPostCache``. Thanks to [@ShaunLawrie](https://github.com/ShaunLawrie) for the suggestion
+- Revised parameter validations on `ImagePath` to provide more granular error messages.
+- Updated `README` with documentation about setting up a credential using an app password.
+- Revised `OnRemove` handler to remove type customizations. This should eliminate errors on module re-import in the same session.
+
+### Removed
+
+- Removed `gif` as a valid image type to upload.
+
+### Fixed
+
+- Modified `New-BskyPost` to re-order items that require facets so that the message is properly formatted. [[Issue #22](https://github.com/jdhitsolutions/PSBluesky/issues/22)]
+'@
             RequireLicenseAcceptance   = $false
             ExternalModuleDependencies = @()
         } # End of PSData hashtable

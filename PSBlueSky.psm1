@@ -25,7 +25,11 @@ initialize a caching hashtable for post texts.
 The key will be an AT value like at://did:plc:ohgsqpfsbocaaxusxqlgfvd7/app.bsky.feed.post/3larqyjbyzl2a
 and the value will the text of the post
 #>
-$PostCache = @{}
+# 21 Nov 2024 - making this a global variable which will persist
+# between module reloads. Thanks to @ShaunLawrie for the suggestion
+if ($null -eq $global:BskyPostCache) {
+    $global:BskyPostCache = @{}
+}
 
 $ModuleVersion = (Import-PowerShellDataFile -Path $PSScriptRoot\PSBlueSky.psd1).ModuleVersion
 #write-host "importing module version $ModuleVersion" -ForegroundColor Green

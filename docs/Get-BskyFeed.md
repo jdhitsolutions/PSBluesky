@@ -1,5 +1,5 @@
 ---
-external help file: PSBluesky-help.xml
+external help file: PSBlueSky-help.xml
 Module Name: PSBlueSky
 online version:
 schema: 2.0.0
@@ -14,12 +14,12 @@ Get your Bluesky feed
 ## SYNTAX
 
 ```yaml
-Get-BskyFeed [[-Limit] <Int32>] [<CommonParameters>]
+Get-BskyFeed [[-Limit] <Int32>] [-UserName <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-This command will return your posts and replies. The default output should feature clickable links. You can get between 1 and 100 feed items. The default is 50.
+By default, this command will return your posts and replies but you can specify any Bluesky username. The default output should feature clickable links. You can get between 1 and 100 feed items. The default is 50.
 
 ## EXAMPLES
 
@@ -84,10 +84,10 @@ Enter the profile or user name to get the feed from another user
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: Profile
+Aliases: Profile, Handle
 
 Required: False
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -100,11 +100,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### PSBlueskyFeedItem
-
 ## NOTES
 
 ## RELATED LINKS

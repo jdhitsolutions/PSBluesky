@@ -2,6 +2,7 @@
 
 ConvertFrom-StringData @'
 AddFacets = Adding facets to record
+AddLabel = Adding image label {0}
 DefineSyncHash = Defining synchronized hashtable
 Ending = Ending PSBluesky module command
 FacetLink = Creating link to {0}

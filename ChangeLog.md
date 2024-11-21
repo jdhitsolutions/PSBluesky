@@ -3,12 +3,31 @@
 This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+
+## [2.1.0] - 2024-11-21
+
 ### Added
+
+- Added alias `bss` for `Get-BskySession`.
+- Added function `Get-BskyAccountDID`.
+- Added parameter validation on image uploads to verify the image file size is less than 1MB.
+- Merged [PR #23](https://github.com/jdhitsolutions/PSBluesky/pull/23) from [@jhoneill](https://github.com/jhoneill) to add label support for `New-BskyPost` and `-Username` to `Get-BskyFeed`.
 - Added command `Get-BskyAccountDID`. This command does not require authentication.
 
 ### Changed
+
+- Made `PostCache` a global-scoped variable and renamed it to `BskyPostCache``. Thanks to [@ShaunLawrie](https://github.com/ShaunLawrie) for the suggestion
+- Revised parameter validations on `ImagePath` to provide more granular error messages.
 - Updated `README` with documentation about setting up a credential using an app password.
 - Revised `OnRemove` handler to remove type customizations. This should eliminate errors on module re-import in the same session.
+
+### Removed
+
+- Removed `gif` as a valid image type to upload.
+
+### Fixed
+
+- Modified `New-BskyPost` to re-order items that require facets so that the message is properly formatted. [[Issue #22](https://github.com/jdhitsolutions/PSBluesky/issues/22)]
 
 ## [2.0.0] - 2024-11-18
 
@@ -182,7 +201,8 @@ This is the first version published to the PowerShell Gallery.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.0.0..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.1.0..HEAD
+[2.1.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.0.0..v2.1.0
 [2.0.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.3.0..v2.0.0
 [1.3.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.2.0..v1.3.0
 [1.2.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.1.0..v1.2.0

@@ -14,7 +14,8 @@ Create a Bluesky post
 ## SYNTAX
 
 ```
-New-BskyPost [-Message] <String> [-ImagePath <String>] [-ImageAlt <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+New-BskyPost [-Message] <String> [-ImagePath <String>] [-ImageAlt <String>] [-Label <String>]
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -103,25 +104,9 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Label
-
-When posting an image it can be labeled as e.g. for 'sexual' for sexually suggestive but non-nude, 'nudity' for artistic / non-erotic nude, and 'porn' for adult content
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: false
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
-```
-
 ### -Message
 
-The text of the post
+The text of the post.
 
 ```yaml
 Type: String
@@ -149,6 +134,22 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Label
+
+When posting an image it can be labeled as e.g. for 'sexual' for sexually suggestive but non-nude, 'nudity' for artistic / non-erotic nude, and 'porn' for adult content. The label must be between 3 and 128 characters in length.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 

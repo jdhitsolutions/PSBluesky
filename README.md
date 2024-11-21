@@ -70,7 +70,7 @@ Get-BskyFollowing    bsfollow            Get a list of Bluesky accounts that
 Get-BskyModuleInfo                       Get a summary of the PSBlueSky module.
 Get-BskyNotification bsn                 Get Bluesky notifications.
 Get-BskyProfile      bsp                 Get a Bluesky profile
-Get-BskySession                          Show your current Bluesky session.
+Get-BskySession      bss                 Show your current Bluesky session.
 Get-BskyTimeline     bst                 Get your Bluesky timeline
 New-BskyPost         skeet               Create a Bluesky post
 Open-BskyHelp        bshelp              Open the PSBluesky help document
@@ -132,7 +132,7 @@ $PSDefaultParameterValues['*-Bsky*:Credential'] = $BlueskyCredential
 
 You should only need this credential for `Start-BskySession`.
 
-__This module does not use 2FA at this time__.
+__This module does not use 2FA at this time. You must use an app password__.
 
 ### App Passwords :key:
 
@@ -177,7 +177,7 @@ $PSDefaultParameterValues['*-*Sky*:Credential'] = $cred
 
 You can revoke an app password at any time. If you do, you will need to create a new app password and update your credential object.
 
-:sparkle: I recommend you use an app password with this module and protect your primary account password.
+:sparkle: __I recommend you use an app password with this module and protect your primary account password. If your Bluesky account is protected with 2FA, you *must* use an app password with this module.__
 
 ## Rate Limits
 
@@ -468,7 +468,7 @@ This module uses ANSI formatting with localized string data and customized verbo
 
 I have a short list of items on my wish list:
 
-- Add support posting multiple images
+- Add support for posting multiple images
 - Add support for posting video
 - Add commands to work with direct messages, aka chat
 - Maybe create a TUI-base reader for your timeline

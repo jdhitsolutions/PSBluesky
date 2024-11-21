@@ -1,5 +1,6 @@
 Function Get-BskySession {
     [cmdletbinding()]
+    [Alias('bss')]
     [OutputType('PSBlueskySession')]
     Param()
 

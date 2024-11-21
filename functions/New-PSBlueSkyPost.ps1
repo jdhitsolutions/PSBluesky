@@ -13,17 +13,20 @@ Function New-BskyPost {
         )]
         [ValidateNotNullOrEmpty()]
         [string]$Message,
-        [parameter(HelpMessage = 'The path to the image file.', ValueFromPipelineByPropertyName)]
-        [ValidatePattern('.*\.(jpg|jpeg|png|gif)$')]
+        [Parameter(HelpMessage = 'The path to the image file.', ValueFromPipelineByPropertyName)]
+        [ValidateScript({ Test-Path $_ },ErrorMessage = 'The file {0} could not be found.')]
+        [ValidateScript({ (Get-Item $_).Length -lt 1MB }, ErrorMessage = 'The image file must be smaller than 1MB.')]
+        [ValidatePattern('.*\.(jpg|jpeg|png)$', ErrorMessage = 'The file must be a jpg, jpeg, or png file.')]
         [string]$ImagePath,
         [Parameter(HelpMessage = 'You should include ALT text for the image.', ValueFromPipelineByPropertyName)]
         [Alias('Alt')]
         [string]$ImageAlt,
-        [Parameter(HelpMessage = 'Label for an image e.g. sexual,nudity,porn', ValueFromPipelineByPropertyName)]
+        [Parameter(HelpMessage = 'Label for an image e.g. sexual,nudity,porn. The label length must be between 3 and 128 characters.', ValueFromPipelineByPropertyName)]
+        [ValidateNotNullOrEmpty()]
+        [ValidateLength(3,128)]
         [string]$Label
     )
-#"labels": {         "$type": "com.atproto.label.defs#selfLabels",         "values": [          {            "val": "nudity"           }         ]
-#                                                                           values : [{val: "sexual"}]
+
     Begin {
         $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
         $PSDefaultParameterValues['_verbose:block'] = 'Begin'
@@ -54,7 +57,7 @@ Function New-BskyPost {
     Process {
         $PSDefaultParameterValues['_verbose:block'] = 'Process'
         If ($headers) {
-            _verbose $strings.PostingMessage
+            _verbose $strings.PostMessage
 
             $record = [ordered]@{
                 '$type'   = 'app.bsky.feed.post'
@@ -65,41 +68,7 @@ Function New-BskyPost {
             #now create the facets
             $facets = @()
 
-            #test for @mentions first and update the text
-            #Added 12 Nov 2024 Issue #14
-            [regex]$rxMention = '(?<name>@[\w+-]*(\.[\w+-]+)+)'
-            if ($rxMention.IsMatch($record.text)) {
-                $rxMatches = $rxMention.Matches($record.text)
-                $rxMatches | ForEach-Object {
-                    #17 Nov 2024 Create a mention facet
-                    #
-                    <#
-                    $url = "https://bsky.app/profile/{0}" -f $_.Groups['name'].Value
-                    $replace = "[$($_.value)]($url)"
-                    Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Replacing mention $($_.Value) with $replace"
-                    $record.text = $record.text -replace $_.Value, $replace
-                    #>
-                    $text = $_.Groups['name'].Value
-                    _verbose -message ($strings.ResolveDID -f $text)
-                    $mentionDid = (Get-BskyProfile $text.SubString(1)).did
-                    $mention = _newFacetLink -Text $text -did $mentionDid -Message $record.text -FacetType mention
-                    $facets += $mention
-                }
-            }
-
-            #test for tags
-            [regex]$rxTag = '(?<tag>#[\w+-]+)'
-            if ($rxTag.IsMatch($record.text)) {
-                $rxMatches = $rxTag.Matches($record.text)
-                $rxMatches | ForEach-Object {
-                    $tag = $_.Groups['tag'].Value
-                    $tagName = $tag.SubString(1)
-                    $tagFacet = _newFacetLink -Text $tag -Message $record.text -FacetType tag -Tag $tagName
-                    $facets += $tagFacet
-                }
-            } #if tags
-
-            #test for Markdown style links
+            #test for Markdown style links first as this will affect the text
             #create a facet if found
             [regex]$pattern = '(?<text>(?<=\[)[^\]]+(?=\]))\]\((?<uri>http(s)?:\/\/\S+(?=\)))'
             #"(?<text>(?<=\[).*(?=\]))\]\((?<uri>http(s)?:\/\/\S+(?=\)))"
@@ -134,6 +103,40 @@ Function New-BskyPost {
                 }
                 #$record.Add('langs', @('en'))
             }
+
+            #test for @mentions
+            #Added 12 Nov 2024 Issue #14
+            [regex]$rxMention = '(?<name>@[\w+-]*(\.[\w+-]+)+)'
+            if ($rxMention.IsMatch($record.text)) {
+                $rxMatches = $rxMention.Matches($record.text)
+                $rxMatches | ForEach-Object {
+                    #17 Nov 2024 Create a mention facet
+                    #
+                    <#
+                    $url = "https://bsky.app/profile/{0}" -f $_.Groups['name'].Value
+                    $replace = "[$($_.value)]($url)"
+                    Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Replacing mention $($_.Value) with $replace"
+                    $record.text = $record.text -replace $_.Value, $replace
+                    #>
+                    $text = $_.Groups['name'].Value
+                    _verbose -message ($strings.ResolveDID -f $text)
+                    $mentionDid = (Get-BskyProfile $text.SubString(1)).did
+                    $mention = _newFacetLink -Text $text -did $mentionDid -Message $record.text -FacetType mention
+                    $facets += $mention
+                }
+            }
+
+            #test for tags
+            [regex]$rxTag = '(?<tag>#[\w+-]+)'
+            if ($rxTag.IsMatch($record.text)) {
+                $rxMatches = $rxTag.Matches($record.text)
+                $rxMatches | ForEach-Object {
+                    $tag = $_.Groups['tag'].Value
+                    $tagName = $tag.SubString(1)
+                    $tagFacet = _newFacetLink -Text $tag -Message $record.text -FacetType tag -Tag $tagName
+                    $facets += $tagFacet
+                }
+            } #if tags
             _verbose -message $strings.AddFacets
             $record.Add('facets', $facets)
 
@@ -168,6 +171,17 @@ Function New-BskyPost {
                 }
             }
 
+            #Added from PR#23
+            # https://atproto.blue/en/latest/atproto/atproto_client.models.com.atproto.label.defs.html
+            <#
+            "labels": {
+                $type": "com.atproto.label.defs#selfLabels",
+                "values": [
+                    {"val": "nudity"},
+                    ]
+            }
+                    #>
+            _verbose -message ($strings.AddLabel -f $label)
             if ($label) {
                    $labels = @{
                        '$type'  = 'com.atproto.label.defs#selfLabels'
