@@ -22,8 +22,7 @@ Function New-BskyPost {
         [Alias('Alt')]
         [string]$ImageAlt,
         [Parameter(HelpMessage = 'Label for an image e.g. sexual,nudity,porn. The label length must be between 3 and 128 characters.', ValueFromPipelineByPropertyName)]
-        [ValidateNotNullOrEmpty()]
-        [ValidateLength(3,128)]
+        [AllowEmptyString()]
         [string]$Label
     )
 
