@@ -1,0 +1,61 @@
+#localized string data for verbose messaging, errors, and warnings.
+#this translation was done from English using AI.
+
+ConvertFrom-StringData @'
+AddFacets = Facetten zum Datensatz hinzufügen
+AddLabel = Bildbeschriftung hinzufügen {0}
+DefineSyncHash = Synchronisierte Hashtabelle definieren
+Ending = PSBluesky-Modulbefehl beenden
+FacetLink = Link zu {0} erstellen
+FacetMention = Erwähnung zu {0} erstellen
+FacetTag = Tag für {0} erstellen
+FailAuthenticate = Authentifizierung der Bluesky-Sitzung fehlgeschlagen
+FailFeed = Abrufen der Feedelemente für {0} fehlgeschlagen. {1}
+FailFollowers = Abrufen der Follower fehlgeschlagen
+FailFollowing = Abrufen der gefolgten Konten fehlgeschlagen
+FailNotification = Abrufen der Benachrichtigungen fehlgeschlagen. {0}
+FailPDF = Öffnen der Hilfedatei fehlgeschlagen. {0}. Sie können versuchen, die Hilfe als Markdown zu öffnen.
+FailProfile = Abrufen des Profils für {0} fehlgeschlagen
+FailRefresh = Aktualisieren oder Authentifizieren der Bluesky-Sitzung fehlgeschlagen. {0}. Sie müssen möglicherweise eine neue Sitzung starten.
+FailResolve = Auflösung von {0} fehlgeschlagen. {1} [{2}]
+FailTimeline = Abrufen der Timeline fehlgeschlagen. {0}
+FailUpload = Hochladen des Bildes {0} fehlgeschlagen. {1}
+FilterNotification = Benachrichtigungen nach Typ filtern: {0}
+FoundCommands = {0} Funktionen gefunden
+GetFunctions = Exportierte Funktionen abrufen
+GetModuleInfo = Modulinformationen für {0} abrufen
+GetNotification = {0} Benachrichtigungen abrufen
+GetTimeline = Timeline-Beiträge {0} abrufen
+MissingAlt = Sie müssen ALT-Text für das Bild angeben!
+NewFacet = Neue Facette {0} für [{1}] in '{2}' erstellen
+NewRunspace = Neuer Hintergrundlaufraum erstellen
+NewSession = Neue Bluesky-Sitzung für {0} erstellen
+NoSearchResults = Keine Ergebnisse für {0} gefunden
+NoSession = Keine Bluesky-Sitzung erkannt. Führen Sie Start-BskySession aus, um eine Sitzung zu initialisieren.
+OpenMarkdownHelp = Hilfedatei als Markdown öffnen
+OpenPDFHelp = Versuch, {0} mit dem Standard-PDF-Viewer zu öffnen
+PageFollowers = Alle Follower von {0} abrufen
+PageFollowing = Alle gefolgten Konten von {0} abrufen
+PostMessage = Nachrichtenaufzeichnung erstellen
+ProcessAccounts = {0} Konten verarbeiten
+ProcessCommand = Funktion {0} verarbeiten
+ProcessMD = Markdown-Stil-Links verarbeiten
+ProcessUrl = URL-Links verarbeiten
+PSVersion = Ausführung unter PowerShell-Version {0}
+QueryFeed = Abfrage der Feedelemente {0} für {1}
+QueryFollowers = Abfrage der Follower {0} für {1}
+QueryFollowing = Abfrage der gefolgten Konten {0} für {1}
+RefreshSession = Aktualisierung einer Bluesky-Login-Sitzung für {0}
+ResolveDID = Auflösung der DiD für {0}
+ResolveText = Auflösung des Beitragstextes für {0}
+RxEscape = Text erfordert Regex-Escaping
+SessionFound = Bestehende Bluesky-Sitzung für {0} gefunden
+Starting = PSBluesky-Modulbefehl starten
+StartRunspace = Hintergrundlaufraum-Befehl starten
+TextNotFound = Der Text {0} wurde in der Nachricht '{1}' nicht gefunden
+UploadImage = Bild {0} hochladen [{1}]
+UserSearch = Suche nach Bluesky-Benutzer: {0}
+UsingHost = Verwendung von PowerShell Host {0}
+UsingModule = Verwendung des Moduls PSBluesky Version {0}
+UsingOS = Ausführung unter dem Betriebssystem {0}
+'@

@@ -1,0 +1,61 @@
+#localized string data for verbose messaging, errors, and warnings.
+
+#this translation was done from English using AI.
+ConvertFrom-StringData @'
+AddFacets = Ajout de facettes à l'enregistrement
+AddLabel = Ajout d'une étiquette d'image {0}
+DefineSyncHash = Définition d'une table de hachage synchronisée
+Ending = Fin de la commande du module PSBluesky
+FacetLink = Création d'un lien vers {0}
+FacetMention = Création d'une mention vers {0}
+FacetTag = Création d'une balise pour {0}
+FailAuthenticate = Échec de l'authentification de la session Bluesky
+FailFeed = Échec de la récupération des éléments du flux pour {0}. {1}
+FailFollowers = Échec de la récupération des abonnés
+FailFollowing = Échec de la récupération des comptes suivis
+FailNotification = Échec de la récupération des notifications. {0}
+FailPDF = Échec de l'ouverture du fichier d'aide. {0}. Vous pouvez essayer d'ouvrir l'aide au format markdown.
+FailProfile = Échec de la récupération du profil pour {0}
+FailRefresh = Échec de l'actualisation ou de l'authentification de la session Bluesky. {0}. Vous pourriez avoir besoin de démarrer une nouvelle session.
+FailResolve = Échec de la résolution de {0}. {1} [{2}]
+FailTimeline = Échec de la récupération de la chronologie. {0}
+FailUpload = Échec du téléchargement de l'image {0}. {1}
+FilterNotification = Filtrage des notifications par type : {0}
+FoundCommands = Trouvé {0} fonctions
+GetFunctions = Obtention des fonctions exportées
+GetModuleInfo = Obtention des informations du module pour {0}
+GetNotification = Récupération des notifications {0}
+GetTimeline = Obtention des publications de la chronologie {0}
+MissingAlt = Vous devez fournir un texte ALT pour l'image !
+NewFacet = Création d'une nouvelle facette {0} pour [{1}] dans '{2}'
+NewRunspace = Création d'un nouvel espace de travail en arrière-plan
+NewSession = Création d'une nouvelle session Bluesky pour {0}
+NoSearchResults = Aucun résultat trouvé pour {0}
+NoSession = Aucune session Bluesky détectée. Exécutez Start-BskySession pour initialiser une session.
+OpenMarkdownHelp = Ouverture du fichier d'aide au format markdown
+OpenPDFHelp = Tentative d'ouverture de {0} avec le visualiseur PDF par défaut
+PageFollowers = Obtention de tous les abonnés de {0}
+PageFollowing = Obtention de tous les comptes suivis de {0}
+PostMessage = Création d'un enregistrement de message
+ProcessAccounts = Traitement de {0} comptes
+ProcessCommand = Traitement de la fonction {0}
+ProcessMD = Traitement des liens de style Markdown
+ProcessUrl = Traitement des liens URL
+PSVersion = Fonctionnement sous la version de PowerShell {0}
+QueryFeed = Interrogation des éléments du flux {0} pour {1}
+QueryFollowers = Interrogation des abonnés {0} pour {1}
+QueryFollowing = Interrogation des comptes suivis par {1} pour {0}
+RefreshSession = Actualisation d'une session de connexion Bluesky pour {0}
+ResolveDID = Résolution de l'ID pour {0}
+ResolveText = Résolution du texte du message pour {0}
+RxEscape = Le texte nécessite une échappée regex
+SessionFound = Session Bluesky existante trouvée pour {0}
+Starting = Début de la commande du module PSBluesky
+StartRunspace = Début de la commande d'espace de travail en arrière-plan
+TextNotFound = Le texte {0} n'a pas été trouvé dans le message '{1}'
+UploadImage = Téléchargement de l'image {0} [{1}]
+UserSearch = Recherche d'utilisateur Bluesky : {0}
+UsingHost = Utilisation de l'hôte PowerShell {0}
+UsingModule = Utilisation du module PSBluesky version {0}
+UsingOS = Fonctionnement sous le système d'exploitation {0}
+'@
