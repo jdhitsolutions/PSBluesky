@@ -3,12 +3,12 @@
 #
 @{
     RootModule           = 'PSBlueSky.psm1'
-    ModuleVersion        = '2.1.0'
+    ModuleVersion        = '2.2.0'
     CompatiblePSEditions = 'Core'
     GUID                 = 'c5c1fd1d-e648-432d-b7d6-bb56f2044c2a'
     Author               = 'Jeff Hicks'
     CompanyName          = 'JDH Information Technology Solutions, Inc.'
-    Copyright            = '(c)2024 JDH Information Technology Solutions, Inc.'
+    Copyright            = '(c)2024-2025 JDH Information Technology Solutions, Inc.'
     Description          = 'A set of PowerShell commands that use the Bluesky API. You can skeet and upload images from a PowerShell prompt. This module is written for PowerShell 7 and uses features like $PSStyle.'
     PowerShellVersion    = '7.4'
     FunctionsToExport    = @(

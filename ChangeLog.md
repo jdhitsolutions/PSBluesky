@@ -3,8 +3,6 @@
 This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
-### Added
-- Added localized strings for FR-FR and DE-DE. Translations done from English using CoPilot.
 
 ### Removed
 - Removed files previously marked as deprecated
