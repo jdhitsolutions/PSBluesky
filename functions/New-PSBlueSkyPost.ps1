@@ -22,8 +22,7 @@ Function New-BskyPost {
         [Alias('Alt')]
         [string]$ImageAlt,
         [Parameter(HelpMessage = 'Label for an image e.g. sexual,nudity,porn. The label length must be between 3 and 128 characters.', ValueFromPipelineByPropertyName)]
-        [ValidateNotNullOrEmpty()]
-        [ValidateLength(3,128)]
+        [AllowEmptyString()]
         [string]$Label
     )
 
@@ -58,6 +57,9 @@ Function New-BskyPost {
         $PSDefaultParameterValues['_verbose:block'] = 'Process'
         If ($headers) {
             _verbose $strings.PostMessage
+
+            #Control characters will louse up spacing when we have hash tags, mentions, or links - replace any in message with space
+            $Message = $Message -replace '\p{C}', ' '  #\p{C} is regex for 'unicode control chars'
 
             $record = [ordered]@{
                 '$type'   = 'app.bsky.feed.post'
@@ -120,9 +122,12 @@ Function New-BskyPost {
                     #>
                     $text = $_.Groups['name'].Value
                     _verbose -message ($strings.ResolveDID -f $text)
-                    $mentionDid = (Get-BskyProfile $text.SubString(1)).did
-                    $mention = _newFacetLink -Text $text -did $mentionDid -Message $record.text -FacetType mention
-                    $facets += $mention
+                    try {
+                        $mentionDid = (Get-BskyProfile $text.SubString(1) -ErrorAction Stop ).did
+                        $mention = _newFacetLink -Text $text -did $mentionDid -Message $record.text -FacetType mention
+                        $facets += $mention
+                    }
+                    catch {Write-Warning "$Text did not match a user and will not be linked"}
                 }
             }
 
