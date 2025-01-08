@@ -55,17 +55,17 @@ You can use `Get-BskyModuleInfo` to get a summary of the module. The default out
 ```powershell
 PS C:\> Get-BskyModuleInfo
 
-   Module: PSBlueSky [v2.1.0]
+   Module: PSBlueSky [v2.2.0]
 
 Name                 Alias               Synopsis
 ----                 -----               --------
 Add-BskyImage                            Upload an image to Bluesky
 Find-BskyUser        bsu                 Search for Bluesky user accounts
-Get-BskyAccountDID                       Resolve a Bluesky account name to its DID
+Get-BskyAccountDID                       Resolve a Bluesky account name ...
 Get-BskyFeed         bsfeed              Get your Bluesky feed
 Get-BskyFollowers    bsfollower          Get your Bluesky followers
-Get-BskyFollowing    bsfollow            Get a list of Bluesky accounts that you follow
-Get-BskyModuleInfo                       Get a summary of the PSBlueSky module.
+Get-BskyFollowing    bsfollow            Get a list of Bluesky accounts t...
+Get-BskyModuleInfo                       Get a summary of the PSBlueSky m...
 Get-BskyNotification bsn                 Get Bluesky notifications.
 Get-BskyProfile      bsp                 Get a Bluesky profile
 Get-BskySession      bss                 Show your current Bluesky session.
@@ -185,7 +185,7 @@ The commands in this module use the public Bluesky API which means there are [ra
 
 ## Posting
 
-:email: Use `New-BskyPost`, or its alias `skeet`, to post a message to Bluesky. There are parameters to include an image. If you include an image, the `New-BskyPost` command will call `Add-BskyImage` to upload the image. It is strongly recommended that you included ALT text for the image.
+:email: Use `New-BskyPost`, or its alias `skeet`, to post a message to Bluesky. There are parameters to include an image. If you include an image, the `New-BskyPost` command will call `Add-BskyImage` to upload the image. It is __strongly recommended__ that you included ALT text for the image.
 
 ```powershell
 $param = @{
@@ -235,21 +235,22 @@ PS C:\> $jeff | Select-Object *
 Username    : jdhitsolutions.com
 Display     : Jeff Hicks
 Created     : 5/21/2023 10:44:48 AM
-Description : PowerShell Author/Teacher/MVP/Guide ✍️
+Description : PowerShell Author/Teacher/MVP/Tour Guide ✍️
               Prof. PowerShell Emeritus 🎓
               Grizzled and grumpy IT Pro - https://jdhitsolutions.github.io/
               🎼Amateur composer - https://musescore.com/user/26698536
               Wine drinker 🍷🐶 and dog lover
-Avatar      : https://cdn.bsky.app/img/avatar/plain/did:plc:ohgsqpfsbocaaxusxqlgfvd7/
-              bafkreifdfahcjmytu3iw2aj2d3howu6q7twkta3h23qmlve2d2mvo5sily@jpeg
-Posts       : 734
-Followers   : 1267
-Following   : 319
-Lists       : 1
+Avatar      : https://cdn.bsky.app/img/avatar/plain/did:plc:ohgsqpfsbocaaxusxqlg
+              fvd7/bafkreifdfahcjmytu3iw2aj2d3howu6q7twkta3h23qmlve2d2mvo5sily@j
+              peg
+Posts       : 1060
+Followers   : 1904
+Following   : 383
+Lists       : 2
 URL         : https://bsky.app/profile/jdhitsolutions.com
 DID         : did:plc:ohgsqpfsbocaaxusxqlgfvd7
 Name        : jdhitsolutions.com
-Age         : 547.02:06:27.3639712
+Age         : 596.06:49:09.1731955
 ```
 
 ## :couple: Followers
@@ -285,19 +286,29 @@ The default behavior is to retrieve between 1 and 100 followers. Or you can use 
 
 ## Searching for Users
 
-You can search for Bluesky users with `Find-BskyUser`. The default behavior is to search for a user by name. The search is case-insensitive
+You can search for Bluesky users with `Find-BskyUser`. The default behavior is to search for a user by name. The search is case-insensitive.
 
 ```powershell
 Find-BskyUser -UserName "jeff h" -Limit 3
 ```
 
-![Bluesky user search](images/find-bskyuser.png)
-
 The default output includes clickable links to the user's profile. This object too has been customized with aliases and script properties.
 
 ```powershell
-PS C:\> Find-BskyUser -UserName "jeff h" -Limit 2 |
+PS C:\> Find-BskyUser -UserName "jeff h" -Limit 3 |
 Select-Object *Name,Description,Created,Age
+
+DisplayName : Jeff (no, the other one)
+UserName    : jeff-notheotherone.bsky.social
+Description : When I use a word, Humpty said, it means just what I choose it to
+              mean - neither more nor less.
+
+              The question is, said Alice, whether you can make words mean so
+              many different things.
+
+              H: The question is which is to be Master — that’s all.
+Created     : 8/11/2023 6:27:08 AM
+Age         : 514.11:04:04.2416645
 
 DisplayName : F-O Loignon
 UserName    : foloignon.bsky.social
@@ -306,20 +317,19 @@ Description : « Un p’tit gosseux » - MBC
               « L’osti de tapette communiste woke » - Un pirate
 
               Je suis pas mal l’amalgame de tout ce que Jeff Fillion haït :
-              prof, artiste, écolo,socialiste, LGBT, féministe, antiraciste,
+              prof, artiste, écolo, socialiste, LGBT, féministe, antiraciste,
               intello, etc.
 Created     : 10/5/2023 8:09:28 PM
-Age         : 409.16:46:04.9286865
+Age         : 458.21:21:43.9869033
 
 DisplayName : Jeff H
-UserName    : jeffhechtaz.bsky.social
-Description : Phoenix, AZ ~ Copywriter by day ~ Musician by night ~ Bass
-              (the instrument, not the fish) ~
-              Proud Liberal ~ Commanders football ~ F1 ~ #BassGuitar 🎸~
-              #RaiseHail 🏈 ~ #ScuderiaFerrari
-              🏎️ ~ #VoteBlue 🌊
-Created     : 11/11/2024 1:05:34 PM
-Age         : 6.23:49:58.3306295
+UserName    : jhorowitzmd.bsky.social
+Description : Division Chief of Pulm, Crit Care and Sleep Med at OSU. Lung
+              fibrosis investigator. Cubs. Star Wars, GoT, LoTR, Avengers. Dad,
+              husband, son and brother. RT's do not mean endorsement.
+              #horoblast.
+Created     : 11/13/2024 6:53:06 AM
+Age         : 54.10:38:05.3790593
 ```
 
 The value you specify for the user name will also search the user's description property. This is a handy way of finding users with similar interests.
@@ -377,20 +387,6 @@ The default output uses a custom format file. The current behavior is to get pos
 
 The formatted output includes clickable links to the the author, which might be different than you if reposting, and the post. For best results, run PowerShell 7 in Windows Terminal.
 
-## Timeline :calendar:
-
-If you want to view items from your timeline, use the `Get-BskyTimeline` command. You can specify a limit of 1 to 100.The default is 50.
-
-```powershell
-Get-BskyTimeline -Limit 25
-```
-
-The command uses a custom format file.
-
-![Getting your Bluesky timeline](images/bsky-timeline.png)
-
-The default formatted output includes clickable links to the author and the post.
-
 ## Notifications :bell:
 
 You can retrieve your notifications with `Get-BskyNotification`. You can specify a limit of 1 to 100. The default is 50.
@@ -399,20 +395,35 @@ You can retrieve your notifications with `Get-BskyNotification`. You can specify
  Get-BskyNotification -limit 10
  ```
 
-The default formatted output includes clickable links to the author and the liked or reposted skeet. Long account names will be truncated in the formatted output.
-
-![Getting your Bluesky notifications](images/bsky-notification.png)
+The default formatted output includes clickable links to the author and the liked or reposted skeet.
 
 - :thumbsup: Like
 - :arrow_right: Follow
 - :arrows_counterclockwise: Repost
 - :leftwards_arrow_with_hook:  Reply
 
+![Getting your Bluesky notifications](images/bsky-notification.png)
+
+Long account names will be truncated in the formatted output.
+
+## Timeline :calendar:
+
+If you want to view items from your timeline, use the `Get-BskyTimeline` command.
+
+![Getting your Bluesky timeline](images/bsky-timeline.png)
+
+You can specify a limit of 1 to 100.The default is 50.
+
+```powershell
+Get-BskyTimeline -Limit 25
+```
+
+The command uses a custom format file. The default formatted output includes clickable links to the author and the post.
+
 ## :information_source: Information and Troubleshooting
 
 The commands in this module should write the raw response from the API request to the Information stream. Some commands might include additional information.
 
-```powershell
 ![Information stream](images/bsky-information.png)
 
 The output will be an object.
@@ -461,6 +472,10 @@ Age         : 569.04:06:51.6915207
 This module uses ANSI formatting with localized string data and customized verbose messaging.
 
 ![Custom verbose messaging](images/custom-verbose.png)
+
+The color formatting the command names is not user-configurable at this time.
+
+I am hoping to add localized strings for other languages as well as localized help and the help PDF file.
 
 ## Roadmap :world_map:
 

@@ -7,7 +7,6 @@ Function New-BskyPost {
     param(
         [parameter(
             Position = 0,
-            Mandatory,
             HelpMessage = 'The text of the post',
             ValueFromPipelineByPropertyName
         )]
@@ -16,7 +15,7 @@ Function New-BskyPost {
         [Parameter(HelpMessage = 'The path to the image file.', ValueFromPipelineByPropertyName)]
         [ValidateScript({ Test-Path $_ },ErrorMessage = 'The file {0} could not be found.')]
         [ValidateScript({ (Get-Item $_).Length -lt 1MB }, ErrorMessage = 'The image file must be smaller than 1MB.')]
-        [ValidatePattern('.*\.(jpg|jpeg|png)$', ErrorMessage = 'The file must be a jpg, jpeg, or png file.')]
+        [ValidatePattern('.*\.(jpg|jpeg|png|gif)$', ErrorMessage = 'The file must be a jpg, jpeg, or png file.')]
         [string]$ImagePath,
         [Parameter(HelpMessage = 'You should include ALT text for the image.', ValueFromPipelineByPropertyName)]
         [Alias('Alt')]
@@ -55,12 +54,18 @@ Function New-BskyPost {
     } #begin
     Process {
         $PSDefaultParameterValues['_verbose:block'] = 'Process'
+        #verify the user is posting or message or an image
+        if (-not $Message -and -not $ImagePath) {
+            Write-Warning $strings.NoPost
+            Return
+        }
         If ($headers) {
             _verbose $strings.PostMessage
 
             #Control characters will louse up spacing when we have hash tags, mentions, or links - replace any in message with space
-            $Message = $Message -replace '\p{C}', ' '  #\p{C} is regex for 'unicode control chars'
-
+            if ($Message) {
+                $Message = $Message -replace '\p{C}', ' '  #\p{C} is regex for 'unicode control chars'
+            }
             $record = [ordered]@{
                 '$type'   = 'app.bsky.feed.post'
                 text      = $Message

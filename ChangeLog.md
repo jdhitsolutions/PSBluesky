@@ -3,9 +3,18 @@
 This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+### Added
+- Added `-Today` parameter to `Get-BskyNotification` to only show notifications from the current day.
+- Imported [PR #30](https://github.com/jdhitsolutions/PSBluesky/pull/30) from  [@jhoneill](https://github.com/jhoneill) to improve piping to `New-BskyPost`.
+
+### Changed
+- Added support for gif files. The image will be static in the current release of Bluesky.
 
 ### Removed
-- Removed files previously marked as deprecated
+- Removed files previously marked as deprecated.
+
+### Fixed
+- Fixed a bug with loading localized help. [[Issue #29](https://github.com/jdhitsolutions/PSBluesky/issues/29)]
 
 ## [2.1.0] - 2024-11-21
 

@@ -13,7 +13,9 @@ Function Get-BskyNotification {
         [int]$Limit = 50,
         [Parameter(HelpMessage = 'Enter the type of notifications to retrieve. Default is All.')]
         [ValidateSet('All', 'Like', 'Follow', 'Repost', 'Mention', 'Reply')]
-        [string]$Filter = 'All'
+        [string]$Filter = 'All',
+        [Parameter(HelpMessage = 'Get notifications from the current day only.')]
+        [switch]$Today
     )
     Begin {
         $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
@@ -108,13 +110,22 @@ Function Get-BskyNotification {
         $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
         $PSDefaultParameterValues['_verbose:block'] = 'End'
         #filter the notifications by type if specified
-        if ($Filter -ne 'All') {
+        $data = if ($Filter -ne 'All') {
             _verbose -message ($strings.FilterNotification -f $Filter)
             $all | Where-Object { $_.Notification -eq $Filter }
         }
         else {
             $all
         }
+
+        #Get notifications from the current day only if specified
+        if ($Today) {
+            $data | Where-Object { $_.Date.Date -eq (Get-Date).Date }
+        }
+        else {
+            $data
+        }
+
         _verbose $strings.Ending
     } #end
 }

@@ -14,7 +14,8 @@
     FunctionsToExport    = @(
         'Add-BskyImage',
         'Find-BskyUser',
-        'Get-BskyAccountDID'
+        'Get-BskyAccountDID',
+        'Get-BskyBlockedUser',
         'Get-BskyFeed',
         'Get-BskyFollowers',
         'Get-BskyFollowing',
@@ -54,7 +55,8 @@
         'bsfollower',
         'bst',
         'bsu',
-        'bss'
+        'bss',
+        'bsblock'
     )
     PrivateData          = @{
         PSData = @{

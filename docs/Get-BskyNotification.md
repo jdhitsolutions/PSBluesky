@@ -14,7 +14,7 @@ Get Bluesky notifications.
 ## SYNTAX
 
 ```yaml
-Get-BskyNotification [[-Limit] <Int32>] [-Filter <String>] [<CommonParameters>]
+Get-BskyNotification [[-Limit] <Int32>] [-Filter <String>] [-Today] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -22,6 +22,8 @@ Get-BskyNotification [[-Limit] <Int32>] [-Filter <String>] [<CommonParameters>]
 Use this command to retrieve Bluesky notifications. You can limit the number of notifications returned up to 100. The default is 50. There is a filtering option based on type, but the filtering is applied after the specified number of notifications are retrieved. The parameter is a convenience so that you don't need to construct an expression using Where-Object.
 
 The default output uses a custom format file to display the notifications. The Account name is displayed as a hyperlink to the account's Bluesky profile. Referenced text should also be clickable. The default output includes emojis.
+
+If you use the -Today parameter, you will get only notifications from the current day. This filtering will be applied after the limit and type filtering.
 
 ## EXAMPLES
 
@@ -100,6 +102,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Today
+
+Get notifications from the current day only.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -115,3 +133,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Get-BskyFeed](Get-BskyFeed.md)
+
+[Get-BskyTimeline](Get-BskyTimeline.md)

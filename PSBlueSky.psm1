@@ -1,14 +1,14 @@
 #region load string data
 # used for culture debugging
-# write-host "Importing with culture $(Get-Culture)" -ForeGroundColor yellow
+#write-host "Importing with culture $(Get-Culture)" -ForeGroundColor yellow
 
-if ((Get-Culture).Name -match '\w+') {
-    #write-host "Using culture $(Get-Culture)" -ForegroundColor yellow
+if ((Get-Culture).Name -match '\w+' -AND (Test-Path "$PSScriptRoot/$((Get-Culture).Name)/PSBluesky.psd1")) {
+    #write-host "Loading $PSScriptRoot\$((Get-Culture).Name)\PSBluesky.psd1" -ForegroundColor yellow
     Import-LocalizedData -BindingVariable strings
 }
 else {
     #force using En-US if no culture found, which might happen on non-Windows systems.
-    #write-host "Loading $PSScriptRoot/en-us/PSWorkItem.psd1" -ForegroundColor yellow
+    #write-host "Loading $PSScriptRoot\en-us\PSBluesky.psd1" -ForegroundColor yellow
     Import-LocalizedData -BindingVariable strings -FileName PSBluesky.psd1 -BaseDirectory $PSScriptRoot/en-us
 }
 
