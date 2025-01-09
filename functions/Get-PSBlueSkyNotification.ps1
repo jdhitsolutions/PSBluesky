@@ -98,6 +98,8 @@ Function Get-BskyNotification {
                         AuthorUrl    = "https://bsky.app/profile/$($notification.author.handle)"
                         SubjectUrl   = $refUrl
                         Subject      = $refText
+                        URI          = $notification.uri
+                        CID          = $notification.cid
                     } #custom object
 
                     [Void]($all.Add($object))

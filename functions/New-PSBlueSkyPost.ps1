@@ -190,7 +190,7 @@ Function New-BskyPost {
                     {"val": "nudity"},
                     ]
             }
-                    #>
+            #>
             _verbose -message ($strings.AddLabel -f $label)
             if ($label) {
                    $labels = @{

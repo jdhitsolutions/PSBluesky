@@ -35,9 +35,12 @@ After installing this module, you should end up with these PSBluesky commands:
 - [Add-BskyImage](docs/Add-BskyImage.md)
 - [Find-BskyUser](docs/Find-BskyUser.md)
 - [Get-BskyAccountDID](docs/Get-BskyAccountDID.md)
+- [Get-BskyBlockedList](docs/Get-BskyBlockedList.md)
+- [Get-BskyBlockedUser](docs/Get-BskyBlockedUser.md)
 - [Get-BskyFeed](docs/Get-BskyFeed.md)
 - [Get-BskyFollowers](docs/Get-BskyFollowers.md)
 - [Get-BskyFollowing](docs/Get-BskyFollowing.md)
+- [Get-BskyLiked](docs/Get-BskyLiked.md)
 - [Get-BskyModuleInfo](docs/Get-BskyModuleInfo.md)
 - [Get-BskyNotification](docs/Get-BskyNotification.md)
 - [Get-BskyProfile](docs/Get-BskyProfile.md)
@@ -60,20 +63,23 @@ PS C:\> Get-BskyModuleInfo
 Name                 Alias               Synopsis
 ----                 -----               --------
 Add-BskyImage                            Upload an image to Bluesky
-Find-BskyUser        bsu                 Search for Bluesky user accounts
-Get-BskyAccountDID                       Resolve a Bluesky account name ...
+Find-BskyUser        bsu                 Search for Bluesky user acco...
+Get-BskyAccountDID                       Resolve a Bluesky account na...
+Get-BskyBlockedList  bsblocklist         Get your subscribed blocked ...
+Get-BskyBlockedUser  bsblock             Get your blocked accounts
 Get-BskyFeed         bsfeed              Get your Bluesky feed
 Get-BskyFollowers    bsfollower          Get your Bluesky followers
-Get-BskyFollowing    bsfollow            Get a list of Bluesky accounts t...
-Get-BskyModuleInfo                       Get a summary of the PSBlueSky m...
+Get-BskyFollowing    bsfollow            Get a list of Bluesky account...
+Get-BskyLiked                            Get liked Bluesky posts
+Get-BskyModuleInfo                       Get a summary of the PSBlueSk...
 Get-BskyNotification bsn                 Get Bluesky notifications.
 Get-BskyProfile      bsp                 Get a Bluesky profile
-Get-BskySession      bss                 Show your current Bluesky session.
+Get-BskySession      bss                 Show your current Bluesky ses...
 Get-BskyTimeline     bst                 Get your Bluesky timeline
 New-BskyPost         skeet               Create a Bluesky post
-Open-BskyHelp        bshelp              Open the PSBluesky help document
+Open-BskyHelp        bshelp              Open the PSBluesky help docum...
 Start-BSkySession                        Start a new Bluesky session
-Update-BskySession   Refresh-BskySession Refresh the Bluesky session token
+Update-BskySession   Refresh-BskySession Refresh the Bluesky session  ...
 ```
 
 ## Authentication
@@ -202,9 +208,10 @@ The output is a URL to the post.
 If your message contains a URL, it will be converted to a clickable link. Make sure your link is surrounded by white space. Beginning with v1.0.0, you can post Markdown style links.
 
 ```powershell
-PS C:\> $m = "Testing multiple Markdown style links from my [#PowerShell PSBluesky
-module](https://github.com/jdhitsolutions/PSBluesky) which you can find on the
-[PowerShell Gallery](https://www.powershellgallery.com/packages/PSBlueSky/0.6.0)"
+PS C:\> $m = "Testing multiple Markdown style links from my [#PowerShell
+PSBluesky module](https://github.com/jdhitsolutions/PSBluesky) which you
+can find on the [PowerShell Gallery](https://www.powershellgallery.com/
+packages/PSBlueSky/0.6.0)"
 PS C:\> skeet $m
 ```
 
@@ -240,9 +247,9 @@ Description : PowerShell Author/Teacher/MVP/Tour Guide ✍️
               Grizzled and grumpy IT Pro - https://jdhitsolutions.github.io/
               🎼Amateur composer - https://musescore.com/user/26698536
               Wine drinker 🍷🐶 and dog lover
-Avatar      : https://cdn.bsky.app/img/avatar/plain/did:plc:ohgsqpfsbocaaxusxqlg
-              fvd7/bafkreifdfahcjmytu3iw2aj2d3howu6q7twkta3h23qmlve2d2mvo5sily@j
-              peg
+Avatar      : https://cdn.bsky.app/img/avatar/plain/did:plc:ohgsqpfsbocaaxus
+              xqlgfvd7/bafkreifdfahcjmytu3iw2aj2d3howu6q7twkta3h23qmlve2d2mv
+              o5sily@jpeg
 Posts       : 1060
 Followers   : 1904
 Following   : 383

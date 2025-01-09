@@ -1,0 +1,63 @@
+<!--
+Format type data generated 01/08/2025 11:15:47 by PROSPERO\Jeff
+
+This file was created using the New-PSFormatXML command that is part
+of the PSScriptTools module.
+
+https://github.com/jdhitsolutions/PSScriptTools
+-->
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <!--Created 01/08/2025 11:15:47 by PROSPERO\Jeff-->
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PSBlueskyBlockedList</TypeName>
+      </ViewSelectedBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <ListItem>
+                <Label>Name</Label>
+                  <ScriptBlock>
+                  $ListName = $_.Name
+                  $ListURL = $_.url
+                  "{0}{1}{2}" -f ($PSStyle.foreground.BrightGreen+$PSStyle.Underline),($PSStyle.formatHyperlink($ListName,$ListUrl)),$PSStyle.Reset
+                </ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <Label>Purpose</Label>
+                <PropertyName>Purpose</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Labels</Label>
+                <PropertyName>Labels</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Items</Label>
+                <PropertyName>Items</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>CreatedBy</Label>
+                <ScriptBlock>
+                  $CreatorName = $_.CreatedBy.UserName
+                  $CreatorURL = $_.CreatedBy.url
+                  "{0}{1}{2}" -f ($PSStyle.foreground.BrightBlue+$PSStyle.Underline),($PSStyle.formatHyperlink($CreatorName,$CreatorUrl)),$PSStyle.Reset
+                </ScriptBlock>
+              </ListItem>
+              <ListItem>
+                <Label>Indexed</Label>
+                <PropertyName>Indexed</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Description</Label>
+                <PropertyName>Description</PropertyName>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

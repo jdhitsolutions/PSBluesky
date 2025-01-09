@@ -4,11 +4,19 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.
 
 ## [Unreleased]
 ### Added
+- Added command `Get-BskyBlockedList` and associated format file. [[Issue #27](https://github.com/]jdhitsolutions/PSBluesky/issues/27)]
+- Added command `Get-BskyBlockedUser` and associated format file.
+- Added command `Get-BskyLiked` and associated format file.
 - Added `-Today` parameter to `Get-BskyNotification` to only show notifications from the current day.
 - Imported [PR #30](https://github.com/jdhitsolutions/PSBluesky/pull/30) from  [@jhoneill](https://github.com/jhoneill) to improve piping to `New-BskyPost`.
+- Added properties `CID` to output from `Get-BskyLiked`,`Get-BskyNotification`,`Get-BskyTimeline`, and `Get-BskyFeed`. This is to support new commands for reposting and quoting.
+- Added properties `URI` to output from `Get-BskyNotification`,`Get-BskyTimeline`, and `Get-BskyFeed`. This is to support new commands for reposting and quoting.
 
 ### Changed
+- Changed output property `aturi` in `Get-BskyLiked` and `Get-BskyFeed` to `URI`. This is to support new commands for reposting and quoting. __This is a potential breaking change__
 - Added support for gif files. The image will be static in the current release of Bluesky.
+- Help updates.
+- Updated `README.md`.
 
 ### Removed
 - Removed files previously marked as deprecated.

@@ -1,16 +1,16 @@
-Function Get-BskyBlockedUser {
+Function Get-BskyBlockedList {
     [CmdletBinding(DefaultParameterSetName = 'Limit')]
-    [Alias('bsblock')]
-    [OutputType('PSBlueskyBlockedUser')]
+    [Alias('bsblocklist')]
+    [OutputType('PSBlueskyBlockedList')]
     Param(
         [Parameter(
             Position = 0,
-            HelpMessage = 'Enter the number of blocked accounts to retrieve between 1 and 100. Default is 50.',
+            HelpMessage = 'Enter the number of blocked lists to retrieve between 1 and 100. Default is 50.',
             ParameterSetName = 'Limit'
         )]
         [ValidateRange(1, 100)]
         [int]$Limit = 50,
-        [Parameter(ParameterSetName = 'All', HelpMessage = 'Return all blocked accounts')]
+        [Parameter(ParameterSetName = 'All', HelpMessage = 'Return all blocked lists')]
         [switch]$All
     )
 
@@ -43,12 +43,11 @@ Function Get-BskyBlockedUser {
     Process {
         $PSDefaultParameterValues['_verbose:block'] = 'Process'
         If ($headers) {
-
             if ($PSCmdlet.ParameterSetName -eq 'Limit') {
-                $apiUrl = "$PDSHOST/xrpc/app.bsky.graph.getBlocks?limit=$Limit"
+                $apiUrl = "$PDSHOST/xrpc/app.bsky.graph.getListBlocks?limit=$Limit"
             }
             else {
-                $apiUrl = "$PDSHOST/xrpc/app.bsky.graph.getBlocks?limit=100"
+                $apiUrl = "$PDSHOST/xrpc/app.bsky.graph.getListBlocks?limit=100"
             }
 
             _verbose $apiUrl
@@ -57,10 +56,10 @@ Function Get-BskyBlockedUser {
             $response = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers -ResponseHeadersVariable rh
             Write-Information -MessageData $rh -Tags ResponseHeader
             If ($response) {
-                $results += $response.blocks
+                $results += $response.lists
                 Write-Information -MessageData $response -Tags raw
                 if ($PSCmdlet.ParameterSetName -eq 'All') {
-                    _verbose -message ($strings.PageBlockedUsers -f $response.cursor)
+                    _verbose -message ($strings.PageBlockedLists -f $response.cursor)
                     # iterate remaining pages using 'cursor' response value
                     while ($response.cursor) {
                         $url = $apiUrl + "&cursor=$($response.cursor)"
@@ -71,21 +70,41 @@ Function Get-BskyBlockedUser {
                         }
                     }
                 } #If All
-                foreach ($profile in $results) {
+                foreach ($list in $results) {
+                    #create a nested User object for the creator
+                    $creator = [PSCustomObject]@{
+                            PSTypeName  = 'PSBlueskySearchResult'
+                            DisplayName = $list.Creator.displayName
+                            UserName    = $list.Creator.handle
+                            Description = $list.Creator.description
+                            Avatar      = $list.Creator.avatar
+                            Created     = $list.Creator.createdAt.ToLocalTime()
+                            DID         = $list.Creator.did
+                            URL         = "https://bsky.app/profile/$($list.Creator.did)"
+                    }
+                    $Purpose = Switch ($list.purpose.split("#")[1]) {
+                        "modlist" {"Moderated list"}
+                        "curatelist " {"Curated list"}
+                        "referencelist" {"Reference list"}
+                    }
+                    #https://bsky.app/profile/did:plc:mcgh4jrag2bcgnhk3skn22dg/lists/3lcdwdnywx425
+                    $split = $list.uri -split '/' | where { $_ -match '\w' }
+                    $ListUrl = "https://bsky.app/profile/{0}/lists/{1}" -f $split[1],$split[-1]
                     [PSCustomObject]@{
-                        PSTypeName  = 'PSBlueskyBlockedUser'
-                        Username    = $profile.handle
-                        Display     = ($profile.displayName) ? $profile.displayName : $profile.handle
-                        Created     = $profile.createdAt.ToLocalTime()
-                        Description = $profile.description
-                        Labels      = $profile.labels.val
-                        URL         = "https://bsky.app/profile/$($profile.handle)"
-                        DID         = $profile.did
+                        PSTypeName  = 'PSBlueskyBlockedList'
+                        Name        = $list.Name
+                        CreatedBy   = $creator
+                        Description = $list.description
+                        Purpose     = $Purpose
+                        Labels      = $list.labels.val
+                        Items       = $list.listItemCount
+                        Indexed     = $list.indexedAt
+                        URL         = $ListUrl
                     }
                 }
             } #if response
             else {
-                Write-Warning $strings.FailBlockedUser
+                Write-Warning $strings.FailBlockList
             }
         }
     } #process

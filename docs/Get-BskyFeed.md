@@ -100,11 +100,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
 ### PSBlueskyFeedItem
+
 ## NOTES
 
 ## RELATED LINKS
 
 [Get-BskyTimeline](Get-BskyTimeline.md)
+
+[Get-BskyLiked](Get-BskyLiked.md)

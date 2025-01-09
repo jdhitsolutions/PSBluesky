@@ -65,6 +65,8 @@ Function Get-BskyTimeline {
                         Reposted      = $item.post.repostCount
                         Quoted        = $item.post.quoteCount
                         URL           = (_convertAT $item.post.uri)
+                        URI           = $item.post.uri
+                        CID           = $item.post.cid
                     } #PSCustomObject
                 } #foreach item
 

@@ -15,10 +15,12 @@
         'Add-BskyImage',
         'Find-BskyUser',
         'Get-BskyAccountDID',
+        'Get-BskyBlockedList'
         'Get-BskyBlockedUser',
         'Get-BskyFeed',
         'Get-BskyFollowers',
         'Get-BskyFollowing',
+        'Get-BskyLiked'
         'Get-BskyNotification'
         'Get-BskyProfile',
         'Get-BskySession',
@@ -34,9 +36,12 @@
     )
     FormatsToProcess     = @(
         'formats\PSBlueSkyTimelinePost.format.ps1xml',
+        'formats\PSBlueskyBlockedUser.format.ps1xml',
+        'formats\PSBlueskyBlockedList.format.ps1xml',
         'formats\PSBlueskyProfile.format.ps1xml',
         'formats\PSBlueskyFollower.format.ps1xml',
         'formats\PSBlueskyFeed.format.ps1xml',
+        'formats\PSBlueskyLiked.format.ps1xml',
         'formats\PSBlueskySession.format.ps1xml',
         'formats\PSBlueskyNotification.format.ps1xml',
         'formats\PSBlueskySearchResult.format.ps1xml',
@@ -56,7 +61,8 @@
         'bst',
         'bsu',
         'bss',
-        'bsblock'
+        'bsblock',
+        'bsblocklist'
     )
     PrivateData          = @{
         PSData = @{

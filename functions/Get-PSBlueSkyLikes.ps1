@@ -1,21 +1,17 @@
-#Get a user's recent posts
+#Get a user's liked posts
 
-# https://docs.bsky.app/docs/api/app-bsky-feed-get-author-feed
+#  https://docs.bsky.app/docs/api/app-bsky-feed-get-actor-likes
 
-Function Get-BskyFeed {
+Function Get-BskyLiked {
     [cmdletbinding()]
-    [Alias('bsfeed')]
-    [OutputType('PSBlueskyFeedItem')]
+    [OutputType('PSBlueskyLikedItem')]
 
     Param(
-        [Parameter(HelpMessage = 'Enter the number of accounts that you follow to retrieve between 1 and 100. Default is 50.')]
+        [Parameter(ParameterSetName = 'Limit',HelpMessage = 'Enter the number of liked posts to retrieve between 1 and 100. Default is 50.')]
         [ValidateRange(1, 100)]
         [int]$Limit = 50,
-
-        [Parameter(HelpMessage = 'Enter the username of an account to retrieve their feed. The default is your feed.')]
-        [ValidateNotNullOrEmpty()]
-        [Alias('Profile','Handle')]
-        [string]$UserName
+        [Parameter(ParameterSetName = 'All', HelpMessage = 'Return all liked posts')]
+        [switch]$All
     )
 
     Begin {
@@ -32,9 +28,7 @@ Function Get-BskyFeed {
         }
         if ($script:BSkySession.accessJwt) {
             $token = $script:BSkySession.accessJwt
-            if (-not $PSBoundParameters.ContainsKey('UserName')) {
-                $UserName = $script:BSkySession.handle
-            }
+            $UserName = $script:BSkySession.handle
             $did = $script:BskySession.did
             $headers = @{
                 Authorization  = "Bearer $token"
@@ -45,46 +39,51 @@ Function Get-BskyFeed {
         else {
             Write-Warning $strings.NoSession
         }
-        <#
-        this might become a parameter in a future release
-        Possible values:
-          posts_with_replies,
-          posts_no_replies,
-          posts_with_media,
-          posts_and_author_threads
-        #>
-        $filter = 'posts_with_replies'
+
     } #begin
 
     Process {
         $PSDefaultParameterValues['_verbose:block'] = 'Process'
         If ($headers) {
-            _verbose -message ($strings.QueryFeed -f $limit, $Username)
-            $filter = 'posts_with_replies'
-            if ($PSBoundParameters.ContainsKey('UserName')) {
-                $apiUrl = "$PDSHost/xrpc/app.bsky.feed.getAuthorFeed?actor=$UserName&limit=$Limit&filter=$filter"
+            if ($PSCmdlet.ParameterSetName -eq 'Limit') {
+                $apiUrl = "$PDSHOST/xrpc/app.bsky.feed.getActorLikes?actor=$($Username)&limit=$limit"
             }
             else {
-                $apiUrl = "$PDSHost/xrpc/app.bsky.feed.getAuthorFeed?actor=$did&limit=$Limit&filter=$filter"
+                $apiUrl = "$PDSHOST/xrpc/app.bsky.feed.getActorLikes?actor=$($Username)&limit=100"
             }
 
             _verbose $apiUrl
 
             Try {
-                $feed = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers -ErrorAction Stop -ResponseHeadersVariable rh
+                $response = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers -ErrorAction Stop -ResponseHeadersVariable rh
                 Write-Information -MessageData $rh -Tags ResponseHeader
             }
             Catch {
-                Write-Warning ($strings.FailFeed -f $username, $_.Exception.Message)
+                Write-Warning ($strings.FailLiked -f $username, $_.Exception.Message)
             }
-            if ($Feed) {
-                Write-Information -MessageData $feed -Tags raw
-                foreach ($post in $feed.feed.post) {
+            $likes = @()
+            if ($response) {
+                $likes += $response.feed
+                Write-Information -MessageData $response -Tags raw
+                if ($PSCmdlet.ParameterSetName -eq 'All') {
+                    _verbose -message ($strings.PageLikes -f $response.cursor)
+                    # iterate remaining pages using 'cursor' response value
+                    while ($response.feed.post.count -gt 0) {
+                        $url = $apiUrl + "&cursor=$($response.cursor)"
+                        $response = Invoke-RestMethod -Uri $url -Method Get -Headers $headers
+                        If ($response.feed.post.count -gt 0) {
+                            Write-Information -MessageData $response -Tags raw
+                            $likes += $response.feed
+                        }
+                    }
+                } #If All
+                Write-Information -MessageData $likes -Tags raw
+                foreach ($post in $likes.post) {
                     [PSCustomObject]@{
-                        PSTypeName    = 'PSBlueskyFeedItem'
+                        PSTypeName    = 'PSBlueskyLikedItem'
                         Text          = $post.record.text
-                        IsRepost      = ($post.viewer.repost) ? $True : $False
                         Author        = $post.author.handle
+                        AuthorUrl     = "https://bsky.app/profile/$($post.author.handle)"
                         AuthorDisplay = $post.author.displayName
                         Liked         = $post.likeCount
                         Replied       = $post.replyCount
@@ -92,14 +91,15 @@ Function Get-BskyFeed {
                         Quoted        = $post.quoteCount
                         Date          = $post.record.createdAt.ToLocalTime()
                         URL           = _convertAT $post.uri
+                        Labels        = $post.labels.val
                         URI           = $post.uri
                         CID           = $post.cid
                     }
-                } #foreach post
-            } #if feed
+                } #foreach like
+            } #if likes
             else {
                 #this should never get to to this point except for new accounts
-                Write-Warning ($strings.FailFeed -f $username, $_.Exception.Message)
+                Write-Warning ($strings.FailLiked -f $username, $_.Exception.Message)
             }
         } #if headers
     } #process
