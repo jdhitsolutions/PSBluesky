@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Get your Bluesky feed
+Get your Bluesky feed.
 
 ## SYNTAX
 

@@ -6,7 +6,7 @@
       <command:verb>Add</command:verb>
       <command:noun>BskyImage</command:noun>
       <maml:description>
-        <maml:para>Upload an image to Bluesky</maml:para>
+        <maml:para>Upload an image to Bluesky.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -161,7 +161,7 @@
       <command:verb>Find</command:verb>
       <command:noun>BskyUser</command:noun>
       <maml:description>
-        <maml:para>Search for Bluesky user accounts</maml:para>
+        <maml:para>Search for Bluesky user accounts.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -289,7 +289,7 @@ Created               Description
       <command:verb>Get</command:verb>
       <command:noun>BskyAccountDID</command:noun>
       <maml:description>
-        <maml:para>Resolve a Bluesky account name to its DID</maml:para>
+        <maml:para>Resolve a Bluesky account name to its DID.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -344,7 +344,7 @@ Created               Description
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-BskyAccountDID jdhitsolutions.com
 did:plc:ohgsqpfsbocaaxusxqlgfvd7</dev:code>
         <dev:remarks>
@@ -365,7 +365,7 @@ did:plc:ohgsqpfsbocaaxusxqlgfvd7</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>BskyBlockedList</command:noun>
       <maml:description>
-        <maml:para>Get your subscribed blocked lists</maml:para>
+        <maml:para>Get your subscribed blocked lists.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -483,7 +483,7 @@ Description : catfish, crypto, etc.</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>BskyBlockedUser</command:noun>
       <maml:description>
-        <maml:para>Get your blocked accounts</maml:para>
+        <maml:para>Get your blocked accounts.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -597,7 +597,7 @@ stormy373.bsky.social       stormy.bsky.social  porn   I offer a wide range...</
       <command:verb>Get</command:verb>
       <command:noun>BskyFeed</command:noun>
       <maml:description>
-        <maml:para>Get your Bluesky feed</maml:para>
+        <maml:para>Get your Bluesky feed.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -853,7 +853,7 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
       <command:verb>Get</command:verb>
       <command:noun>BskyFollowing</command:noun>
       <maml:description>
-        <maml:para>Get a list of Bluesky accounts that you follow</maml:para>
+        <maml:para>Get a list of Bluesky accounts that you follow.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -970,7 +970,7 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
       <command:verb>Get</command:verb>
       <command:noun>BskyLiked</command:noun>
       <maml:description>
-        <maml:para>Get liked Bluesky posts</maml:para>
+        <maml:para>Get your liked Bluesky posts.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1132,25 +1132,29 @@ Date                  Liked Replied Reposted Quoted
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-BskyModuleInfo
 
-   Module: PSBlueSky [v2.0.0]
+   Module: PSBlueSky [v2.2.0]
 
 Name                 Alias               Synopsis
 ----                 -----               --------
-Add-BskyImage                            Upload an image to Bluesky
-Find-BskyUser        bsu                 Search for Bluesky user accounts
-Get-BskyFeed         bsfeed              Get your Bluesky feed
-Get-BskyFollowers    bsfollower          Get your Bluesky followers
-Get-BskyFollowing    bsfollow            Get a list of Bluesky accounts that
-                                         you follow
-Get-BskyModuleInfo                       Get a summary of the PSBlueSky module.
+Add-BskyImage                            Upload an image to Bluesky.
+Find-BskyUser        bsu                 Search for Bluesky user accounts.
+Get-BskyAccountDID                       Resolve a Bluesky account name to ...
+Get-BskyBlockedList  bsblocklist         Get your subscribed blocked lists.
+Get-BskyBlockedUser  bsblock             Get your blocked accounts.
+Get-BskyFeed         bsfeed              Get your Bluesky feed.
+Get-BskyFollowers    bsfollower          Get your Bluesky followers.
+Get-BskyFollowing    bsfollow            Get a list of Bluesky accounts tha...
+Get-BskyLiked                            Get your liked Bluesky posts.
+Get-BskyModuleInfo                       Get a summary of the PSBlueSky mod...
 Get-BskyNotification bsn                 Get Bluesky notifications.
-Get-BskyProfile      bsp                 Get a Bluesky profile
-Get-BskySession                          Show your current Bluesky session.
-Get-BskyTimeline     bst                 Get your Bluesky timeline
-New-BskyPost         skeet               Create a Bluesky post
-Open-BskyHelp        bshelp              Open the PSBluesky help document
-Start-BSkySession                        Start a new Bluesky session
-Update-BskySession   Refresh-BskySession Refresh the Bluesky session token</dev:code>
+Get-BskyProfile      bsp                 Get a Bluesky profile.
+Get-BskySession      bss                 Show your current Bluesky session.
+Get-BskyTimeline     bst                 Get your Bluesky timeline.
+New-BskyPost         skeet               Create a Bluesky post.
+Open-BskyHelp        bshelp              Open the PSBluesky help document.
+Publish-BskyPost     Repost-BskyPost     Repost or quote a Bluesky post.
+Start-BSkySession                        Start a new Bluesky session.
+Update-BskySession   Refresh-BskySession Refresh the Bluesky session token.</dev:code>
         <dev:remarks>
           <maml:para>The default output includes clickable hyperlinks.</maml:para>
         </dev:remarks>
@@ -1331,7 +1335,7 @@ Date               Account                    Subject
       <command:verb>Get</command:verb>
       <command:noun>BskyProfile</command:noun>
       <maml:description>
-        <maml:para>Get a Bluesky profile</maml:para>
+        <maml:para>Get a Bluesky profile.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1513,7 +1517,7 @@ True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:21:56.7958913</dev:cod
       <command:verb>Get</command:verb>
       <command:noun>BskyTimeline</command:noun>
       <maml:description>
-        <maml:para>Get your Bluesky timeline</maml:para>
+        <maml:para>Get your Bluesky timeline.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1605,7 +1609,7 @@ on becoming a Microsoft MVP https://buff.ly/4fa3iv7 #MVPBuzz
       <command:verb>New</command:verb>
       <command:noun>BskyPost</command:noun>
       <maml:description>
-        <maml:para>Create a Bluesky post</maml:para>
+        <maml:para>Create a Bluesky post.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1821,6 +1825,10 @@ PS C:\&gt; skeet $m</dev:code>
         <maml:linkText>Add-BskyImage</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Publish-BskyPost</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -1829,7 +1837,7 @@ PS C:\&gt; skeet $m</dev:code>
       <command:verb>Open</command:verb>
       <command:noun>BskyHelp</command:noun>
       <maml:description>
-        <maml:para>Open the PSBluesky help document</maml:para>
+        <maml:para>Open the PSBluesky help document.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1923,11 +1931,220 @@ PS C:\&gt; skeet $m</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Publish-BskyPost</command:name>
+      <command:verb>Publish</command:verb>
+      <command:noun>BskyPost</command:noun>
+      <maml:description>
+        <maml:para>Repost or quote a Bluesky post.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>You can use the command to repost or quote a Bluesky post. The default action will be a repost unless you specify the -Quote parameter. The command requires URI and CID values from the post you want to quote or repost. These values are part of the output from commands like Get-BskyFeed and Get-BskyTimeline. The easiest way is to pipe an object to this command.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Publish-BskyPost</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+          <maml:name>Uri</maml:name>
+          <maml:description>
+            <maml:para>The Bluesky post AT Uri which will look like at://did:plc:ohgsqpfsbocaaxusxqlgfvd7/app.bsky.feed.post/3lfb2rervzy2g</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+          <maml:name>CID</maml:name>
+          <maml:description>
+            <maml:para>The Bluesky post CID which will look like bafyreihsbxv5p3zckgocz43tpjuzn5e77wpp2ynsqtuv6blwioyjc3bzee</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>Quote</maml:name>
+          <maml:description>
+            <maml:para>Add quoted text. Otherwise the result will be a simple repost.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+          <maml:name>WhatIf</maml:name>
+          <maml:description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none">
+        <maml:name>CID</maml:name>
+        <maml:description>
+          <maml:para>The Bluesky post CID which will look like bafyreihsbxv5p3zckgocz43tpjuzn5e77wpp2ynsqtuv6blwioyjc3bzee</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>Quote</maml:name>
+        <maml:description>
+          <maml:para>Add quoted text. Otherwise the result will be a simple repost.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="0" aliases="none">
+        <maml:name>Uri</maml:name>
+        <maml:description>
+          <maml:para>The Bluesky post AT Uri which will look like at://did:plc:ohgsqpfsbocaaxusxqlgfvd7/app.bsky.feed.post/3lfb2rervzy2g</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
+        <maml:name>WhatIf</maml:name>
+        <maml:description>
+          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; $tl[-1] | Publish-BskyPost -Verbose -WhatIf
+VERBOSE: [12:14:47:7437 BEGIN  ] Publish-BskyPost-&gt;  Starting PSBluesky module command
+VERBOSE: [12:14:47:7440 BEGIN  ] Publish-BskyPost-&gt;  Running under PowerShell version 7.4.6
+VERBOSE: [12:14:47:7442 BEGIN  ] Publish-BskyPost-&gt;  Using PowerShell Host ConsoleHost
+VERBOSE: [12:14:47:7464 BEGIN  ] Publish-BskyPost-&gt;  Running under Operating System Microsoft Windows 10.0.26100
+VERBOSE: [12:14:47:7466 BEGIN  ] Publish-BskyPost-&gt;  Using module PSBluesky version 2.2.0
+VERBOSE: [12:14:47:7470 PROCESS] Publish-BskyPost-&gt;  Reposting the message with AT Uri at://did:plc:nsy2e4vupxndly4adhszebcy/app.bsky.feed.post/3lfbhddas6s25
+What if: Performing the operation "Publish to Bluesky" on target "at://did:plc:nsy2e4vupxndly4adhszebcy/app.bsky.feed.post/3lfbhddas6s25".
+VERBOSE: [12:14:47:7476 END    ] Publish-BskyPost-&gt;  Ending PSBluesky module command</dev:code>
+        <dev:remarks>
+          <maml:para>This example assumes that $tl is a collection of PSBlueskyTimelinePost objects. Because no quote was provided this example would have the effect of reposting the last post in the timeline array.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; $f[-4] | Publish-BskyPost -Quote "I couldn't agree more." -Verbose -WhatIf
+VERBOSE: [12:25:49:9364 BEGIN  ] Publish-BskyPost-&gt;  Starting PSBluesky module command
+VERBOSE: [12:25:49:9366 BEGIN  ] Publish-BskyPost-&gt;  Running under PowerShell version 7.4.6
+VERBOSE: [12:25:49:9368 BEGIN  ] Publish-BskyPost-&gt;  Using PowerShell Host ConsoleHost
+VERBOSE: [12:25:49:9370 BEGIN  ] Publish-BskyPost-&gt;  Running under Operating System Microsoft Windows 10.0.26100
+VERBOSE: [12:25:49:9372 BEGIN  ] Publish-BskyPost-&gt;  Using module PSBluesky version 2.2.0
+VERBOSE: [12:25:49:9376 PROCESS] Publish-BskyPost-&gt;  Quoting the message with AT Uri at://did:plc:ohgsqpfsbocaaxusxqlgfvd7/app.bsky.feed.post/3lfb2rervzy2g
+What if: Performing the operation "Publish to Bluesky" on target "at://did:plc:ohgsqpfsbocaaxusxqlgfvd7/app.bsky.feed.post/3lfb2rervzy2g".
+VERBOSE: [12:25:49:9381 END    ] Publish-BskyPost-&gt;  Ending PSBluesky module command</dev:code>
+        <dev:remarks>
+          <maml:para>Quoting a PSBlueskyFeedItem.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-BskyTimeline</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-BskyFeed</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-BskyNotification</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Start-BSkySession</command:name>
       <command:verb>Start</command:verb>
       <command:noun>BSkySession</command:noun>
       <maml:description>
-        <maml:para>Start a new Bluesky session</maml:para>
+        <maml:para>Start a new Bluesky session.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -2011,7 +2228,7 @@ PS C:\&gt; skeet $m</dev:code>
       <command:verb>Update</command:verb>
       <command:noun>BskySession</command:noun>
       <maml:description>
-        <maml:para>Refresh the Bluesky session token</maml:para>
+        <maml:para>Refresh the Bluesky session token.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>

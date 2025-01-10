@@ -3,7 +3,12 @@
 This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+
+## [2.2.0] - 2025-01-10
+
 ### Added
+
+- Added command `Publish-BskyPost` with an alias of `Repost-BskyPost` which can be used to quote or repost. [[Issue #25](https://github.com/jdhitsolutions/PSBluesky/issues/25)]
 - Added command `Get-BskyBlockedList` and associated format file. [[Issue #27](https://github.com/]jdhitsolutions/PSBluesky/issues/27)]
 - Added command `Get-BskyBlockedUser` and associated format file.
 - Added command `Get-BskyLiked` and associated format file.
@@ -11,18 +16,25 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.
 - Imported [PR #30](https://github.com/jdhitsolutions/PSBluesky/pull/30) from  [@jhoneill](https://github.com/jhoneill) to improve piping to `New-BskyPost`.
 - Added properties `CID` to output from `Get-BskyLiked`,`Get-BskyNotification`,`Get-BskyTimeline`, and `Get-BskyFeed`. This is to support new commands for reposting and quoting.
 - Added properties `URI` to output from `Get-BskyNotification`,`Get-BskyTimeline`, and `Get-BskyFeed`. This is to support new commands for reposting and quoting.
+- Added a custom view called `Liked` to the `PSBlueskyTimelinePost.format.ps1xml`, `PSBlueskyLiked.format.ps1xml`, and `PSBlueskyFeed.format.ps1xml' files.
+
 
 ### Changed
+
 - Changed output property `aturi` in `Get-BskyLiked` and `Get-BskyFeed` to `URI`. This is to support new commands for reposting and quoting. __This is a potential breaking change__
-- Added support for gif files. The image will be static in the current release of Bluesky.
+- Added support for gif files as an image upload type. The image will be static in the current release of Bluesky.
+- Updated formatting files for `Get-BskyTimeline`, `Get-BskyLiked`, and `Get-BskyFeed` to highlight the number of likes.
 - Help updates.
 - Updated `README.md`.
 
 ### Removed
+
 - Removed files previously marked as deprecated.
 
 ### Fixed
+
 - Fixed a bug with loading localized help. [[Issue #29](https://github.com/jdhitsolutions/PSBluesky/issues/29)]
+- Fixed image layout problems in the help PDF file.
 
 ## [2.1.0] - 2024-11-21
 
@@ -221,7 +233,8 @@ This is the first version published to the PowerShell Gallery.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.1.0..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.2.0..HEAD
+[2.2.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.1.0..v2.2.0
 [2.1.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.0.0..v2.1.0
 [2.0.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.3.0..v2.0.0
 [1.3.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.2.0..v1.3.0

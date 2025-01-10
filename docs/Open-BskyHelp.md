@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Open the PSBluesky help document
+Open the PSBluesky help document.
 
 ## SYNTAX
 

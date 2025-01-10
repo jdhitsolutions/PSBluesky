@@ -48,6 +48,7 @@ After installing this module, you should end up with these PSBluesky commands:
 - [Get-BskyTimeline](docs/Get-BskyTimeline.md)
 - [New-BskyPost](docs/New-BskyPost.md)
 - [Open-BskyHelp](docs/Open-BskyHelp.md)
+- [Publish-BskyPost](docs/Publish-BskyPost.md)
 - [Start-BskySession](docs/Start-BskySession.md)
 - [Update-BskySession](docs/Update-BskySession.md)
 
@@ -62,24 +63,25 @@ PS C:\> Get-BskyModuleInfo
 
 Name                 Alias               Synopsis
 ----                 -----               --------
-Add-BskyImage                            Upload an image to Bluesky
+Add-BskyImage                            Upload an image to Bluesky.
 Find-BskyUser        bsu                 Search for Bluesky user acco...
 Get-BskyAccountDID                       Resolve a Bluesky account na...
 Get-BskyBlockedList  bsblocklist         Get your subscribed blocked ...
-Get-BskyBlockedUser  bsblock             Get your blocked accounts
-Get-BskyFeed         bsfeed              Get your Bluesky feed
-Get-BskyFollowers    bsfollower          Get your Bluesky followers
+Get-BskyBlockedUser  bsblock             Get your blocked accounts.
+Get-BskyFeed         bsfeed              Get your Bluesky feed.
+Get-BskyFollowers    bsfollower          Get your Bluesky followers.
 Get-BskyFollowing    bsfollow            Get a list of Bluesky account...
-Get-BskyLiked                            Get liked Bluesky posts
+Get-BskyLiked                            Get your liked Bluesky posts.
 Get-BskyModuleInfo                       Get a summary of the PSBlueSk...
 Get-BskyNotification bsn                 Get Bluesky notifications.
-Get-BskyProfile      bsp                 Get a Bluesky profile
+Get-BskyProfile      bsp                 Get a Bluesky profile.
 Get-BskySession      bss                 Show your current Bluesky ses...
-Get-BskyTimeline     bst                 Get your Bluesky timeline
-New-BskyPost         skeet               Create a Bluesky post
+Get-BskyTimeline     bst                 Get your Bluesky timeline.
+New-BskyPost         skeet               Create a Bluesky post.
 Open-BskyHelp        bshelp              Open the PSBluesky help docum...
-Start-BSkySession                        Start a new Bluesky session
-Update-BskySession   Refresh-BskySession Refresh the Bluesky session  ...
+Publish-BskyPost     Repost-BskyPost     Repost or quote a Bluesky post
+Start-BSkySession                        Start a new Bluesky session.
+Update-BskySession   Refresh-BskySession Refresh the Bluesky session t...
 ```
 
 ## Authentication
@@ -218,6 +220,43 @@ PS C:\> skeet $m
 ![Markdown links in a Bluesky post](images/markdown-links.png)
 
 This example is using the `skeet` alias for `New-BskyPost`.
+
+### Reposting and Quoting
+
+You can repost or quote a Bluesky post with `Publish-BskyPost`. You will need the CID and AT Uri (URI) of the post you want to repost or quote. These values should be part of items you can get with commands like `Get-BskyFeed` or `Get-BskyTimeline`.
+
+```powershell
+PS C:\> Get-BskyTimeline -Limit 1 | Select-Object *
+
+Author        : joeydantoni.com
+AuthorDisplay : Joey D'Antoni
+Date          : 1/9/2025 12:11:13 PM
+Text          : I would likely denormalize the data a little bit, and
+                have a non-vector table with ref. data like date that
+                you could filter on, before doing the heavier lifting
+                of the vector query. Almost like a fact/dim join in a
+                DW. learn.microsoft.com/en-us/sample... cc
+                @mauridb.bsky.social for a better example
+Liked         : 0
+Reposted      : 0
+Quoted        : 0
+URL           : https://bsky.app/profile/did:plc:3dvxs53kzjez5oxcbucfsa
+                cf/post/3lfd6cfv7hs2o
+URI           : at://did:plc:3dvxs53kzjez5oxcbucfsacf/app.bsky.feed.post
+                /3lfd6cfv7hs2o
+CID           : bafyreih7yplygqrno2n3n5mhqs35fbwqovxsvc6xrictt4afzgnwrt7
+                epi
+```
+
+The easiest way to repost or quote a post is to pipe the object to `Publish-BskyPost`.
+
+![Reposting a Bluesky post](images/bsky-repost.png)
+
+This example assumes that `$tl` is an array of objects from `Get-BskyTimeline`. If you don't specify a quote, the command will repost the original message. If you do specify a quote, the command will quote the original message.
+
+```powershell
+$f[-4] | Publish-BskyPost -Quote "Testing quoting with a PSBluesky command"
+```
 
 ## Profiles
 
@@ -453,6 +492,22 @@ $PSDefaultParameterValues['*-*Sky*:InformationVariable'] = "iv"
 
 ## Other Module Features
 
+### Custom Formatting
+
+Many of the commands in this module use custom formatting files to provide a more visually appealing output. The module uses emojis and ANSI formatting. The formatting is designed for Windows Terminal or a console that supports ANSI formatting and emojis.
+
+Some commands will also have alternative format views.
+
+![Liked custom view](images/liked-customview.png)
+
+| Command | Format | ViewName  |
+|---------|------| ----|
+| Get-BskyLiked | Table | Liked | A custom view for liked posts |
+| Get-BskyTimeline | Table | Liked | A custom view for liked posts |
+| Get-BskyTimeline | Table | Default | An alternate table view |
+| Get-BskyFeed | Table | Liked | A custom view for liked posts |
+| Get-BskyModuleInfo | List | Default | A custom view for module information |
+
 ### Type Extensions
 
 You are encourage to pipe command results to `Get-Member` to discover additional properties you might find useful.
@@ -482,13 +537,12 @@ This module uses ANSI formatting with localized string data and customized verbo
 
 The color formatting the command names is not user-configurable at this time.
 
-I am hoping to add localized strings for other languages as well as localized help and the help PDF file.
+I am hoping to add localized strings for other languages as well as localizations to command help and the help PDF file.
 
 ## Roadmap :world_map:
 
 I have a short list of items on my wish list:
 
-- Add support for posting multiple images
 - Add support for posting video
 - Add commands to work with direct messages, aka chat
 - Maybe create a TUI-base reader for your timeline

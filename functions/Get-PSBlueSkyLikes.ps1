@@ -3,14 +3,20 @@
 #  https://docs.bsky.app/docs/api/app-bsky-feed-get-actor-likes
 
 Function Get-BskyLiked {
-    [cmdletbinding()]
+    [cmdletbinding(DefaultParameterSetName = 'Limit')]
     [OutputType('PSBlueskyLikedItem')]
 
     Param(
-        [Parameter(ParameterSetName = 'Limit',HelpMessage = 'Enter the number of liked posts to retrieve between 1 and 100. Default is 50.')]
+        [Parameter(
+            ParameterSetName = 'Limit',
+            HelpMessage = 'Enter the number of liked posts to retrieve between 1 and 100. Default is 50.'
+        )]
         [ValidateRange(1, 100)]
         [int]$Limit = 50,
-        [Parameter(ParameterSetName = 'All', HelpMessage = 'Return all liked posts')]
+        [Parameter(
+            ParameterSetName = 'All',
+            HelpMessage = 'Return all liked posts'
+        )]
         [switch]$All
     )
 
@@ -39,7 +45,6 @@ Function Get-BskyLiked {
         else {
             Write-Warning $strings.NoSession
         }
-
     } #begin
 
     Process {

@@ -32,13 +32,102 @@
                             <NewLine/>
                             <ExpressionBinding>
                                 <ScriptBlock>
-                                    $_ | Format-Table -property Date,Liked,Replied,Reposted,Quoted | Out-String
+                                    $_ | Format-Table -property Date, @{Name='Liked';Expression={
+                                            if ($_.Liked -ge 1000) {
+                                            "`e[38;5;201m$($_.liked)`e[0m"
+                                        }
+                                        elseif ($_.liked -ge 500) {
+                                            "`e[38;5;214m$($_.liked)`e[0m"
+                                        }
+                                        elseif ($_.liked -ge 100) {
+                                            "`e[38;5;105m$($_.liked)`e[0m"
+                                        }
+                                        elseif ($_.liked -ge 10) {
+                                            "`e[38;5;48m$($_.liked)`e[0m"
+                                        }
+                                        else {
+                                            $_.Liked
+                                        }
+                                    }},Replied,Reposted,Quoted | Out-Default
                                 </ScriptBlock>
                             </ExpressionBinding>
                         </CustomItem>
                     </CustomEntry>
                 </CustomEntries>
             </CustomControl>
+        </View>
+        <View>
+            <!--Created 01/09/2025 13:19:37 by PROSPERO\Jeff-->
+            <Name>liked</Name>
+            <ViewSelectedBy>
+                <TypeName>PSBlueskyLikedItem</TypeName>
+            </ViewSelectedBy>
+            <TableControl>
+                <!--Delete the AutoSize node if you want to use the defined widths.-->
+                <AutoSize />
+                <TableHeaders>
+                    <TableColumnHeader>
+                        <Label>Liked</Label>
+                        <Width>8</Width>
+                        <Alignment>left</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Date</Label>
+                        <Width>23</Width>
+                        <Alignment>left</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Author</Label>
+                        <Width>14</Width>
+                        <Alignment>left</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Text</Label>
+                        <Width>58</Width>
+                        <Alignment>left</Alignment>
+                    </TableColumnHeader>
+                </TableHeaders>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <wrap/>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <ScriptBlock>
+                  if ($_.Liked -ge 1000) {
+                      "`e[38;5;201m$($_.liked)`e[0m"
+                  }
+                  elseif ($_.liked -ge 500) {
+                      "`e[38;5;214m$($_.liked)`e[0m"
+                  }
+                  elseif ($_.liked -ge 100) {
+                      "`e[38;5;105m$($_.liked)`e[0m"
+                  }
+                  elseif ($_.liked -ge 10) {
+                      "`e[38;5;48m$($_.liked)`e[0m"
+                  }
+                  else {
+                      $_.Liked
+                  }
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Date</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
+                "{0} [$($PSStyle.Foreground.BrightBlue+$PSStyle.Underline){1}$($PSStyle.Reset)]" -f $_.AuthorDisplay,$($PSStyle.FormatHyperLink($_.Author,$_.Url))
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
+                  $fg = $PSStyle.Foreground.BrightYellow
+                  "{0} {1}{2}" -f ($fg+$PSStyle.Italic),($PSStyle.FormatHyperLink($_.Text,$_.url)),$PSStyle.Reset
+                                </ScriptBlock>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
         </View>
     </ViewDefinitions>
 </Configuration>

@@ -13,7 +13,7 @@
                         <CustomItem>
                             <ExpressionBinding>
                                 <ScriptBlock>
-                                "{0} [$($PSStyle.Foreground.Brightblue+$PSStyle.Underline){1}$($PSStyle.Reset)]" -f $_.Display,$($PSStyle.FormatHyperLink($_.UserName,$_.Url))
+                                "{0} [$($PSStyle.Foreground.BrightBlue+$PSStyle.Underline){1}$($PSStyle.Reset)]" -f $_.Display,$($PSStyle.FormatHyperLink($_.UserName,$_.Url))
                                 </ScriptBlock>
                             </ExpressionBinding>
                             <NewLine/>

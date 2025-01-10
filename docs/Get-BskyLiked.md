@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Get liked Bluesky posts
+Get your liked Bluesky posts.
 
 ## SYNTAX
 

@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Get your subscribed blocked lists
+Get your subscribed blocked lists.
 
 ## SYNTAX
 
@@ -50,6 +50,7 @@ The default output includes clickable hyperlinks.
 ## PARAMETERS
 
 ### -All
+
 Return all blocked lists
 
 ```yaml
@@ -65,6 +66,7 @@ Accept wildcard characters: False
 ```
 
 ### -Limit
+
 Enter the number of blocked lists to retrieve between 1 and 100.
 Default is 50.
 

@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Upload an image to Bluesky
+Upload an image to Bluesky.
 
 ## SYNTAX
 

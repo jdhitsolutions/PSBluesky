@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Get a Bluesky profile
+Get a Bluesky profile.
 
 ## SYNTAX
 

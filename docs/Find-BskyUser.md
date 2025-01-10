@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Search for Bluesky user accounts
+Search for Bluesky user accounts.
 
 ## SYNTAX
 
@@ -55,6 +55,7 @@ The default output includes clickable links to the user's profile.
 ## PARAMETERS
 
 ### -Limit
+
 Enter the number of results to retrieve between 1 and 100.
 Default is 50.
 
@@ -71,6 +72,7 @@ Accept wildcard characters: False
 ```
 
 ### -UserName
+
 Enter a search string. This will be used to search the user's name and description.
 
 ```yaml

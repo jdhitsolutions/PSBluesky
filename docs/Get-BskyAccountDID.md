@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Resolve a Bluesky account name to its DID
+Resolve a Bluesky account name to its DID.
 
 ## SYNTAX
 
@@ -24,8 +24,9 @@ This command does not require authentication.
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
+### Example 1
+
+```powershell
 PS C:\> Get-BskyAccountDID jdhitsolutions.com
 did:plc:ohgsqpfsbocaaxusxqlgfvd7
 ```

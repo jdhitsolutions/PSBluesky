@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Get your Bluesky timeline
+Get your Bluesky timeline.
 
 ## SYNTAX
 

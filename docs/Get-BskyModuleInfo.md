@@ -28,25 +28,29 @@ Use this command to get a summary of the PSBlueSky module showing functions, ali
 ```powershell
 PS C:\> Get-BskyModuleInfo
 
-   Module: PSBlueSky [v2.0.0]
+   Module: PSBlueSky [v2.2.0]
 
 Name                 Alias               Synopsis
 ----                 -----               --------
-Add-BskyImage                            Upload an image to Bluesky
-Find-BskyUser        bsu                 Search for Bluesky user accounts
-Get-BskyFeed         bsfeed              Get your Bluesky feed
-Get-BskyFollowers    bsfollower          Get your Bluesky followers
-Get-BskyFollowing    bsfollow            Get a list of Bluesky accounts that
-                                         you follow
-Get-BskyModuleInfo                       Get a summary of the PSBlueSky module.
+Add-BskyImage                            Upload an image to Bluesky.
+Find-BskyUser        bsu                 Search for Bluesky user accounts.
+Get-BskyAccountDID                       Resolve a Bluesky account name to ...
+Get-BskyBlockedList  bsblocklist         Get your subscribed blocked lists.
+Get-BskyBlockedUser  bsblock             Get your blocked accounts.
+Get-BskyFeed         bsfeed              Get your Bluesky feed.
+Get-BskyFollowers    bsfollower          Get your Bluesky followers.
+Get-BskyFollowing    bsfollow            Get a list of Bluesky accounts tha...
+Get-BskyLiked                            Get your liked Bluesky posts.
+Get-BskyModuleInfo                       Get a summary of the PSBlueSky mod...
 Get-BskyNotification bsn                 Get Bluesky notifications.
-Get-BskyProfile      bsp                 Get a Bluesky profile
-Get-BskySession                          Show your current Bluesky session.
-Get-BskyTimeline     bst                 Get your Bluesky timeline
-New-BskyPost         skeet               Create a Bluesky post
-Open-BskyHelp        bshelp              Open the PSBluesky help document
-Start-BSkySession                        Start a new Bluesky session
-Update-BskySession   Refresh-BskySession Refresh the Bluesky session token
+Get-BskyProfile      bsp                 Get a Bluesky profile.
+Get-BskySession      bss                 Show your current Bluesky session.
+Get-BskyTimeline     bst                 Get your Bluesky timeline.
+New-BskyPost         skeet               Create a Bluesky post.
+Open-BskyHelp        bshelp              Open the PSBluesky help document.
+Publish-BskyPost     Repost-BskyPost     Repost or quote a Bluesky post.
+Start-BSkySession                        Start a new Bluesky session.
+Update-BskySession   Refresh-BskySession Refresh the Bluesky session token.
 ```
 
 The default output includes clickable hyperlinks.

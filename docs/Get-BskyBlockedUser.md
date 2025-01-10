@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Get your blocked accounts
+Get your blocked accounts.
 
 ## SYNTAX
 
@@ -46,6 +46,7 @@ This is a sample blocked user account. The default formatting includes clickable
 ## PARAMETERS
 
 ### -All
+
 Return all blocked accounts
 
 ```yaml
