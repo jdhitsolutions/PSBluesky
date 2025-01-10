@@ -258,6 +258,8 @@ This example assumes that `$tl` is an array of objects from `Get-BskyTimeline`. 
 $f[-4] | Publish-BskyPost -Quote "Testing quoting with a PSBluesky command"
 ```
 
+The command has an alias of `Repost-BskyPost`. If you include quote text, the post will be a quote, otherwise it will show as a repost from you.
+
 ## Profiles
 
 The module has a command to retrieve a Bluesky profile.

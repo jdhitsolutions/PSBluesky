@@ -75,6 +75,8 @@
             ReleaseNotes               = @'
 ## [2.2.1] - 2025-01-10
 
+See change log for v2.2.0 for major changes to this module.
+
 ### Fixed
 
 - Added `Repost-BskyPost` alias to the module manifest.
