@@ -3,7 +3,7 @@
 #
 @{
     RootModule           = 'PSBlueSky.psm1'
-    ModuleVersion        = '2.2.0'
+    ModuleVersion        = '2.2.1'
     CompatiblePSEditions = 'Core'
     GUID                 = 'c5c1fd1d-e648-432d-b7d6-bb56f2044c2a'
     Author               = 'Jeff Hicks'
@@ -29,7 +29,6 @@
         'New-BskyPost',
         'Open-BskyHelp',
         'Publish-BskyPost',
-        'Repost-BskyPost',
         'Start-BskySession'
         'Update-BskySession'
     )
@@ -54,6 +53,7 @@
     AliasesToExport      = @(
         'skeet',
         'Refresh-BskySession',
+        'Repost-BskyPost',
         'bshelp',
         'bsn',
         'bsp',
@@ -73,37 +73,11 @@
             ProjectUri                 = 'https://github.com/jdhitsolutions/PSBluesky'
             IconUri                    = 'https://raw.githubusercontent.com/jdhitsolutions/PSBlueSky/main/images/BlueskyLogo-icon.png'
             ReleaseNotes               = @'
-## [2.2.0] - 2025-01-10
-
-### Added
-
-- Added command `Publish-BskyPost` with an alias of `Repost-BskyPost` which can be used to quote or repost. [[Issue #25](https://github.com/jdhitsolutions/PSBluesky/issues/25)]
-- Added command `Get-BskyBlockedList` and associated format file. [[Issue #27](https://github.com/]jdhitsolutions/PSBluesky/issues/27)]
-- Added command `Get-BskyBlockedUser` and associated format file.
-- Added command `Get-BskyLiked` and associated format file.
-- Added `-Today` parameter to `Get-BskyNotification` to only show notifications from the current day.
-- Imported [PR #30](https://github.com/jdhitsolutions/PSBluesky/pull/30) from  [@jhoneill](https://github.com/jhoneill) to improve piping to `New-BskyPost`.
-- Added properties `CID` to output from `Get-BskyLiked`,`Get-BskyNotification`,`Get-BskyTimeline`, and `Get-BskyFeed`. This is to support new commands for reposting and quoting.
-- Added properties `URI` to output from `Get-BskyNotification`,`Get-BskyTimeline`, and `Get-BskyFeed`. This is to support new commands for reposting and quoting.
-- Added a custom view called `Liked` to the `PSBlueskyTimelinePost.format.ps1xml`, `PSBlueskyLiked.format.ps1xml`, and `PSBlueskyFeed.format.ps1xml' files.
-
-
-### Changed
-
-- Changed output property `aturi` in `Get-BskyLiked` and `Get-BskyFeed` to `URI`. This is to support new commands for reposting and quoting. __This is a potential breaking change__
-- Added support for gif files as an image upload type. The image will be static in the current release of Bluesky.
-- Updated formatting files for `Get-BskyTimeline`, `Get-BskyLiked`, and `Get-BskyFeed` to highlight the number of likes.
-- Help updates.
-- Updated `README.md`.
-
-### Removed
-
-- Removed files previously marked as deprecated.
+## [2.2.1] - 2025-01-10
 
 ### Fixed
 
-- Fixed a bug with loading localized help. [[Issue #29](https://github.com/jdhitsolutions/PSBluesky/issues/29)]
-- Fixed image layout problems in the help PDF file.
+- Added `Repost-BskyPost` alias to the module manifest.
 '@
             RequireLicenseAcceptance   = $false
             ExternalModuleDependencies = @()

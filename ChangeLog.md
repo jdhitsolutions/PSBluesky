@@ -4,6 +4,12 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.
 
 ## [Unreleased]
 
+## [2.2.1] - 2025-01-10
+
+### Fixed
+
+- Added `Repost-BskyPost` alias to the module manifest.
+
 ## [2.2.0] - 2025-01-10
 
 ### Added
@@ -233,7 +239,8 @@ This is the first version published to the PowerShell Gallery.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.2.0..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.2.1..HEAD
+[2.2.1]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.2.0..v2.2.1
 [2.2.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.1.0..v2.2.0
 [2.1.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.0.0..v2.1.0
 [2.0.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v1.3.0..v2.0.0
