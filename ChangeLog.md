@@ -4,6 +4,23 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.
 
 ## [Unreleased]
 
+## [2.3.0] - 2025-01-13
+
+### Added
+
+- Added commands `New-BskyFollow` and `Remove-BskyFollow`, with aliases `Follow-BskyUser` and `Unfollow-BskyUser` to handle following and un-following Bluesky user accounts. [[Issue #32](https://github.com/jdhitsolutions/PSBluesky/issues/32)]
+- Created a user-configurable preferences variable, `$bskyPreferences` and related commands: `Get-BskyPreference`, `Set-BskyPreference`, `Export-BskyPreference`, and `Remove-BskyPreferenceFile`. The preference variable is exported so that the formatting files can use it, but should be managed with the related functions. [[Issue #31](https://github.com/jdhitsolutions/PSBluesky/issues/31)]
+- Added alias `bsliked` for `Get-BskyLiked`.
+
+### Changed
+
+- Updated verbose helper function to use the new formatting preferences.
+- Updated formatting files to use the new preference variable.
+- Moved all type extensions defined in the module file using `Update-TypeData` to the external types.ps1xml file.
+- Updated `README.md`.
+- Updated help documentation.
+- Updated module to remove additional types on module removal.
+
 ## [2.2.1] - 2025-01-10
 
 ### Fixed
@@ -239,7 +256,8 @@ This is the first version published to the PowerShell Gallery.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.2.1..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.3.0..HEAD
+[2.3.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.2.1..v2.3.0
 [2.2.1]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.2.0..v2.2.1
 [2.2.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.1.0..v2.2.0
 [2.1.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.0.0..v2.1.0

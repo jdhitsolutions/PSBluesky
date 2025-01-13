@@ -48,7 +48,7 @@ https://github.com/jdhitsolutions/PSScriptTools
               </TableColumnItem>
               <TableColumnItem>
                  <ScriptBlock>
-                  "{0}{1}{2}" -f ($PSStyle.foreground.BrightBlue+$PSStyle.Underline),($PSStyle.formatHyperlink($_.Username,$_.url)),$PSStyle.Reset
+                  "{0}{1}{2}" -f ($bskyPreferences['Username']),($PSStyle.formatHyperlink($_.Username,$_.url)),$PSStyle.Reset
                 </ScriptBlock>
               </TableColumnItem>
                 <TableColumnItem>

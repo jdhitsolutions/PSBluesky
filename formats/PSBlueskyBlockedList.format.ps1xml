@@ -23,7 +23,7 @@ https://github.com/jdhitsolutions/PSScriptTools
                   <ScriptBlock>
                   $ListName = $_.Name
                   $ListURL = $_.url
-                  "{0}{1}{2}" -f ($PSStyle.foreground.BrightGreen+$PSStyle.Underline),($PSStyle.formatHyperlink($ListName,$ListUrl)),$PSStyle.Reset
+                  "{0}{1}{2}" -f ($bskyPreferences['BlockedList']),($PSStyle.formatHyperlink($ListName,$ListUrl)),$PSStyle.Reset
                 </ScriptBlock>
               </ListItem>
               <ListItem>
@@ -43,7 +43,7 @@ https://github.com/jdhitsolutions/PSScriptTools
                 <ScriptBlock>
                   $CreatorName = $_.CreatedBy.UserName
                   $CreatorURL = $_.CreatedBy.url
-                  "{0}{1}{2}" -f ($PSStyle.foreground.BrightBlue+$PSStyle.Underline),($PSStyle.formatHyperlink($CreatorName,$CreatorUrl)),$PSStyle.Reset
+                  "{0}{1}{2}" -f ($bskyPreferences['Username']),($PSStyle.formatHyperlink($CreatorName,$CreatorUrl)),$PSStyle.Reset
                 </ScriptBlock>
               </ListItem>
               <ListItem>

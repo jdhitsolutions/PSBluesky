@@ -15,20 +15,12 @@ https://github.com/jdhitsolutions/PSScriptTools
         <TypeName>PSBlueskySession</TypeName>
       </ViewSelectedBy>
       <GroupBy>
-        <!--
-            You can also use a scriptblock to define a custom property name.
-            You must have a Label tag.
-            <ScriptBlock>$_.machinename.ToUpper()</ScriptBlock>
-            <Label>Computername</Label>
-
-            Use <Label> to set the displayed value.
--->
         <ScriptBlock>
           if ($_.Active) {
-            $fg = $PSStyle.Foreground.BrightGreen
+            $fg = $bskyPreferences.ActiveSession
           }
           else {
-            $fg = $PSStyle.Foreground.Red
+            $fg = $bskyPreferences.InactiveSession
           }
           "{0}{1}{2}" -f $fg,$_.Username,$PSStyle.Reset
           </ScriptBlock>

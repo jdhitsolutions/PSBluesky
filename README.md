@@ -46,9 +46,11 @@ After installing this module, you should end up with these PSBluesky commands:
 - [Get-BskyProfile](docs/Get-BskyProfile.md)
 - [Get-BskySession](docs/Get-BskySession.md)
 - [Get-BskyTimeline](docs/Get-BskyTimeline.md)
+- [New-BskyFollow](docs/New-BskyFollow.md)
 - [New-BskyPost](docs/New-BskyPost.md)
 - [Open-BskyHelp](docs/Open-BskyHelp.md)
 - [Publish-BskyPost](docs/Publish-BskyPost.md)
+- [Remove-BskyFollow](docs/Remove-BskyFollow.md)
 - [Start-BskySession](docs/Start-BskySession.md)
 - [Update-BskySession](docs/Update-BskySession.md)
 
@@ -56,39 +58,43 @@ After importing the module you can run `Open-BskyHelp` which will open a PDF ver
 
 You can use `Get-BskyModuleInfo` to get a summary of the module. The default output includes clickable links to online command help and the module's GitHub repository.
 
-```powershell
+```text
 PS C:\> Get-BskyModuleInfo
 
-   Module: PSBlueSky [v2.2.0]
-
-Name                 Alias               Synopsis
-----                 -----               --------
-Add-BskyImage                            Upload an image to Bluesky.
-Find-BskyUser        bsu                 Search for Bluesky user acco...
-Get-BskyAccountDID                       Resolve a Bluesky account na...
-Get-BskyBlockedList  bsblocklist         Get your subscribed blocked ...
-Get-BskyBlockedUser  bsblock             Get your blocked accounts.
-Get-BskyFeed         bsfeed              Get your Bluesky feed.
-Get-BskyFollowers    bsfollower          Get your Bluesky followers.
-Get-BskyFollowing    bsfollow            Get a list of Bluesky account...
-Get-BskyLiked                            Get your liked Bluesky posts.
-Get-BskyModuleInfo                       Get a summary of the PSBlueSk...
-Get-BskyNotification bsn                 Get Bluesky notifications.
-Get-BskyProfile      bsp                 Get a Bluesky profile.
-Get-BskySession      bss                 Show your current Bluesky ses...
-Get-BskyTimeline     bst                 Get your Bluesky timeline.
-New-BskyPost         skeet               Create a Bluesky post.
-Open-BskyHelp        bshelp              Open the PSBluesky help docum...
-Publish-BskyPost     Repost-BskyPost     Repost or quote a Bluesky post
-Start-BSkySession                        Start a new Bluesky session.
-Update-BskySession   Refresh-BskySession Refresh the Bluesky session t...
+Name                      Alias               Synopsis
+----                      -----               --------
+Add-BskyImage                                 Upload an image to Bluesky.
+Export-BskyPreference                         Export your PSBlueSky format...
+Find-BskyUser             bsu                 Search for Bluesky user accou...
+Get-BskyAccountDID                            Resolve a Bluesky account nam...
+Get-BskyBlockedList       bsblocklist         Get your subscribed blocked l...
+Get-BskyBlockedUser       bsblock             Get your blocked accounts.
+Get-BskyFeed              bsfeed              Get your Bluesky feed.
+Get-BskyFollowers         bsfollower          Get your Bluesky followers
+Get-BskyFollowing         bsfollow            Get a list of Bluesky accounts...
+Get-BskyLiked             bsliked             Get your liked Bluesky posts.
+Get-BskyModuleInfo                            Get a summary of the PSBlueSky...
+Get-BskyNotification      bsn                 Get Bluesky notifications.
+Get-BskyPreference                            Get PSBlueSky formatting prefe...
+Get-BskyProfile           bsp                 Get a Bluesky profile.
+Get-BskySession           bss                 Show your current Bluesky session.
+Get-BskyTimeline          bst                 Get your Bluesky timeline.
+New-BskyFollow            Follow-BskyUser     Follow a Bluesky user.
+New-BskyPost              skeet               Create a Bluesky post.
+Open-BskyHelp             bshelp              Open the PSBluesky help document.
+Publish-BskyPost          Repost-BskyPost     Repost or quote a Bluesky post.
+Remove-BskyFollow         Unfollow-BskyUser   Unfollow a Bluesky user.
+Remove-BskyPreferenceFile                     Delete the user's PSBlueSky pre...
+Set-BskyPreference                            Set a PSBlueSky formatting pref...
+Start-BSkySession                             Start a new Bluesky session.
+Update-BskySession        Refresh-BskySession Refresh the Bluesky session token.
 ```
 
 ## Authentication
 
 ### Session and Tokens
 
-:coin: In order to send data, you must authenticate. Version 2.0.0 of this module introduces a new session model. After you import the module, you __must run__ `Start-BskySession` to initialize the module and setup module-scoped variables.
+:coin: In order to send data, you must authenticate. Version 2.0.0 of this module introduced a new session model. After you import the module, you __must run__ `Start-BskySession` to initialize the module and setup module-scoped variables.
 
 ```powershell
 Start-BskySession -credential $cred
@@ -138,7 +144,7 @@ $PSDefaultParameterValues['*-Bsky*:Credential'] = $BlueskyCredential
 
 You should only need this credential for `Start-BskySession`.
 
-__This module does not use 2FA at this time. You must use an app password__.
+__This module does not use 2FA. You must use an app password__.
 
 ### App Passwords :key:
 
@@ -422,6 +428,36 @@ Get-BskyFollowing -limit 3
 
 As with followers, the default behavior is to retrieve between 1 and 100 accounts you are following. Or you can use the `-All` parameter to retrieve all accounts you are following.
 
+Starting with version 2.3.0, you can follow and unfollow Bluesky users with [New-BskyFollow](docs/New-BskyFollow.md) and [Remove-BskyFollow](docs/Remove-BskyFollow.md). These commands can also be referenced by their aliases `Follow-BskyUser` and `Unfollow-BskyUser`.
+
+To follow, specify the account's user name or handle.
+
+```powershell
+PS C:\> Follow-Bskyuser andrewpla.tech
+https://bsky.app/profile/did:plc:xrspiwserax6shgskcj7grgg
+```
+
+The output is a clickable link to the followed user's profile.
+
+To unfollow, you can pipe a user object to `Remove-BskyFollow`
+
+```powershell
+PS C:\> Remove-BskyFollow andrewpla.tech -WhatIf
+What if: Performing the operation "Remove-BskyFollow" on target "andrewpla.tech".
+```
+
+Or you can pipe a user object to `Remove-BskyFollow`.
+
+```powershell
+PS C:\> Get-BskyProfile andrewpla.tech | Remove-BskyFollow -Passthru
+
+cid                                                         rev
+---                                                         ---
+bafyreibe4a3ewrh2oty2jercit75q42wdnuuip22b3tq6jybwamdz7daq4 3lfnjoouju62k
+```
+
+The followed user will receive a notification when you follow them but not when you unfollow them.
+
 ## Feed :newspaper:
 
 Use `Get-BskyFeed` to retrieve the latest posts from *your* feed. You can query for 1 to 100.
@@ -540,6 +576,36 @@ This module uses ANSI formatting with localized string data and customized verbo
 The color formatting the command names is not user-configurable at this time.
 
 I am hoping to add localized strings for other languages as well as localizations to command help and the help PDF file.
+
+### Preferences
+
+The module features that rely on custom formatting and ANSI colorization may not be compatible in all console environments or for all users. You may need to adjust settings to improve the display. All formatting preferences are stored in an exported hash table variable called `bskyPreferences`. While you can modify this variable directly, it is recommended that you use the related module commands to manage it.
+
+Run [Get-BskyPreference](docs/Get-BskyPreference.md) to see your current settings.
+
+![Bluesky preferences](images/bskypreferences.png)
+
+You can use [Set-BskyPreference](docs/Set-BskyPreference.md) to change them.
+
+```powershell
+Set-BskyPreference Username -style "`e[3;38;5;135m"
+```
+
+You can use any ANSI sequence or `$PSStyle` value. Any changes you make will only persist for the duration of your PowerShell session or until you remove the PSBluesky module. The next time you import the module, the default preferences will be used. To save your changes, run [Export-BskyPreference](docs/Export-BskyPreference.md) to save your preferences to a JSON file under `$HOME`.
+
+```powershell
+PS C:\> Export-BskyPreference -Passthru
+
+    Directory: C:\Users\Jeff
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---           1/13/2025  9:41 AM           1091 .psbluesky-preferences.json
+```
+
+The next time you import the module, if this file is present, the module will import it and apply your preferences.
+
+To remove your preferences and restore the module defaults, you can use [Remove-BskyPreferenceFile](docs/Remove-BskyPreferenceFile.md) and then re-import the module. If you decide to uninstall the module, and have exported preferences, you should run this command before uninstalling. Otherwise, you will need to manually delete the file.
 
 ## Roadmap :world_map:
 

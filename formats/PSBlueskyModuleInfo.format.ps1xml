@@ -45,7 +45,7 @@
               </TableColumnItem>
               <TableColumnItem>
                 <ScriptBlock>
-                  "$($PSStyle.Italic)$($PSStyle.Foreground.BrightYellow)$($_.Alias)$($PSStyle.Reset)"
+                  "$($bskyPreferences.InfoAlias)$($_.Alias)$($PSStyle.Reset)"
                 </ScriptBlock>
               </TableColumnItem>
               <TableColumnItem>

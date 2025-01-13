@@ -96,7 +96,6 @@ Function _convertAT {
     $publicUri += '{0}/post/{1}' -f $split[1], $split[-1]
     $publicUri
 }
-
 function _getPostText {
     [cmdletbinding()]
     param (
@@ -294,19 +293,20 @@ function _verbose {
     )
 
     #Display each command name in a different color sequence
-    if ($script:VerboseANSI.ContainsKey($Command)) {
-        [string]$ANSI = $script:VerboseANSI[$Command]
+    if ($bskyPreferences.Contains($Command)) {
+        [string]$ANSI = $bskyPreferences[$Command]
     }
     else {
-        [string]$ANSI = $script:VerboseANSI['DEFAULT']
+        [string]$ANSI = $bskyPreferences['DefaultCommand']
     }
 
     $BlockString = $Block.ToUpper().PadRight(7, ' ')
     $Reset = "$([char]27)[0m"
     $ToD = (Get-Date).TimeOfDay
-    $AnsiCommand = "$([char]27)$Ansi$($command)"
+    $AnsiCommand = "$ANSI$($command)"
     $Italic = "$([char]27)[3m"
     if ($Host.Name -eq 'Windows PowerShell ISE Host') {
+        #this code should never run in this module since it requires PowerShell 7
         $msg = '[{0:hh\:mm\:ss\:ffff} {1}] {2}-> {3}' -f $Tod, $BlockString, $Command, $Message
     }
     else {

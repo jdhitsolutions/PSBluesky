@@ -19,15 +19,14 @@ https://github.com/jdhitsolutions/PSScriptTools
             <CustomItem>
               <ExpressionBinding>
                 <ScriptBlock>
-                    "► {2} ◄ 🦋 {0} [$($PSStyle.Foreground.BrightBlue+$PSStyle.Underline){1}$($PSStyle.Reset)]" -f $_.AuthorDisplay,$($PSStyle.FormatHyperLink($_.Author,$_.Url)),$_.Date
+                    "► {2} ◄ 🦋 {0} [$($bskyPreferences.Username){1}$($PSStyle.Reset)]" -f $_.AuthorDisplay,$($PSStyle.FormatHyperLink($_.Author,$_.Url)),$_.Date
                 </ScriptBlock>
               </ExpressionBinding>
               <NewLine />
               <NewLine />
               <ExpressionBinding>
                 <ScriptBlock>
-                  $fg = $PSStyle.Foreground.BrightYellow
-                  "{0} {1}{2}" -f ($fg+$PSStyle.Italic),($PSStyle.FormatHyperLink($_.Text,$_.url)),$PSStyle.Reset
+                  "{0} {1}{2}" -f $($bskyPreferences.Message),($PSStyle.FormatHyperLink($_.Text,$_.url)),$PSStyle.Reset
                 </ScriptBlock>
               </ExpressionBinding>
               <NewLine />
@@ -36,20 +35,20 @@ https://github.com/jdhitsolutions/PSScriptTools
                 <ScriptBlock>
                 <!-- highlight liked values-->
                 $Liked = if ($_.Liked -ge 1000) {
-                      "`e[38;5;201m$($_.liked)`e[0m"
-                  }
-                  elseif ($_.liked -ge 500) {
-                      "`e[38;5;214m$($_.liked)`e[0m"
-                  }
-                  elseif ($_.liked -ge 100) {
-                      "`e[38;5;105m$($_.liked)`e[0m"
-                  }
-                  elseif ($_.liked -ge 10) {
-                      "`e[38;5;48m$($_.liked)`e[0m"
-                  }
-                  else {
-                      $_.Liked
-                  }
+                              "$($bskyPreferences.LikedHighest)$($_.liked)`e[0m"
+                          }
+                          elseif ($_.liked -ge 500) {
+                              "$($bskyPreferences.LikedHigh)$($_.liked)`e[0m"
+                          }
+                          elseif ($_.liked -ge 100) {
+                              "$($bskyPreferences.LikedMedium)$($_.liked)`e[0m"
+                          }
+                          elseif ($_.liked -ge 10) {
+                              "$($bskyPreferences.LikedLow)$($_.liked)`e[0m"
+                          }
+                          else {
+                              $_.Liked
+                          }
 
                   "❤  {0}  📧 {1}  💬 {2}" -f $Liked,$_.Reposted,$_.Quoted
                 </ScriptBlock>
@@ -169,16 +168,16 @@ https://github.com/jdhitsolutions/PSScriptTools
               <TableColumnItem>
                 <ScriptBlock>
                   if ($_.Liked -ge 1000) {
-                      "`e[38;5;201m$($_.liked)`e[0m"
+                      "$($bskyPreferences.LikedHighest)$($_.liked)`e[0m"
                   }
                   elseif ($_.liked -ge 500) {
-                      "`e[38;5;214m$($_.liked)`e[0m"
+                      "$($bskyPreferences.LikedHigh)$($_.liked)`e[0m"
                   }
                   elseif ($_.liked -ge 100) {
-                      "`e[38;5;105m$($_.liked)`e[0m"
+                      "$($bskyPreferences.LikedMedium)$($_.liked)`e[0m"
                   }
                   elseif ($_.liked -ge 10) {
-                      "`e[38;5;48m$($_.liked)`e[0m"
+                      "$($bskyPreferences.LikedLow)$($_.liked)`e[0m"
                   }
                   else {
                       $_.Liked
@@ -190,7 +189,7 @@ https://github.com/jdhitsolutions/PSScriptTools
               </TableColumnItem>
               <TableColumnItem>
                 <ScriptBlock>
-                "{0} [$($PSStyle.Foreground.BrightBlue+$PSStyle.Underline){1}$($PSStyle.Reset)]" -f $_.AuthorDisplay,$($PSStyle.FormatHyperLink($_.Author,$_.Url))
+                "{0} [$($bskyPreferences.Username){1}$($PSStyle.Reset)]" -f $_.AuthorDisplay,$($PSStyle.FormatHyperLink($_.Author,$_.Url))
                 </ScriptBlock>
               </TableColumnItem>
               <TableColumnItem>

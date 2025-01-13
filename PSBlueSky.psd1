@@ -3,7 +3,7 @@
 #
 @{
     RootModule           = 'PSBlueSky.psm1'
-    ModuleVersion        = '2.2.1'
+    ModuleVersion        = '2.3.0'
     CompatiblePSEditions = 'Core'
     GUID                 = 'c5c1fd1d-e648-432d-b7d6-bb56f2044c2a'
     Author               = 'Jeff Hicks'
@@ -25,12 +25,18 @@
         'Get-BskyProfile',
         'Get-BskySession',
         'Get-BskyModuleInfo',
-        'Get-BskyTimeline'
+        'Get-BskyTimeline',
+        'New-BskyFollow',
         'New-BskyPost',
         'Open-BskyHelp',
         'Publish-BskyPost',
+        'Remove-BskyFollow',
         'Start-BskySession'
-        'Update-BskySession'
+        'Update-BskySession',
+        'Get-BskyPreference',
+        'Set-BskyPreference',
+        'Export-BskyPreference',
+        'Remove-BskyPreferenceFile'
     )
     TypesToProcess       = @(
         'types/PSBlueSky.types.ps1xml'
@@ -49,12 +55,13 @@
         'formats\PSBlueskyModuleInfo.format.ps1xml'
     )
     CmdletsToExport      = ''
-    VariablesToExport    = ''
+    VariablesToExport    = 'bskyPreferences'
     AliasesToExport      = @(
         'skeet',
         'Refresh-BskySession',
         'Repost-BskyPost',
         'bshelp',
+        'bsliked',
         'bsn',
         'bsp',
         'bsfeed',
@@ -64,7 +71,9 @@
         'bsu',
         'bss',
         'bsblock',
-        'bsblocklist'
+        'bsblocklist',
+        'Follow-BskyUser',
+        'Unfollow-BskyUser'
     )
     PrivateData          = @{
         PSData = @{
@@ -73,17 +82,25 @@
             ProjectUri                 = 'https://github.com/jdhitsolutions/PSBluesky'
             IconUri                    = 'https://raw.githubusercontent.com/jdhitsolutions/PSBlueSky/main/images/BlueskyLogo-icon.png'
             ReleaseNotes               = @'
-## [2.2.1] - 2025-01-10
+## [2.3.0] - 2025-01-13
 
-See change log for v2.2.0 for major changes to this module.
+### Added
 
-### Fixed
+- Added commands `New-BskyFollow` and `Remove-BskyFollow`, with aliases `Follow-BskyUser` and `Unfollow-BskyUser` to handle following and un-following Bluesky user accounts. [[Issue #32](https://github.com/jdhitsolutions/PSBluesky/issues/32)]
+- Created a user-configurable preferences variable, `$bskyPreferences` and related commands: `Get-BskyPreference`, `Set-BskyPreference`, `Export-BskyPreference`, and `Remove-BskyPreferenceFile`. The preference variable is exported so that the formatting files can use it, but should be managed with the related functions. [[Issue #31](https://github.com/jdhitsolutions/PSBluesky/issues/31)]
+- Added alias `bsliked` for `Get-BskyLiked`.
 
-- Added `Repost-BskyPost` alias to the module manifest.
+### Changed
+
+- Updated verbose helper function to use the new formatting preferences.
+- Updated formatting files to use the new preference variable.
+- Moved all type extensions defined in the module file using `Update-TypeData` to the external types.ps1xml file.
+- Updated `README.md`.
+- Updated help documentation.
+- Updated module to remove additional types on module removal.
 '@
             RequireLicenseAcceptance   = $false
             ExternalModuleDependencies = @()
         } # End of PSData hashtable
     } # End of PrivateData hashtable
-
 }

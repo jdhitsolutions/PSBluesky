@@ -5,7 +5,7 @@
 Function Get-BskyLiked {
     [cmdletbinding(DefaultParameterSetName = 'Limit')]
     [OutputType('PSBlueskyLikedItem')]
-
+    [alias('bsliked')]
     Param(
         [Parameter(
             ParameterSetName = 'Limit',

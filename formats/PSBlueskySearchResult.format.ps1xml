@@ -16,7 +16,7 @@ https://github.com/jdhitsolutions/PSScriptTools
       </ViewSelectedBy>
       <GroupBy>
         <ScriptBlock>
-        "{0} [$($PSStyle.Foreground.Brightblue+$PSStyle.Underline){1}$($PSStyle.Reset)]" -f $_.DisplayName,$($PSStyle.FormatHyperLink($_.UserName,$_.Url))
+        "{0} [$($bskyPreferences.Username){1}$($PSStyle.Reset)]" -f $_.DisplayName,$($PSStyle.FormatHyperLink($_.UserName,$_.Url))
         </ScriptBlock>
         <Label>Username</Label>
       </GroupBy>
@@ -39,10 +39,6 @@ https://github.com/jdhitsolutions/PSScriptTools
           <TableRowEntry>
             <Wrap />
             <TableColumnItems>
-              <!--
-            By default the entries use property names, but you can replace them with scriptblocks.
-            <ScriptBlock>$_.foo /1mb -as [int]</ScriptBlock>
--->
               <TableColumnItem>
                 <PropertyName>Created</PropertyName>
               </TableColumnItem>

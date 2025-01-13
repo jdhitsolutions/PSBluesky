@@ -62,4 +62,38 @@ Created 10/27/2024 14:10:07
       </ScriptProperty>
     </Members>
   </Type>
+  <Type>
+    <Name>PSBlueskySession</Name>
+    <Members>
+      <AliasProperty>
+        <Name>UserName</Name>
+        <ReferencedMemberName>handle</ReferencedMemberName>
+      </AliasProperty>
+      <AliasProperty>
+        <Name>AccessToken</Name>
+        <ReferencedMemberName>AccessJwt</ReferencedMemberName>
+      </AliasProperty>
+      <AliasProperty>
+        <Name>RefreshToken</Name>
+        <ReferencedMemberName>RefreshJwt</ReferencedMemberName>
+      </AliasProperty>
+      <ScriptProperty>
+        <Name>Age</Name>
+        <GetScriptBlock> (Get-Date) - $this.Date </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptMethod>
+        <Name>Refresh</Name>
+        <Script>Update-BskySession -RefreshToken $this.RefreshJwt</Script>
+      </ScriptMethod>
+    </Members>
+  </Type>
+  <Type>
+    <Name>PSBlueskySearchResult</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>Age</Name>
+        <GetScriptBlock> (Get-Date) - $this.Created </GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
 </Types>

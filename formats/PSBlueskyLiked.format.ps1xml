@@ -13,7 +13,7 @@
                         <CustomItem>
                             <ExpressionBinding>
                                 <ScriptBlock>
-                                "{0} [$($PSStyle.Foreground.BrightBlue+$PSStyle.Underline){1}$($PSStyle.Reset)]" -f $_.AuthorDisplay,$($PSStyle.FormatHyperLink($_.Author,$_.Url))
+                                "{0} [$($bskyPreferences.Username){1}$($PSStyle.Reset)]" -f $_.AuthorDisplay,$($PSStyle.FormatHyperLink($_.Author,$_.Url))
                                 </ScriptBlock>
                             </ExpressionBinding>
                             <NewLine/>
@@ -21,29 +21,29 @@
                             <ExpressionBinding>
                                 <ScriptBlock>
                                 if ($_.IsRepost) {
-                                    $fg = $PSStyle.Foreground.Cyan
+                                    $fg = $bskyPreferences.IsRepost
                                 }
                                 else {
-                                    $fg = $PSStyle.Foreground.BrightGreen
+                                    $fg = $PSStyle.Foreground.White
                                 }
-                                "{0}{1}{2}" -f ($fg+$PSStyle.Italic),($PSStyle.FormatHyperLink($_.Text,$_.url)),$PSStyle.Reset
+                                "{0}{1}{2}" -f $fg,($PSStyle.FormatHyperLink($_.Text,$_.url)),$PSStyle.Reset
                                 </ScriptBlock>
                             </ExpressionBinding>
                             <NewLine/>
                             <ExpressionBinding>
                                 <ScriptBlock>
                                     $_ | Format-Table -property Date, @{Name='Liked';Expression={
-                                            if ($_.Liked -ge 1000) {
-                                            "`e[38;5;201m$($_.liked)`e[0m"
+                                        if ($_.Liked -ge 1000) {
+                                            "$($bskyPreferences.LikedHighest)$($_.liked)`e[0m"
                                         }
                                         elseif ($_.liked -ge 500) {
-                                            "`e[38;5;214m$($_.liked)`e[0m"
+                                            "$($bskyPreferences.LikedHigh)$($_.liked)`e[0m"
                                         }
                                         elseif ($_.liked -ge 100) {
-                                            "`e[38;5;105m$($_.liked)`e[0m"
+                                            "$($bskyPreferences.LikedMedium)$($_.liked)`e[0m"
                                         }
                                         elseif ($_.liked -ge 10) {
-                                            "`e[38;5;48m$($_.liked)`e[0m"
+                                            "$($bskyPreferences.LikedLow)$($_.liked)`e[0m"
                                         }
                                         else {
                                             $_.Liked
@@ -93,21 +93,21 @@
                         <TableColumnItems>
                             <TableColumnItem>
                                 <ScriptBlock>
-                  if ($_.Liked -ge 1000) {
-                      "`e[38;5;201m$($_.liked)`e[0m"
-                  }
-                  elseif ($_.liked -ge 500) {
-                      "`e[38;5;214m$($_.liked)`e[0m"
-                  }
-                  elseif ($_.liked -ge 100) {
-                      "`e[38;5;105m$($_.liked)`e[0m"
-                  }
-                  elseif ($_.liked -ge 10) {
-                      "`e[38;5;48m$($_.liked)`e[0m"
-                  }
-                  else {
-                      $_.Liked
-                  }
+                                    if ($_.Liked -ge 1000) {
+                                        "$($bskyPreferences.LikedHighest)$($_.liked)`e[0m"
+                                    }
+                                    elseif ($_.liked -ge 500) {
+                                        "$($bskyPreferences.LikedHigh)$($_.liked)`e[0m"
+                                    }
+                                    elseif ($_.liked -ge 100) {
+                                        "$($bskyPreferences.LikedMedium)$($_.liked)`e[0m"
+                                    }
+                                    elseif ($_.liked -ge 10) {
+                                        "$($bskyPreferences.LikedLow)$($_.liked)`e[0m"
+                                    }
+                                    else {
+                                        $_.Liked
+                                    }
                                 </ScriptBlock>
                             </TableColumnItem>
                             <TableColumnItem>
@@ -115,13 +115,12 @@
                             </TableColumnItem>
                             <TableColumnItem>
                                 <ScriptBlock>
-                "{0} [$($PSStyle.Foreground.BrightBlue+$PSStyle.Underline){1}$($PSStyle.Reset)]" -f $_.AuthorDisplay,$($PSStyle.FormatHyperLink($_.Author,$_.Url))
+                                    "{0} [$($bskyPreferences.Username){1}$($PSStyle.Reset)]" -f $_.AuthorDisplay,$($PSStyle.FormatHyperLink($_.Author,$_.Url))
                                 </ScriptBlock>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <ScriptBlock>
-                  $fg = $PSStyle.Foreground.BrightYellow
-                  "{0} {1}{2}" -f ($fg+$PSStyle.Italic),($PSStyle.FormatHyperLink($_.Text,$_.url)),$PSStyle.Reset
+                                    "{0} {1}{2}" -f ($bskyPreferences.Message),($PSStyle.FormatHyperLink($_.Text,$_.url)),$PSStyle.Reset
                                 </ScriptBlock>
                             </TableColumnItem>
                         </TableColumnItems>

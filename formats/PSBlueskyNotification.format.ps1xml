@@ -56,7 +56,7 @@ https://github.com/jdhitsolutions/PSScriptTools
                     "reply" {'↩ '}
                     "default" {$_.notification}
                   }
-                  "$($PSStyle.Foreground.BrightGreen){0}$($PSStyle.Reset) $($PSStyle.Italic){1}$($PSStyle.Reset)" -f $glyph,$($PSStyle.FormatHyperLink($Name,$_.AuthorUrl))
+                  "{0} $($bskyPreferences.Username){1}$($PSStyle.Reset)" -f $glyph,$($PSStyle.FormatHyperLink($Name,$_.AuthorUrl))
                 </ScriptBlock>
               </TableColumnItem>
                <TableColumnItem>
