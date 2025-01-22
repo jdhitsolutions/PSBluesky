@@ -5,33 +5,30 @@ online version:
 schema: 2.0.0
 ---
 
-# Remove-BskyPreferenceFile
+# Unblock-BskyUser
 
 ## SYNOPSIS
 
-Delete the user's PSBlueSky preference file.
+Unblock a Bluesky user account.
 
 ## SYNTAX
 
 ```yaml
-Remove-BskyPreferenceFile [-WhatIf] [-Confirm] [<CommonParameters>]
+Unblock-BskyUser [[-UserName] <String>] [-Passthru] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-If you have exported your PSBlueSky preference settings, you can delete the file with this command. The next time you import the PSBlueSky module, you will get the default preference settings. If you uninstall the PSBlueSky module, you should run this command first. Otherwise, you will need to manually delete the preference file.
-
-This command and the bskyPreference variable were introduced in PSBluesky v2.3.0.
+Use this command to unblock a Bluesky user account.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> Remove-BskyPreferenceFile
+PS C:\> Unblock-BskyUser -UserName "PooBar1234.bsky.social"
 ```
-
-You will get a warning if no preference file is found.
 
 ## PARAMETERS
 
@@ -48,6 +45,38 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Passthru
+
+Write the API response to the pipeline.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UserName
+
+Enter the profile or user name.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases: Profile
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
@@ -74,14 +103,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+### System.String
 
 ## OUTPUTS
 
 ### None
 
+### PSObject
+
 ## NOTES
 
 ## RELATED LINKS
 
-[Export-BskyPreference](Export-BskyPreference.md)
+[Block-BskyUser](Block-BskyUser.md)

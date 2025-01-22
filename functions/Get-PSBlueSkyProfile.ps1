@@ -64,6 +64,7 @@ Function Get-BskyProfile {
                     ResponseHeadersVariable = 'rh'
                 }
                 $bSkyProfile = Invoke-RestMethod @splat
+                _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
                 Write-Information -MessageData $rh -Tags ResponseHeader
                 If ($bSkyProfile) {
                     Write-Information -MessageData $bSkyProfile -Tags raw
@@ -80,6 +81,8 @@ Function Get-BskyProfile {
                         Lists       = $bSkyProfile.associated.lists
                         URL         = "https://bsky.app/profile/$($bSkyProfile.handle)"
                         DID         = $bSkyProfile.did
+                        Viewer      = $bSkyProfile.viewer
+                        Labels     = $bSkyProfile.labels.val
                     }
                 }
                 else {

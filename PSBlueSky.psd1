@@ -3,16 +3,17 @@
 #
 @{
     RootModule           = 'PSBlueSky.psm1'
-    ModuleVersion        = '2.3.0'
+    ModuleVersion        = '2.4.0'
     CompatiblePSEditions = 'Core'
     GUID                 = 'c5c1fd1d-e648-432d-b7d6-bb56f2044c2a'
     Author               = 'Jeff Hicks'
     CompanyName          = 'JDH Information Technology Solutions, Inc.'
     Copyright            = '(c)2024-2025 JDH Information Technology Solutions, Inc.'
-    Description          = 'A set of PowerShell commands that use the Bluesky API. You can skeet and upload images from a PowerShell prompt. This module is written for PowerShell 7 and uses features like $PSStyle.'
+    Description          = 'A set of PowerShell commands that use the Bluesky AT Proto API. You can post and upload images from a PowerShell prompt, as well as get your timeline, feed, followers, and more. Run Open-BskyHelp after installation to launch a PDF guide. This module is written for PowerShell 7 and uses features like $PSStyle.'
     PowerShellVersion    = '7.4'
     FunctionsToExport    = @(
         'Add-BskyImage',
+        'Block-BskyUser',
         'Find-BskyUser',
         'Get-BskyAccountDID',
         'Get-BskyBlockedList'
@@ -36,7 +37,13 @@
         'Get-BskyPreference',
         'Set-BskyPreference',
         'Export-BskyPreference',
-        'Remove-BskyPreferenceFile'
+        'Remove-BskyPreferenceFile',
+        'Enable-BskyLogging',
+        'Disable-BskyLogging',
+        'Get-BskyLogging',
+        'Remove-BskyLogging',
+        'Set-BskyLogging',
+        'Unblock-BskyUser'
     )
     TypesToProcess       = @(
         'types/PSBlueSky.types.ps1xml'
@@ -55,7 +62,7 @@
         'formats\PSBlueskyModuleInfo.format.ps1xml'
     )
     CmdletsToExport      = ''
-    VariablesToExport    = 'bskyPreferences'
+    VariablesToExport    = @('bskyPreferences','PDSHost')
     AliasesToExport      = @(
         'skeet',
         'Refresh-BskySession',
@@ -77,27 +84,31 @@
     )
     PrivateData          = @{
         PSData = @{
-            Tags                       = @('Bluesky', 'skeet','API', 'adprotocol')
+            Tags                       = @('Bluesky', 'skeet','API', 'atprotocol','atproto')
             LicenseUri                 = 'https://github.com/jdhitsolutions/PSBlueSky/blob/main/LICENSE.txt'
             ProjectUri                 = 'https://github.com/jdhitsolutions/PSBluesky'
             IconUri                    = 'https://raw.githubusercontent.com/jdhitsolutions/PSBlueSky/main/images/BlueskyLogo-icon.png'
             ReleaseNotes               = @'
-## [2.3.0] - 2025-01-13
+## [2.4.0] - 2025-01-22
 
 ### Added
 
-- Added commands `New-BskyFollow` and `Remove-BskyFollow`, with aliases `Follow-BskyUser` and `Unfollow-BskyUser` to handle following and un-following Bluesky user accounts. [[Issue #32](https://github.com/jdhitsolutions/PSBluesky/issues/32)]
-- Created a user-configurable preferences variable, `$bskyPreferences` and related commands: `Get-BskyPreference`, `Set-BskyPreference`, `Export-BskyPreference`, and `Remove-BskyPreferenceFile`. The preference variable is exported so that the formatting files can use it, but should be managed with the related functions. [[Issue #31](https://github.com/jdhitsolutions/PSBluesky/issues/31)]
-- Added alias `bsliked` for `Get-BskyLiked`.
+- Added property `DID` to follower objects.
+- Added a script method called `CreateHeader` to the Bluesky session object (`bskySession`). This header can be used with the Bluesky API for custom testing or development.
+- Added commands `Block-BskyUser` and `Unblock-BskyUser`.
+- Added properties `Viewer` and `Labels` to profile objects including blocked user profiles.
+- Added a feature to create a log of API usage. Added properties `bskyLoggingEnabled` and `bskyLogFile` to the PSBluesky session object. The log is a JSON file of structured data. Logging is disabled by default on module import. Commands `Disable-BskyLogging`,`Enable-BskyLogging`,`Get-BskyLogging`,`Set-BskyLogging` and `Remove-BskyLogging` have been added to manage this feature.
+- Added properties `isRead`, `Labels`, and `SeenAt` to`PSBlueSkyNotification` object. [[Issue #34](https://github.com/jdhitsolutions/PSBluesky/issues/34)]
+- Added an alias property of `Username` for `AuthorHandle` on output from `Get-BskyNotification`.
 
 ### Changed
 
-- Updated verbose helper function to use the new formatting preferences.
-- Updated formatting files to use the new preference variable.
-- Moved all type extensions defined in the module file using `Update-TypeData` to the external types.ps1xml file.
+- Revised the module manifest description.
+- Increased the refresh interval for the session runspace to 60 minutes. This should reduce the number of API calls. __This is a potential breaking change,__
+- Cleaned up code to ensure consistency with commands. References to an endpoint should all use the same variable, `$apiUrl`. Responses from the API should all use the `$response` variable.
+- Updated `Get-BskyBlockedUser` and the associated format file to show the date the account was blocked.
+- Help updates.
 - Updated `README.md`.
-- Updated help documentation.
-- Updated module to remove additional types on module removal.
 '@
             RequireLicenseAcceptance   = $false
             ExternalModuleDependencies = @()

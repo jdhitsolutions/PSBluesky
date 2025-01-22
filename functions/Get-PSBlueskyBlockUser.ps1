@@ -55,6 +55,7 @@ Function Get-BskyBlockedUser {
 
             $results = @()
             $response = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers -ResponseHeadersVariable rh
+            _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
             Write-Information -MessageData $rh -Tags ResponseHeader
             If ($response) {
                 $results += $response.blocks
@@ -65,6 +66,7 @@ Function Get-BskyBlockedUser {
                     while ($response.cursor) {
                         $url = $apiUrl + "&cursor=$($response.cursor)"
                         $response = Invoke-RestMethod -Uri $url -Method Get -Headers $headers
+                        _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
                         If ($response.followers) {
                             Write-Information -MessageData $response -Tags raw
                             $results += $response.followers
@@ -72,6 +74,13 @@ Function Get-BskyBlockedUser {
                     }
                 } #If All
                 foreach ($profile in $results) {
+                    #get the blocked record to retrieve the blocked date
+                    $rkey = $profile.viewer.blocking.split('/')[-1]
+                    $apiUrl = "$PDSHost/xrpc/com.atproto.repo.getRecord?repo=$did&collection=app.bsky.graph.block&rkey=$rkey"
+                    $record = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers
+                    _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
+                    Write-Information -MessageData $record -Tags raw
+                    $BlockedAt = $record.value.createdAt.ToLocalTime()
                     [PSCustomObject]@{
                         PSTypeName  = 'PSBlueskyBlockedUser'
                         Username    = $profile.handle
@@ -81,6 +90,8 @@ Function Get-BskyBlockedUser {
                         Labels      = $profile.labels.val
                         URL         = "https://bsky.app/profile/$($profile.handle)"
                         DID         = $profile.did
+                        Viewer      = $profile.viewer
+                        Blocked     = $BlockedAt
                     }
                 }
             } #if response

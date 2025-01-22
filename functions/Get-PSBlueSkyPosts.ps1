@@ -71,15 +71,16 @@ Function Get-BskyFeed {
             _verbose $apiUrl
 
             Try {
-                $feed = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers -ErrorAction Stop -ResponseHeadersVariable rh
+                $response = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers -ErrorAction Stop -ResponseHeadersVariable rh
+                _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
                 Write-Information -MessageData $rh -Tags ResponseHeader
             }
             Catch {
                 Write-Warning ($strings.FailFeed -f $username, $_.Exception.Message)
             }
-            if ($Feed) {
-                Write-Information -MessageData $feed -Tags raw
-                foreach ($post in $feed.feed.post) {
+            if ($response) {
+                Write-Information -MessageData $response -Tags raw
+                foreach ($post in $response.feed.post) {
                     [PSCustomObject]@{
                         PSTypeName    = 'PSBlueskyFeedItem'
                         Text          = $post.record.text

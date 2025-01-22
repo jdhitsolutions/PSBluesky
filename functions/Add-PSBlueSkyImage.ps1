@@ -46,12 +46,13 @@ Function Add-BskyImage {
         if ($headers) {
             $imageBytes = [System.IO.File]::ReadAllBytes($ImagePath)
             _verbose -message ($strings.UploadImage -f $ImagePath, $ImageAlt)
-            $uploadUrl = "$PDSHOST/xrpc/com.atproto.repo.uploadBlob"
+            $apiUrl = "$PDSHOST/xrpc/com.atproto.repo.uploadBlob"
 
             if ($PSCmdlet.ShouldProcess($ImagePath, 'Upload Bluesky image')) {
-                $response = Invoke-RestMethod -Uri $uploadUrl -Method Post -Headers $headers -Body $imageBytes -ResponseHeadersVariable rh
+                $response = Invoke-RestMethod -Uri $apiUrl -Method Post -Headers $headers -Body $imageBytes -ResponseHeadersVariable rh
                 Write-Information -MessageData $rh -Tags ResponseHeader
                 Write-Information -MessageData $response -Tags raws
+                _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
                 [PSCustomObject]@{
                     PSTypeName = 'PSBlueskyImageUpLoad'
                     Type       = $response.blob.'$type'
@@ -59,7 +60,7 @@ Function Add-BskyImage {
                     MimeType   = $response.blob.mimeType
                     Size       = $response.blob.size
                 }
-            }    #WhatIf
+            } #WhatIf
         }
     } #process
     End {

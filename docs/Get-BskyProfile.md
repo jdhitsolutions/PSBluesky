@@ -21,6 +21,8 @@ Get-BskyProfile [[-UserName] <String>] [<CommonParameters>]
 
 Use this command to retrieve a Bluesky profile. The default will be your profile based on the credential you used to start your Bluesky session, but you can get any profile if you know the user name. The user name is case-sensitive. The default output includes clickable links.
 
+Note the the Followers property may not be 100% accurate. This counter may not properly reflect accounts that have stopped following you. The way that Bluesky is handling bot accounts may also affect this count.
+
 ## EXAMPLES
 
 ### Example 1

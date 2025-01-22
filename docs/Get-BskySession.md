@@ -21,6 +21,8 @@ Get-BskySession [<CommonParameters>]
 
 This command will display API information about your current Bluesky session. The object will be created when your run any module command or create a Bluesky access token. The output object includes alias properties you might find helpful. This is useful for troubleshooting and debugging but otherwise, you shouldn't need to use this command.
 
+The session object will refresh the access token every 60 minutes.
+
 ## EXAMPLES
 
 ### Example 1
@@ -40,6 +42,7 @@ Default output is a formatted table. Pipe the command to Select-Object to see al
 ## PARAMETERS
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS

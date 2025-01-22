@@ -34,16 +34,17 @@ Function Update-BskySession {
             Authorization  = "Bearer $RefreshToken"
             'Content-Type' = 'application/json'
         }
-        $RefreshUrl = "$PDSHost/xrpc/com.atproto.server.refreshSession"
+        $apiUrl = "$PDSHost/xrpc/com.atproto.server.refreshSession"
         Try {
             $splat = @{
-                Uri                     = $RefreshUrl
+                Uri                     = $apiUrl
                 Method                  = 'Post'
                 Headers                 = $headers
                 ErrorAction             = 'Stop'
                 ResponseHeadersVariable = 'rh'
             }
             $script:BSkySession = Invoke-RestMethod @splat
+            _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
             Write-Information -MessageData $rh -Tags ResponseHeader
             $script:accessJwt = $script:BSkySession.accessJwt
             $script:refreshJwt = $script:BSkySession.refreshJwt
@@ -60,5 +61,4 @@ Function Update-BskySession {
         $PSDefaultParameterValues['_verbose:block'] = 'End'
         _verbose $strings.Ending
     } #end
-
 }

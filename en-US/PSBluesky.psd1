@@ -3,6 +3,7 @@
 ConvertFrom-StringData @'
 AddFacets = Adding facets to record
 AddLabel = Adding image label {0}
+BlockingUser = Blocking user account {0}
 DefineSyncHash = Defining synchronized hashtable
 Ending = Ending PSBluesky module command
 ExportPref = Exporting module preferences to {0}
@@ -36,10 +37,11 @@ MissingAlt = You must provide ALT text for the image!
 NewFacet = Creating a new {0} facet for [{1}] in '{2}'
 NewRunspace = Creating a new background runspace
 NewSession = Creating a new Bluesky session for {0}
+NoLogFile = Logging file {0} was not found.
 NoPost = You need to specify a message or an image!
 NoPrefFile = No module preferences file found.
 NoSearchResults = No results found for {0}
-NoSession = No Bluesky session detected. Run Start-BskySession to initialize a session.
+NoSession = No active Bluesky session detected. Run Start-BskySession to initialize a session.
 NotFollowing = You do not appear to be following {0}
 OpenMarkdownHelp = Opening the help file as markdown
 OpenPDFHelp = Attempting to open {0} with the default PDF viewer

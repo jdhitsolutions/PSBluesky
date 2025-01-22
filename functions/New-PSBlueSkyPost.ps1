@@ -155,6 +155,7 @@ Function New-BskyPost {
                     Throw $strings.MissingAlt
                 }
                 $image = Add-BskyImage -ImagePath $ImagePath -ImageAlt $ImageAlt
+
                 Write-Information -MessageData $image -Tags raw
                 if ($WhatIfPreference) {
                     #don't do anything
@@ -212,6 +213,7 @@ Function New-BskyPost {
 
             if ($PSCmdlet.ShouldProcess($Message, 'Post to Bluesky')) {
                 $response = Invoke-RestMethod -Uri $apiUrl -Method Post -Headers $headers -Body $body
+                _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
                 _convertAT -at $response.uri
                 Write-Information -MessageData $response -Tags raw
             }

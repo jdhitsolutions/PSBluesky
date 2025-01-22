@@ -34,6 +34,11 @@ https://github.com/jdhitsolutions/PSScriptTools
             <Alignment>left</Alignment>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>Blocked</Label>
+            <Width>20</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>Description</Label>
             <Width>128</Width>
             <Alignment>left</Alignment>
@@ -44,7 +49,14 @@ https://github.com/jdhitsolutions/PSScriptTools
             <Wrap />
             <TableColumnItems>
               <TableColumnItem>
-                <PropertyName>Display</PropertyName>
+                <ScriptBlock>
+                  If ($_.Display.length -ge 20) {
+                    "{0}..." -f $_.Display.Substring(0,19)
+                  }
+                  else {
+                    $_.Display
+                  }
+                </ScriptBlock>
               </TableColumnItem>
               <TableColumnItem>
                  <ScriptBlock>
@@ -53,6 +65,9 @@ https://github.com/jdhitsolutions/PSScriptTools
               </TableColumnItem>
                 <TableColumnItem>
                 <PropertyName>Labels</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Blocked</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Description</PropertyName>

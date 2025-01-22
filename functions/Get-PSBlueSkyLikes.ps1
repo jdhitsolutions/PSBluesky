@@ -61,6 +61,7 @@ Function Get-BskyLiked {
 
             Try {
                 $response = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers -ErrorAction Stop -ResponseHeadersVariable rh
+                _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
                 Write-Information -MessageData $rh -Tags ResponseHeader
             }
             Catch {
@@ -76,6 +77,7 @@ Function Get-BskyLiked {
                     while ($response.feed.post.count -gt 0) {
                         $url = $apiUrl + "&cursor=$($response.cursor)"
                         $response = Invoke-RestMethod -Uri $url -Method Get -Headers $headers
+                        _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
                         If ($response.feed.post.count -gt 0) {
                             Write-Information -MessageData $response -Tags raw
                             $likes += $response.feed

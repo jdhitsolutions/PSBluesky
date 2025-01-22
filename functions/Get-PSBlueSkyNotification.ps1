@@ -50,10 +50,11 @@ Function Get-BskyNotification {
         If ($headers) {
 
             _verbose -message ($strings.GetNotification -f $limit)
-            $url = "$PDSHOST/xrpc/app.bsky.notification.listNotifications?limit=$Limit"
+            $apiUrl = "$PDSHOST/xrpc/app.bsky.notification.listNotifications?limit=$Limit"
 
             Try {
-                $response = Invoke-RestMethod -Uri $url -Method Get -Headers $headers -ErrorAction Stop -ResponseHeadersVariable rh
+                $response = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers -ErrorAction Stop -ResponseHeadersVariable rh
+                _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
                 Write-Information -MessageData $rh -Tags ResponseHeader
             }
             Catch {
@@ -100,6 +101,9 @@ Function Get-BskyNotification {
                         Subject      = $refText
                         URI          = $notification.uri
                         CID          = $notification.cid
+                        isRead       = $notification.isRead
+                        Labels       = $notification.labels.val
+                        SeenAt       = $response.SeenAt.ToLocalTime()
                     } #custom object
 
                     [Void]($all.Add($object))

@@ -64,6 +64,7 @@ Function Get-BskyFollowing {
                 ResponseHeadersVariable = 'rh'
             }
             $response = Invoke-RestMethod @splat
+            _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
             Write-Information -MessageData $rh -Tags ResponseHeader
             If ($response) {
                 $results += $response.follows
@@ -74,6 +75,7 @@ Function Get-BskyFollowing {
                     while ($response.cursor) {
                         $url = $apiUrl + "&cursor=$($response.cursor)"
                         $response = Invoke-RestMethod -Uri $url -Method Get -Headers $headers
+                        _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
                         If ($response.follows) {
                             $results += $response.follows
                         }

@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Get your Bluesky followers
+Get your Bluesky followers.
 
 ## SYNTAX
 

@@ -66,12 +66,33 @@ Date               Account                    Subject
 
 Filter the notifications to only show Follow notifications from the last 10 notifications.
 
+### Example 3
+
+```powershell
+PS C:> $f = Get-BskyNotification -Limit 50 -Filter Follow
+PS C:\> $f | Get-BskyProfile | Select-Object Display,UserName,Description
+
+Display                     Username                    Description
+-------                     --------                    -----------
+Adrian Nastase              sql-troubles.bsky.social    OPEN2WORK≫D365 F&O ...
+asmblr.bsky.social          asmblr.bsky.social
+msfollower.bsky.social      msfollower.bsky.social
+Kevin M. Sparenberg         kmsigma.com                 Technologist, speak...
+aaronmerrill-it.bsky....    aaronmerrill-it.bsky.so...
+Misty Miller ☻              mistymadonna.bsky.social    Clippy historian, ti...
+eRDECKe                     erdecke.bsky.social         Elektromobilität
+GM Natchev                  natchev.bsky.social         Bringing you the bes...
+Guy Leech                   guyrleech.bsky.social       PowerShell nut. Dog ...
+```
+
+Get recent follow notifications and pipe the results to Get-BskyProfile to get more information about the accounts.
+
 ## PARAMETERS
 
 ### -Limit
 
 Enter the number of notifications to retrieve between 1 and 100.
-Default is 50.
+Default is 50. The limit is applied before any filtering.
 
 ```yaml
 Type: Int32
@@ -89,6 +110,7 @@ Accept wildcard characters: False
 
 Enter the type of notifications to retrieve. Default is All.
 Possible values are "Like","Follow","Repost","Mention", and "Reply".
+Filtering is applied after the limit is reached.
 
 ```yaml
 Type: String
@@ -137,3 +159,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 [Get-BskyFeed](Get-BskyFeed.md)
 
 [Get-BskyTimeline](Get-BskyTimeline.md)
+
+[Get-BskyFollowers](Get-BskyFollowers.md)

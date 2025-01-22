@@ -23,12 +23,14 @@ Function Get-BskyAccountDID {
     } #begin
     Process {
         $PSDefaultParameterValues['_verbose:block'] = 'Process'
-        $url = "https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=$AccountName"
+        $apiUrl = "https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=$AccountName"
         _verbose -message ($strings.ResolveDID -f $AccountName)
 
         Try {
-            $r = Invoke-RestMethod -Uri $url -ErrorAction Stop -ErrorVariable e
-            $r.did
+            $response = Invoke-RestMethod -Uri $apiUrl -ErrorAction Stop -ErrorVariable e
+            _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
+            Write-Information -MessageData $response -Tags raw
+            $response.did
         }
         Catch {
             #convert the JSON error message

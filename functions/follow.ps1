@@ -84,6 +84,8 @@ Function New-BskyFollow {
                 _verbose ($strings.Following -f $Username)
                 if ($PSCmdlet.ShouldProcess($Username)) {
                     $response = Invoke-RestMethod -Uri $apiUrl -Method Post -Headers $headers -Body $body
+                    _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
+
                     #output should be the followed account page
                     "https://bsky.app/profile/$($FollowDid)"
                 }
@@ -183,6 +185,7 @@ Function Remove-BskyFollow {
                     ResponseHeadersVariable = 'rh'
                 }
                 $User = Invoke-RestMethod @splat
+                _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
                 Write-Information -MessageData $rh -Tags ResponseHeader
                 Write-Information -MessageData $user -Tags raw
             }
@@ -211,6 +214,7 @@ Function Remove-BskyFollow {
 
                 if ($PSCmdlet.ShouldProcess($User.handle)) {
                     $delResponse = Invoke-RestMethod @splat
+                    _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
                     Write-Information -MessageData $delResponse -Tags raw
                     if ($Passthru -AND (-Not $WhatIfPreference)) {
                         $delResponse.commit

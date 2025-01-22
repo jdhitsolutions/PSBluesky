@@ -13,7 +13,7 @@ Create a Bluesky post.
 
 ## SYNTAX
 
-```
+```yaml
 New-BskyPost [-Message] <String> [-ImagePath <String>] [-ImageAlt <String>] [-Label <String>]
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```

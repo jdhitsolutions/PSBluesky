@@ -102,6 +102,7 @@ Function Publish-BskyPost {
         Write-Information -MessageData $body -Tags raw
         if ($PSCmdlet.ShouldProcess($Uri, 'Publish to Bluesky')) {
             $response = Invoke-RestMethod -Uri $apiUrl -Method Post -Headers $headers -Body $body
+            _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
             #the URL to generate depends if this is a repost or a quote
             if ($Quote) {
                 _convertAT $response.uri

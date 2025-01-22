@@ -20,13 +20,14 @@ Function Get-BskySession {
     Process {
         $PSDefaultParameterValues['_verbose:block'] = 'Process'
         if ($script:BSkySession) {
-            _verbose ($strings.SessionFound -f $script:BSkySession.handle)
+            if ($script:BSkySession.Handle) {
+                Write-Verbose ($strings.SessionFound -f $script:BSkySession.handle)
+            }
+            else {
+                Write-Warning $strings.NoSession
+            }
             Write-Information -MessageData $script:BSkySession -tag data
             $script:BSkySession | _newSessionObject
-        }
-        else {
-            Write-Warning $strings.NoSession
-
         }
     } #process
     End {

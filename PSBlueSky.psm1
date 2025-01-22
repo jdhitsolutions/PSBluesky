@@ -13,26 +13,11 @@ else {
 }
 
 #endregion
-#region Main
+
+#region Load functions
 
 Get-ChildItem -Path $PSScriptRoot\functions\*.ps1 |
 ForEach-Object { . $_.FullName }
-
-#define module scoped variables
-$PDSHOST = 'https://bsky.social'
-<#
-initialize a caching hashtable for post texts.
-The key will be an AT value like at://did:plc:ohgsqpfsbocaaxusxqlgfvd7/app.bsky.feed.post/3larqyjbyzl2a
-and the value will the text of the post
-#>
-# 21 Nov 2024 - making this a global variable which will persist
-# between module reloads. Thanks to @ShaunLawrie for the suggestion
-if ($null -eq $global:BskyPostCache) {
-    $global:BskyPostCache = @{}
-}
-
-$ModuleVersion = (Import-PowerShellDataFile -Path $PSScriptRoot\PSBlueSky.psd1).ModuleVersion
-#write-host "importing module version $ModuleVersion" -ForegroundColor Green
 
 #register an event to remove the background session runspace
 #when the module is removed
@@ -46,10 +31,53 @@ $OnRemoveScript = {
     'PSBlueskySession', 'PSBlueskySearchResult',
     'PSBlueskyProfile', 'PSBlueskyFollowProfile',
     'PSBlueskyFeedItem', 'PSBlueskyTimelinePost' | Remove-TypeData
+    #clean up variables
+    Get-Variable -Name bsky*,PDSHost,BSkySession -Exclude BskyPostCache |
+    Remove-Variable -ErrorAction SilentlyContinue
 }
 
 $ExecutionContext.SessionState.Module.OnRemove += $OnRemoveScript
 
+#endregion
+
+#region Logging
+
+#these variables will be exported so that the user can change them
+#$bskyLoggingEnabled = $False
+[string]$bskyLogFile = Join-Path ([System.IO.Path]::GetTempPath()) bskyAPILogging.json
+
+#endregion
+
+#region variables
+#define module scoped variables
+$PDSHOST = 'https://bsky.social'
+
+$BskySession = [hashtable]::Synchronized(@{
+    Handle         = $null
+    Email          = $null
+    Active         = $False
+    AccessJwt      = $null
+    RefreshJwt     = $null
+    DiD            = $null
+    DidDoc         = $null
+    Date           = Get-Date
+    LoggingEnabled = $False
+    LogFile        = $bskyLogFile
+})
+
+<#
+initialize a caching hashtable for post texts.
+The key will be an AT value like at://did:plc:ohgsqpfsbocaaxusxqlgfvd7/app.bsky.feed.post/3larqyjbyzl2a
+and the value will the text of the post
+#>
+# 21 Nov 2024 - making this a global variable which will persist
+# between module reloads. Thanks to @ShaunLawrie for the suggestion
+if ($null -eq $global:BskyPostCache) {
+    $global:BskyPostCache = @{}
+}
+
+$ModuleVersion = (Import-PowerShellDataFile -Path $PSScriptRoot\PSBlueSky.psd1).ModuleVersion
+#write-host "importing module version $ModuleVersion" -ForegroundColor Green
 #endregion
 
 #region type updates
@@ -64,8 +92,13 @@ Update-TypeData -TypeName 'PSBlueskySession' -MemberType ScriptMethod -MemberNam
 Update-TypeData -TypeName 'PSBlueskySearchResult' -MemberType ScriptProperty -MemberName Age -Value { (Get-Date) - $this.Created } -Force
 Update-TypeData -TypeName 'PSBlueskyProfile' -MemberType ScriptProperty -MemberName Age -Value { (Get-Date) - $this.Created } -Force
 Update-TypeData -TypeName 'PSBlueskyFollowProfile' -MemberType ScriptProperty -MemberName Age -Value { (Get-Date) - $this.Created } -Force
+Update-TypeData -TypeName PSBlueskySession -MemberName CreateHeader -MemberType ScriptMethod -Value {
+    @{
+        'Authorization' = "Bearer $($this.accessJwt)"
+        'Content-Type'  = 'application/json'
+    }
+} -Force
 #>
-
 #endregion
 
 #region verbose command highlighting
@@ -143,6 +176,8 @@ else {
 
 #endregion
 
+#region Exporting
+
 #Export the variable as a global variable, otherwise the
 #formatting files can't access it. This must be done with
 ##Export-ModuleMember due to a long time bug in PowerShell
@@ -167,4 +202,7 @@ $AliasesToExport      = @(
     'Follow-BskyUser',
     'Unfollow-BskyUser'
 )
-Export-ModuleMember -Variable bskyPreferences -Alias $AliasesToExport
+$varsToExport = @('bskyPreferences','PDSHost')
+Export-ModuleMember -Variable $varsToExport -Alias $AliasesToExport
+
+#endregion

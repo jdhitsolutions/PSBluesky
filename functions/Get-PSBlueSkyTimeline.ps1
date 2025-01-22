@@ -36,25 +36,26 @@ Function Get-BskyTimeline {
         $PSDefaultParameterValues['_verbose:block'] = 'Process'
         If ($headers) {
             _verbose -message ($strings.GetTimeline -f $limit)
-            $URL = "$PDSHost/xrpc/app.bsky.feed.getTimeline?limit=$Limit"
-            _verbose $URL
+            $apiUrl = "$PDSHost/xrpc/app.bsky.feed.getTimeline?limit=$Limit"
+            _verbose $apiUrl
             Try {
                 $splat = @{
-                    Uri                     = $URL
+                    Uri                     = $apiUrl
                     Method                  = 'Get'
                     Headers                 = $headers
                     ErrorAction             = 'Stop'
                     ResponseHeadersVariable = 'rh'
                 }
-                $tl = Invoke-RestMethod @splat
+                $response = Invoke-RestMethod @splat
+                _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
                 Write-Information -MessageData $rh -Tags ResponseHeader
             }
             Catch {
                 Write-Warning ($strings.FailTimeline -f $_.Exception.Message)
             }
-            if ($tl) {
-                Write-Information -MessageData $tl -Tags raw
-                $timeline = Foreach ($item in $tl.feed) {
+            if ($response) {
+                Write-Information -MessageData $response -Tags raw
+                $timeline = Foreach ($item in $response.feed) {
                     [PSCustomObject]@{
                         PSTypeName    = 'PSBlueskyTimelinePost'
                         Author        = $item.post.author.handle

@@ -5,32 +5,40 @@ online version:
 schema: 2.0.0
 ---
 
-# New-BskyFollow
+# Block-BskyUser
 
 ## SYNOPSIS
 
-Follow a Bluesky user.
+Block a Bluesky user account.
 
 ## SYNTAX
 
+### User (Default)
+
 ```yaml
-New-BskyFollow [[-UserName] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Block-BskyUser [[-UserName] <String>] [-Passthru] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
+```
+
+### Input
+
+```yaml
+Block-BskyUser [[-InputObject] <Object>] [-Passthru] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Use this command to follow a Bluesky user. The user will get a notification that you have followed them.
+Use this account to block a Bluesky user account. You can specify an account username or pipe a profile object to the function.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> New-BskyFollow thedavecarroll.com -Verbose
-https://bsky.app/profile/did:plc:rlwd5iajr3btl5e7gyvfwk67
+PS C:\> Block-BskyUser -UserName "PooBar1234.bsky.social"
 ```
 
-The output is a link to the followed user's profile.
 
 ## PARAMETERS
 
@@ -50,19 +58,51 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -InputObject
+
+A Bluesky profile object.
+
+```yaml
+Type: Object
+Parameter Sets: Input
+Aliases:
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Passthru
+
+Write the API response to the pipeline.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -UserName
 
 Enter the profile or user name.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: User
 Aliases: Profile
 
 Required: False
 Position: 0
 Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -91,18 +131,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.String
 
+### System.Object
+
 ## OUTPUTS
 
-### String
+### None
+
+### PSObject
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Get-BskyProfile](Get-BskyProfile.md)
-
-[Get-BskyFollowers](Get-BskyFollowers.md)
-
-[Get-BskyFollowing](Get-BskyFollowing.md)
-
-[Remove-BskyFollow](Remove-BskyFollow.md)
+[Unblock-BskyUser](Unblock-BskyUser.md)

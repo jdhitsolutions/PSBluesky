@@ -2,7 +2,6 @@
 
 [![PSGallery Version](https://img.shields.io/powershellgallery/v/PSBluesky.png?style=for-the-badge&label=PowerShell%20Gallery)](https://www.powershellgallery.com/packages/PSBluesky/) [![PSGallery Downloads](https://img.shields.io/powershellgallery/dt/PSBluesky.png?style=for-the-badge&label=Downloads)](https://www.powershellgallery.com/packages/PSBluesky/)
 
-
 ![](images/BlueskyLogo-small.png)
 
 This module is a set of PowerShell functions designed to let you interact with the Bluesky API from a PowerShell session. Technically, the module commands are wrappers around the [AT protocol](https://docs.bsky.app/docs/category/http-reference). The module is written for *__PowerShell 7__*, although it might work as written in Windows PowerShell with minimal changes if you wish to fork the GitHub repository. Commands *have not* been thoroughly tested for cross-platform compatibility, so please post an Issue if you encounter a problem.
@@ -25,45 +24,54 @@ Or using `Install-PSResource` from the [Microsoft.PowerShell.PSResourceGet](http
 Install-PSResource -Name PSBluesky -Repository PSGallery -TrustRepository
 ```
 
-You might want to also install the following modules or related modules to securely store your Bluesky credentials:
+You might want to also install the following or related modules to securely store your Bluesky credentials:
 
 - [Microsoft.PowerShell.SecretManagement]( https://github.com/powershell/secretmanagement)
 - [Microsoft.PowerShell.SecretStore](https://github.com/powershell/secretstore)
 
+## Module Information
+
 After installing this module, you should end up with these PSBluesky commands:
 
-- [Add-BskyImage](docs/Add-BskyImage.md)
-- [Find-BskyUser](docs/Find-BskyUser.md)
-- [Get-BskyAccountDID](docs/Get-BskyAccountDID.md)
-- [Get-BskyBlockedList](docs/Get-BskyBlockedList.md)
-- [Get-BskyBlockedUser](docs/Get-BskyBlockedUser.md)
-- [Get-BskyFeed](docs/Get-BskyFeed.md)
-- [Get-BskyFollowers](docs/Get-BskyFollowers.md)
-- [Get-BskyFollowing](docs/Get-BskyFollowing.md)
-- [Get-BskyLiked](docs/Get-BskyLiked.md)
-- [Get-BskyModuleInfo](docs/Get-BskyModuleInfo.md)
-- [Get-BskyNotification](docs/Get-BskyNotification.md)
-- [Get-BskyProfile](docs/Get-BskyProfile.md)
-- [Get-BskySession](docs/Get-BskySession.md)
-- [Get-BskyTimeline](docs/Get-BskyTimeline.md)
-- [New-BskyFollow](docs/New-BskyFollow.md)
-- [New-BskyPost](docs/New-BskyPost.md)
-- [Open-BskyHelp](docs/Open-BskyHelp.md)
-- [Publish-BskyPost](docs/Publish-BskyPost.md)
-- [Remove-BskyFollow](docs/Remove-BskyFollow.md)
-- [Start-BskySession](docs/Start-BskySession.md)
-- [Update-BskySession](docs/Update-BskySession.md)
+|         |         |         |
+|---------|---------|---------|
+| [Add-BskyImage](docs/Add-BskyImage.md) | [Block-BskyUser](docs/Block-BskyUser.md) |
+| [Disable-BskyLogging](docs/Disable-BskyLogging.md) | [Enable-BskyLogging](docs/Enable-BskyLogging.md) |
+| [Export-BskyPreference](docs/Export-BskyPreference.md) | [Find-BskyUser](docs/Find-BskyUser.md) |
+| [Get-BskyAccountDID](docs/Get-BskyAccountDID.md) | [Get-BskyBlockedList](docs/Get-BskyBlockedList.md) |
+| [Get-BskyBlockedUser](docs/Get-BskyBlockedUser.md) | [Get-BskyFeed](docs/Get-BskyFeed.md) |
+| [Get-BskyFollowers](docs/Get-BskyFollowers.md) | [Get-BskyFollowing](docs/Get-BskyFollowing.md) |
+| [Get-BskyLiked](docs/Get-BskyLiked.md) | [Get-BskyLogging](docs/Get-BskyLogging.md) |
+| [Get-BskyModuleInfo](docs/Get-BskyModuleInfo.md) | [Get-BskyNotification](docs/Get-BskyNotification.md) |
+| [Get-BskyPreference](docs/Get-BskyPreference.md) | [Get-BskyProfile](docs/Get-BskyProfile.md) |
+| [Get-BskySession](docs/Get-BskySession.md) | [Get-BskyTimeline](docs/Get-BskyTimeline.md) |
+| [New-BskyFollow](docs/New-BskyFollow.md) | [New-BskyPost](docs/New-BskyPost.md) |
+| [Open-BskyHelp](docs/Open-BskyHelp.md) | [Publish-BskyPost](docs/Publish-BskyPost.md) |
+| [Remove-BskyFollow](docs/Remove-BskyFollow.md) | [Remove-BskyLogging](docs/Remove-BskyLogging.md) |
+| [Remove-BskyPreferenceFile](docs/Remove-BskyPreferenceFile.md) | [Set-BskyLogging](docs/Set-BskyLogging.md) |
+| [Set-BskyPreference](docs/Set-BskyPreference.md) | [Start-BSkySession](docs/Start-BSkySession.md) |
+| [Unblock-BskyUser](docs/Unblock-BskyUser.md) | [Update-BskySession](docs/Update-BskySession.md) |
 
-After importing the module you can run `Open-BskyHelp` which will open a PDF version of this document in the default application associated with PDF files. Or you can use the -`AsMarkdown` parameter to read this file using markdown formatting. Not all markdown features may properly render in the console.
 
-You can use `Get-BskyModuleInfo` to get a summary of the module. The default output includes clickable links to online command help and the module's GitHub repository.
+### Open-BskyHelp
 
-```text
+After importing the module you can run [`Open-BskyHelp`](docs/Open-BskyHelp.md) which will open a PDF version of this document in the default application associated with PDF files. Note that not all emojis will render properly in the PDF. Or you can use the -`AsMarkdown` parameter to read this file using markdown formatting. Not all Markdown features may properly render in the console.
+
+### Get-BskyModuleInfo
+
+You can use [`Get-BskyModuleInfo`](docs/Get-BskyModuleInfo.md) to get a summary of the module. The default output includes clickable links to online command help and the module's GitHub repository.
+
+```dos
 PS C:\> Get-BskyModuleInfo
+
+   Module: PSBlueSky [v2.4.0]
 
 Name                      Alias               Synopsis
 ----                      -----               --------
 Add-BskyImage                                 Upload an image to Bluesky.
+Block-BskyUser                                Block a Bluesky user account.
+Disable-BskyLogging                           Disable BlueSky API logging.
+Enable-BskyLogging                            Enable BlueSky API logging.
 Export-BskyPreference                         Export your PSBlueSky format...
 Find-BskyUser             bsu                 Search for Bluesky user accou...
 Get-BskyAccountDID                            Resolve a Bluesky account nam...
@@ -73,6 +81,7 @@ Get-BskyFeed              bsfeed              Get your Bluesky feed.
 Get-BskyFollowers         bsfollower          Get your Bluesky followers
 Get-BskyFollowing         bsfollow            Get a list of Bluesky accounts...
 Get-BskyLiked             bsliked             Get your liked Bluesky posts.
+Get-BskyLogging                               Getting the current PSBlueSky ...
 Get-BskyModuleInfo                            Get a summary of the PSBlueSky...
 Get-BskyNotification      bsn                 Get Bluesky notifications.
 Get-BskyPreference                            Get PSBlueSky formatting prefe...
@@ -84,11 +93,15 @@ New-BskyPost              skeet               Create a Bluesky post.
 Open-BskyHelp             bshelp              Open the PSBluesky help document.
 Publish-BskyPost          Repost-BskyPost     Repost or quote a Bluesky post.
 Remove-BskyFollow         Unfollow-BskyUser   Unfollow a Bluesky user.
-Remove-BskyPreferenceFile                     Delete the user's PSBlueSky pre...
+Remove-BskyPreferenceFile                     Delete the user’s PSBlueSky pre...
+Set-BskyLogging                               Configure PSBlueSky API logging.
 Set-BskyPreference                            Set a PSBlueSky formatting pref...
 Start-BSkySession                             Start a new Bluesky session.
+Unblock-BskyUser                              Unblock a Bluesky user account.
 Update-BskySession        Refresh-BskySession Refresh the Bluesky session token.
 ```
+
+The output will include clickable links to the online help for each command.
 
 ## Authentication
 
@@ -100,13 +113,13 @@ Update-BskySession        Refresh-BskySession Refresh the Bluesky session token.
 Start-BskySession -credential $cred
 ```
 
-The credential should be a PSCredential object representing your Bluesky username (handle) and password. (*See below*)
+The credential must be a PSCredential object representing your Bluesky username (handle) and password. (*See below*)
 
-This command will create a hidden session object that will be called from other module commands to get the necessary authentication token for the `Invoke-ResetMethod` header. The access token has a limited lifetime unless it is refreshed. Beginning with version 1.2.0, the module will refresh the token every 15 minutes through a background runspace using a synchronized hashtable. If you remove the module, the runspace will be removed as well.
+This command will create a hidden session object that will be called from other module commands to get the necessary authentication token for the `Invoke-ResetMethod` header. The access token has a limited lifetime unless it is refreshed. Beginning with version 2.4.0, the module will refresh the token every 60 minutes through a background runspace using a synchronized hashtable. If you remove the module, the runspace will be removed as well.
 
 Run `Get-BskySession` to see your current session information.
 
-```powershell
+```dos
 PS C:\> Get-BskySession
 
    User: jdhitsolutions.com
@@ -118,7 +131,7 @@ True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:05:41.5115796
 
 If you want to manually test the Bluesky API in your own code, you can use the access and refresh token properties from this object.
 
-```powershell
+```dos
 PS C:\> $bskySession = Get-BskySession
 PS C:\> $access = $bskySession.AccessToken
 PS C:\> $refresh = $bskySession.RefreshToken
@@ -144,7 +157,7 @@ $PSDefaultParameterValues['*-Bsky*:Credential'] = $BlueskyCredential
 
 You should only need this credential for `Start-BskySession`.
 
-__This module does not use 2FA. You must use an app password__.
+__This module does not support 2FA. You must use an app password__.
 
 ### App Passwords :key:
 
@@ -172,7 +185,7 @@ $did = Get-BskyAccountDID jdhitsolutions.com
 
 Now you can create a credential object.
 
-```powershell
+```dos
 PS C:\> $cred = Get-Credential $did
 
 PowerShell credential request
@@ -197,9 +210,9 @@ The commands in this module use the public Bluesky API which means there are [ra
 
 :warning: There is a rate limit of 300 new sessions per day. This shouldn't be an issue for most people unless you are testing code or running some sort of high-volume automation.
 
-## Posting
+## :email: Posting
 
-:email: Use `New-BskyPost`, or its alias `skeet`, to post a message to Bluesky. There are parameters to include an image. If you include an image, the `New-BskyPost` command will call `Add-BskyImage` to upload the image. It is __strongly recommended__ that you included ALT text for the image.
+Use `New-BskyPost`, or its alias `skeet`, to post a message to Bluesky. There are parameters to include an image. If you include an image, the `New-BskyPost` command will call `Add-BskyImage` to upload the image. It is __strongly recommended__ that you included ALT text for the image.
 
 ```powershell
 $param = @{
@@ -215,7 +228,7 @@ The output is a URL to the post.
 
 If your message contains a URL, it will be converted to a clickable link. Make sure your link is surrounded by white space. Beginning with v1.0.0, you can post Markdown style links.
 
-```powershell
+```dos
 PS C:\> $m = "Testing multiple Markdown style links from my [#PowerShell
 PSBluesky module](https://github.com/jdhitsolutions/PSBluesky) which you
 can find on the [PowerShell Gallery](https://www.powershellgallery.com/
@@ -231,11 +244,11 @@ This example is using the `skeet` alias for `New-BskyPost`.
 
 You can repost or quote a Bluesky post with `Publish-BskyPost`. You will need the CID and AT Uri (URI) of the post you want to repost or quote. These values should be part of items you can get with commands like `Get-BskyFeed` or `Get-BskyTimeline`.
 
-```powershell
+```dos
 PS C:\> Get-BskyTimeline -Limit 1 | Select-Object *
 
 Author        : joeydantoni.com
-AuthorDisplay : Joey D'Antoni
+AuthorDisplay : Joey D’Antoni
 Date          : 1/9/2025 12:11:13 PM
 Text          : I would likely denormalize the data a little bit, and
                 have a non-vector table with ref. data like date that
@@ -282,7 +295,7 @@ The user's profile name should be a clickable link.
 
 The object has been customized with aliases and script properties.
 
-```powershell
+```dos
 PS C:\> $jeff = Get-BskyProfile
 PS C:\> $jeff | Select-Object *
 
@@ -307,13 +320,11 @@ Name        : jdhitsolutions.com
 Age         : 596.06:49:09.1731955
 ```
 
+Note the the `Followers` property may not be 100% accurate. This counter may not properly reflect accounts that have stopped following you. The way that Bluesky is handling bot accounts may also affect this count.
+
 ## :couple: Followers
 
 You can retrieve a list of your followers. You can specify a number of followers between 1 and 100. The default is 50.
-
-```powershell
-Get-BskyFollowers -Limit 2
-```
 
 ![Bluesky followers](images/bsky-follower.png)
 
@@ -321,8 +332,8 @@ The custom formatting includes a clickable link to the follower's profile if run
 
 You can pipe the follower object to `Get-BskyProfile` to retrieve more information.
 
-```powershell
-PS C:\>$f= Get-BskyFollowers
+```dos
+PS C:\> $f= Get-BskyFollowers
 PS C:\> $f[12] | Get-BskyProfile
 
 Jess Pomfret [jpomfret.bsky.social]
@@ -338,7 +349,7 @@ Created              Posts Followers Following Lists
 
 The default behavior is to retrieve between 1 and 100 followers. Or you can use the `-All` parameter to retrieve all followers.
 
-## Searching for Users
+## :telescope: Searching for Users
 
 You can search for Bluesky users with `Find-BskyUser`. The default behavior is to search for a user by name. The search is case-insensitive.
 
@@ -348,7 +359,7 @@ Find-BskyUser -UserName "jeff h" -Limit 3
 
 The default output includes clickable links to the user's profile. This object too has been customized with aliases and script properties.
 
-```powershell
+```dos
 PS C:\> Find-BskyUser -UserName "jeff h" -Limit 3 |
 Select-Object *Name,Description,Created,Age
 
@@ -380,7 +391,7 @@ DisplayName : Jeff H
 UserName    : jhorowitzmd.bsky.social
 Description : Division Chief of Pulm, Crit Care and Sleep Med at OSU. Lung
               fibrosis investigator. Cubs. Star Wars, GoT, LoTR, Avengers. Dad,
-              husband, son and brother. RT's do not mean endorsement.
+              husband, son and brother. RT’s do not mean endorsement.
               #horoblast.
 Created     : 11/13/2024 6:53:06 AM
 Age         : 54.10:38:05.3790593
@@ -396,7 +407,7 @@ Find-BskyUser powershell
 
 You can pipe the search results to `Get-BskyProfile` to retrieve more information.
 
-```powershell
+```dos
 PS C:\> $p = Find-BskyUser powershell -Limit 10
 PS C:\> $p | Get-BskyProfile
 
@@ -420,10 +431,6 @@ Created               Posts Followers Following Lists
 
 Likewise, you can get a list of all the accounts you are following.
 
-```powershell
-Get-BskyFollowing -limit 3
-```
-
 ![Bluesky following](images/bsky-following.png)
 
 As with followers, the default behavior is to retrieve between 1 and 100 accounts you are following. Or you can use the `-All` parameter to retrieve all accounts you are following.
@@ -432,8 +439,8 @@ Starting with version 2.3.0, you can follow and unfollow Bluesky users with [New
 
 To follow, specify the account's user name or handle.
 
-```powershell
-PS C:\> Follow-Bskyuser andrewpla.tech
+```dos
+PS C:\> Follow-BskyUser andrewpla.tech
 https://bsky.app/profile/did:plc:xrspiwserax6shgskcj7grgg
 ```
 
@@ -441,14 +448,14 @@ The output is a clickable link to the followed user's profile.
 
 To unfollow, you can pipe a user object to `Remove-BskyFollow`
 
-```powershell
+```dos
 PS C:\> Remove-BskyFollow andrewpla.tech -WhatIf
 What if: Performing the operation "Remove-BskyFollow" on target "andrewpla.tech".
 ```
 
 Or you can pipe a user object to `Remove-BskyFollow`.
 
-```powershell
+```dos
 PS C:\> Get-BskyProfile andrewpla.tech | Remove-BskyFollow -Passthru
 
 cid                                                         rev
@@ -458,14 +465,41 @@ bafyreibe4a3ewrh2oty2jercit75q42wdnuuip22b3tq6jybwamdz7daq4 3lfnjoouju62k
 
 The followed user will receive a notification when you follow them but not when you unfollow them.
 
-## Feed :newspaper:
+## :no_entry_sign: Blocking
 
-Use `Get-BskyFeed` to retrieve the latest posts from *your* feed. You can query for 1 to 100.
+You can block a Bluesky user with `Block-BskyUser`. You will need the user's user name.
+
+```dos
+PS C:\> Block-BskyUser -UserName "PooBar1234.bsky.social"
+```
+
+You can also pipe follower or profile objects to the command.
+
+```dos
+PS C:\> $f[-1] | Block-BskyUser -WhatIf
+What if: Performing the operation "Block-BskyUser" on target "thedavecarroll.com [did:plc:rlwd5iajr3btl5e7gyvfwk67]".
+PS C:\> Get-BskyProfile thedavecarroll.com | Block-BskyUser
+```
+
+Use `Get-BskyBlockedUser` to see a formatted display.
+
+![Blocked Bluesky users](images/get-bskyblockeduser.png)
+
+To unblock is just as easy.
 
 ```powershell
-Get-BskyFeed -Limit 3
+Unblock-BskyUser thedavecarroll.com
 ```
-The default output uses a custom format file. The current behavior is to get posts and replies.
+
+If you subscribe to any block lists, use `Get-BskyBlockedList` to see the list.
+
+![Get Bluesky blocked list](images/get-bskyblockedlist.png)
+
+The formatted output includes hyperlinks.
+
+## Feed :newspaper:
+
+Use `Get-BskyFeed` to retrieve the latest posts from *your* feed. You can query for 1 to 100. The default output uses a custom format file. The current behavior is to get posts and replies.
 
 ![Getting your Bluesky feed](images/bsky-feed.png)
 
@@ -504,6 +538,185 @@ Get-BskyTimeline -Limit 25
 
 The command uses a custom format file. The default formatted output includes clickable links to the author and the post.
 
+## API Logging :file_cabinet:
+
+Beginning with v2.4.0, you can enable API logging. This will allow you to keep track of what API endpoints you are using. You might want to know this information to gauge your usage against API rate limits. Logging is disabled by default when you import the module.
+
+Run `Get-BskyLogging` to see the current logging status.
+
+```dos
+PS C:\> Get-BskyLogging
+
+LoggingEnabled LogFile                                              LogFileSize
+-------------- -------                                              -----------
+         False C:\Users\Jeff\AppData\Local\Temp\bskyAPILogging.json           0
+```
+
+To enable logging, run `Enable-BskyLogging`.
+
+```dos
+PS C:\> Enable-BskyLogging -Passthru | Select LoggingEnabled
+
+LoggingEnabled
+--------------
+          True
+```
+
+When an Bluesky API request is made, it will be logged to a JSON file.
+
+```dos
+PS C:\> Get-Content (Get-BskyLogging).LogFile
+[
+  {
+    "Date": "2025-01-21T08:54:05.4764747-05:00",
+    "Uri": "https://bsky.social/xrpc/com.atproto.server.createSession",
+    "Endpoint": "com.atproto.server.createSession",
+    "Name": "createSession",
+    "Command": "_CreateSession"
+  },
+  {
+    "Date": "2025-01-21T08:54:55.3206374-05:00",
+    "Uri": "https://bsky.social/xrpc/app.bsky.actor.getProfile?actor=
+    jdhitsolutions.com",
+    "Endpoint": "app.bsky.actor.getProfile",
+    "Name": "getProfile",
+    "Command": "Get-BskyProfile"
+  }
+]
+PS C:\> Get-Content (Get-BskyLogging).LogFile | ConvertFrom-Json
+
+Date     : 1/21/2025 8:54:05 AM
+Uri      : https://bsky.social/xrpc/com.atproto.server.createSession
+Endpoint : com.atproto.server.createSession
+Name     : createSession
+Command  : _CreateSession
+
+Date     : 1/21/2025 8:54:55 AM
+Uri      : https://bsky.social/xrpc/app.bsky.actor.getProfile?actor=
+jdhitsolutions.com
+Endpoint : app.bsky.actor.getProfile
+Name     : getProfile
+Command  : Get-BskyProfile
+```
+
+It should be easier to work with structured data to analyze usage patterns. The default log is in your `%TEMP%` directory. You can change the log file location `Set-BskyLogging`.
+
+```dos
+PS C:\> Set-BskyLogging c:\temp\api.json -WhatIf
+What if: Performing the operation "Set-BskyLogging" on target "c:\temp\api.json".
+```
+
+You can disable logging with `Disable-BskyLogging`.
+
+```dos
+PS C:\> Disable-BskyLogging
+```
+
+If you want to clear the logging file or start over, you can easily delete it.
+
+```dos
+PS C:\> Remove-BskyLogging -WhatIf
+What if: Performing the operation "Remove File" on target "C:\Users\Jeff\
+AppData\Local\Temp\bskyAPILogging.json".
+```
+
+Changes you make to logging will persist for the duration of your PowerShell session. The next time you import the module, the default settings will be used and you will need to re-enable logging and/or change the log file location.
+
+The assumption is that logging is a temporary feature to help you troubleshoot or monitor your API usage and thus logging settings are not stored as module preferences.
+
+Logging information is stored in the `BskySession` object, but you should use the module functions to manage it.
+
+## Ad-Hoc Scripting
+
+You can use the PSBluesky module in ad-hoc scripting projects using the [Bluesky API](https://docs.bsky.app/docs/category/http-reference). One common requirement is to provide an authentication header. Since you can use the PSBluesky module to create an authenticated session, you can create a header from this information.
+
+The session object has a script method you can use to create a header.
+
+```dos
+PS C:\> $headers = (Get-BskySession).CreateHeader()
+PS C:\> $headers
+
+Name                           Value
+----                           -----
+Content-Type                   application/json
+Authorization                  Bearer eyJ0eXAiOiJhdCtqd...
+```
+
+During your scripting, if you get an error about an expired token, recreate the headers variable.
+
+Say you want to use the [`actor-get-preferences`](https://docs.bsky.app/docs/api/app-bsky-actor-get-preferences) API. You can define the uri accoriding to the documentation.
+
+```powershell
+$PDSHost = "https://bsky.social"
+$uri = "$PDSHost/xrpc/app.bsky.actor.getPreferences"
+```
+
+Then you can use the `Invoke-RestMethod` cmdlet to make the API call.
+
+```powershell
+$r = Invoke-RestMethod -Uri $uri -Method Get -Headers $headers
+```
+
+And then work with results.
+
+```dos
+PS C:\> $r.preferences
+
+hideReplies             : False
+hideRepliesByUnfollowed : False
+hideRepliesByLikeCount  : 2
+hideReposts             : False
+hideQuotePosts          : False
+$type                   : app.bsky.actor.defs#feedViewPref
+feed                    : home
+
+nuxs  : {@{id=TenMillionDialog; completed=True}, @{id=NeueTypography; completed
+        =True}}
+$type : app.bsky.actor.defs#bskyAppStatePref
+...
+
+PS C:\> $r.preferences[0] | Select hide*
+
+hideReplies             : False
+hideRepliesByUnfollowed : False
+hideRepliesByLikeCount  : 2
+hideReposts             : False
+hideQuotePosts          : False
+```
+
+Here's another example using the [`get-known-followers`](https://docs.bsky.app/docs/api/app-bsky-graph-get-known-followers) API.
+
+```dos
+PS C:\> $uri = "$PDSHost/xrpc/app.bsky.graph.getKnownFollowers?actor=
+jdhitsolutions.com&limit=100"
+PS C:\> $r = Invoke-RestMethod -Uri $uri -Headers $headers
+PS C:\> $r.followers.count
+100
+PS C:\> $r.followers[-1]
+
+did         : did:plc:h6cd7ej2sl4hswxfyjp6b4mx
+handle      : harjit.bsky.social
+displayName : Harjit Dhaliwal [Hoorge]
+avatar      : https://cdn.bsky.app/img/avatar/plain/did:plc:h6cd7ej2sl4hswxfyj
+              p6b4mx/bafkreibb56a7ywrmwqcfn5wj42a473wj375c4l33526xiitch2td3an4
+              km@jpeg
+associated  : @{chat=}
+viewer      : @{muted=False; blockedBy=False;
+              following=at://did:plc:ohgsqpfsbocaaxusxqlgfvd7/app.bsky.grap...
+              followedBy=at://did:plc:h6cd7ej2sl4hswxfyjp6b4mx/app.bsky.gra...
+labels      : {}
+createdAt   : 5/1/2023 4:35:34 AM
+description : Senior Product Marketing Manager for Cloud Endpoints at Microsoft,
+              Ex-Microsoft MVP, IT Pro, Social Media Strategist, Photographer,
+              International Speaker, Mentor.
+
+              https://about.me/HarjitDhaliwal
+              https://aka.ms/TacklingTech
+
+              #Windows #Microsoft #Copilot
+indexedAt   : 11/29/2024 1:28:38 AM
+```
+
 ## :information_source: Information and Troubleshooting
 
 The commands in this module should write the raw response from the API request to the Information stream. Some commands might include additional information.
@@ -512,7 +725,7 @@ The commands in this module should write the raw response from the API request t
 
 The output will be an object.
 
-```powershell
+```dos
 PS C:\> $v.MessageData | Select-Object did,handle,*count
 
 did            : did:plc:ohgsqpfsbocaaxusxqlgfvd7
@@ -550,7 +763,7 @@ Some commands will also have alternative format views.
 
 You are encourage to pipe command results to `Get-Member` to discover additional properties you might find useful.
 
-```powershell
+```dos
 PS C:\> Get-BskyProfile thedavecarroll.com |
 Format-List Name,Description,Created,Age
 
@@ -564,7 +777,7 @@ Description : #PowerShell #Developer and enthusiast with a side of #DevOps,
 
               https://thedavecarroll.com
 Created     : 4/29/2023 6:52:59 AM
-Age         : 569.04:06:51.6915207
+Age         : 633.07:27:20.9929789
 ```
 
 ### Custom Verbose Messaging
@@ -591,9 +804,9 @@ You can use [Set-BskyPreference](docs/Set-BskyPreference.md) to change them.
 Set-BskyPreference Username -style "`e[3;38;5;135m"
 ```
 
-You can use any ANSI sequence or `$PSStyle` value. Any changes you make will only persist for the duration of your PowerShell session or until you remove the PSBluesky module. The next time you import the module, the default preferences will be used. To save your changes, run [Export-BskyPreference](docs/Export-BskyPreference.md) to save your preferences to a JSON file under `$HOME`.
+You can use any ANSI sequence or `$PSStyle` value. Any changes you make will only persist for the duration of your PowerShell session or until you remove the PSBluesky module. The next time you import the module, the default preferences will be used. To save your changes, run [`Export-BskyPreference`](docs/Export-BskyPreference.md) to save your preferences to a JSON file under `$HOME`.
 
-```powershell
+```dos
 PS C:\> Export-BskyPreference -Passthru
 
     Directory: C:\Users\Jeff

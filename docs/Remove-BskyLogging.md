@@ -5,33 +5,30 @@ online version:
 schema: 2.0.0
 ---
 
-# Remove-BskyPreferenceFile
+# Remove-BskyLogging
 
 ## SYNOPSIS
 
-Delete the user's PSBlueSky preference file.
+Remove the PSBlueSky API log file.
 
 ## SYNTAX
 
-```yaml
-Remove-BskyPreferenceFile [-WhatIf] [-Confirm] [<CommonParameters>]
+```
+Remove-BskyLogging [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-If you have exported your PSBlueSky preference settings, you can delete the file with this command. The next time you import the PSBlueSky module, you will get the default preference settings. If you uninstall the PSBlueSky module, you should run this command first. Otherwise, you will need to manually delete the preference file.
-
-This command and the bskyPreference variable were introduced in PSBluesky v2.3.0.
+This command makes it easy to delete the API log file for the PSBluesky module.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> Remove-BskyPreferenceFile
+PS C:\> Remove-BskyLogging -WhatIf
+What if: Performing the operation "Remove File" on target "C:\temp\api.json".
 ```
-
-You will get a warning if no preference file is found.
 
 ## PARAMETERS
 
@@ -84,4 +81,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Export-BskyPreference](Export-BskyPreference.md)
+[Get-BskyLogging](Get-BskyLogging.md)
+
+[Seth-BskyLogging](Set-BskyLogging.md)

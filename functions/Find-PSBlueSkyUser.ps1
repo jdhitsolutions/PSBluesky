@@ -45,11 +45,12 @@ Function Find-BskyUser {
 
         _verbose $apiUrl
         Try {
-            $results = Invoke-RestMethod -Uri $apiUrl -Method Get -ResponseHeadersVariable rh
+            $response = Invoke-RestMethod -Uri $apiUrl -Method Get -ResponseHeadersVariable rh
+            _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
             Write-Information -MessageData $rh -Tags ResponseHeader
-            Write-Information -MessageData $results -Tags raw
-            If ($results.actors.count -gt 0) {
-                Foreach ($item in $results.actors) {
+            Write-Information -MessageData $response -Tags raw
+            If ($response.actors.count -gt 0) {
+                Foreach ($item in $response.actors) {
                     [PSCustomObject]@{
                         PSTypeName  = 'PSBlueskySearchResult'
                         DisplayName = $item.displayName

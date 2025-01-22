@@ -79,11 +79,27 @@ Created 10/27/2024 14:10:07
       </AliasProperty>
       <ScriptProperty>
         <Name>Age</Name>
-        <GetScriptBlock> (Get-Date) - $this.Date </GetScriptBlock>
+        <GetScriptBlock>
+         If ($Null -eq $this.Handle) {
+            New-TimeSpan -Seconds 0
+         }
+         else {
+          (Get-Date) - $this.Date
+          }
+      </GetScriptBlock>
       </ScriptProperty>
       <ScriptMethod>
         <Name>Refresh</Name>
         <Script>Update-BskySession -RefreshToken $this.RefreshJwt</Script>
+      </ScriptMethod>
+       <ScriptMethod>
+        <Name>CreateHeader</Name>
+        <Script>
+        @{
+        'Authorization' = "Bearer $($this.accessJwt)"
+        'Content-Type'  = 'application/json'
+        }
+        </Script>
       </ScriptMethod>
     </Members>
   </Type>
@@ -94,6 +110,15 @@ Created 10/27/2024 14:10:07
         <Name>Age</Name>
         <GetScriptBlock> (Get-Date) - $this.Created </GetScriptBlock>
       </ScriptProperty>
+    </Members>
+  </Type>
+  <Type>
+    <Name>PSBlueSkyNotification</Name>
+    <Members>
+      <AliasProperty>
+        <Name>Username</Name>
+        <ReferencedMemberName>AuthorHandle</ReferencedMemberName>
+      </AliasProperty>
     </Members>
   </Type>
 </Types>

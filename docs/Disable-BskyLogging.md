@@ -5,50 +5,52 @@ online version:
 schema: 2.0.0
 ---
 
-# Open-BskyHelp
+# Disable-BskyLogging
 
 ## SYNOPSIS
 
-Open the PSBluesky help document.
+Disable BlueSky API logging.
 
 ## SYNTAX
 
 ```yaml
-Open-BskyHelp [-AsMarkdown]  [<CommonParameters>]
+Disable-BskyLogging [-Passthru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Use this command to open the PDF help document for the PSBluesky module with the associated application for PDF files. As an alternative you can view the documentation as a Markdown document. Note that not all emojis will render properly in the PDF.
+API logging is controlled by settings the the PSBluesky session object. However, you should use module cmdlets to configure API logging. Logging is disabled by default on module import. If you enable it, you can later disable it in your session with this command.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> Open-BskyHelp
+PS C:\> Disable-BskyLogging
 ```
 
-The file should open in the default application for PDF files.
+The default doesn't write anything to the pipeline.
 
 ### Example 2
 
 ```powershell
-PS C:\> Open-BskyHelp -AsMarkdown
-```
+PS C:\> Disable-BskyLogging -passthru
 
-View the help file a markdown document.
+LoggingEnabled LogFile          LogFileSize
+-------------- -------          -----------
+         False c:\temp\api.json        4639
+```
 
 ## PARAMETERS
 
-### -AsMarkdown
+### -Passthru
 
-Open the help file as markdown.
+Show the update session object.
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: md
+Aliases:
 
 Required: False
 Position: Named
@@ -69,12 +71,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-### System.String
+### BskyLoggingInfo
 
 ## NOTES
 
 ## RELATED LINKS
 
-[Get-BskyModuleInfo](Get-BskyModuleInfo.md)
+[Enable-BskyLogging](Enable-BskyLogging.md)
 
-[PSBluesky GitHub Repository:](https://github.com/jdhitsolutions/PSBluesky)
+[Get-BskyLogging](Get-BskyLogging.md)

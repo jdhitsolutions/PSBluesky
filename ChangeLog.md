@@ -4,13 +4,34 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.
 
 ## [Unreleased]
 
+## [2.4.0] - 2025-01-22
+
+### Added
+
+- Added property `DID` to follower objects.
+- Added a script method called `CreateHeader` to the Bluesky session object (`bskySession`). This header can be used with the Bluesky API for custom testing or development.
+- Added commands `Block-BskyUser` and `Unblock-BskyUser`.
+- Added properties `Viewer` and `Labels` to profile objects including blocked user profiles.
+- Added a feature to create a log of API usage. Added properties `bskyLoggingEnabled` and `bskyLogFile` to the PSBluesky session object. The log is a JSON file of structured data. Logging is disabled by default on module import. Commands `Disable-BskyLogging`,`Enable-BskyLogging`,`Get-BskyLogging`,`Set-BskyLogging` and `Remove-BskyLogging` have been added to manage this feature.
+- Added properties `isRead`, `Labels`, and `SeenAt` to`PSBlueSkyNotification` object. [[Issue #34](https://github.com/jdhitsolutions/PSBluesky/issues/34)]
+- Added an alias property of `Username` for `AuthorHandle` on output from `Get-BskyNotification`.
+
+### Changed
+
+- Revised the module manifest description.
+- Increased the refresh interval for the session runspace to 60 minutes. This should reduce the number of API calls. __This is a potential breaking change,__
+- Cleaned up code to ensure consistency with commands. References to an endpoint should all use the same variable, `$apiUrl`. Responses from the API should all use the `$response` variable.
+- Updated `Get-BskyBlockedUser` and the associated format file to show the date the account was blocked.
+- Help updates.
+- Updated `README.md`.
+
 ## [2.3.0] - 2025-01-13
 
 ### Added
 
 - Added commands `New-BskyFollow` and `Remove-BskyFollow`, with aliases `Follow-BskyUser` and `Unfollow-BskyUser` to handle following and un-following Bluesky user accounts. [[Issue #32](https://github.com/jdhitsolutions/PSBluesky/issues/32)]
 - Created a user-configurable preferences variable, `$bskyPreferences` and related commands: `Get-BskyPreference`, `Set-BskyPreference`, `Export-BskyPreference`, and `Remove-BskyPreferenceFile`. The preference variable is exported so that the formatting files can use it, but should be managed with the related functions. [[Issue #31](https://github.com/jdhitsolutions/PSBluesky/issues/31)]
-- Added alias `bsliked` for `Get-BskyLiked`.
+- Added alias command `bsliked` for `Get-BskyLiked`.
 
 ### Changed
 
@@ -256,7 +277,8 @@ This is the first version published to the PowerShell Gallery.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.3.0..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.4.0..HEAD
+[2.4.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.3.0..v2.4.0
 [2.3.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.2.1..v2.3.0
 [2.2.1]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.2.0..v2.2.1
 [2.2.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.1.0..v2.2.0

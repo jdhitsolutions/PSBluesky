@@ -19,7 +19,7 @@ Update-BskySession [-RefreshToken] <String> [<CommonParameters>]
 
 ## DESCRIPTION
 
-You can use this command if you want to manually refresh your Bluesky access token. Module commands should automatically attempt to refresh it if the age is over 60 minutes. You should rarely need to call this command as the session token is refreshed automatically every 15 minutes.
+You can use this command if you want to manually refresh your Bluesky access token. You should rarely need to call this command as the session token is refreshed automatically every 60 minutes.
 
 ## EXAMPLES
 

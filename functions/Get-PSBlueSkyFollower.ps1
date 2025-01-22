@@ -56,6 +56,7 @@ Function Get-BskyFollowers {
 
             $results = @()
             $response = Invoke-RestMethod -Uri $apiUrl -Method Get -Headers $headers -ResponseHeadersVariable rh
+            _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
             Write-Information -MessageData $rh -Tags ResponseHeader
             If ($response) {
                 $results += $response.followers
@@ -66,6 +67,7 @@ Function Get-BskyFollowers {
                     while ($response.cursor) {
                         $url = $apiUrl + "&cursor=$($response.cursor)"
                         $response = Invoke-RestMethod -Uri $url -Method Get -Headers $headers
+                        _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
                         If ($response.followers) {
                             Write-Information -MessageData $response -Tags raw
                             $results += $response.followers
@@ -80,6 +82,7 @@ Function Get-BskyFollowers {
                         Created     = $profile.createdAt.ToLocalTime()
                         Description = $profile.description
                         URL         = "https://bsky.app/profile/$($profile.handle)"
+                        DID         = $profile.did
                     }
                 }
             } #if response
