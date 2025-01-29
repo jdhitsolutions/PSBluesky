@@ -169,7 +169,7 @@ You will need to create a new app password. Give it a meaningful name.
 
 Click the button to create the app password.
 
-![Bluesky app password](images/bluesky-appPassword.png)
+![Bluesky app password](images/bluesky-apppassword.png)
 
 You will only see the password once. Copy the password and save it in a secure location such as a secrets management vault.
 
