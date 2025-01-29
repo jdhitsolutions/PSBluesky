@@ -11,6 +11,9 @@ Function Enable-BskyLogging {
     If ($Passthru) {
         Get-BskyLogging
     }
+
+    #create a global variable to hold the log file path
+    Set-Variable -Name bskyLogFile -Value (Get-BskyLogging).LogFile -Scope Global
 }
 
 Function Disable-BskyLogging {
@@ -69,8 +72,12 @@ Function Set-BskyLogging {
         [switch]$Passthru
     )
 
+    #convert the Path to a file system path
+    $Path = Convert-Path $Path
     if ($PSCmdlet.ShouldProcess($Path)) {
         $script:BskySession.LogFile = $Path
+        #update the global variable to hold the log file path
+        Set-Variable -Name bskyLogFile -Value $Path -Scope Global
         if ($Passthru) {
             Get-BskyLogging
         }
@@ -91,12 +98,19 @@ Function _newLogData {
 
     [regex]$rx = '((app)|(com)|(chat))(\.\w+){3}'
     $ep = $rx.match($apiUrl).value
+    <#
+    27 Jan 2025
+    Adding a property of PID to the logging file because it is possible you might
+    be logging from multiple PowerShell instances
+    #>
     [PSCustomObject]@{
         Date     = Get-Date
+        PID      = $PID
         Uri      = $apiUrl
         Endpoint = $rx.match($apiUrl).value
         Name     = $ep.split('.')[-1]
         Command  = $command
+        Host     = $Host.Name
     }
 }
 

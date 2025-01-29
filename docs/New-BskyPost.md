@@ -26,6 +26,10 @@ If your message includes a reference to another account, you should use the `@` 
 
 Any text preceded by a # will be treated as a tag.
 
+The command will strip off any Unicode control characters except for a new line. If you would like to create a multi-line post, using a here-string is recommended.
+
+You can include emojis in your post, however use with caution. If your post is nothing but text with an emoji or two, you shouldn't encounter any issues. However, if you mix emojis with tags or links, the posted message might not display the tags or links properly. Inserting tags and links requires calculations using the line length. Some emojis may throw off the calculations.
+
 ## EXAMPLES
 
 ### Example 1
@@ -53,6 +57,21 @@ PS C:\> New-BskyPost -Message "This is awesome https://microsoft.com/powershell"
 ```
 
 An example that posts an image. The URL will be formatted as a clickable hyperlink. While not technically required, you should include ALT text for the image.
+
+### Example 4
+
+```powershell
+PS C:\> $s= @"
+I am amazed that the [PSBluesky](https://github.com/jdhitsolutions/PSBluesky) module has almost 7K downloads. I started throwing things together only three months ago.
+
+Thank you.
+
+#PowerShell
+"@
+PS C:\> skeet $s -ImagePath C:\scripts\PSBluesky\images\BlueskyLogo-icon.png -ImageAlt "Bluesky logo"
+```
+
+This example is building a multi-line post using a here-string. The message includes a markdown style link and a tag.
 
 ## PARAMETERS
 

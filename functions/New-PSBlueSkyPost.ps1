@@ -64,7 +64,10 @@ Function New-BskyPost {
 
             #Control characters will louse up spacing when we have hash tags, mentions, or links - replace any in message with space
             if ($Message) {
-                $Message = $Message -replace '\p{C}', ' '  #\p{C} is regex for 'unicode control chars'
+                # 27 Jan 2025 adjusting pattern to ignore new line characters
+                $pattern = '[\p{C}&&[^\n]]'
+                #$pattern - '\p{C}'
+                $Message = $Message -replace $pattern, ' '  #\p{C} is regex for 'unicode control chars'
             }
             $record = [ordered]@{
                 '$type'   = 'app.bsky.feed.post'

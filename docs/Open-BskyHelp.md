@@ -19,7 +19,7 @@ Open-BskyHelp [-AsMarkdown]  [<CommonParameters>]
 
 ## DESCRIPTION
 
-Use this command to open the PDF help document for the PSBluesky module with the associated application for PDF files. As an alternative you can view the documentation as a Markdown document. Note that not all emojis will render properly in the PDF.
+Use this command to open the PDF help document for the PSBluesky module with the associated application for PDF files. As an alternative you can view the documentation as a Markdown document. Note that not all emojis will render properly in the PDF, especially in code blocks.
 
 ## EXAMPLES
 
@@ -29,7 +29,7 @@ Use this command to open the PDF help document for the PSBluesky module with the
 PS C:\> Open-BskyHelp
 ```
 
-The file should open in the default application for PDF files.
+Open the file with the default application for PDF files.
 
 ### Example 2
 
@@ -37,13 +37,13 @@ The file should open in the default application for PDF files.
 PS C:\> Open-BskyHelp -AsMarkdown
 ```
 
-View the help file a markdown document.
+View the help file a Markdown document. Rendering is performed using the Show-Markdown cmdlet.
 
 ## PARAMETERS
 
 ### -AsMarkdown
 
-Open the help file as markdown.
+Open the help file as markdown. Any limitations or problems in rendering are due to the limitations in the Show-Markdown cmdlet.
 
 ```yaml
 Type: SwitchParameter

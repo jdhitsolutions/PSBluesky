@@ -501,6 +501,7 @@ LoggingEnabled LogFile          LogFileSize
     </command:details>
     <maml:description>
       <maml:para>API logging is controlled by settings the the PSBluesky session object. However, you should use module cmdlets to configure API logging. Logging is disabled by default on module import. You can use the command to enable it.</maml:para>
+      <maml:para>When you enable logging, a global variable $bskyLogFile will be created that contains the path to the log file. This makes it easier to work with the file in the PowerShell console.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2173,7 +2174,7 @@ Username `e[4;38;5;190m</dev:code>
     </command:details>
     <maml:description>
       <maml:para>Use this command to retrieve a Bluesky profile. The default will be your profile based on the credential you used to start your Bluesky session, but you can get any profile if you know the user name. The user name is case-sensitive. The default output includes clickable links.</maml:para>
-      <maml:para>Note the the Followers property may not be 100% accurate. This counter may not properly reflect accounts that have stopped following you. The way that Bluesky is handling bot accounts may also affect this count.</maml:para>
+      <maml:para>Note the the Followers property may not be 100% accurate. This counter may not properly reflect accounts that have stopped following you. The way that Bluesky is handling bot accounts may also affect this count. To get a true picture of your followers, use Get-BskyFollowers.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2245,25 +2246,25 @@ Grizzled and grumpy IT Pro - https://jdhitsolutions.github.io/
 Wine drinker 🍷🐶 and dog lover
 
 
-Created               Posts Followers Following Lists
--------               ----- --------- --------- -----
-5/21/2023 10:44:48 AM   544       322       177     0</dev:code>
+Created            Posts Followers Following Lists
+-------            ----- --------- --------- -----
+5/21/2023 10:44 AM  1230      1994       415     2</dev:code>
         <dev:remarks>
           <maml:para>The default output includes clickable links.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-BskyProfile jsnover.bsky.social
+        <dev:code>PS C:\&gt; Get-BskyProfile jsnover.com
 
 Jeffrey Snover [jsnover.bsky.social]
 
 PowerShell inventor, Reader, Science &amp; Geopolitics geek, Google Distinguished Engineer
 
 
-Created              Posts Followers Following Lists
--------              ----- --------- --------- -----
-5/1/2023 10:14:33 AM    32       592        26     0</dev:code>
+Created           Posts Followers Following Lists
+-------           ----- --------- --------- -----
+5/1/2023 10:14 AM   210      2747       660     0</dev:code>
         <dev:remarks>
           <maml:para>You can get any profile if you know the user name.</maml:para>
         </dev:remarks>
@@ -2272,6 +2273,10 @@ Created              Posts Followers Following Lists
     <command:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Find-BskyUser</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-BskyFollowers</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -2594,6 +2599,8 @@ https://bsky.app/profile/did:plc:rlwd5iajr3btl5e7gyvfwk67</dev:code>
       <maml:para>Use this command to post to Bluesky from PowerShell. You can optionally include images. If you include an image you should include an ALT text value. If your message includes URL links, they will be converted into hyperlinks. Be sure that your links have a whitespace on both sides in your message text.</maml:para>
       <maml:para>If your message includes a reference to another account, you should use the `@` symbol followed by the account name. For example, `@jdhitsolutions.com`. The reference will be turned into a clickable inline link. This command WILL NOT validate any references or links.</maml:para>
       <maml:para>Any text preceded by a # will be treated as a tag.</maml:para>
+      <maml:para>The command will strip off any Unicode control characters except for a new line. If you would like to create a multi-line post, using a here-string is recommended.</maml:para>
+      <maml:para>You can include emojis in your post, however use with caution. If your post is nothing but text with an emoji or two, you shouldn't encounter any issues. However, if you mix emojis with tags or links, the posted message might not display the tags or links properly. Inserting tags and links requires calculations using the line length. Some emojis may throw off the calculations.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2793,6 +2800,20 @@ PS C:\&gt; skeet $m</dev:code>
           <maml:para>An example that posts an image. The URL will be formatted as a clickable hyperlink. While not technically required, you should include ALT text for the image.</maml:para>
         </dev:remarks>
       </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 4 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; $s= @"
+I am amazed that the [PSBluesky](https://github.com/jdhitsolutions/PSBluesky) module has almost 7K downloads. I started throwing things together only three months ago.
+
+Thank you.
+
+#PowerShell
+"@
+PS C:\&gt; skeet $s -ImagePath C:\scripts\PSBluesky\images\BlueskyLogo-icon.png -ImageAlt "Bluesky logo"</dev:code>
+        <dev:remarks>
+          <maml:para>This example is building a multi-line post using a here-string. The message includes a markdown style link and a tag.</maml:para>
+        </dev:remarks>
+      </command:example>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
@@ -2819,7 +2840,7 @@ PS C:\&gt; skeet $m</dev:code>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Use this command to open the PDF help document for the PSBluesky module with the associated application for PDF files. As an alternative you can view the documentation as a Markdown document. Note that not all emojis will render properly in the PDF.</maml:para>
+      <maml:para>Use this command to open the PDF help document for the PSBluesky module with the associated application for PDF files. As an alternative you can view the documentation as a Markdown document. Note that not all emojis will render properly in the PDF, especially in code blocks.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2827,7 +2848,7 @@ PS C:\&gt; skeet $m</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="md">
           <maml:name>AsMarkdown</maml:name>
           <maml:description>
-            <maml:para>Open the help file as markdown.</maml:para>
+            <maml:para>Open the help file as markdown. Any limitations or problems in rendering are due to the limitations in the Show-Markdown cmdlet.</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -2841,7 +2862,7 @@ PS C:\&gt; skeet $m</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="md">
         <maml:name>AsMarkdown</maml:name>
         <maml:description>
-          <maml:para>Open the help file as markdown.</maml:para>
+          <maml:para>Open the help file as markdown. Any limitations or problems in rendering are due to the limitations in the Show-Markdown cmdlet.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -2889,14 +2910,14 @@ PS C:\&gt; skeet $m</dev:code>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Open-BskyHelp</dev:code>
         <dev:remarks>
-          <maml:para>The file should open in the default application for PDF files.</maml:para>
+          <maml:para>Open the file with the default application for PDF files.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Open-BskyHelp -AsMarkdown</dev:code>
         <dev:remarks>
-          <maml:para>View the help file a markdown document.</maml:para>
+          <maml:para>View the help file a Markdown document. Rendering is performed using the Show-Markdown cmdlet.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -3584,6 +3605,7 @@ What if: Performing the operation "Remove File" on target "C:\temp\api.json".</d
     </command:details>
     <maml:description>
       <maml:para>Use this command to configure the logging path for API logging in the PSBluesky module. The module default is `$ENV:TEMP\bskyAPIlogging.json`, but you can use this command to change the location. The file must be a JSON file. The default is to not log API calls. If you enable logging, you can later disable it with the Disable-BskyLogging command.</maml:para>
+      <maml:para>When you set a new path, the global variable $bskyLogFile will be updated to reflect the new path.This makes it easier to work with the file in the PowerShell console.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>

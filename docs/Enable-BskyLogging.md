@@ -21,6 +21,8 @@ Enable-BskyLogging [-Passthru] [<CommonParameters>]
 
 API logging is controlled by settings the the PSBluesky session object. However, you should use module cmdlets to configure API logging. Logging is disabled by default on module import. You can use the command to enable it.
 
+When you enable logging, a global variable $bskyLogFile will be created that contains the path to the log file. This makes it easier to work with the file in the PowerShell console.
+
 ## EXAMPLES
 
 ### Example 1

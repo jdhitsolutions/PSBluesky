@@ -22,6 +22,8 @@ Set-BskyLogging [-Path] <String> [-Passthru] [<CommonParameters>]
 
 Use this command to configure the logging path for API logging in the PSBluesky module. The module default is `$ENV:TEMP\bskyAPIlogging.json`, but you can use this command to change the location. The file must be a JSON file. The default is to not log API calls. If you enable logging, you can later disable it with the Disable-BskyLogging command.
 
+When you set a new path, the global variable $bskyLogFile will be updated to reflect the new path.This makes it easier to work with the file in the PowerShell console.
+
 ## EXAMPLES
 
 ### Example 1

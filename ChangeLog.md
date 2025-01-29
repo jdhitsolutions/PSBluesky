@@ -4,6 +4,19 @@ This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.
 
 ## [Unreleased]
 
+## [2.5.0] - 2025-01-29
+
+### Added
+
+- Added `PID` and `Host` to the API logging output.
+
+### Changed
+
+- Modified `Enable-BskyLogging` and `Set-BskyLogging` to populate a global variable `bskyLogFile` to make it easier to work with the file in the console
+- Revised the regex pattern in `New-BskyPost` that was stripping out control characters to not remove new line characters.
+- Updated `README`.
+- Updated help documentation.
+
 ## [2.4.0] - 2025-01-22
 
 ### Added
@@ -277,7 +290,8 @@ This is the first version published to the PowerShell Gallery.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.4.0..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.5.0..HEAD
+[2.5.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.4.0..v2.5.0
 [2.4.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.3.0..v2.4.0
 [2.3.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.2.1..v2.3.0
 [2.2.1]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.2.0..v2.2.1

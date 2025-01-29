@@ -3,7 +3,7 @@
 #
 @{
     RootModule           = 'PSBlueSky.psm1'
-    ModuleVersion        = '2.4.0'
+    ModuleVersion        = '2.5.0'
     CompatiblePSEditions = 'Core'
     GUID                 = 'c5c1fd1d-e648-432d-b7d6-bb56f2044c2a'
     Author               = 'Jeff Hicks'
@@ -89,26 +89,18 @@
             ProjectUri                 = 'https://github.com/jdhitsolutions/PSBluesky'
             IconUri                    = 'https://raw.githubusercontent.com/jdhitsolutions/PSBlueSky/main/images/BlueskyLogo-icon.png'
             ReleaseNotes               = @'
-## [2.4.0] - 2025-01-22
+## [2.5.0] - 2025-01-29
 
 ### Added
 
-- Added property `DID` to follower objects.
-- Added a script method called `CreateHeader` to the Bluesky session object (`bskySession`). This header can be used with the Bluesky API for custom testing or development.
-- Added commands `Block-BskyUser` and `Unblock-BskyUser`.
-- Added properties `Viewer` and `Labels` to profile objects including blocked user profiles.
-- Added a feature to create a log of API usage. Added properties `bskyLoggingEnabled` and `bskyLogFile` to the PSBluesky session object. The log is a JSON file of structured data. Logging is disabled by default on module import. Commands `Disable-BskyLogging`,`Enable-BskyLogging`,`Get-BskyLogging`,`Set-BskyLogging` and `Remove-BskyLogging` have been added to manage this feature.
-- Added properties `isRead`, `Labels`, and `SeenAt` to`PSBlueSkyNotification` object. [[Issue #34](https://github.com/jdhitsolutions/PSBluesky/issues/34)]
-- Added an alias property of `Username` for `AuthorHandle` on output from `Get-BskyNotification`.
+- Added `PID` and `Host` to the API logging output.
 
 ### Changed
 
-- Revised the module manifest description.
-- Increased the refresh interval for the session runspace to 60 minutes. This should reduce the number of API calls. __This is a potential breaking change,__
-- Cleaned up code to ensure consistency with commands. References to an endpoint should all use the same variable, `$apiUrl`. Responses from the API should all use the `$response` variable.
-- Updated `Get-BskyBlockedUser` and the associated format file to show the date the account was blocked.
-- Help updates.
-- Updated `README.md`.
+- Modified `Enable-BskyLogging` and `Set-BskyLogging` to populate a global variable `bskyLogFile` to make it easier to work with the file in the console
+- Revised the regex pattern in `New-BskyPost` that was stripping out control characters to not remove new line characters.
+- Updated `README`.
+- Updated help documentation.
 '@
             RequireLicenseAcceptance   = $false
             ExternalModuleDependencies = @()

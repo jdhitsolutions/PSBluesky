@@ -1,10 +1,10 @@
 # PSBluesky
 
+![](images/butterfly-ralign.png)
+
 [![PSGallery Version](https://img.shields.io/powershellgallery/v/PSBluesky.png?style=for-the-badge&label=PowerShell%20Gallery)](https://www.powershellgallery.com/packages/PSBluesky/) [![PSGallery Downloads](https://img.shields.io/powershellgallery/dt/PSBluesky.png?style=for-the-badge&label=Downloads)](https://www.powershellgallery.com/packages/PSBluesky/)
 
-![](images/BlueskyLogo-small.png)
-
-This module is a set of PowerShell functions designed to let you interact with the Bluesky API from a PowerShell session. Technically, the module commands are wrappers around the [AT protocol](https://docs.bsky.app/docs/category/http-reference). The module is written for *__PowerShell 7__*, although it might work as written in Windows PowerShell with minimal changes if you wish to fork the GitHub repository. Commands *have not* been thoroughly tested for cross-platform compatibility, so please post an Issue if you encounter a problem.
+This module is a set of PowerShell functions designed to let you interact with the Bluesky API from a PowerShell session. Technically, the module commands are wrappers around the [AT protocol](https://docs.bsky.app/docs/category/http-reference). The module is written for *__PowerShell 7__*, although it might work as written in Windows PowerShell with minimal changes if you wish to fork the GitHub repository. Commands *have not* been thoroughly tested for cross-platform compatibility, so please post an [Issue](https://github.com/jdhitsolutions/PSBlueSky/issues) if you encounter a problem.
 
 The commands in this module are __not__ intended to provide complete coverage of the Bluesky API or user experience. Instead, the module focuses on the most common tasks you might want to do with Bluesky from a PowerShell prompt.
 
@@ -35,22 +35,18 @@ After installing this module, you should end up with these PSBluesky commands:
 
 |         |         |         |
 |---------|---------|---------|
-| [Add-BskyImage](docs/Add-BskyImage.md) | [Block-BskyUser](docs/Block-BskyUser.md) |
-| [Disable-BskyLogging](docs/Disable-BskyLogging.md) | [Enable-BskyLogging](docs/Enable-BskyLogging.md) |
-| [Export-BskyPreference](docs/Export-BskyPreference.md) | [Find-BskyUser](docs/Find-BskyUser.md) |
-| [Get-BskyAccountDID](docs/Get-BskyAccountDID.md) | [Get-BskyBlockedList](docs/Get-BskyBlockedList.md) |
-| [Get-BskyBlockedUser](docs/Get-BskyBlockedUser.md) | [Get-BskyFeed](docs/Get-BskyFeed.md) |
-| [Get-BskyFollowers](docs/Get-BskyFollowers.md) | [Get-BskyFollowing](docs/Get-BskyFollowing.md) |
-| [Get-BskyLiked](docs/Get-BskyLiked.md) | [Get-BskyLogging](docs/Get-BskyLogging.md) |
-| [Get-BskyModuleInfo](docs/Get-BskyModuleInfo.md) | [Get-BskyNotification](docs/Get-BskyNotification.md) |
-| [Get-BskyPreference](docs/Get-BskyPreference.md) | [Get-BskyProfile](docs/Get-BskyProfile.md) |
-| [Get-BskySession](docs/Get-BskySession.md) | [Get-BskyTimeline](docs/Get-BskyTimeline.md) |
-| [New-BskyFollow](docs/New-BskyFollow.md) | [New-BskyPost](docs/New-BskyPost.md) |
-| [Open-BskyHelp](docs/Open-BskyHelp.md) | [Publish-BskyPost](docs/Publish-BskyPost.md) |
-| [Remove-BskyFollow](docs/Remove-BskyFollow.md) | [Remove-BskyLogging](docs/Remove-BskyLogging.md) |
-| [Remove-BskyPreferenceFile](docs/Remove-BskyPreferenceFile.md) | [Set-BskyLogging](docs/Set-BskyLogging.md) |
-| [Set-BskyPreference](docs/Set-BskyPreference.md) | [Start-BSkySession](docs/Start-BSkySession.md) |
-| [Unblock-BskyUser](docs/Unblock-BskyUser.md) | [Update-BskySession](docs/Update-BskySession.md) |
+| [Add-BskyImage](docs/Add-BskyImage.md) | [Block-BskyUser](docs/Block-BskyUser.md) | [Disable-BskyLogging](docs/Disable-BskyLogging.md) |
+| [Enable-BskyLogging](docs/Enable-BskyLogging.md) | [Export-BskyPreference](docs/Export-BskyPreference.md) | [Find-BskyUser](docs/Find-BskyUser.md) |
+| [Get-BskyAccountDID](docs/Get-BskyAccountDID.md) | [Get-BskyBlockedList](docs/Get-BskyBlockedList.md) | [Get-BskyBlockedUser](docs/Get-BskyBlockedUser.md) |
+| [Get-BskyFeed](docs/Get-BskyFeed.md) | [Get-BskyFollowers](docs/Get-BskyFollowers.md) | [Get-BskyFollowing](docs/Get-BskyFollowing.md) |
+| [Get-BskyLiked](docs/Get-BskyLiked.md) | [Get-BskyLogging](docs/Get-BskyLogging.md) | [Get-BskyModuleInfo](docs/Get-BskyModuleInfo.md) |
+| [Get-BskyNotification](docs/Get-BskyNotification.md) | [Get-BskyPreference](docs/Get-BskyPreference.md) | [Get-BskyProfile](docs/Get-BskyProfile.md) |
+| [Get-BskySession](docs/Get-BskySession.md) | [Get-BskyTimeline](docs/Get-BskyTimeline.md) | [New-BskyFollow](docs/New-BskyFollow.md) |
+| [New-BskyPost](docs/New-BskyPost.md) | [Open-BskyHelp](docs/Open-BskyHelp.md) | [Publish-BskyPost](docs/Publish-BskyPost.md) |
+| [Remove-BskyFollow](docs/Remove-BskyFollow.md) | [Remove-BskyLogging](docs/Remove-BskyLogging.md) | [Remove-BskyPreferenceFile](docs/Remove-BskyPreferenceFile.md) |
+| [Set-BskyLogging](docs/Set-BskyLogging.md) | [Set-BskyPreference](docs/Set-BskyPreference.md) | [Start-BSkySession](docs/Start-BSkySession.md) |
+| [Unblock-BskyUser](docs/Unblock-BskyUser.md) | [Update-BskySession](docs/Update-BskySession.md) | [](docs/.md) |
+
 
 
 ### Open-BskyHelp
@@ -212,7 +208,7 @@ The commands in this module use the public Bluesky API which means there are [ra
 
 ## :email: Posting
 
-Use `New-BskyPost`, or its alias `skeet`, to post a message to Bluesky. There are parameters to include an image. If you include an image, the `New-BskyPost` command will call `Add-BskyImage` to upload the image. It is __strongly recommended__ that you included ALT text for the image.
+Use `New-BskyPost`, or its alias `skeet`, to post a message to Bluesky. There are parameters to include an image. If you include an image, the `New-BskyPost` command will call `Add-BskyImage` to upload the image. It is __strongly recommended__ that you include ALT text for the image.
 
 ```powershell
 $param = @{
@@ -239,6 +235,30 @@ PS C:\> skeet $m
 ![Markdown links in a Bluesky post](images/markdown-links.png)
 
 This example is using the `skeet` alias for `New-BskyPost`.
+
+### Emojis
+
+:writing_hand: You can include emojis in your post, however use with caution. If your post is nothing but text with an emoji or two, you shouldn't encounter any issues. However, if you mix emojis with tags or links, the posted message might not display the tags or links properly. Inserting tags and links requires calculations using the line length. Some emojis may throw off the calculations.
+
+### Multi-Line Posts
+
+The command will strip off any Unicode control characters except for a new line. If you would like to create a multi-line post, using a here-string is recommended.
+
+```powershell
+PS C:\> $s= @"
+I am amazed that the [PSBluesky](https://github.com/jdhitsolutions/PSBluesky)
+module has almost 7K downloads. I started throwing things together only three
+months ago.
+
+Thank you.
+
+#PowerShell
+"@
+PS C:\> skeet $s -ImagePath C:\scripts\PSBluesky\images\BlueskyLogo-icon.png
+-ImageAlt "Bluesky logo"
+```
+
+This example uses the alias `skeet` for `New-BskyPost`.
 
 ### Reposting and Quoting
 
@@ -302,22 +322,24 @@ PS C:\> $jeff | Select-Object *
 Username    : jdhitsolutions.com
 Display     : Jeff Hicks
 Created     : 5/21/2023 10:44:48 AM
-Description : PowerShell Author/Teacher/MVP/Tour Guide ✍️
+Description : PowerShell Author ~ Learning Architect ~ MVP ✍️
               Prof. PowerShell Emeritus 🎓
               Grizzled and grumpy IT Pro - https://jdhitsolutions.github.io/
               🎼Amateur composer - https://musescore.com/user/26698536
               Wine drinker 🍷🐶 and dog lover
-Avatar      : https://cdn.bsky.app/img/avatar/plain/did:plc:ohgsqpfsbocaaxus
-              xqlgfvd7/bafkreifdfahcjmytu3iw2aj2d3howu6q7twkta3h23qmlve2d2mv
-              o5sily@jpeg
-Posts       : 1060
-Followers   : 1904
-Following   : 383
+Avatar      : https://cdn.bsky.app/img/avatar/plain/did:plc:ohgsqpfsbocaaxusx
+              qlgfvd7/bafkreifdfahcjmytu3iw2aj2d3howu6q7twkta3h23qmlve2d2mvo5
+              sily@jpeg
+Posts       : 1243
+Followers   : 2002
+Following   : 416
 Lists       : 2
 URL         : https://bsky.app/profile/jdhitsolutions.com
 DID         : did:plc:ohgsqpfsbocaaxusxqlgfvd7
+Viewer      : @{muted=False; blockedBy=False; knownFollowers=}
+Labels      :
 Name        : jdhitsolutions.com
-Age         : 596.06:49:09.1731955
+Age         : 618.22:15:32.5068959
 ```
 
 Note the the `Followers` property may not be 100% accurate. This counter may not properly reflect accounts that have stopped following you. The way that Bluesky is handling bot accounts may also affect this count.
@@ -477,7 +499,8 @@ You can also pipe follower or profile objects to the command.
 
 ```dos
 PS C:\> $f[-1] | Block-BskyUser -WhatIf
-What if: Performing the operation "Block-BskyUser" on target "thedavecarroll.com [did:plc:rlwd5iajr3btl5e7gyvfwk67]".
+What if: Performing the operation "Block-BskyUser" on target "thedavecarroll.com
+[did:plc:rlwd5iajr3btl5e7gyvfwk67]".
 PS C:\> Get-BskyProfile thedavecarroll.com | Block-BskyUser
 ```
 
@@ -562,42 +585,29 @@ LoggingEnabled
           True
 ```
 
-When an Bluesky API request is made, it will be logged to a JSON file.
+When an Bluesky API request is made, it will be logged to a JSON file. When you enable logging, beginning in version 2.5.0, the command will define a global variable, `$bskyLogFile` which makes it easier to work with the log file.
 
 ```dos
-PS C:\> Get-Content (Get-BskyLogging).LogFile
-[
-  {
-    "Date": "2025-01-21T08:54:05.4764747-05:00",
-    "Uri": "https://bsky.social/xrpc/com.atproto.server.createSession",
-    "Endpoint": "com.atproto.server.createSession",
-    "Name": "createSession",
-    "Command": "_CreateSession"
-  },
-  {
-    "Date": "2025-01-21T08:54:55.3206374-05:00",
-    "Uri": "https://bsky.social/xrpc/app.bsky.actor.getProfile?actor=
-    jdhitsolutions.com",
-    "Endpoint": "app.bsky.actor.getProfile",
-    "Name": "getProfile",
-    "Command": "Get-BskyProfile"
-  }
-]
-PS C:\> Get-Content (Get-BskyLogging).LogFile | ConvertFrom-Json
+PS C:\> Get-Content $bskyLogFile | ConvertFrom-Json | Select-Object -last 2
 
-Date     : 1/21/2025 8:54:05 AM
-Uri      : https://bsky.social/xrpc/com.atproto.server.createSession
-Endpoint : com.atproto.server.createSession
-Name     : createSession
-Command  : _CreateSession
+Date     : 1/27/2025 2:45:02 PM
+PID      : 31876
+Uri      : https://bsky.social/xrpc/com.atproto.repo.createRecord
+Endpoint : com.atproto.repo.createRecord
+Name     : createRecord
+Command  : New-BskyPost
+Host     : ConsoleHost
 
-Date     : 1/21/2025 8:54:55 AM
-Uri      : https://bsky.social/xrpc/app.bsky.actor.getProfile?actor=
-jdhitsolutions.com
+Date     : 1/27/2025 2:49:51 PM
+PID      : 31876
+Uri      : https://bsky.social/xrpc/app.bsky.actor.getProfile?actor=jdhitsolutions.com
 Endpoint : app.bsky.actor.getProfile
 Name     : getProfile
 Command  : Get-BskyProfile
+Host     : ConsoleHost
 ```
+
+*If you see a command like `_getPostText` or `RunspaceRefreshSession`, these are private helper functions. Exported module commands follow the verb-noun naming convention.*
 
 It should be easier to work with structured data to analyze usage patterns. The default log is in your `%TEMP%` directory. You can change the log file location `Set-BskyLogging`.
 
@@ -605,6 +615,8 @@ It should be easier to work with structured data to analyze usage patterns. The 
 PS C:\> Set-BskyLogging c:\temp\api.json -WhatIf
 What if: Performing the operation "Set-BskyLogging" on target "c:\temp\api.json".
 ```
+
+If you set the location, this will also update `$bskyLogFile`.
 
 You can disable logging with `Disable-BskyLogging`.
 

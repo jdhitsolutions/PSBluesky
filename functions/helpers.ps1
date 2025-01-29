@@ -56,7 +56,7 @@ Function _newFacetLink {
         [PSCustomObject]@{
             index    = [ordered]@{
                 byteStart = $m.index
-                byteEnd   = ($m.value.length) + ($m.index)
+                byteEnd   = ($m.length) + ($m.index)
             }
             features = @(
                 $feature
@@ -258,10 +258,12 @@ Function _CreateSession {
                     $ep = $rx.match($apiUrl).value
                     [PSCustomObject]@{
                         Date     = Get-Date
+                        PID      = $PID
                         Uri      = $apiUrl
                         Endpoint = $rx.match($apiUrl).value
                         Name     = $ep.split('.')[-1]
                         Command  = $command
+                        Host     = $Host.Name
                     }
                 }
 

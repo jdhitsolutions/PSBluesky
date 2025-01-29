@@ -21,7 +21,7 @@ Get-BskyProfile [[-UserName] <String>] [<CommonParameters>]
 
 Use this command to retrieve a Bluesky profile. The default will be your profile based on the credential you used to start your Bluesky session, but you can get any profile if you know the user name. The user name is case-sensitive. The default output includes clickable links.
 
-Note the the Followers property may not be 100% accurate. This counter may not properly reflect accounts that have stopped following you. The way that Bluesky is handling bot accounts may also affect this count.
+Note the the Followers property may not be 100% accurate. This counter may not properly reflect accounts that have stopped following you. The way that Bluesky is handling bot accounts may also affect this count. To get a true picture of your followers, use Get-BskyFollowers.
 
 ## EXAMPLES
 
@@ -39,9 +39,9 @@ Grizzled and grumpy IT Pro - https://jdhitsolutions.github.io/
 Wine drinker 🍷🐶 and dog lover
 
 
-Created               Posts Followers Following Lists
--------               ----- --------- --------- -----
-5/21/2023 10:44:48 AM   544       322       177     0
+Created            Posts Followers Following Lists
+-------            ----- --------- --------- -----
+5/21/2023 10:44 AM  1230      1994       415     2
 ```
 
 The default output includes clickable links.
@@ -49,16 +49,16 @@ The default output includes clickable links.
 ### Example 2
 
 ```powershell
-PS C:\> Get-BskyProfile jsnover.bsky.social
+PS C:\> Get-BskyProfile jsnover.com
 
 Jeffrey Snover [jsnover.bsky.social]
 
 PowerShell inventor, Reader, Science & Geopolitics geek, Google Distinguished Engineer
 
 
-Created              Posts Followers Following Lists
--------              ----- --------- --------- -----
-5/1/2023 10:14:33 AM    32       592        26     0
+Created           Posts Followers Following Lists
+-------           ----- --------- --------- -----
+5/1/2023 10:14 AM   210      2747       660     0
 ```
 
 You can get any profile if you know the user name.
@@ -98,3 +98,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Find-BskyUser](Find-BskyUser.md)
+
+[Get-BskyFollowers](Get-BskyFollowers.md)
