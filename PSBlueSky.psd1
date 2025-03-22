@@ -25,6 +25,8 @@
         'Get-BskyNotification'
         'Get-BskyProfile',
         'Get-BskySession',
+        'Get-BskyStarterPack',
+        'Get-BskyStarterPackList',
         'Get-BskyModuleInfo',
         'Get-BskyTimeline',
         'New-BskyFollow',
@@ -59,6 +61,8 @@
         'formats\PSBlueskySession.format.ps1xml',
         'formats\PSBlueskyNotification.format.ps1xml',
         'formats\PSBlueskySearchResult.format.ps1xml',
+        'formats\PSBlueskyStarterPack.format.ps1xml',
+        'formats\PSBlueskyStarterPackList.format.ps1xml',
         'formats\PSBlueskyModuleInfo.format.ps1xml'
     )
     CmdletsToExport      = ''

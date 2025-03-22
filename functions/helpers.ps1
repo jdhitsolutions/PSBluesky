@@ -86,16 +86,29 @@ Function _convertAT {
     Param(
         [parameter(Mandatory, HelpMessage = 'The AT string to convert')]
         [ValidatePattern('^at://')]
-        [string]$at
+        [string]$at,
+
+        [string]$type = 'profile'
     )
 
     #at://did:plc:qrllvid7s54k4hnwtqxwetrf/app.bsky.feed.post/3l7e5jvorof2t
     $split = $at -split '/' | where { $_ -match '\w' }
-    #this part might need to change in the future depending on the type of link
-    $publicUri = 'https://bsky.app/profile/'
-    $publicUri += '{0}/post/{1}' -f $split[1], $split[-1]
+
+    if ($type -eq 'profile') {
+        $publicUri = 'https://bsky.app/profile/'
+        $publicUri += '{0}/post/{1}' -f $split[1], $split[-1]
+    }
+    elseif ($type -eq 'starter-pack') {
+        $publicUri = 'https://bsky.app/starter-pack/'
+        $publicUri += '{0}/{1}' -f $split[1], $split[-1]
+    }
+    else {
+        Write-Error "Invalid type $type encountered converting AT to URL."
+    }
+
     $publicUri
 }
+
 function _getPostText {
     [cmdletbinding()]
     param (
