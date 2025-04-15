@@ -68,6 +68,8 @@ Function Get-BskyTimeline {
                         URL           = (_convertAT $item.post.uri)
                         URI           = $item.post.uri
                         CID           = $item.post.cid
+                        Tags          = ($item.post.record.facets.features).Where({$_.tag}).tag
+                        Thumbnail     = $item.post.embed.images.thumb
                     } #PSCustomObject
                 } #foreach item
 

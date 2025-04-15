@@ -12,13 +12,25 @@ https://github.com/jdhitsolutions/PSScriptTools
       <!--Created 11/15/2024 09:37:33 by PROSPERO\Jeff-->
       <Name>default</Name>
       <ViewSelectedBy>
+      <!-- output from Find-BskyUser-->
         <TypeName>PSBlueskySearchResult</TypeName>
       </ViewSelectedBy>
       <GroupBy>
         <ScriptBlock>
-        "{0} [$($bskyPreferences.Username){1}$($PSStyle.Reset)]" -f $_.DisplayName,$($PSStyle.FormatHyperLink($_.UserName,$_.Url))
+         <!--
+            18 Feb 2025 Added optional code to use pwshSpectreConsole module
+            to display the user's avatar. This will only work if the module
+            is installed and the console properly configured.
+          -->
+          Try {
+              $avt = (Get-SpectreImage $_.avatar -MaxWidth 5 -errorAction Stop | Out-SpectreHost).Trim()
+          }
+          Catch {
+              $avt = $Null
+          }
+        "`n{2}`n{0} [$($bskyPreferences.Username){1}$($PSStyle.Reset)]" -f $_.DisplayName,$($PSStyle.FormatHyperLink($_.UserName,$_.Url)),$avt
         </ScriptBlock>
-        <Label>Username</Label>
+        <Label>UserAccount</Label>
       </GroupBy>
       <TableControl>
         <!--Delete the AutoSize node if you want to use the defined widths.-->

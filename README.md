@@ -48,7 +48,6 @@ After installing this module, you should end up with these PSBluesky commands:
 | [Unblock-BskyUser](docs/Unblock-BskyUser.md) | [Update-BskySession](docs/Update-BskySession.md) | [](docs/.md) |
 
 
-
 ### Open-BskyHelp
 
 After importing the module you can run [`Open-BskyHelp`](docs/Open-BskyHelp.md) which will open a PDF version of this document in the default application associated with PDF files. Note that not all emojis will render properly in the PDF. Or you can use the -`AsMarkdown` parameter to read this file using markdown formatting. Not all Markdown features may properly render in the console.

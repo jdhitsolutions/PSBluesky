@@ -83,6 +83,8 @@ Function Get-BskyFollowers {
                         Description = $profile.description
                         URL         = "https://bsky.app/profile/$($profile.handle)"
                         DID         = $profile.did
+                        Avatar      = $profile.avatar
+                        Labels      = $profile.Labels.val
                     }
                 }
             } #if response

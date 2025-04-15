@@ -54,5 +54,49 @@ https://github.com/jdhitsolutions/PSScriptTools
         </TableRowEntries>
       </TableControl>
     </View>
+    <View>
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>PSBlueskyFollowProfile</TypeName>
+      </ViewSelectedBy>
+      <CustomControl>
+        <CustomEntries>
+          <CustomEntry>
+            <CustomItem>
+              <ExpressionBinding>
+                <ScriptBlock>
+                  <!--
+                  18 Feb 2025 Added optional code to use pwshSpectreConsole module
+                  to display the user's avatar. This will only work if the module
+                  is installed and the console properly configured.
+                  -->
+                Try {
+                    $avt = (Get-SpectreImage $_.avatar -MaxWidth 5 -errorAction Stop | Out-SpectreHost).Trim()
+                }
+                Catch {
+                    $avt = $Null
+                }
+                "{2} {0} [$($bskyPreferences['UserName']){1}$($PSStyle.Reset)]" -f $_.Display.trim(),$($PSStyle.FormatHyperLink($_.UserName,$_.Url)),$avt
+              </ScriptBlock>
+              </ExpressionBinding>
+              <NewLine/>
+              <NewLine/>
+              <ExpressionBinding>
+                <ScriptBlock>
+                     "{0}{1}{2}" -f ($bskyPreferences['ProfileDescription']),($_.Description.split("`n").foreach({$_.ToString()})|Out-String),$PSStyle.Reset
+                </ScriptBlock>
+              </ExpressionBinding>
+              <NewLine/>
+              <ExpressionBinding>
+                <ScriptBlock>
+                  "Created: {0:g}" -f $_.Created
+                </ScriptBlock>
+              </ExpressionBinding>
+              <NewLine/>
+            </CustomItem>
+          </CustomEntry>
+        </CustomEntries>
+      </CustomControl>
+    </View>
   </ViewDefinitions>
 </Configuration>

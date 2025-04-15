@@ -91,6 +91,8 @@ Function Get-BskyFollowing {
                         Created     = $profile.createdAt.ToLocalTime()
                         Description = $profile.description
                         URL         = "https://bsky.app/profile/$($profile.handle)"
+                        Avatar      = $profile.avatar
+                        Labels      = $profile.Labels.val
                     }
                 }
             }

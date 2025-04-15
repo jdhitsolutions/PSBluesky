@@ -152,7 +152,9 @@ else {
         InActiveSession        = "`e[91m"
         'Add-BskyImage'        = "`e[1;38;5;122m"
         'Find-BskyUser'        = "`e[1;38;5;111m"
+        'Find-BskyPost'        = "`e[1;38;5;158m"
         'Get-BskyFeed'         = "`e[1;96m"
+        'Get-BskyAccountDID'   = "`e[1;38;5;189m"
         'Get-BskyBlockedList'  = "`e[1;38;5;165m"
         'Get-BskyBlockedUser'  = "`e[1;38;5;168m"
         'Get-BskyFollowers'    = "`e[1;38;5;182m"
@@ -190,6 +192,7 @@ $AliasesToExport      = @(
     'bshelp',
     'bsliked',
     'bsn',
+    'bsf',
     'bsp',
     'bsfeed',
     'bsfollow',
@@ -200,6 +203,7 @@ $AliasesToExport      = @(
     'bsblock',
     'bsblocklist',
     'Follow-BskyUser',
+    'Search-BskyPost'
     'Unfollow-BskyUser'
 )
 $varsToExport = @('bskyPreferences','PDSHost')

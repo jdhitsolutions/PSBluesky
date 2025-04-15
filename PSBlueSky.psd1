@@ -3,7 +3,7 @@
 #
 @{
     RootModule           = 'PSBlueSky.psm1'
-    ModuleVersion        = '2.5.0'
+    ModuleVersion        = '2.6.0'
     CompatiblePSEditions = 'Core'
     GUID                 = 'c5c1fd1d-e648-432d-b7d6-bb56f2044c2a'
     Author               = 'Jeff Hicks'
@@ -15,6 +15,7 @@
         'Add-BskyImage',
         'Block-BskyUser',
         'Find-BskyUser',
+        'Find-BskyPost',
         'Get-BskyAccountDID',
         'Get-BskyBlockedList'
         'Get-BskyBlockedUser',
@@ -71,6 +72,8 @@
         'bsliked',
         'bsn',
         'bsp',
+        'bsf',
+        'fbp'
         'bsfeed',
         'bsfollow',
         'bsfollower',
@@ -88,20 +91,7 @@
             LicenseUri                 = 'https://github.com/jdhitsolutions/PSBlueSky/blob/main/LICENSE.txt'
             ProjectUri                 = 'https://github.com/jdhitsolutions/PSBluesky'
             IconUri                    = 'https://raw.githubusercontent.com/jdhitsolutions/PSBlueSky/main/images/BlueskyLogo-icon.png'
-            ReleaseNotes               = @'
-## [2.5.0] - 2025-01-29
-
-### Added
-
-- Added `PID` and `Host` to the API logging output.
-
-### Changed
-
-- Modified `Enable-BskyLogging` and `Set-BskyLogging` to populate a global variable `bskyLogFile` to make it easier to work with the file in the console
-- Revised the regex pattern in `New-BskyPost` that was stripping out control characters to not remove new line characters.
-- Updated `README`.
-- Updated help documentation.
-'@
+            ReleaseNotes               = ''
             RequireLicenseAcceptance   = $false
             ExternalModuleDependencies = @()
         } # End of PSData hashtable

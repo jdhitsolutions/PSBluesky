@@ -1,8 +1,7 @@
-
 ---
 external help file: PSBlueSky-help.xml
 Module Name: PSBlueSky
-online version:
+online version: https://jdhitsolutions.com/yourls/setbskylogging
 schema: 2.0.0
 ---
 

@@ -95,6 +95,8 @@ Function Get-BskyFeed {
                         URL           = _convertAT $post.uri
                         URI           = $post.uri
                         CID           = $post.cid
+                        Tags          = ($post.record.facets.features).Where({$_.tag}).tag
+                        Thumbnail     = $post.embed.images.thumb
                     }
                 } #foreach post
             } #if feed

@@ -1,7 +1,7 @@
 ---
 external help file: PSBluesky-help.xml
 Module Name: PSBlueSky
-online version:
+online version: https://jdhitsolutions.com/yourls/getbskyprofile
 schema: 2.0.0
 ---
 

@@ -1,8 +1,15 @@
 # PSBluesky Changelog
 
-This changelog is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
-
 ## [Unreleased]
+### Added
+- Added a custom view to `PSBlueskyFollowers.format.ps1xml` to display avatar images is the pswSpectreConsole module is detected. This will apply to output from `Get-BskyFollowers` and `Get-BskyFollowing`.
+- Added `Thumbnail` property to the'PSBlueskyFeedItem' and `'PSBlueskyTimelinePost'` objects.
+
+### Changed
+- Modified output from `Get-BskyFeed` and `Get-BskyTimeline` to include tags.
+- Updated `Get-BskyFollower` and `Get-BskyFollowing` to include the account's avatar and labels.
+- Updated profile formatting file to display the user's logo if the pwshSpectreConsole module is detected. This will apply to output from `Get-BskyProfile`, and `Find-BskyUser`.
+- Added online help links
 
 ## [2.5.0] - 2025-01-29
 
