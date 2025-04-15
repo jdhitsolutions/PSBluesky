@@ -1,7 +1,7 @@
 ---
 external help file: PSBlueSky-help.xml
 Module Name: PSBlueSky
-online version:
+online version: https://jdhitsolutions.com/yourls/347462
 schema: 2.0.0
 ---
 
@@ -32,6 +32,8 @@ Use this command to retrieve a specified starter pack and the member profiles co
 Note the command will return a maximum of 50 members by default. To return all members use the -All switch. Use -Limit to configure how many members to return, between 1 and 100.
 
 Note that a warning will be shown if the number of members returned is less than the starter packs item count, however this may be expected if one or more members has blocked the creator of the starter pack, even when using -All.
+
+This command was added in v2.6.0.
 
 ## EXAMPLES
 
@@ -70,6 +72,7 @@ You can get any starter pack if you know its AT protocol URI.
 ## PARAMETERS
 
 ### -All
+
 Return All starter park list items
 
 ```yaml
@@ -85,6 +88,7 @@ Accept wildcard characters: False
 ```
 
 ### -Limit
+
 Enter the number of starter pack list items to retrieve between 1 and 100.
 Default is 50.
 
@@ -101,6 +105,7 @@ Accept wildcard characters: False
 ```
 
 ### -Uri
+
 Enter the at-uri for the starter pack.
 
 ```yaml
@@ -108,7 +113,7 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
@@ -116,6 +121,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -127,6 +133,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### PSBlueskyStarterPackList
 
 ## NOTES
+
+Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 

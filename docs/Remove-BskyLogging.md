@@ -13,7 +13,7 @@ Remove the PSBlueSky API log file.
 
 ## SYNTAX
 
-```
+```yaml
 Remove-BskyLogging [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -78,6 +78,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### None
 
 ## NOTES
+
+Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 

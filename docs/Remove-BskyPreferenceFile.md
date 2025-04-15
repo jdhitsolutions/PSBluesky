@@ -82,6 +82,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
+Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter
+
 ## RELATED LINKS
 
 [Export-BskyPreference](Export-BskyPreference.md)

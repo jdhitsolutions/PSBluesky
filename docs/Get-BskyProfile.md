@@ -72,7 +72,7 @@ Enter the profile or user name.
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: Profile
+Aliases: Profile,Handle
 
 Required: False
 Position: 0
@@ -94,6 +94,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### PSBlueskyProfile
 
 ## NOTES
+
+Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 

@@ -28,7 +28,7 @@ Use this command to get a summary of the PSBlueSky module showing functions, ali
 ```text
 PS C:\> Get-BskyModuleInfo
 
-   Module: PSBlueSky [v2.4.0]
+   Module: PSBlueSky [v2.6.0]
 
 Name                      Alias               Synopsis
 ----                      -----               --------
@@ -36,33 +36,13 @@ Add-BskyImage                                 Upload an image to Bluesky.
 Block-BskyUser                                Block a Bluesky user account.
 Disable-BskyLogging                           Disable BlueSky API logging.
 Enable-BskyLogging                            Enable BlueSky API logging.
-Export-BskyPreference                         Export your PSBlueSky format...
-Find-BskyUser             bsu                 Search for Bluesky user accou...
-Get-BskyAccountDID                            Resolve a Bluesky account nam...
-Get-BskyBlockedList       bsblocklist         Get your subscribed blocked l...
-Get-BskyBlockedUser       bsblock             Get your blocked accounts.
-Get-BskyFeed              bsfeed              Get your Bluesky feed.
-Get-BskyFollowers         bsfollower          Get your Bluesky followers
-Get-BskyFollowing         bsfollow            Get a list of Bluesky accounts...
-Get-BskyLiked             bsliked             Get your liked Bluesky posts.
-Get-BskyLogging                               Getting the current PSBlueSky ...
-Get-BskyModuleInfo                            Get a summary of the PSBlueSky...
-Get-BskyNotification      bsn                 Get Bluesky notifications.
-Get-BskyPreference                            Get PSBlueSky formatting prefe...
-Get-BskyProfile           bsp                 Get a Bluesky profile.
-Get-BskySession           bss                 Show your current Bluesky session.
-Get-BskyTimeline          bst                 Get your Bluesky timeline.
-New-BskyFollow            Follow-BskyUser     Follow a Bluesky user.
-New-BskyPost              skeet               Create a Bluesky post.
-Open-BskyHelp             bshelp              Open the PSBluesky help document.
-Publish-BskyPost          Repost-BskyPost     Repost or quote a Bluesky post.
-Remove-BskyFollow         Unfollow-BskyUser   Unfollow a Bluesky user.
-Remove-BskyPreferenceFile                     Delete the user's PSBlueSky pre...
-Set-BskyLogging                               Configure PSBlueSky API logging.
-Set-BskyPreference                            Set a PSBlueSky formatting pref...
-Start-BSkySession                             Start a new Bluesky session.
-Unblock-BskyUser                              Unblock a Bluesky user account.
-Update-BskySession        Refresh-BskySession Refresh the Bluesky session token.
+Export-BskyPreference                         Export your PSBlueSky formatting
+                                              preference settings to a file.
+Find-BskyPost             bsf Search-BskyPost Find Bluesky posts using a search term or text.
+Find-BskyUser             bsu                 Search for Bluesky user accounts.
+Get-BskyAccountDID                            Resolve a Bluesky account name to its DID.
+Get-BskyBlockedList       bsblocklist         Get your subscribed blocked lists.
+...
 ```
 
 The default output includes clickable hyperlinks to th online help for each command in the module's GitHub repository.
@@ -82,6 +62,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### PSBlueskyModuleInfo
 
 ## NOTES
+
+Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 

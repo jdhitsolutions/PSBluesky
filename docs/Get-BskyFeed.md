@@ -107,8 +107,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
+Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter
+
 ## RELATED LINKS
 
 [Get-BskyTimeline](Get-BskyTimeline.md)
 
 [Get-BskyLiked](Get-BskyLiked.md)
+
+[Find-BskyPost](Find-BskyPost.md)

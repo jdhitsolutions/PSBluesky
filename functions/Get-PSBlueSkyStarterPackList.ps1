@@ -8,6 +8,7 @@ Function Get-BskyStarterPackList {
     Param(
         [Parameter(
             Position = 0,
+            Mandatory,
             ValueFromPipeline,
             ValueFromPipelineByPropertyName,
             HelpMessage = 'Enter the at-uri for the starter pack.'

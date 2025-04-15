@@ -1,7 +1,7 @@
 ---
 external help file: PSBlueSky-help.xml
 Module Name: PSBlueSky
-online version:
+online version: https://jdhitsolutions.com/yourls/e6b498
 schema: 2.0.0
 ---
 
@@ -21,6 +21,8 @@ Get-BskyStarterPack [[-UserName] <String>] [<CommonParameters>]
 
 Use this command to retrieve the starter packs for a specified Bluesky profile. The default will be your profile based on the credential you used to start your Bluesky session, but you can get the starter packs for any profile if you know the user name. The username is case-sensitive. The default output includes clickable links.
 
+This command was added in v2.6.0.
+
 ## EXAMPLES
 
 ### Example 1
@@ -36,8 +38,6 @@ A starter pack of Pluralsight authors and content creators. This is a personal l
 Created          Creator            CreatorDisplay Feeds                                                  Labels
 -------          -------            -------------- -----                                                  ------
 31/10/2024 12:56 jdhitsolutions.com Jeff Hicks     {Microsoft Azure, Developers, DevOps | SecOps | Cloud} {}
-
-
 ```
 
 The default output includes clickable links.
@@ -62,7 +62,8 @@ You can get the starter packs for any profile if you know the user name.
 ## PARAMETERS
 
 ### -UserName
-Enter the profile or username.
+
+Enter the profile or username. The default is your profile.
 
 ```yaml
 Type: String
@@ -77,6 +78,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -88,6 +90,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### PSBlueskyStarterPack
 
 ## NOTES
+
+Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
 

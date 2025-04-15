@@ -1,15 +1,24 @@
 # PSBluesky Changelog
 
 ## [Unreleased]
+
+## [2.6.0] - 2025-04-15
+
 ### Added
-- Added a custom view to `PSBlueskyFollowers.format.ps1xml` to display avatar images is the pswSpectreConsole module is detected. This will apply to output from `Get-BskyFollowers` and `Get-BskyFollowing`.
-- Added `Thumbnail` property to the'PSBlueskyFeedItem' and `'PSBlueskyTimelinePost'` objects.
+
+- Added parameter alias `handle` for `Username` in `Get-BskyProfile`.
+- Added command `Find-BskyPost`.
+- Added a custom view to `PSBlueskyFollowers.format.ps1xml` to display avatar images is the pwshSpectreConsole module is detected. This will apply to output from `Get-BskyFollowers` and `Get-BskyFollowing`.
+- Added `Thumbnail` property to the `PSBlueskyFeedItem` and `PSBlueskyTimelinePost` objects.
 
 ### Changed
+
+- Merged [PR#38](https://github.com/jdhitsolutions/PSBluesky/pull/38) to add starter pack commands `Get-BskyStarterPack` and `Get-BskyStarterPackList`. Thanks [@markwragg](https://github.com/markwragg)
 - Modified output from `Get-BskyFeed` and `Get-BskyTimeline` to include tags.
 - Updated `Get-BskyFollower` and `Get-BskyFollowing` to include the account's avatar and labels.
 - Updated profile formatting file to display the user's logo if the pwshSpectreConsole module is detected. This will apply to output from `Get-BskyProfile`, and `Find-BskyUser`.
 - Added online help links
+- Updated `README.md`.
 
 ## [2.5.0] - 2025-01-29
 
@@ -136,16 +145,16 @@
 - Added a parameter to `Open-BskyHelp` to view the file as a markdown document.
 - Added support for proper notifications and tags in new messages. [[Issue #19](https://github.com/jdhitsolutions/PSBluesky/issues/19)]
 - Added command aliases:
-    - bsfeed --> `Get-BskyFeed`
-    - bsfollow --> `Get-BskyFollowing`
-    - bsfollower --> `Get-BskyFollowers`
-    - bshelp --> `Open-BskyHelp`
-    - bsn --> `Get-BskyNotification`
-    - bsp --> `Get-BskyProfile`
-    - bst --> `Get-BskyTimeline`
-    - bsu --> `Find-BskyUser`
-    - Refresh-BskySession --> `Update-BskySession`
-    - skeet --> `New-BskyPost`
+  - bsfeed --> `Get-BskyFeed`
+  - bsfollow --> `Get-BskyFollowing`
+  - bsfollower --> `Get-BskyFollowers`
+  - bshelp --> `Open-BskyHelp`
+  - bsn --> `Get-BskyNotification`
+  - bsp --> `Get-BskyProfile`
+  - bst --> `Get-BskyTimeline`
+  - bsu --> `Find-BskyUser`
+  - Refresh-BskySession --> `Update-BskySession`
+  - skeet --> `New-BskyPost`
 
 ### Changed
 
@@ -297,7 +306,8 @@ This is the first version published to the PowerShell Gallery.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.5.0..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.6.0..HEAD
+[2.6.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.5.0..v2.6.0
 [2.5.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.4.0..v2.5.0
 [2.4.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.3.0..v2.4.0
 [2.3.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.2.1..v2.3.0

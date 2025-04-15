@@ -48,8 +48,8 @@ Function Find-BskyPost {
             _verbose -message ($strings.UsingOS -f $PSVersionTable.OS)
             _verbose -message ($strings.UsingModule -f $ModuleVersion)
         }
-        #this commands queries a public API
 
+        #this commands queries a public API
         $headers = @{
             'Content-Type' = 'application/json'
         }

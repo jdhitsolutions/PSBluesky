@@ -84,6 +84,8 @@
         'bst',
         'bsu',
         'bss',
+        'bssp',
+        'bssplist',
         'bsblock',
         'bsblocklist',
         'Follow-BskyUser',
@@ -95,7 +97,25 @@
             LicenseUri                 = 'https://github.com/jdhitsolutions/PSBlueSky/blob/main/LICENSE.txt'
             ProjectUri                 = 'https://github.com/jdhitsolutions/PSBluesky'
             IconUri                    = 'https://raw.githubusercontent.com/jdhitsolutions/PSBlueSky/main/images/BlueskyLogo-icon.png'
-            ReleaseNotes               = ''
+            ReleaseNotes               = @'
+## [2.6.0] - 2025-04-15
+
+### Added
+
+- Added parameter alias `handle` for `Username` in `Get-BskyProfile`.
+- Added command `Find-BskyPost`.
+- Added a custom view to `PSBlueskyFollowers.format.ps1xml` to display avatar images is the pwshSpectreConsole module is detected. This will apply to output from `Get-BskyFollowers` and `Get-BskyFollowing`.
+- Added `Thumbnail` property to the `PSBlueskyFeedItem` and `PSBlueskyTimelinePost` objects.
+
+### Changed
+
+- Merged [PR#38](https://github.com/jdhitsolutions/PSBluesky/pull/38) to add starter pack commands `Get-BskyStarterPack` and `Get-BskyStarterPackList`. Thanks [@markwragg](https://github.com/markwragg)
+- Modified output from `Get-BskyFeed` and `Get-BskyTimeline` to include tags.
+- Updated `Get-BskyFollower` and `Get-BskyFollowing` to include the account's avatar and labels.
+- Updated profile formatting file to display the user's logo if the pwshSpectreConsole module is detected. This will apply to output from `Get-BskyProfile`, and `Find-BskyUser`.
+- Added online help links
+- Updated `README.md`.
+'@
             RequireLicenseAcceptance   = $false
             ExternalModuleDependencies = @()
         } # End of PSData hashtable

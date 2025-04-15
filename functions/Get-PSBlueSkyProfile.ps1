@@ -11,7 +11,7 @@ Function Get-BskyProfile {
             HelpMessage = 'Enter the profile or user name.'
         )]
         [ValidateNotNullOrEmpty()]
-        [Alias('Profile')]
+        [Alias('Profile','Handle')]
         [string]$UserName
     )
 

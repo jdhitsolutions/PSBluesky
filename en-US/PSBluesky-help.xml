@@ -136,7 +136,7 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -149,6 +149,10 @@
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/addbskyimage</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>New-BskyPost</maml:linkText>
         <maml:uri></maml:uri>
@@ -365,7 +369,7 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -378,6 +382,10 @@
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/blockbskyuser</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Unblock-BskyUser</maml:linkText>
         <maml:uri></maml:uri>
@@ -456,7 +464,7 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -480,6 +488,10 @@ LoggingEnabled LogFile          LogFileSize
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/disablebskylogging</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Enable-BskyLogging</maml:linkText>
         <maml:uri></maml:uri>
@@ -563,7 +575,7 @@ LoggingEnabled LogFile          LogFileSize
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -587,6 +599,10 @@ LoggingEnabled LogFile          LogFileSize
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/enablebskylogging</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Disable-BskyLogging</maml:linkText>
         <maml:uri></maml:uri>
@@ -712,7 +728,7 @@ LoggingEnabled LogFile          LogFileSize
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -732,11 +748,285 @@ Mode                 LastWriteTime         Length Name
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/exportbskypreference</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Get-BskyPreference</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Remove-BskyPreferenceFile</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Find-BskyPost</command:name>
+      <command:verb>Find</command:verb>
+      <command:noun>BskyPost</command:noun>
+      <maml:description>
+        <maml:para>Find Bluesky posts using a search term or text.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This command uses the Bluesky API to find posts that match a given query. You can specify a keyword or phrase and search all posts or limit the search to a particular user. The API does not support searching tags and the results are not guaranteed to be complete or immediately up-to-date. This command should be considered EXPERIMENTAL and may change in future releases or be removed entirely.</maml:para>
+      <maml:para>This command was added in v2.6.0.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Find-BskyPost</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Query</maml:name>
+          <maml:description>
+            <maml:para>Enter a search term or text. If you specify a username, you can use a wildcard query to find all posts by that user.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Language</maml:name>
+          <maml:description>
+            <maml:para>Filter by a language. The default is English (en).</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Limit</maml:name>
+          <maml:description>
+            <maml:para>Enter the number of posts to retrieve between 1 and 100. Default is 50.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Since</maml:name>
+          <maml:description>
+            <maml:para>Filter by posts since a specific date and time.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+          <dev:type>
+            <maml:name>DateTime</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Profile, Handle">
+          <maml:name>UserName</maml:name>
+          <maml:description>
+            <maml:para>Filter by a username.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Language</maml:name>
+        <maml:description>
+          <maml:para>Filter by a language. The default is English (en).</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Limit</maml:name>
+        <maml:description>
+          <maml:para>Enter the number of posts to retrieve between 1 and 100. Default is 50.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Query</maml:name>
+        <maml:description>
+          <maml:para>Enter a search term or text. If you specify a username, you can use a wildcard query to find all posts by that user.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Since</maml:name>
+        <maml:description>
+          <maml:para>Filter by posts since a specific date and time.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Profile, Handle">
+        <maml:name>UserName</maml:name>
+        <maml:description>
+          <maml:para>Filter by a username.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>PSBlueskyFeedItem</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Find-BskyPost -query "PSConfeu" -Since "4/1/2025"
+
+Date                Liked Replied Reposted Quoted
+----                ----- ------- -------- ------
+4/8/2025 7:02:55 PM     0       2        0      0
+
+
+Patch My PC [patchmypc.com]
+
+They're pretty great, right? We won't make it to PSConfEU this year, but we've got several other conferences on the
+lineup ➡️ patchmypc.com/events?utm_c...
+
+Will you be at any of these?
+
+
+Date                Liked Replied Reposted Quoted
+----                ----- ------- -------- ------
+4/8/2025 2:38:53 PM     3       1        0      0
+
+Thorsten Butz 🎗️ [thorsten.butz.io]
+
+So that thi is clear, @patchmypc.com : better bring some ducks to @psconfeu , I want one of these ! 🐥
+
+
+Date                Liked Replied Reposted Quoted
+----                ----- ------- -------- ------
+4/5/2025 5:12:28 AM 17          0        0      0
+
+Rob Sewell He/Him [robsewell.com]
+
+Riding in Mallorca with @tracisewell.com and my @psconf.eu shirt on
+
+
+Date                Liked Replied Reposted Quoted
+----                ----- ------- -------- ------
+4/3/2025 4:35:57 PM     0       0        0      0
+
+Cory Knox (corbob) [coryknox.dev]
+
+It's not what you're looking for per se, but there was a psconfeu video from a few years back where someone demoed
+their nvim setup.
+
+
+Date                Liked Replied Reposted Quoted
+----                ----- ------- -------- ------
+4/2/2025 6:15:03 AM     0       0        0      0
+
+ [JeffHicks.techhub.social.ap.brid.gy]
+
+I am very excited to return to Sweden this summer for #PSConfEU. Looking forward to Swedish summer nights with my
+European and Scandinavian #PowerShell family. I hope to see you there. Skål! https://psconf.eu/</dev:code>
+        <dev:remarks>
+          <maml:para>Do not attempt to search for a tag like #PSConfEU. The API will treat it as a bad request. The output is formatted with links to the user profile and the message.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Find-BskyPost -query "PSPodcast" -UserName jdhitsolutions.com
+
+Date                 Liked Replied Reposted Quoted
+----                 ----- ------- -------- ------
+4/12/2025 3:42:22 PM 16          3        6      3
+
+
+Jeff Hicks [jdhitsolutions.com]
+
+The first release of the PSPodcast #PowerShell module is now in the PowerShell Gallery. It requires PS and the
+pwshSpectreConsole module. I recommend looking at the project's README file.  This is designed for interactive fun.
+github.com/jdhitsolutio...  /cc @andrewpla.tech
+
+
+Date                 Liked Replied Reposted Quoted
+----                 ----- ------- -------- ------
+4/11/2025 7:06:56 PM 12          1        0      0
+
+Jeff Hicks [jdhitsolutions.com]
+
+Planning on publishing the first release of the PSPodcast #PowerShell module over the weekend. I'll announce it here
+when that happens.</dev:code>
+        <dev:remarks>
+          <maml:para>Searching for posts by a specific user.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Find-BskyPost -query "*" -UserName jdhitsolutions.com</dev:code>
+        <dev:remarks>
+          <maml:para>You can find all posts by a specific user with a wildcard query. You can return between 1 and 100 posts. The default is 50.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/a58d5e</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-BskyFeed</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -831,7 +1121,7 @@ Mode                 LastWriteTime         Length Name
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -863,6 +1153,10 @@ Created               Description
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/findbskyuser</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyProfile</maml:linkText>
         <maml:uri></maml:uri>
@@ -925,7 +1219,7 @@ Created               Description
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -939,6 +1233,10 @@ did:plc:ohgsqpfsbocaaxusxqlgfvd7</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/getbskyaccountdid</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyProfile</maml:linkText>
         <maml:uri></maml:uri>
@@ -1036,7 +1334,7 @@ did:plc:ohgsqpfsbocaaxusxqlgfvd7</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -1057,6 +1355,10 @@ Description : catfish, crypto, etc.</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/getbskyblockedlist</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyBlockedUser</maml:linkText>
         <maml:uri></maml:uri>
@@ -1154,7 +1456,7 @@ Description : catfish, crypto, etc.</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -1171,6 +1473,10 @@ stormy373.bsky.social       stormy.bsky.social  porn   I offer a wide range...</
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/getbskyblockeduser</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyBlockedList</maml:linkText>
         <maml:uri></maml:uri>
@@ -1266,7 +1572,7 @@ stormy373.bsky.social       stormy.bsky.social  porn   I offer a wide range...</
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -1307,11 +1613,19 @@ Date                  Liked Replied Reposted Quoted
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/getbskyfeed</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Get-BskyTimeline</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyLiked</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Find-BskyPost</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
@@ -1407,7 +1721,7 @@ Date                  Liked Replied Reposted Quoted
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -1427,6 +1741,10 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/getbskyfollowers</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyFollowing</maml:linkText>
         <maml:uri></maml:uri>
@@ -1524,7 +1842,7 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -1544,6 +1862,10 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/getbskyfollowing</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyFollowers</maml:linkText>
         <maml:uri></maml:uri>
@@ -1641,7 +1963,7 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -1664,6 +1986,10 @@ Date                  Liked Replied Reposted Quoted
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/getbskyliked</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyFeed</maml:linkText>
         <maml:uri></maml:uri>
@@ -1710,7 +2036,7 @@ Date                  Liked Replied Reposted Quoted
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -1727,6 +2053,10 @@ LoggingEnabled LogFile          LogFileSize
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/getbskylogging</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Set-BskyLogging</maml:linkText>
         <maml:uri></maml:uri>
@@ -1781,7 +2111,7 @@ LoggingEnabled LogFile          LogFileSize
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -1789,7 +2119,7 @@ LoggingEnabled LogFile          LogFileSize
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-BskyModuleInfo
 
-   Module: PSBlueSky [v2.4.0]
+   Module: PSBlueSky [v2.6.0]
 
 Name                      Alias               Synopsis
 ----                      -----               --------
@@ -1797,39 +2127,23 @@ Add-BskyImage                                 Upload an image to Bluesky.
 Block-BskyUser                                Block a Bluesky user account.
 Disable-BskyLogging                           Disable BlueSky API logging.
 Enable-BskyLogging                            Enable BlueSky API logging.
-Export-BskyPreference                         Export your PSBlueSky format...
-Find-BskyUser             bsu                 Search for Bluesky user accou...
-Get-BskyAccountDID                            Resolve a Bluesky account nam...
-Get-BskyBlockedList       bsblocklist         Get your subscribed blocked l...
-Get-BskyBlockedUser       bsblock             Get your blocked accounts.
-Get-BskyFeed              bsfeed              Get your Bluesky feed.
-Get-BskyFollowers         bsfollower          Get your Bluesky followers
-Get-BskyFollowing         bsfollow            Get a list of Bluesky accounts...
-Get-BskyLiked             bsliked             Get your liked Bluesky posts.
-Get-BskyLogging                               Getting the current PSBlueSky ...
-Get-BskyModuleInfo                            Get a summary of the PSBlueSky...
-Get-BskyNotification      bsn                 Get Bluesky notifications.
-Get-BskyPreference                            Get PSBlueSky formatting prefe...
-Get-BskyProfile           bsp                 Get a Bluesky profile.
-Get-BskySession           bss                 Show your current Bluesky session.
-Get-BskyTimeline          bst                 Get your Bluesky timeline.
-New-BskyFollow            Follow-BskyUser     Follow a Bluesky user.
-New-BskyPost              skeet               Create a Bluesky post.
-Open-BskyHelp             bshelp              Open the PSBluesky help document.
-Publish-BskyPost          Repost-BskyPost     Repost or quote a Bluesky post.
-Remove-BskyFollow         Unfollow-BskyUser   Unfollow a Bluesky user.
-Remove-BskyPreferenceFile                     Delete the user's PSBlueSky pre...
-Set-BskyLogging                               Configure PSBlueSky API logging.
-Set-BskyPreference                            Set a PSBlueSky formatting pref...
-Start-BSkySession                             Start a new Bluesky session.
-Unblock-BskyUser                              Unblock a Bluesky user account.
-Update-BskySession        Refresh-BskySession Refresh the Bluesky session token.</dev:code>
+Export-BskyPreference                         Export your PSBlueSky formatting
+                                              preference settings to a file.
+Find-BskyPost             bsf Search-BskyPost Find Bluesky posts using a search term or text.
+Find-BskyUser             bsu                 Search for Bluesky user accounts.
+Get-BskyAccountDID                            Resolve a Bluesky account name to its DID.
+Get-BskyBlockedList       bsblocklist         Get your subscribed blocked lists.
+...</dev:code>
         <dev:remarks>
           <maml:para>The default output includes clickable hyperlinks to th online help for each command in the module's GitHub repository.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/getbskymoduleinfo</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyPreference</maml:linkText>
         <maml:uri></maml:uri>
@@ -1954,7 +2268,7 @@ Update-BskySession        Refresh-BskySession Refresh the Bluesky session token.
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -2017,6 +2331,10 @@ Guy Leech                   guyrleech.bsky.social       PowerShell nut. Dog ...<
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/getbskynotification</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyFeed</maml:linkText>
         <maml:uri></maml:uri>
@@ -2097,7 +2415,7 @@ Guy Leech                   guyrleech.bsky.social       PowerShell nut. Dog ...<
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -2154,6 +2472,10 @@ Username `e[4;38;5;190m</dev:code>
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/getbskypreference</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Set-BskyPreference</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
@@ -2179,7 +2501,7 @@ Username `e[4;38;5;190m</dev:code>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-BskyProfile</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="Profile">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="Profile, Handle">
           <maml:name>UserName</maml:name>
           <maml:description>
             <maml:para>Enter the profile or user name.</maml:para>
@@ -2194,7 +2516,7 @@ Username `e[4;38;5;190m</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="Profile">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="Profile, Handle">
         <maml:name>UserName</maml:name>
         <maml:description>
           <maml:para>Enter the profile or user name.</maml:para>
@@ -2229,7 +2551,7 @@ Username `e[4;38;5;190m</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -2271,6 +2593,10 @@ Created           Posts Followers Following Lists
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/getbskyprofile</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Find-BskyUser</maml:linkText>
         <maml:uri></maml:uri>
@@ -2322,7 +2648,7 @@ Created           Posts Followers Following Lists
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -2341,6 +2667,10 @@ True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:21:56.7958913</dev:cod
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/getbskysession</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyAccessToken</maml:linkText>
         <maml:uri></maml:uri>
@@ -2362,6 +2692,7 @@ True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:21:56.7958913</dev:cod
     </command:details>
     <maml:description>
       <maml:para>Use this command to retrieve the starter packs for a specified Bluesky profile. The default will be your profile based on the credential you used to start your Bluesky session, but you can get the starter packs for any profile if you know the user name. The username is case-sensitive. The default output includes clickable links.</maml:para>
+      <maml:para>This command was added in v2.6.0.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2369,7 +2700,7 @@ True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:21:56.7958913</dev:cod
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="Profile">
           <maml:name>UserName</maml:name>
           <maml:description>
-            <maml:para>Enter the profile or username.</maml:para>
+            <maml:para>Enter the profile or username. The default is your profile.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2384,7 +2715,7 @@ True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:21:56.7958913</dev:cod
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="Profile">
         <maml:name>UserName</maml:name>
         <maml:description>
-          <maml:para>Enter the profile or username.</maml:para>
+          <maml:para>Enter the profile or username. The default is your profile.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2416,7 +2747,7 @@ True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:21:56.7958913</dev:cod
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -2455,6 +2786,10 @@ Created          Creator  CreatorDisplay Feeds Labels
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/e6b498</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>Get-BskyStarterPackList</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
@@ -2473,11 +2808,12 @@ Created          Creator  CreatorDisplay Feeds Labels
       <maml:para>Use this command to retrieve a specified starter pack and the member profiles contains. You must specify the AT protocol URI for the starter pack. This can be retrieved via Get-BskyStarterPack, the output of which can be piped into Get-BskyStarterPackList.</maml:para>
       <maml:para>Note the command will return a maximum of 50 members by default. To return all members use the -All switch. Use -Limit to configure how many members to return, between 1 and 100.</maml:para>
       <maml:para>Note that a warning will be shown if the number of members returned is less than the starter packs item count, however this may be expected if one or more members has blocked the creator of the starter pack, even when using -All.</maml:para>
+      <maml:para>This command was added in v2.6.0.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-BskyStarterPackList</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
           <maml:name>Uri</maml:name>
           <maml:description>
             <maml:para>Enter the at-uri for the starter pack.</maml:para>
@@ -2503,7 +2839,7 @@ Created          Creator  CreatorDisplay Feeds Labels
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Get-BskyStarterPackList</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
           <maml:name>Uri</maml:name>
           <maml:description>
             <maml:para>Enter the at-uri for the starter pack.</maml:para>
@@ -2554,7 +2890,7 @@ Created          Creator  CreatorDisplay Feeds Labels
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
         <maml:name>Uri</maml:name>
         <maml:description>
           <maml:para>Enter the at-uri for the starter pack.</maml:para>
@@ -2589,7 +2925,7 @@ Created          Creator  CreatorDisplay Feeds Labels
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -2627,6 +2963,10 @@ Created          Creator  CreatorDisplay MemberCount Members
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/347462</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyStarterPack</maml:linkText>
         <maml:uri></maml:uri>
@@ -2698,7 +3038,7 @@ Created          Creator  CreatorDisplay MemberCount Members
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -2719,6 +3059,10 @@ on becoming a Microsoft MVP https://buff.ly/4fa3iv7 #MVPBuzz
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/getbskytimeline</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyFeed</maml:linkText>
         <maml:uri></maml:uri>
@@ -2836,7 +3180,7 @@ on becoming a Microsoft MVP https://buff.ly/4fa3iv7 #MVPBuzz
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -2850,6 +3194,10 @@ https://bsky.app/profile/did:plc:rlwd5iajr3btl5e7gyvfwk67</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/newbskyfollow</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyProfile</maml:linkText>
         <maml:uri></maml:uri>
@@ -3055,7 +3403,7 @@ https://bsky.app/profile/did:plc:rlwd5iajr3btl5e7gyvfwk67</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -3098,6 +3446,10 @@ PS C:\&gt; skeet $s -ImagePath C:\scripts\PSBluesky\images\BlueskyLogo-icon.png 
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/newbskypost</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyFeed</maml:linkText>
         <maml:uri></maml:uri>
@@ -3184,7 +3536,7 @@ PS C:\&gt; skeet $s -ImagePath C:\scripts\PSBluesky\images\BlueskyLogo-icon.png 
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -3204,6 +3556,10 @@ PS C:\&gt; skeet $s -ImagePath C:\scripts\PSBluesky\images\BlueskyLogo-icon.png 
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/openbskyhelp</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyModuleInfo</maml:linkText>
         <maml:uri></maml:uri>
@@ -3373,7 +3729,7 @@ PS C:\&gt; skeet $s -ImagePath C:\scripts\PSBluesky\images\BlueskyLogo-icon.png 
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -3409,6 +3765,10 @@ VERBOSE: [12:25:49:9381 END    ] Publish-BskyPost-&gt;  Ending PSBluesky module 
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/publishbskypost</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyTimeline</maml:linkText>
         <maml:uri></maml:uri>
@@ -3617,7 +3977,7 @@ VERBOSE: [12:25:49:9381 END    ] Publish-BskyPost-&gt;  Ending PSBluesky module 
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -3640,6 +4000,10 @@ bafyreigmtawteltd6lqsj5kpp7czhbygnooyx6j6xacgh7cjvofclqerxa 3lfnfgueedi2k</dev:c
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/removebskyfollow</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyProfile</maml:linkText>
         <maml:uri></maml:uri>
@@ -3745,7 +4109,7 @@ bafyreigmtawteltd6lqsj5kpp7czhbygnooyx6j6xacgh7cjvofclqerxa 3lfnfgueedi2k</dev:c
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -3759,6 +4123,10 @@ What if: Performing the operation "Remove File" on target "C:\temp\api.json".</d
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/removebskylogging</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyLogging</maml:linkText>
         <maml:uri></maml:uri>
@@ -3857,7 +4225,7 @@ What if: Performing the operation "Remove File" on target "C:\temp\api.json".</d
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -3870,6 +4238,10 @@ What if: Performing the operation "Remove File" on target "C:\temp\api.json".</d
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/removebskypreferencefile</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Export-BskyPreference</maml:linkText>
         <maml:uri></maml:uri>
@@ -3973,7 +4345,7 @@ What if: Performing the operation "Remove File" on target "C:\temp\api.json".</d
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -3997,6 +4369,10 @@ LoggingEnabled LogFile          LogFileSize
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/setbskylogging</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyLogging</maml:linkText>
         <maml:uri></maml:uri>
@@ -4183,7 +4559,7 @@ LoggingEnabled LogFile          LogFileSize
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -4207,6 +4583,10 @@ LikedHighest `e[31m</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/setbskypreference</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyPreference</maml:linkText>
         <maml:uri></maml:uri>
@@ -4282,7 +4662,7 @@ LikedHighest `e[31m</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -4295,6 +4675,10 @@ LikedHighest `e[31m</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/startbskysession</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskySession</maml:linkText>
         <maml:uri></maml:uri>
@@ -4443,7 +4827,7 @@ LikedHighest `e[31m</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -4456,6 +4840,10 @@ LikedHighest `e[31m</dev:code>
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/unblockbskyuser</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Block-BskyUser</maml:linkText>
         <maml:uri></maml:uri>
@@ -4527,7 +4915,7 @@ LikedHighest `e[31m</dev:code>
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -4546,6 +4934,10 @@ True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:00:00.0072880</dev:cod
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/updatebskysession</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Start-BskySession</maml:linkText>
         <maml:uri></maml:uri>
