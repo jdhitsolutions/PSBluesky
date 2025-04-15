@@ -121,4 +121,30 @@ Created 10/27/2024 14:10:07
       </AliasProperty>
     </Members>
   </Type>
+  <Type>
+    <Name>PSBlueskyStarterPack</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>Age</Name>
+        <GetScriptBlock>(Get-Date) - $this.Created</GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+  <Type>
+    <Name>PSBlueskyStarterPackList</Name>
+    <Members>
+    <AliasProperty>
+        <Name>MemberCount</Name>
+        <ReferencedMemberName>ListItemCount</ReferencedMemberName>
+      </AliasProperty>
+      <AliasProperty>
+        <Name>Members</Name>
+        <ReferencedMemberName>ListItems</ReferencedMemberName>
+      </AliasProperty>
+      <ScriptProperty>
+        <Name>Age</Name>
+        <GetScriptBlock>(Get-Date) - $this.Created</GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
 </Types>

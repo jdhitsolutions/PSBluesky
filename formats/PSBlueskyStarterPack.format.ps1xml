@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+    <ViewDefinitions>
+        <View>
+            <Name>default</Name>
+            <ViewSelectedBy>
+                <TypeName>PSBlueskyStarterPack</TypeName>
+            </ViewSelectedBy>
+            <CustomControl>
+                <CustomEntries>
+                    <CustomEntry>
+                        <CustomItem>
+                            <ExpressionBinding>
+                                <ScriptBlock>
+                            "{0} [$($bskyPreferences['UserName']){1}$($PSStyle.Reset)]" -f $_.Name,$($PSStyle.FormatHyperLink($_.Url,$_.Url))
+                                </ScriptBlock>
+                            </ExpressionBinding>
+                            <NewLine/>
+                            <NewLine/>
+                            <ExpressionBinding>
+                                <ScriptBlock>
+                            "{0}{1}{2}" -f ($bskyPreferences['ProfileDescription']),($_.Description.split("`n").foreach({$_.ToString()})|Out-String),$PSStyle.Reset
+                                </ScriptBlock>
+                            </ExpressionBinding>
+                            <NewLine/>
+                            <ExpressionBinding>
+                                <ScriptBlock>
+                                $_ | Format-Table -property @{Name='Created';Expression={$_.Created.ToString("g")}},
+                                Creator,CreatorDisplay,@{Name='Feeds';Expression={$_.Feeds.displayName}},Labels | Out-String
+                                </ScriptBlock>
+                            </ExpressionBinding>
+                        </CustomItem>
+                    </CustomEntry>
+                </CustomEntries>
+            </CustomControl>
+        </View>
+    </ViewDefinitions>
+</Configuration>
