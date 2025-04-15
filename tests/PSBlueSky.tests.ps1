@@ -187,6 +187,42 @@ InModuleScope $ModuleName {
         #insert additional command-specific tests
 
     } -Tag function
+    Describe Get-BskyStarterPack {
+        It 'Should have help documentation' {
+            (Get-Help Get-BskyStarterPack).Description | Should -Not -BeNullOrEmpty
+        }
+        It 'Should have a defined output type' {
+            (Get-Command -CommandType function -Name Get-BskyStarterPack).OutputType | Should -Not -BeNullOrEmpty
+        }
+        It 'Should run without error' {
+            <#
+        mock and set mandatory parameters as needed
+        this test is marked as pending since it
+        most likely needs to be refined
+        #>
+            { Get-BskyStarterPack } | Should -Not -Throw
+        } -Pending
+        #insert additional command-specific tests
+
+    } -Tag function
+    Describe Get-BskyStarterPackList {
+        It 'Should have help documentation' {
+            (Get-Help Get-BskyStarterPackList).Description | Should -Not -BeNullOrEmpty
+        }
+        It 'Should have a defined output type' {
+            (Get-Command -CommandType function -Name Get-BskyStarterPackList).OutputType | Should -Not -BeNullOrEmpty
+        }
+        It 'Should run without error' {
+            <#
+        mock and set mandatory parameters as needed
+        this test is marked as pending since it
+        most likely needs to be refined
+        #>
+            { Get-BskyStarterPackList } | Should -Not -Throw
+        } -Pending
+        #insert additional command-specific tests
+
+    } -Tag function
     Describe Get-BskyProfile {
         It 'Should have help documentation' {
             (Get-Help Get-BskyProfile).Description | Should -Not -BeNullOrEmpty

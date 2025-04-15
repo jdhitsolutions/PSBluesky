@@ -2353,6 +2353,288 @@ True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:21:56.7958913</dev:cod
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-BskyStarterPack</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>BskyStarterPack</command:noun>
+      <maml:description>
+        <maml:para>Get Bluesky starter packs for a specified profile.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Use this command to retrieve the starter packs for a specified Bluesky profile. The default will be your profile based on the credential you used to start your Bluesky session, but you can get the starter packs for any profile if you know the user name. The username is case-sensitive. The default output includes clickable links.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-BskyStarterPack</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="Profile">
+          <maml:name>UserName</maml:name>
+          <maml:description>
+            <maml:para>Enter the profile or username.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="Profile">
+        <maml:name>UserName</maml:name>
+        <maml:description>
+          <maml:para>Enter the profile or username.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>PSBlueskyStarterPack</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-BskyStarterPack
+
+Pluralsight Authors Starter Pack [https://bsky.app/starter-pack/did:plc:ohgsqpfsbocaaxusxqlgfvd7/3l7spfvbk5w2n]
+
+A starter pack of Pluralsight authors and content creators. This is a personal list, unaffiliated with Pluralsight.com. If you are a Pluralsight author, ping me to get added to the list.
+
+
+Created          Creator            CreatorDisplay Feeds                                                  Labels
+-------          -------            -------------- -----                                                  ------
+31/10/2024 12:56 jdhitsolutions.com Jeff Hicks     {Microsoft Azure, Developers, DevOps | SecOps | Cloud} {}</dev:code>
+        <dev:remarks>
+          <maml:para>The default output includes clickable links.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-BskyStarterPack wragg.io
+
+Azure Spring Clean 2025 [https://bsky.app/starter-pack/did:plc:re4hy2aynaii3jfcgl2s5gmp/3ljhnp6v2mq2y]
+
+Contributors to the Azure Spring Clean 2025 free community event promoting well-managed Azure tenants.
+
+
+Created          Creator  CreatorDisplay Feeds Labels
+-------          -------  -------------- ----- ------
+03/03/2025 09:38 wragg.io Mark Wragg           {}</dev:code>
+        <dev:remarks>
+          <maml:para>You can get the starter packs for any profile if you know the user name.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-BskyStarterPackList</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-BskyStarterPackList</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>BskyStarterPackList</command:noun>
+      <maml:description>
+        <maml:para>Get a Bluesky starter pack and the list of profiles it contains.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Use this command to retrieve a specified starter pack and the member profiles contains. You must specify the AT protocol URI for the starter pack. This can be retrieved via Get-BskyStarterPack, the output of which can be piped into Get-BskyStarterPackList.</maml:para>
+      <maml:para>Note the command will return a maximum of 50 members by default. To return all members use the -All switch. Use -Limit to configure how many members to return, between 1 and 100.</maml:para>
+      <maml:para>Note that a warning will be shown if the number of members returned is less than the starter packs item count, however this may be expected if one or more members has blocked the creator of the starter pack, even when using -All.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-BskyStarterPackList</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+          <maml:name>Uri</maml:name>
+          <maml:description>
+            <maml:para>Enter the at-uri for the starter pack.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>All</maml:name>
+          <maml:description>
+            <maml:para>Return All starter park list items</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-BskyStarterPackList</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+          <maml:name>Uri</maml:name>
+          <maml:description>
+            <maml:para>Enter the at-uri for the starter pack.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Limit</maml:name>
+          <maml:description>
+            <maml:para>Enter the number of starter pack list items to retrieve between 1 and 100. Default is 50.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>All</maml:name>
+        <maml:description>
+          <maml:para>Return All starter park list items</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Limit</maml:name>
+        <maml:description>
+          <maml:para>Enter the number of starter pack list items to retrieve between 1 and 100. Default is 50.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none">
+        <maml:name>Uri</maml:name>
+        <maml:description>
+          <maml:para>Enter the at-uri for the starter pack.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>PSBlueskyStarterPackList</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-BskyStarterPack | Get-BskyStarterPackList
+
+Pluralsight Authors Starter Pack [https://bsky.app/starter-pack/did:plc:ohgsqpfsbocaaxusxqlgfvd7/3l7spfvbk5w2n]
+
+A starter pack of Pluralsight authors and content creators. This is a personal list, unaffiliated with Pluralsight.com. If you are a Pluralsight author, ping me to get added to the list.
+
+
+Created          Creator            CreatorDisplay MemberCount Members
+-------          -------            -------------- ----------- -------
+31/10/2024 12:56 jdhitsolutions.com Jeff Hicks              49 {matthewrenze.bsky.social, alisaduncan.dev, mhadaily.bsky.social, jesperdj.bsky.social…}</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-BskyStarterPackList at://did:plc:re4hy2aynaii3jfcgl2s5gmp/app.bsky.graph.starterpack/3ljhnp6v2mq2y
+
+Azure Spring Clean 2025 [https://bsky.app/starter-pack/did:plc:re4hy2aynaii3jfcgl2s5gmp/3ljhnp6v2mq2y]
+
+Contributors to the Azure Spring Clean 2025 free community event promoting well-managed Azure tenants.
+
+
+Created          Creator  CreatorDisplay MemberCount Members
+-------          -------  -------------- ----------- -------
+03/03/2025 09:38 wragg.io Mark Wragg              29 {azurealan.ie, cfgcloud.io, wmatthyssen.com, autosysops.bsky.social…}</dev:code>
+        <dev:remarks>
+          <maml:para>You can get any starter pack if you know its AT protocol URI.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-BskyStarterPack</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-BskyTimeline</command:name>
       <command:verb>Get</command:verb>
       <command:noun>BskyTimeline</command:noun>
