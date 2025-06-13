@@ -16,7 +16,7 @@ Function Get-BskyChatList {
     $m.convos | Select ID,
     @{Name="Members";Expression={$_.members.DisplayName}},
     @{Name="LastSent";Expression={$_.lastMessage.sentAt.ToLocalTime()}},
-    @{Name="LastMesssage";Expression={$_.lastMessage.text}}
+    @{Name="LastMessage";Expression={$_.lastMessage.text}}
 }
 Function Get-BskyChat {
     [CmdletBinding()]

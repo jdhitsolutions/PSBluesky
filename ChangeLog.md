@@ -17,7 +17,7 @@
 - Updated `Get-BskyProfile` to return the link to the profile banner.
 - Updated `Get-BskyFeed` and `Get-BskyTimeline` output with a new property of `Links` to get embedded links.
 - Updated `Get-BskyLiked` to include `Thumbnail` and `Links` properties.
-- Added support `Write-Progress` output to `Get-BskyLiked`, `Get-BkskyFollowers` and `Get-BskyFollowing` [[Issue #40](https://github.com/jdhitsolutions/PSBluesky/issues/40)].
+- Added support `Write-Progress` output to `Get-BskyLiked`, `Get-BskyFollowers` and `Get-BskyFollowing` [[Issue #40](https://github.com/jdhitsolutions/PSBluesky/issues/40)].
 - help documentation updates.
 - Updated `README`.
 
@@ -109,7 +109,6 @@
 - Added properties `CID` to output from `Get-BskyLiked`,`Get-BskyNotification`,`Get-BskyTimeline`, and `Get-BskyFeed`. This is to support new commands for reposting and quoting.
 - Added properties `URI` to output from `Get-BskyNotification`,`Get-BskyTimeline`, and `Get-BskyFeed`. This is to support new commands for reposting and quoting.
 - Added a custom view called `Liked` to the `PSBlueskyTimelinePost.format.ps1xml`, `PSBlueskyLiked.format.ps1xml`, and `PSBlueskyFeed.format.ps1xml' files.
-
 
 ### Changed
 

@@ -49,7 +49,6 @@ After installing this module, you should end up with these PSBluesky commands:
 | [Set-BskyPreference](docs/Set-BskyPreference.md) | [Start-BSkySession](docs/Start-BSkySession.md) | [Unblock-BskyUser](docs/Unblock-BskyUser.md) |
 | [Update-BskySession](docs/Update-BskySession.md) | [](docs/.md) | [](docs/.md) |
 
-
 ### Open-BskyHelp
 
 After importing the module you can run [`Open-BskyHelp`](docs/Open-BskyHelp.md) which will open a PDF version of this document in the default application associated with PDF files. Note that not all emojis will render properly in the PDF. Or you can use the -`AsMarkdown` parameter to read this file using markdown formatting. Not all Markdown features may properly render in the console.
@@ -283,7 +282,7 @@ You can repost or quote a Bluesky post with `Publish-BskyPost`. You will need th
 PS C:\> Get-BskyTimeline -Limit 1 | Select-Object *
 
 Author        : joeydantoni.com
-AuthorDisplay : Joey D’Antoni
+AuthorDisplay : Joey D'Antoni
 Date          : 1/9/2025 12:11:13 PM
 Text          : I would likely denormalize the data a little bit, and
                 have a non-vector table with ref. data like date that
@@ -392,7 +391,6 @@ You can use [`Get-BskyKnownFollowers`](docs/Get-BskyKnownFollowers.md) to retrie
 
 ![Bluesky known followers](images/known-followers.png)
 
-
 ## :telescope: Searching for Users
 
 You can search for Bluesky users with [`Find-BskyUser`](docs/Find-BskyUser.md). The default behavior is to search for a user by name. The search is case-insensitive.
@@ -404,7 +402,7 @@ Find-BskyUser -UserName "jeff h" -Limit 3
 The default output includes clickable links to the user's profile. This object too has been customized with aliases and script properties.
 
 ```dos
-PS C:\> Find-BskyUser -UserName "jeff h" -Limit 3 |
+PS C:\> Find-BskyUser -UserName "jeff h" -Limit 2 |
 Select-Object *Name,Description,Created,Age
 
 DisplayName : Jeff (no, the other one)
@@ -415,27 +413,15 @@ Description : When I use a word, Humpty said, it means just what I choose it to
               The question is, said Alice, whether you can make words mean so
               many different things.
 
-              H: The question is which is to be Master — that’s all.
+              H: The question is which is to be Master — that's all.
 Created     : 8/11/2023 6:27:08 AM
 Age         : 514.11:04:04.2416645
-
-DisplayName : F-O Loignon
-UserName    : foloignon.bsky.social
-Description : « Un p’tit gosseux » - MBC
-              « Une caricature » - H. Buzetti
-              « L’osti de tapette communiste woke » - Un pirate
-
-              Je suis pas mal l’amalgame de tout ce que Jeff Fillion haït :
-              prof, artiste, écolo, socialiste, LGBT, féministe, antiraciste,
-              intello, etc.
-Created     : 10/5/2023 8:09:28 PM
-Age         : 458.21:21:43.9869033
 
 DisplayName : Jeff H
 UserName    : jhorowitzmd.bsky.social
 Description : Division Chief of Pulm, Crit Care and Sleep Med at OSU. Lung
               fibrosis investigator. Cubs. Star Wars, GoT, LoTR, Avengers. Dad,
-              husband, son and brother. RT’s do not mean endorsement.
+              husband, son and brother. RT's do not mean endorsement.
               #horoblast.
 Created     : 11/13/2024 6:53:06 AM
 Age         : 54.10:38:05.3790593

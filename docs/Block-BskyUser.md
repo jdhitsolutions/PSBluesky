@@ -39,7 +39,6 @@ Use this account to block a Bluesky user account. You can specify an account use
 PS C:\> Block-BskyUser -UserName "PooBar1234.bsky.social"
 ```
 
-
 ## PARAMETERS
 
 ### -Confirm

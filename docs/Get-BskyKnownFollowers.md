@@ -49,6 +49,7 @@ Dan Wahlin                             danwahlin.bsky.social        Cloud Develo
 ## PARAMETERS
 
 ### -All
+
 Return All followers
 
 ```yaml
@@ -64,6 +65,7 @@ Accept wildcard characters: False
 ```
 
 ### -Limit
+
 Enter the number of followers to retrieve between 1 and 100.
 Default is 50.
 

@@ -18,6 +18,7 @@ Get-BskyAccountDID [-AccountName] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
+
 Use this command to resolve your Bluesky account name to its DID.
 The DID is a unique identifier for your account that you can use to created an AppPassword credential.
 This command does not require authentication.
