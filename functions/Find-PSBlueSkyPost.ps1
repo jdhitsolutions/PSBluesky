@@ -105,6 +105,7 @@ Function Find-BskyPost {
                     CID           = $post.cid
                     Tags          = ($post.record.facets.features).Where({ $_.tag }).tag
                     Thumbnail     = $post.embed.images.thumb
+                    Links         = $post.embed.external.uri
                 }
             } #foreach post
         } #if response

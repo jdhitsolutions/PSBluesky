@@ -2,6 +2,25 @@
 
 ## [Unreleased]
 
+## [2.7.0] - 2025-06-13
+
+### Added
+
+- Added command `Get-BskyKnownFollowers`.
+- Added command `Format-SpectreConsole` with aliases of `fsc` and `Format-Bsky`.
+- Added script property `Links` for profile objects to pull links from the profile description.
+
+### Changed
+
+- Made ALT text for images required. If the user specifies an image with `New-BskyPost` and doesn't specify ALT text, they will be prompted. The `ImageAlt` parameter in `Add-BskyImage` is now mandatory. __This is a breaking change.__
+- Updated `Get-BskyModuleInfo` with parameters `Verb` and `Noun`.
+- Updated `Get-BskyProfile` to return the link to the profile banner.
+- Updated `Get-BskyFeed` and `Get-BskyTimeline` output with a new property of `Links` to get embedded links.
+- Updated `Get-BskyLiked` to include `Thumbnail` and `Links` properties.
+- Added support `Write-Progress` output to `Get-BskyLiked`, `Get-BkskyFollowers` and `Get-BskyFollowing` [[Issue #40](https://github.com/jdhitsolutions/PSBluesky/issues/40)].
+- help documentation updates.
+- Updated `README`.
+
 ## [2.6.0] - 2025-04-15
 
 ### Added
@@ -306,7 +325,8 @@ This is the first version published to the PowerShell Gallery.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.6.0..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.7.0..HEAD
+[2.7.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.6.0..v2.7.0
 [2.6.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.5.0..v2.6.0
 [2.5.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.4.0..v2.5.0
 [2.4.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.3.0..v2.4.0

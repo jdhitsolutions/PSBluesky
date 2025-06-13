@@ -47,6 +47,13 @@ Created 10/27/2024 14:10:07
         <Name>Age</Name>
         <GetScriptBlock>(Get-Date) - $this.Created</GetScriptBlock>
       </ScriptProperty>
+            <ScriptProperty>
+        <Name>Links</Name>
+        <GetScriptBlock>
+          [regex]$rx = 'http(s)?:\/\/\S+'
+          $rx.matches($this.description).value
+        </GetScriptBlock>
+      </ScriptProperty>
     </Members>
   </Type>
   <Type>
@@ -59,6 +66,13 @@ Created 10/27/2024 14:10:07
       <ScriptProperty>
         <Name>Age</Name>
         <GetScriptBlock>(Get-Date) - $this.Created</GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Links</Name>
+        <GetScriptBlock>
+          [regex]$rx = 'http(s)?:\/\/\S+'
+          $rx.matches($this.description).value
+        </GetScriptBlock>
       </ScriptProperty>
     </Members>
   </Type>

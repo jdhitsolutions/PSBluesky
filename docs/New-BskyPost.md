@@ -109,7 +109,7 @@ Accept wildcard characters: False
 
 ### -ImageAlt
 
-You should include ALT text for the image.
+You muse include ALT text for the image. This parameter is technically not mandatory, but if you specify and image without a corresponding ImageAlt parameter, you will be prompted for the ALT text.
 
 ```yaml
 Type: String

@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Export your PSBlueSky formatting preference settings to a file.
+Export PSBlueSky preference settings.
 
 ## SYNTAX
 

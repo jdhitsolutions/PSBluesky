@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Get PSBlueSky formatting preference settings.
+Get PSBlueSky formatting preferences.
 
 ## SYNTAX
 

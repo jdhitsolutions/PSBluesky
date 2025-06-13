@@ -28,10 +28,10 @@ The image must be less than 1MB in size and the recommended format is PNG. Avoid
 ### Example 1
 
 ```powershell
-PS C:\> Add-BskyImage -ImagePath "C:\Users\user\Documents\image.png" -ImageAlt "alt tet here"
+PS C:\> Add-BskyImage -ImagePath "C:\Users\user\Documents\image.png" -ImageAlt "alt text here"
 ```
 
-You should use ALT text for images.
+You must use ALT text for images.
 
 ## PARAMETERS
 
@@ -60,7 +60,7 @@ Type: String
 Parameter Sets: (All)
 Aliases: Alt
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False

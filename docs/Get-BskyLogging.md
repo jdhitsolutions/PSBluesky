@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Getting the current PSBlueSky API logging settings.
+Getting PSBlueSky logging settings.
 
 ## SYNTAX
 

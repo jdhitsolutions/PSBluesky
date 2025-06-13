@@ -9,7 +9,8 @@ Function Add-BskyImage {
         [ValidatePattern('.*\.(jpg|jpeg|png|gif)$', ErrorMessage = 'The file must be a jpg, jpeg, or png file.')]
         [Alias('Path')]
         [string]$ImagePath,
-        [Parameter(HelpMessage = 'You should include ALT text for the image.')]
+
+        [Parameter(Mandatory,HelpMessage = 'You should include ALT text for the image.')]
         [Alias('Alt')]
         [string]$ImageAlt
     )

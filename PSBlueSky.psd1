@@ -3,24 +3,26 @@
 #
 @{
     RootModule           = 'PSBlueSky.psm1'
-    ModuleVersion        = '2.6.0'
+    ModuleVersion        = '2.7.0'
     CompatiblePSEditions = 'Core'
     GUID                 = 'c5c1fd1d-e648-432d-b7d6-bb56f2044c2a'
     Author               = 'Jeff Hicks'
     CompanyName          = 'JDH Information Technology Solutions, Inc.'
     Copyright            = '(c)2024-2025 JDH Information Technology Solutions, Inc.'
-    Description          = 'A set of PowerShell commands that use the Bluesky AT Proto API. You can post and upload images from a PowerShell prompt, as well as get your timeline, feed, followers, and more. Run Open-BskyHelp after installation to launch a PDF guide. This module is written for PowerShell 7 and uses features like $PSStyle.'
+    Description          = 'A set of PowerShell commands that use the Bluesky AT Proto API. You can post and upload images from a PowerShell prompt, as well as get your timeline, feed, followers, and more. Run Open-BskyHelp after installation to launch a PDF guide. This module is written for PowerShell 7 and uses features like $PSStyle. If you have the pwshSpectreConsole module installed, additional features are available.'
     PowerShellVersion    = '7.4'
     FunctionsToExport    = @(
         'Add-BskyImage',
         'Block-BskyUser',
         'Find-BskyUser',
         'Find-BskyPost',
+        'Format-SpectreConsole',
         'Get-BskyAccountDID',
         'Get-BskyBlockedList'
         'Get-BskyBlockedUser',
         'Get-BskyFeed',
         'Get-BskyFollowers',
+        'Get-BskyKnownFollowers',
         'Get-BskyFollowing',
         'Get-BskyLiked'
         'Get-BskyNotification'
@@ -78,6 +80,8 @@
         'bsp',
         'bsf',
         'fbp'
+        'fsc',
+        'Format-Bsky',
         'bsfeed',
         'bsfollow',
         'bsfollower',
@@ -97,25 +101,29 @@
             LicenseUri                 = 'https://github.com/jdhitsolutions/PSBlueSky/blob/main/LICENSE.txt'
             ProjectUri                 = 'https://github.com/jdhitsolutions/PSBluesky'
             IconUri                    = 'https://raw.githubusercontent.com/jdhitsolutions/PSBlueSky/main/images/BlueskyLogo-icon.png'
-            ReleaseNotes               = @'
-## [2.6.0] - 2025-04-15
+            ReleaseNotes               = @"
+# PSBlueSky Release Notes
+
+## [2.7.0] - 2025-06-13
 
 ### Added
 
-- Added parameter alias `handle` for `Username` in `Get-BskyProfile`.
-- Added command `Find-BskyPost`.
-- Added a custom view to `PSBlueskyFollowers.format.ps1xml` to display avatar images is the pwshSpectreConsole module is detected. This will apply to output from `Get-BskyFollowers` and `Get-BskyFollowing`.
-- Added `Thumbnail` property to the `PSBlueskyFeedItem` and `PSBlueskyTimelinePost` objects.
+- Added command `Get-BskyKnownFollowers`.
+- Added command `Format-SpectreConsole` with aliases of `fsc` and `Format-Bsky`.
+- Added script property `Links` for profile objects to pull links from the profile description.
 
 ### Changed
 
-- Merged [PR#38](https://github.com/jdhitsolutions/PSBluesky/pull/38) to add starter pack commands `Get-BskyStarterPack` and `Get-BskyStarterPackList`. Thanks [@markwragg](https://github.com/markwragg)
-- Modified output from `Get-BskyFeed` and `Get-BskyTimeline` to include tags.
-- Updated `Get-BskyFollower` and `Get-BskyFollowing` to include the account's avatar and labels.
-- Updated profile formatting file to display the user's logo if the pwshSpectreConsole module is detected. This will apply to output from `Get-BskyProfile`, and `Find-BskyUser`.
-- Added online help links
-- Updated `README.md`.
-'@
+- Made ALT text for images required. If the user specifies an image with `New-BskyPost` and doesn't specify ALT text, they will be prompted. The `ImageAlt` parameter in `Add-BskyImage` is now mandatory. __This is a breaking change.__
+- Updated `Get-BskyModuleInfo` with parameters `Verb` and `Noun`.
+- Updated `Get-BskyProfile` to return the link to the profile banner.
+- Updated `Get-BskyFeed` and `Get-BskyTimeline` output with a new property of `Links` to get embedded links.
+- Updated `Get-BskyLiked` to include `Thumbnail` and `Links` properties.
+- Added support `Write-Progress` output to `Get-BskyLiked`, `Get-BkskyFollowers` and `Get-BskyFollowing` [[Issue #40](https://github.com/jdhitsolutions/PSBluesky/issues/40)].
+- help documentation updates.
+- Updated `README`.
+"@
+
             RequireLicenseAcceptance   = $false
             ExternalModuleDependencies = @()
         } # End of PSData hashtable

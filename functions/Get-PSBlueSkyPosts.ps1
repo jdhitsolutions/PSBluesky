@@ -81,6 +81,13 @@ Function Get-BskyFeed {
             if ($response) {
                 Write-Information -MessageData $response -Tags raw
                 foreach ($post in $response.feed.post) {
+                #use embedded images if found or external uri thumb
+                $thumb = If ($post.embed.images.thumb) {
+                    $post.embed.images.thumb
+                }
+                elseif ($post.embed.external ) {
+                    $post.embed.external.thumb
+                }
                     [PSCustomObject]@{
                         PSTypeName    = 'PSBlueskyFeedItem'
                         Text          = $post.record.text
@@ -96,7 +103,8 @@ Function Get-BskyFeed {
                         URI           = $post.uri
                         CID           = $post.cid
                         Tags          = ($post.record.facets.features).Where({$_.tag}).tag
-                        Thumbnail     = $post.embed.images.thumb
+                        Thumbnail     = $thumb
+                        Links         = $post.embed.external.uri
                     }
                 } #foreach post
             } #if feed

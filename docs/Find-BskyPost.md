@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Find Bluesky posts using a search term or text.
+Find Bluesky posts.
 
 ## SYNTAX
 

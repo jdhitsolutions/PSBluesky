@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Get a list of Bluesky accounts that you follow.
+Get Bluesky accounts you follow.
 
 ## SYNTAX
 
@@ -36,12 +36,19 @@ This command will return a list of Bluesky accounts that you follow. You can get
 ```powershell
 PS C:\> Get-BskyFollowing -Limit 2
 
-Display      Username                   Description
--------      --------                   -----------
-Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teacher |
-                                        Board member of the .NET Foundation 💜
-                                        | Proud dad joke lover
-             mikeshepard70.bsky.social
+Display           Username              Description
+-------           --------              -----------
+Catherine Rampell crampell.bsky.social  MSNBC anchor/co-host of The Weekend:
+                                        Primetime, Sat/Sun 6-9pm. Washington
+                                        Post syndicated op-ed columnist.
+                                        Econ, politics, immigration, tax, etc.
+                                        + occasional theater nerdery.
+                                       
+Rick Vanover      rickatron.bsky.social RICKATRON. I work at Veeam in the
+                                        Office of the CTO ► Backup, vSphere,
+                                        Hyper-V, Windows Server, Azure, AWS +
+                                        more. Father, Husband. Work in
+                                        Progress. Based in Central Ohio, USA.
 ```
 
 The default output includes clickable links to the user's profile.
@@ -98,5 +105,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter
 
 ## RELATED LINKS
+
+[Get-BskyFollowers](Get-BskyFollowers.md)
 
 [Get-BskyFollowers](Get-BskyFollowers.md)

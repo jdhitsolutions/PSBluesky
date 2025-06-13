@@ -28,8 +28,8 @@ Function Get-BskyBlockedList {
         }
         if ($script:BSkySession.accessJwt) {
             $token = $script:BSkySession.accessJwt
-            $UserName = $script:BSkySession.handle
-            $did = $script:BskySession.did
+          #  $UserName = $script:BSkySession.handle
+          #  $did = $script:BskySession.did
             $headers = @{
                 Authorization  = "Bearer $token"
                 'Content-Type' = 'application/json'
@@ -90,7 +90,7 @@ Function Get-BskyBlockedList {
                         "referencelist" {"Reference list"}
                     }
                     #https://bsky.app/profile/did:plc:mcgh4jrag2bcgnhk3skn22dg/lists/3lcdwdnywx425
-                    $split = $list.uri -split '/' | where { $_ -match '\w' }
+                    $split = $list.uri -split '/' | Where-Object { $_ -match '\w' }
                     $ListUrl = "https://bsky.app/profile/{0}/lists/{1}" -f $split[1],$split[-1]
                     [PSCustomObject]@{
                         PSTypeName  = 'PSBlueskyBlockedList'

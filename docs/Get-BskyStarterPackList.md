@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Get a Bluesky starter pack and the list of profiles it contains.
+Get a Bluesky starter pack list.
 
 ## SYNTAX
 

@@ -82,7 +82,8 @@ Function Get-BskyProfile {
                         URL         = "https://bsky.app/profile/$($bSkyProfile.handle)"
                         DID         = $bSkyProfile.did
                         Viewer      = $bSkyProfile.viewer
-                        Labels     = $bSkyProfile.labels.val
+                        Labels      = $bSkyProfile.labels.val
+                        Banner      = $bSkyProfile.banner
                     }
                 }
                 else {

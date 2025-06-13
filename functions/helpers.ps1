@@ -18,7 +18,6 @@ Function _newFacetLink {
         [string]$FacetType = 'link'
     )
 
-
     $PSDefaultParameterValues['_verbose:block'] = 'PRIVATE'
     _verbose -Message ($strings.NewFacet -f $FacetType, $Text, $Message)
     $feature = Switch ($FacetType) {
@@ -92,7 +91,7 @@ Function _convertAT {
     )
 
     #at://did:plc:qrllvid7s54k4hnwtqxwetrf/app.bsky.feed.post/3l7e5jvorof2t
-    $split = $at -split '/' | where { $_ -match '\w' }
+    $split = $at -split '/' | Where-Object { $_ -match '\w' }
 
     if ($type -eq 'profile') {
         $publicUri = 'https://bsky.app/profile/'

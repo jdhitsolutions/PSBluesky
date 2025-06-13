@@ -70,14 +70,27 @@ Function Get-BskyFollowing {
                 $results += $response.follows
                 Write-Information -MessageData $response -Tags raw
                 if ($PSCmdlet.ParameterSetName -eq 'All') {
+                     # 25 April 2025 add support for Write-Progress Issue #40
+                     $count = 0
+                     #get the approximate number of following accounts
+                     $Max = (Get-BskyProfile).Following
+                     $progParams = @{
+                         Activity = $strings.ProgressActivity2
+                         Status   =($strings.ProgressStatus2 -f 0)
+                         Percent  = 0
+                     }
                     _verbose -message ($strings.PageFollowing -f $response.cursor)
                     # iterate remaining pages using 'cursor' response value
                     while ($response.cursor) {
+                        [int]$progParams.Percent = ($count / $Max) * 100
+                        $progParams.Status = ($strings.ProgressStatus2 -f $progParams.Percent)
+                        Write-Progress @progParams
                         $url = $apiUrl + "&cursor=$($response.cursor)"
                         $response = Invoke-RestMethod -Uri $url -Method Get -Headers $headers
                         _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
                         If ($response.follows) {
                             $results += $response.follows
+                            $count += $response.follows.count
                         }
                     }
                 } #If All

@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Delete the user's PSBlueSky preference file.
+Delete a PSBlueSky preference file.
 
 ## SYNTAX
 

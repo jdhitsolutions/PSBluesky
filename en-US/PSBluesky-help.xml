@@ -28,7 +28,7 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Alt">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Alt">
           <maml:name>ImageAlt</maml:name>
           <maml:description>
             <maml:para>You should include ALT text for the image.</maml:para>
@@ -77,7 +77,7 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Alt">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="Alt">
         <maml:name>ImageAlt</maml:name>
         <maml:description>
           <maml:para>You should include ALT text for the image.</maml:para>
@@ -142,9 +142,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Add-BskyImage -ImagePath "C:\Users\user\Documents\image.png" -ImageAlt "alt tet here"</dev:code>
+        <dev:code>PS C:\&gt; Add-BskyImage -ImagePath "C:\Users\user\Documents\image.png" -ImageAlt "alt text here"</dev:code>
         <dev:remarks>
-          <maml:para>You should use ALT text for images.</maml:para>
+          <maml:para>You must use ALT text for images.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -619,7 +619,7 @@ LoggingEnabled LogFile          LogFileSize
       <command:verb>Export</command:verb>
       <command:noun>BskyPreference</command:noun>
       <maml:description>
-        <maml:para>Export your PSBlueSky formatting preference settings to a file.</maml:para>
+        <maml:para>Export PSBlueSky preference settings.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -767,7 +767,7 @@ Mode                 LastWriteTime         Length Name
       <command:verb>Find</command:verb>
       <command:noun>BskyPost</command:noun>
       <maml:description>
-        <maml:para>Find Bluesky posts using a search term or text.</maml:para>
+        <maml:para>Find Bluesky posts.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1160,6 +1160,147 @@ Created               Description
       <maml:navigationLink>
         <maml:linkText>Get-BskyProfile</maml:linkText>
         <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Format-SpectreConsole</command:name>
+      <command:verb>Format</command:verb>
+      <command:noun>SpectreConsole</command:noun>
+      <maml:description>
+        <maml:para>Format PSBluesky output for SpectreConsole.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>If you have the pwshSpectreConsole module installed, you can pipe some commands from the PSBluesky module to this command to customize the output. This output is intended for viewing in the console. This is a format command so you shouldn't attempt to pipe it to another command.</maml:para>
+      <maml:para>The command will accept output from these commands:</maml:para>
+      <maml:para>- Find-BskyPost</maml:para>
+      <maml:para>- Get-BskyFeed</maml:para>
+      <maml:para>- Get-BskyFollower</maml:para>
+      <maml:para>- Get-BskyFollowing</maml:para>
+      <maml:para>- Get-BskyLiked</maml:para>
+      <maml:para>- Get-BskyModuleInfo</maml:para>
+      <maml:para>- Get-BskyProfile</maml:para>
+      <maml:para>- Get-BskyTimeline</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Format-SpectreConsole</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
+          <maml:name>InputObject</maml:name>
+          <maml:description>
+            <maml:para>Output from a PSBluesky command.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
+          <dev:type>
+            <maml:name>PSObject</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>BorderColor</maml:name>
+          <maml:description>
+            <maml:para>The color of the table border. Use a SpectreConsole color name.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Steelblue1_1</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>TitleColor</maml:name>
+          <maml:description>
+            <maml:para>The color of the title text. Use a SpectreConsole color name.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>Gold1</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>BorderColor</maml:name>
+        <maml:description>
+          <maml:para>The color of the table border. Use a SpectreConsole color name.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>Steelblue1_1</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
+        <maml:name>InputObject</maml:name>
+        <maml:description>
+          <maml:para>Output from a PSBluesky command.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
+        <dev:type>
+          <maml:name>PSObject</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>TitleColor</maml:name>
+        <maml:description>
+          <maml:para>The color of the title text. Use a SpectreConsole color name.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>Gold1</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Management.Automation.PSObject</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Formatted SpectreConsole output</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-BskyProfile | Format-SpectreConsole</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/547504</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
@@ -1749,6 +1890,10 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
         <maml:linkText>Get-BskyFollowing</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-BskyKnownFollowers</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -1757,7 +1902,7 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
       <command:verb>Get</command:verb>
       <command:noun>BskyFollowing</command:noun>
       <maml:description>
-        <maml:para>Get a list of Bluesky accounts that you follow.</maml:para>
+        <maml:para>Get Bluesky accounts you follow.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1850,12 +1995,19 @@ Libby Brown   trubludevil.social Product manager @ SpruceID. Mom. Digital
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-BskyFollowing -Limit 2
 
-Display      Username                   Description
--------      --------                   -----------
-Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teacher |
-                                        Board member of the .NET Foundation 💜
-                                        | Proud dad joke lover
-             mikeshepard70.bsky.social</dev:code>
+Display           Username              Description
+-------           --------              -----------
+Catherine Rampell crampell.bsky.social  MSNBC anchor/co-host of The Weekend:
+                                        Primetime, Sat/Sun 6-9pm. Washington
+                                        Post syndicated op-ed columnist.
+                                        Econ, politics, immigration, tax, etc.
+                                        + occasional theater nerdery.
+                                       
+Rick Vanover      rickatron.bsky.social RICKATRON. I work at Veeam in the
+                                        Office of the CTO ► Backup, vSphere,
+                                        Hyper-V, Windows Server, Azure, AWS +
+                                        more. Father, Husband. Work in
+                                        Progress. Based in Central Ohio, USA.</dev:code>
         <dev:remarks>
           <maml:para>The default output includes clickable links to the user's profile.</maml:para>
         </dev:remarks>
@@ -1865,6 +2017,133 @@ Lou Creemers lovelacecoding.bsky.social Microsoft MVP | ❤️ .NET | Uni teache
       <maml:navigationLink>
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://jdhitsolutions.com/yourls/getbskyfollowing</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-BskyFollowers</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-BskyFollowers</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-BskyKnownFollowers</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>BskyKnownFollowers</command:noun>
+      <maml:description>
+        <maml:para>Get known Bluesky followers</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This command will return a list of your Bluesky followers that you follow back, You can get between 1 and 100. The default is 50. Or use the All parameter to page through all followers.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-BskyKnownFollowers</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>All</maml:name>
+          <maml:description>
+            <maml:para>Return All followers</maml:para>
+          </maml:description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-BskyKnownFollowers</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>Limit</maml:name>
+          <maml:description>
+            <maml:para>Enter the number of followers to retrieve between 1 and 100. Default is 50.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>All</maml:name>
+        <maml:description>
+          <maml:para>Return All followers</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Limit</maml:name>
+        <maml:description>
+          <maml:para>Enter the number of followers to retrieve between 1 and 100. Default is 50.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>PSBlueskyFollowProfile</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/yourls/newsletter</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-BskyKnownFollowers -All
+
+Display                                Username                     Description
+-------                                --------                     -----------
+Pwnallthethings                        pwnallthethings.bsky.social  Just thinking out loud.
+Dan Wahlin                             danwahlin.bsky.social        Cloud Developer Advocate (Azure,
+                                                                    AI, JS/TS, more) | Microsoft
+                                                                    Pluralsight Author |
+                                                                    codewithdan.me/ps-author
+,,,</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://jdhitsolutions.com/yourls/6eb30b</maml:uri>
       </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-BskyFollowers</maml:linkText>
@@ -2002,7 +2281,7 @@ Date                  Liked Replied Reposted Quoted
       <command:verb>Get</command:verb>
       <command:noun>BskyLogging</command:noun>
       <maml:description>
-        <maml:para>Getting the current PSBlueSky API logging settings.</maml:para>
+        <maml:para>Getting PSBlueSky logging settings.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -2086,9 +2365,58 @@ LoggingEnabled LogFile          LogFileSize
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-BskyModuleInfo</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="true" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Noun</maml:name>
+          <maml:description>
+            <maml:para>Get commands that match the given noun. This parameter was added in v2.7.0.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>*</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Verb</maml:name>
+          <maml:description>
+            <maml:para>Get commands that match the given verb. This parameter was added in v2.7.0.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>*</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
-    <command:parameters />
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="true" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Noun</maml:name>
+        <maml:description>
+          <maml:para>Get commands that match the given noun. This parameter was added in v2.7.0.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>*</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Verb</maml:name>
+        <maml:description>
+          <maml:para>Get commands that match the given verb. This parameter was added in v2.7.0.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>*</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
     <command:inputTypes>
       <command:inputType>
         <dev:type>
@@ -2119,23 +2447,46 @@ LoggingEnabled LogFile          LogFileSize
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
         <dev:code>PS C:\&gt; Get-BskyModuleInfo
 
-   Module: PSBlueSky [v2.6.0]
+   Module: PSBlueSky [v2.7.0]
 
 Name                      Alias               Synopsis
 ----                      -----               --------
 Add-BskyImage                                 Upload an image to Bluesky.
 Block-BskyUser                                Block a Bluesky user account.
 Disable-BskyLogging                           Disable BlueSky API logging.
-Enable-BskyLogging                            Enable BlueSky API logging.
-Export-BskyPreference                         Export your PSBlueSky formatting
-                                              preference settings to a file.
-Find-BskyPost             bsf Search-BskyPost Find Bluesky posts using a search term or text.
-Find-BskyUser             bsu                 Search for Bluesky user accounts.
-Get-BskyAccountDID                            Resolve a Bluesky account name to its DID.
-Get-BskyBlockedList       bsblocklist         Get your subscribed blocked lists.
 ...</dev:code>
         <dev:remarks>
           <maml:para>The default output includes clickable hyperlinks to th online help for each command in the module's GitHub repository.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-BskyModuleInfo -verb remove
+
+   Module: PSBlueSky [v2.7.0]
+
+Name                      Alias             Synopsis
+----                      -----             --------
+Remove-BskyFollow         Unfollow-BskyUser Unfollow a Bluesky user.
+Remove-BskyLogging                          Remove the PSBlueSky API log file.
+Remove-BskyPreferenceFile                   Delete a PSBlueSky preference file.</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 3 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-BskyModuleInfo -noun *session
+
+   Module: PSBlueSky [v2.7.0]
+
+Name               Alias               Synopsis
+----               -----               --------
+Get-BskySession    bss                 Show your current Bluesky session.
+Start-BSkySession                      Start a new Bluesky session.
+Update-BskySession Refresh-BskySession Refresh the Bluesky session token.</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2355,7 +2706,7 @@ Guy Leech                   guyrleech.bsky.social       PowerShell nut. Dog ...<
       <command:verb>Get</command:verb>
       <command:noun>BskyPreference</command:noun>
       <maml:description>
-        <maml:para>Get PSBlueSky formatting preference settings.</maml:para>
+        <maml:para>Get PSBlueSky formatting preferences.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -2687,7 +3038,7 @@ True   eyJ0eXAiOiJhdCtqd3Qi... eyJ0eXAiOiJyZWZyZXNo... 00:21:56.7958913</dev:cod
       <command:verb>Get</command:verb>
       <command:noun>BskyStarterPack</command:noun>
       <maml:description>
-        <maml:para>Get Bluesky starter packs for a specified profile.</maml:para>
+        <maml:para>Get Bluesky starter packs.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -2801,7 +3152,7 @@ Created          Creator  CreatorDisplay Feeds Labels
       <command:verb>Get</command:verb>
       <command:noun>BskyStarterPackList</command:noun>
       <maml:description>
-        <maml:para>Get a Bluesky starter pack and the list of profiles it contains.</maml:para>
+        <maml:para>Get a Bluesky starter pack list.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -3273,7 +3624,7 @@ https://bsky.app/profile/did:plc:rlwd5iajr3btl5e7gyvfwk67</dev:code>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="Alt">
           <maml:name>ImageAlt</maml:name>
           <maml:description>
-            <maml:para>You should include ALT text for the image.</maml:para>
+            <maml:para>You muse include ALT text for the image. This parameter is technically not mandatory, but if you specify and image without a corresponding ImageAlt parameter, you will be prompted for the ALT text.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3335,7 +3686,7 @@ https://bsky.app/profile/did:plc:rlwd5iajr3btl5e7gyvfwk67</dev:code>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="Alt">
         <maml:name>ImageAlt</maml:name>
         <maml:description>
-          <maml:para>You should include ALT text for the image.</maml:para>
+          <maml:para>You muse include ALT text for the image. This parameter is technically not mandatory, but if you specify and image without a corresponding ImageAlt parameter, you will be prompted for the ALT text.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4143,7 +4494,7 @@ What if: Performing the operation "Remove File" on target "C:\temp\api.json".</d
       <command:verb>Remove</command:verb>
       <command:noun>BskyPreferenceFile</command:noun>
       <maml:description>
-        <maml:para>Delete the user's PSBlueSky preference file.</maml:para>
+        <maml:para>Delete a PSBlueSky preference file.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>

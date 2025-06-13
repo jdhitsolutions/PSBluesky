@@ -14,7 +14,7 @@ Get a summary of the PSBlueSky module.
 ## SYNTAX
 
 ```yaml
-Get-BskyModuleInfo [<CommonParameters>]
+Get-BskyModuleInfo [-Verb <String>] [-Noun <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -28,26 +28,79 @@ Use this command to get a summary of the PSBlueSky module showing functions, ali
 ```text
 PS C:\> Get-BskyModuleInfo
 
-   Module: PSBlueSky [v2.6.0]
+   Module: PSBlueSky [v2.7.0]
 
 Name                      Alias               Synopsis
 ----                      -----               --------
 Add-BskyImage                                 Upload an image to Bluesky.
 Block-BskyUser                                Block a Bluesky user account.
 Disable-BskyLogging                           Disable BlueSky API logging.
-Enable-BskyLogging                            Enable BlueSky API logging.
-Export-BskyPreference                         Export your PSBlueSky formatting
-                                              preference settings to a file.
-Find-BskyPost             bsf Search-BskyPost Find Bluesky posts using a search term or text.
-Find-BskyUser             bsu                 Search for Bluesky user accounts.
-Get-BskyAccountDID                            Resolve a Bluesky account name to its DID.
-Get-BskyBlockedList       bsblocklist         Get your subscribed blocked lists.
 ...
 ```
 
 The default output includes clickable hyperlinks to th online help for each command in the module's GitHub repository.
 
+### Example 2
+
+```powershell
+PS C:\> Get-BskyModuleInfo -verb remove
+
+   Module: PSBlueSky [v2.7.0]
+
+Name                      Alias             Synopsis
+----                      -----             --------
+Remove-BskyFollow         Unfollow-BskyUser Unfollow a Bluesky user.
+Remove-BskyLogging                          Remove the PSBlueSky API log file.
+Remove-BskyPreferenceFile                   Delete a PSBlueSky preference file.
+```
+
+### Example 3
+
+```powershell
+PS C:\> Get-BskyModuleInfo -noun *session
+
+   Module: PSBlueSky [v2.7.0]
+
+Name               Alias               Synopsis
+----               -----               --------
+Get-BskySession    bss                 Show your current Bluesky session.
+Start-BSkySession                      Start a new Bluesky session.
+Update-BskySession Refresh-BskySession Refresh the Bluesky session token.
+```
+
 ## PARAMETERS
+
+### -Noun
+
+Get commands that match the given noun. This parameter was added in v2.7.0.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: *
+Accept pipeline input: False
+Accept wildcard characters: True
+```
+
+### -Verb
+
+Get commands that match the given verb. This parameter was added in v2.7.0.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: *
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 

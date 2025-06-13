@@ -99,6 +99,7 @@ Update-TypeData -TypeName PSBlueskySession -MemberName CreateHeader -MemberType 
     }
 } -Force
 #>
+
 #endregion
 
 #region verbose command highlighting
@@ -149,7 +150,7 @@ else {
         LikedHighest           = "`e[38;5;201m"
         InfoAlias              = "`e[3;38;5;220m"
         ActiveSession          = "`e[92m"
-        InActiveSession        = "`e[91m"
+        InactiveSession        = "`e[91m"
         'Add-BskyImage'        = "`e[1;38;5;122m"
         'Find-BskyUser'        = "`e[1;38;5;111m"
         'Find-BskyPost'        = "`e[1;38;5;158m"
@@ -204,7 +205,9 @@ $AliasesToExport      = @(
     'bsblocklist',
     'Follow-BskyUser',
     'Search-BskyPost'
-    'Unfollow-BskyUser'
+    'Unfollow-BskyUser',
+    'fsc',
+    'Format-Bsky'
 )
 $varsToExport = @('bskyPreferences','PDSHost')
 Export-ModuleMember -Variable $varsToExport -Alias $AliasesToExport

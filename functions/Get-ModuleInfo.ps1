@@ -1,7 +1,14 @@
 Function Get-BskyModuleInfo {
     [CmdletBinding()]
     [OutputType('PSBlueskyModuleInfo')]
-    Param( )
+    Param(
+        [Parameter(HelpMessage = "Get commands that match the given verb.")]
+        [ArgumentCompleter({(Get-Verb).Verb})]
+        [string]$Verb = "*",
+        [Parameter(HelpMessage = "Get commands that match the given noun.")]
+        [SupportsWildcards()]
+        [string]$Noun="*"
+    )
 
     Begin {
         $PSDefaultParameterValues['_verbose:Command'] = $MyInvocation.MyCommand
@@ -24,7 +31,9 @@ Function Get-BskyModuleInfo {
         $mod = Get-Module -Name $ModuleName
 
         _verbose -message ($strings.GetFunctions)
-        $cmds += $mod.ExportedFunctions.keys | Get-Command
+        #6 May 2025 added filtering for Verb and Noun
+        $cmds += $mod.ExportedFunctions.keys | 
+        Get-Command | Where-Object {$_.Verb -Like $verb -AND $_.noun -Like $Noun}
 
         _verbose -message ($strings.FoundCommands -f $cmds.count)
 

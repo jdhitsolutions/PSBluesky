@@ -72,20 +72,37 @@ Function Get-BskyLiked {
                 $likes += $response.feed
                 Write-Information -MessageData $response -Tags raw
                 if ($PSCmdlet.ParameterSetName -eq 'All') {
+                        # 25 April 2025 add support for Write-Progress Issue #40
+                        $count = 0
+                        $progParams = @{
+                            Activity = $strings.ProgressActivity3
+                            Status   =($strings.ProgressStatus3 -f 0)
+                            Percent  = 0
+                        }
                     _verbose -message ($strings.PageLikes -f $response.cursor)
                     # iterate remaining pages using 'cursor' response value
                     while ($response.feed.post.count -gt 0) {
+                        $progParams.Status = ($strings.ProgressStatus3 -f $count)
+                        Write-Progress @progParams
                         $url = $apiUrl + "&cursor=$($response.cursor)"
                         $response = Invoke-RestMethod -Uri $url -Method Get -Headers $headers
                         _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
                         If ($response.feed.post.count -gt 0) {
                             Write-Information -MessageData $response -Tags raw
                             $likes += $response.feed
+                            $count += $response.feed.post.count
                         }
                     }
                 } #If All
                 Write-Information -MessageData $likes -Tags raw
                 foreach ($post in $likes.post) {
+                    #use embedded images if found or external uri thumb
+                $thumb = If ($post.embed.images.thumb) {
+                    $post.embed.images.thumb
+                }
+                elseif ($item.post.embed.external ) {
+                    $post.embed.external.thumb
+                }
                     [PSCustomObject]@{
                         PSTypeName    = 'PSBlueskyLikedItem'
                         Text          = $post.record.text
@@ -101,6 +118,8 @@ Function Get-BskyLiked {
                         Labels        = $post.labels.val
                         URI           = $post.uri
                         CID           = $post.cid
+                        Thumbnail     = $thumb
+                        Links         = $post.embed.external.uri
                     }
                 } #foreach like
             } #if likes

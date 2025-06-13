@@ -56,6 +56,13 @@ Function Get-BskyTimeline {
             if ($response) {
                 Write-Information -MessageData $response -Tags raw
                 $timeline = Foreach ($item in $response.feed) {
+                #use embedded images if found or external uri thumb
+                $thumb = If ($item.post.embed.images.thumb) {
+                    $item.post.embed.images.thumb
+                }
+                elseif ($item.post.embed.external ) {
+                    $item.post.embed.external.thumb
+                }
                     [PSCustomObject]@{
                         PSTypeName    = 'PSBlueskyTimelinePost'
                         Author        = $item.post.author.handle
@@ -69,7 +76,8 @@ Function Get-BskyTimeline {
                         URI           = $item.post.uri
                         CID           = $item.post.cid
                         Tags          = ($item.post.record.facets.features).Where({$_.tag}).tag
-                        Thumbnail     = $item.post.embed.images.thumb
+                        Thumbnail     = $thumb
+                        Links         = $item.post.embed.external.uri
                     } #PSCustomObject
                 } #foreach item
 

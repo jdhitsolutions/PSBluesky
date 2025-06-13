@@ -12,14 +12,20 @@ Function New-BskyPost {
         )]
         [ValidateNotNullOrEmpty()]
         [string]$Message,
+
         [Parameter(HelpMessage = 'The path to the image file.', ValueFromPipelineByPropertyName)]
         [ValidateScript({ Test-Path $_ },ErrorMessage = 'The file {0} could not be found.')]
         [ValidateScript({ (Get-Item $_).Length -lt 1MB }, ErrorMessage = 'The image file must be smaller than 1MB.')]
         [ValidatePattern('.*\.(jpg|jpeg|png|gif)$', ErrorMessage = 'The file must be a jpg, jpeg, or png file.')]
         [string]$ImagePath,
-        [Parameter(HelpMessage = 'You should include ALT text for the image.', ValueFromPipelineByPropertyName)]
+
+        [Parameter(
+            HelpMessage = 'You must include ALT text for the image.',
+            ValueFromPipelineByPropertyName
+        )]
         [Alias('Alt')]
         [string]$ImageAlt,
+
         [Parameter(HelpMessage = 'Label for an image e.g. sexual,nudity,porn. The label length must be between 3 and 128 characters.', ValueFromPipelineByPropertyName)]
         [AllowEmptyString()]
         [string]$Label
@@ -58,6 +64,10 @@ Function New-BskyPost {
         if (-not $Message -and -not $ImagePath) {
             Write-Warning $strings.NoPost
             Return
+        }
+        # 13 June 2025 - Force the user to enter an Image alt if not specified
+        if ($ImagePath -and -not $ImageAlt) {
+            $ImageAlt = Read-Host $strings.AddAlt
         }
         If ($headers) {
             _verbose $strings.PostMessage

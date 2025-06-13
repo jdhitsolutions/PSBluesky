@@ -45,7 +45,7 @@
               </TableColumnItem>
               <TableColumnItem>
                 <ScriptBlock>
-                  "$($bskyPreferences.InfoAlias)$($_.Alias)$($PSStyle.Reset)"
+                  "$($bskyPreferences.InfoAlias)$($_.Alias -join ',')$($PSStyle.Reset)"
                 </ScriptBlock>
               </TableColumnItem>
               <TableColumnItem>
