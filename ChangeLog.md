@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+## [2.7.1] - 2025-06-13
+
+### Changed
+
+- Updated manifest release notes to point to the project's ChangeLog on GitHub.
+- File cleanup.
+
 ## [2.7.0] - 2025-06-13
 
 ### Added
@@ -324,7 +331,8 @@ This is the first version published to the PowerShell Gallery.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.7.0..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.7.1..HEAD
+[2.7.1]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.7.0..v2.7.1
 [2.7.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.6.0..v2.7.0
 [2.6.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.5.0..v2.6.0
 [2.5.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.4.0..v2.5.0
