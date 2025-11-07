@@ -1,6 +1,24 @@
 # PSBluesky Changelog
 
+The format of this change log is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+
 ## [Unreleased]
+
+## [2.8.0] - 2025-11-07
+
+### Added
+
+- Added localization for `en-GB` to fix problems when running the module on Raspberry Pi.
+
+### Changed
+
+- Revised `New-BskyPost` to display a message preview when using `-WhatIf`. If the `pwshSpectreConsole` module is detected, any images will also be displayed.
+- Updated `README`.
+- Revised `Get-BskySession` to not return an empty session object when the warning is displayed.
+
+### Fixed
+
+- Corrected casing in references to `en-US`. [[Issue #45](https://github.com/jdhitsolutions/PSBluesky/issues/45)]
 
 ## [2.7.1] - 2025-06-13
 
@@ -331,7 +349,8 @@ This is the first version published to the PowerShell Gallery.
 
 - initial files and module structure
 
-[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.7.1..HEAD
+[Unreleased]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.8.0..HEAD
+[2.8.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.7.1..v2.8.0
 [2.7.1]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.7.0..v2.7.1
 [2.7.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.6.0..v2.7.0
 [2.6.0]: https://github.com/jdhitsolutions/PSBluesky/compare/v2.5.0..v2.6.0

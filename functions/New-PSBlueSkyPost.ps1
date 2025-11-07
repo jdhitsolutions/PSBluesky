@@ -45,7 +45,7 @@ Function New-BskyPost {
         }
 
         $apiUrl = "$PDSHOST/xrpc/com.atproto.repo.createRecord"
-        if ($script:BSkySession.accessJwt) {
+         if ($script:BSkySession.accessJwt) {
             $token = $script:BSkySession.accessJwt
             $did = $script:BskySession.did
             $headers = @{
@@ -57,6 +57,7 @@ Function New-BskyPost {
         else {
             Write-Warning $strings.NoSession
         }
+
     } #begin
     Process {
         $PSDefaultParameterValues['_verbose:block'] = 'Process'
@@ -224,11 +225,15 @@ Function New-BskyPost {
 
             Write-Information -MessageData $body -Tags raw
 
-            if ($PSCmdlet.ShouldProcess($Message, 'Post to Bluesky')) {
+            if ($PSCmdlet.ShouldProcess("$($Message.Substring(0,20))...", 'Post to Bluesky')) {
                 $response = Invoke-RestMethod -Uri $apiUrl -Method Post -Headers $headers -Body $body
                 _newLogData -apiUrl $apiUrl -command $MyInvocation.MyCommand | _updateLog
                 _convertAT -at $response.uri
                 Write-Information -MessageData $response -Tags raw
+            }
+            else {
+                #13 Sept 2025 Preview the message
+                _previewPost -Body $body -ImagePath $ImagePath -ImageAlt $ImageAlt
             }
         }
     } #process

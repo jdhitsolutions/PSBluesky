@@ -22,12 +22,12 @@ Function Get-BskySession {
         if ($script:BSkySession) {
             if ($script:BSkySession.Handle) {
                 Write-Verbose ($strings.SessionFound -f $script:BSkySession.handle)
+                Write-Information -MessageData $script:BSkySession -tag data
+                $script:BSkySession | _newSessionObject
             }
             else {
                 Write-Warning $strings.NoSession
             }
-            Write-Information -MessageData $script:BSkySession -tag data
-            $script:BSkySession | _newSessionObject
         }
     } #process
     End {

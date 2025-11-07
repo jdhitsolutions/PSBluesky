@@ -7,9 +7,9 @@ if ((Get-Culture).Name -match '\w+' -AND (Test-Path "$PSScriptRoot/$((Get-Cultur
     Import-LocalizedData -BindingVariable strings
 }
 else {
-    #force using En-US if no culture found, which might happen on non-Windows systems.
-    #write-host "Loading $PSScriptRoot\en-us\PSBluesky.psd1" -ForegroundColor yellow
-    Import-LocalizedData -BindingVariable strings -FileName PSBluesky.psd1 -BaseDirectory $PSScriptRoot/en-us
+    #force using en-US if no culture found, which might happen on non-Windows systems.
+    #write-host "Loading $PSScriptRoot\en-US\PSBluesky.psd1" -ForegroundColor yellow
+    Import-LocalizedData -BindingVariable strings -FileName PSBluesky.psd1 -BaseDirectory $PSScriptRoot/en-US
 }
 
 #endregion

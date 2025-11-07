@@ -4,9 +4,9 @@
 
 [![PSGallery Version](https://img.shields.io/powershellgallery/v/PSBluesky.png?style=for-the-badge&label=PowerShell%20Gallery)](https://www.powershellgallery.com/packages/PSBluesky/) [![PSGallery Downloads](https://img.shields.io/powershellgallery/dt/PSBluesky.png?style=for-the-badge&label=Downloads)](https://www.powershellgallery.com/packages/PSBluesky/)
 
-This module is a set of PowerShell functions designed to let you interact with the Bluesky API from a PowerShell session. Technically, the module commands are wrappers around the [AT protocol](https://docs.bsky.app/docs/category/http-reference). The module is written for *__PowerShell 7__*, although it might work as written in Windows PowerShell with minimal changes if you wish to fork the GitHub repository. Commands *have not* been thoroughly tested for cross-platform compatibility, so please post an [Issue](https://github.com/jdhitsolutions/PSBlueSky/issues) if you encounter a problem.
+This module is a set of PowerShell functions designed to let you interact with the Bluesky API from a PowerShell 7.x session. Technically, the module commands are wrappers around the [AT protocol](https://docs.bsky.app/docs/category/http-reference). The commands in this module are written for *__PowerShell 7__*, although it might work as written in Windows PowerShell with minimal changes if you wish to fork the GitHub repository. Commands *have not* been thoroughly tested for cross-platform compatibility, so please post an [Issue](https://github.com/jdhitsolutions/PSBlueSky/issues) if you encounter a problem.
 
-The commands in this module are __not__ intended to provide complete coverage of the Bluesky API or user experience. Instead, the module focuses on the most common tasks you might want to do with Bluesky from a PowerShell prompt.
+The commands in this module are __not__ intended to provide complete coverage of the Bluesky API or user experience. Instead, the module focuses on the most common tasks you might want to do with Bluesky from a PowerShell prompt or for situations where you want to automate some tasks.
 
 For best results, you should run this module in a PowerShell console that supports emojis and ANSI formatting like Windows Terminal.
 
@@ -33,34 +33,58 @@ You might want to also install the following or related modules to securely stor
 
 After installing this module, you should end up with these PSBluesky commands:
 
-|         |         |         |
-|---------|---------|---------|
-| [Add-BskyImage](docs/Add-BskyImage.md) | [Block-BskyUser](docs/Block-BskyUser.md) | [Disable-BskyLogging](docs/Disable-BskyLogging.md) |
-| [Enable-BskyLogging](docs/Enable-BskyLogging.md) | [Export-BskyPreference](docs/Export-BskyPreference.md) | [Find-BskyPost](docs/Find-BskyPost.md) |
-| [Find-BskyUser](docs/Find-BskyUser.md) | [Format-SpectreConsole](docs/Format-SpectreConsole.md) | [Get-BskyAccountDID](docs/Get-BskyAccountDID.md) |
-| [Get-BskyBlockedList](docs/Get-BskyBlockedList.md) | [Get-BskyBlockedUser](docs/Get-BskyBlockedUser.md) | [Get-BskyFeed](docs/Get-BskyFeed.md) |
-| [Get-BskyFollowers](docs/Get-BskyFollowers.md) | [Get-BskyFollowing](docs/Get-BskyFollowing.md) | [Get-BskyKnownFollowers](docs/Get-BskyKnownFollowers.md) |
-| [Get-BskyLiked](docs/Get-BskyLiked.md) | [Get-BskyLogging](docs/Get-BskyLogging.md) | [Get-BskyModuleInfo](docs/Get-BskyModuleInfo.md) |
-| [Get-BskyNotification](docs/Get-BskyNotification.md) | [Get-BskyPreference](docs/Get-BskyPreference.md) | [Get-BskyProfile](docs/Get-BskyProfile.md) |
-| [Get-BskySession](docs/Get-BskySession.md) | [Get-BskyStarterPack](docs/Get-BskyStarterPack.md) | [Get-BskyStarterPackList](docs/Get-BskyStarterPackList.md) |
-| [Get-BskyTimeline](docs/Get-BskyTimeline.md) | [New-BskyFollow](docs/New-BskyFollow.md) | [New-BskyPost](docs/New-BskyPost.md) |
-| [Open-BskyHelp](docs/Open-BskyHelp.md) | [Publish-BskyPost](docs/Publish-BskyPost.md) | [Remove-BskyFollow](docs/Remove-BskyFollow.md) |
-| [Remove-BskyLogging](docs/Remove-BskyLogging.md) | [Remove-BskyPreferenceFile](docs/Remove-BskyPreferenceFile.md) | [Set-BskyLogging](docs/Set-BskyLogging.md) |
-| [Set-BskyPreference](docs/Set-BskyPreference.md) | [Start-BSkySession](docs/Start-BSkySession.md) | [Unblock-BskyUser](docs/Unblock-BskyUser.md) |
-| [Update-BskySession](docs/Update-BskySession.md) | [](docs/.md) | [](docs/.md) |
+| Name | Alias | Synopsis |
+|------|-------|----------|
+| [Add-BskyImage](docs/Add-BskyImage.md) |  | Upload an image to Bluesky. |
+| [Block-BskyUser](docs/Block-BskyUser.md) |  | Block a Bluesky user account. |
+| [Disable-BskyLogging](docs/Disable-BskyLogging.md) |  | Disable BlueSky API logging. |
+| [Enable-BskyLogging](docs/Enable-BskyLogging.md) |  | Enable BlueSky API logging. |
+| [Export-BskyPreference](docs/Export-BskyPreference.md) |  | Export PSBlueSky preference settings. |
+| [Find-BskyPost](docs/Find-BskyPost.md) | *bsf* | Find Bluesky posts. |
+| [Find-BskyUser](docs/Find-BskyUser.md) | *bsu* | Search for Bluesky user accounts. |
+| [Format-SpectreConsole](docs/Format-SpectreConsole.md) | *Format-Bsky,fsc* | Format PSBluesky output for SpectreConsole. |
+| [Get-BskyAccountDID](docs/Get-BskyAccountDID.md) |  | Resolve a Bluesky account name to its DID. |
+| [Get-BskyBlockedList](docs/Get-BskyBlockedList.md) | *bsblocklist* | Get your subscribed blocked lists. |
+| [Get-BskyBlockedUser](docs/Get-BskyBlockedUser.md) | *bsblock* | Get your blocked accounts. |
+| [Get-BskyFeed](docs/Get-BskyFeed.md) | *bsfeed* | Get your Bluesky feed. |
+| [Get-BskyFollowers](docs/Get-BskyFollowers.md) | *bsfollower* | Get your Bluesky followers. |
+| [Get-BskyFollowing](docs/Get-BskyFollowing.md) | *bsfollow* | Get Bluesky accounts you follow. |
+| [Get-BskyKnownFollowers](docs/Get-BskyKnownFollowers.md) |  | Get known Bluesky followers |
+| [Get-BskyLiked](docs/Get-BskyLiked.md) | *bsliked* | Get your liked Bluesky posts. |
+| [Get-BskyLogging](docs/Get-BskyLogging.md) |  | Getting PSBlueSky logging settings. |
+| [Get-BskyModuleInfo](docs/Get-BskyModuleInfo.md) |  | Get a summary of the PSBlueSky module. |
+| [Get-BskyNotification](docs/Get-BskyNotification.md) | *bsn* | Get Bluesky notifications. |
+| [Get-BskyPreference](docs/Get-BskyPreference.md) |  | Get PSBlueSky formatting preferences. |
+| [Get-BskyProfile](docs/Get-BskyProfile.md) | *bsp* | Get a Bluesky profile. |
+| [Get-BskySession](docs/Get-BskySession.md) | *bss* | Show your current Bluesky session. |
+| [Get-BskyStarterPack](docs/Get-BskyStarterPack.md) |  | Get Bluesky starter packs. |
+| [Get-BskyStarterPackList](docs/Get-BskyStarterPackList.md) |  | Get a Bluesky starter pack list. |
+| [Get-BskyTimeline](docs/Get-BskyTimeline.md) | *bst* | Get your Bluesky timeline. |
+| [New-BskyFollow](docs/New-BskyFollow.md) | *Follow-BskyUser* | Follow a Bluesky user. |
+| [New-BskyPost](docs/New-BskyPost.md) | *skeet* | Create a Bluesky post. |
+| [Open-BskyHelp](docs/Open-BskyHelp.md) | *bshelp* | Open the PSBluesky help document. |
+| [Publish-BskyPost](docs/Publish-BskyPost.md) | *Repost-BskyPost* | Repost or quote a Bluesky post. |
+| [Remove-BskyFollow](docs/Remove-BskyFollow.md) | *Unfollow-BskyUser* | Unfollow a Bluesky user. |
+| [Remove-BskyLogging](docs/Remove-BskyLogging.md) |  | Remove the PSBlueSky API log file. |
+| [Remove-BskyPreferenceFile](docs/Remove-BskyPreferenceFile.md) |  | Delete a PSBlueSky preference file. |
+| [Set-BskyLogging](docs/Set-BskyLogging.md) |  | Configure PSBlueSky API logging. |
+| [Set-BskyPreference](docs/Set-BskyPreference.md) |  | Set a PSBlueSky formatting preference. |
+| [Start-BSkySession](docs/Start-BSkySession.md) |  | Start a new Bluesky session. |
+| [Unblock-BskyUser](docs/Unblock-BskyUser.md) |  | Unblock a Bluesky user account. |
+| [Update-BskySession](docs/Update-BskySession.md) | *Refresh-BskySession* | Refresh the Bluesky session token. |
 
-### Open-BskyHelp
+### [Open-BskyHelp](docs/Open-BskyHelp.md)
 
 After importing the module you can run [`Open-BskyHelp`](docs/Open-BskyHelp.md) which will open a PDF version of this document in the default application associated with PDF files. Note that not all emojis will render properly in the PDF. Or you can use the -`AsMarkdown` parameter to read this file using markdown formatting. Not all Markdown features may properly render in the console.
 
-### Get-BskyModuleInfo
+### [Get-BskyModuleInfo](docs/Get-BskyModuleInfo.md)
 
 You can use [`Get-BskyModuleInfo`](docs/Get-BskyModuleInfo.md) to get a summary of the module. The default output includes clickable links to online command help and the module's GitHub repository.
 
 ```dos
 PS C:\> Get-BskyModuleInfo
 
-   Module: PSBlueSky [v2.7.0]
+   Module: PSBlueSky [v2.8.0]
 
 Name                      Alias               Synopsis
 ----                      -----               --------
@@ -68,14 +92,11 @@ Add-BskyImage                                 Upload an image to Bluesky.
 Block-BskyUser                                Block a Bluesky user account.
 Disable-BskyLogging                           Disable BlueSky API logging.
 Enable-BskyLogging                            Enable BlueSky API logging.
-Export-BskyPreference                         Export PSBlueSky preference
-                                              settings.
+Export-BskyPreference                         Export PSBlueSky preference settings.
 Find-BskyPost             bsf,Search-BskyPost Find Bluesky posts.
 Find-BskyUser             bsu                 Search for Bluesky user accounts.
-Format-SpectreConsole     Format-Bsky,fsc     Format PSBluesky output for
-                                              SpectreConsole.
-Get-BskyAccountDID                            Resolve a Bluesky account name to
-                                              its DID.
+Format-SpectreConsole     Format-Bsky,fsc     Format PSBluesky output for SpectreConsole.
+Get-BskyAccountDID                            Resolve a Bluesky account name to its DID.
 Get-BskyBlockedList       bsblocklist         Get your subscribed blocked lists.
 Get-BskyBlockedUser       bsblock             Get your blocked accounts.
 Get-BskyFeed              bsfeed              Get your Bluesky feed.
@@ -83,13 +104,10 @@ Get-BskyFollowers         bsfollower          Get your Bluesky followers.
 Get-BskyFollowing         bsfollow            Get Bluesky accounts you follow.
 Get-BskyKnownFollowers                        Get known Bluesky followers
 Get-BskyLiked             bsliked             Get your liked Bluesky posts.
-Get-BskyLogging                               Getting PSBlueSky logging
-                                              settings.
-Get-BskyModuleInfo                            Get a summary of the PSBlueSky
-                                              module.
+Get-BskyLogging                               Get PSBlueSky logging settings.
+Get-BskyModuleInfo                            Get a summary of the PSBlueSky module.
 Get-BskyNotification      bsn                 Get Bluesky notifications.
-Get-BskyPreference                            Get PSBlueSky formatting
-                                              preferences.
+Get-BskyPreference                            Get PSBlueSky formatting preferences.
 Get-BskyProfile           bsp                 Get a Bluesky profile.
 Get-BskySession           bss                 Show your current Bluesky session.
 Get-BskyStarterPack       bssp                Get Bluesky starter packs.
@@ -101,11 +119,9 @@ Open-BskyHelp             bshelp              Open the PSBluesky help document.
 Publish-BskyPost          Repost-BskyPost     Repost or quote a Bluesky post.
 Remove-BskyFollow         Unfollow-BskyUser   Unfollow a Bluesky user.
 Remove-BskyLogging                            Remove the PSBlueSky API log file.
-Remove-BskyPreferenceFile                     Delete a PSBlueSky preference
-                                              file.
+Remove-BskyPreferenceFile                     Delete a PSBlueSky preference file.
 Set-BskyLogging                               Configure PSBlueSky API logging.
-Set-BskyPreference                            Set a PSBlueSky formatting
-                                              preference.
+Set-BskyPreference                            Set a PSBlueSky formatting preference.
 Start-BSkySession                             Start a new Bluesky session.
 Unblock-BskyUser                              Unblock a Bluesky user account.
 Update-BskySession        Refresh-BskySession Refresh the Bluesky session token.
@@ -312,6 +328,14 @@ $f[-4] | Publish-BskyPost -Quote "Testing quoting with a PSBluesky command"
 ```
 
 The command has an alias of `Repost-BskyPost`. If you include quote text, the post will be a quote, otherwise it will show as a repost from you.
+
+### Previewing a Post
+
+If you use run `New-BskyPost` with the `-WhatIf` parameter, you will see a preview of the post. If the `pwshSpectreConsole` module is installed, any images will also be displayed in the console.
+
+![Previewing a Bluesky post](images/preview-skeet.png)
+
+If you are using tags or Markdown style links, the preview text should be formatted to reflect that.
 
 ## Profiles
 
@@ -832,7 +856,7 @@ If you have the [pwshSpectreConsole](https://github.com/ShaunLawrie/PwshSpectreC
 
 If you do not have the module installed, you'll get the default output.
 
-### Format-SpectreConsole
+### [Format-SpectreConsole](docs/Format-SpectreConsole.md)
 
 If you __do__ have the pwshSpectreConsole module installed, you can pipe some commands from the PSBluesky module to `Format-SpectreConsole` to customize the output. The command will attempt to display images and separate out tags and links. The output is intended for viewing in the console. This is a format command so you shouldn't attempt to pipe it to another command.
 

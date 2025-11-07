@@ -49,7 +49,7 @@ Mode                 LastWriteTime         Length Name
 
 ### -Confirm
 
-Prompts you for confirmation before running the cmdlet.
+Prompts you for confirmation before running the command.
 
 ```yaml
 Type: SwitchParameter

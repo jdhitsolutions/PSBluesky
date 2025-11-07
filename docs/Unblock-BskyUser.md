@@ -34,7 +34,7 @@ PS C:\> Unblock-BskyUser -UserName "PooBar1234.bsky.social"
 
 ### -Confirm
 
-Prompts you for confirmation before running the cmdlet.
+Prompts you for confirmation before running the command.
 
 ```yaml
 Type: SwitchParameter

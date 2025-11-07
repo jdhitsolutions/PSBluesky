@@ -30,6 +30,8 @@ The command will strip off any Unicode control characters except for a new line.
 
 You can include emojis in your post, however use with caution. If your post is nothing but text with an emoji or two, you shouldn't encounter any issues. However, if you mix emojis with tags or links, the posted message might not display the tags or links properly. Inserting tags and links requires calculations using the line length. Some emojis may throw off the calculations.
 
+If you use -WhatIf, you will see a preview of the post. If the pwshSpectreConsole module is installed, any images will also be displayed in the console.
+
 ## EXAMPLES
 
 ### Example 1
@@ -73,21 +75,32 @@ PS C:\> skeet $s -ImagePath C:\scripts\PSBluesky\images\BlueskyLogo-icon.png -Im
 
 This example is building a multi-line post using a here-string. The message includes a markdown style link and a tag.
 
+### Example 5
+
+```powershell
+PS C:\> New-BskyPost -Message "The upcoming release of the [PSBluesky](https://github.com/jdhitsolutions/PSBluesky) #PowerShell module will preview new posts when using -WhatIf" -WhatIf
+What if: Performing the operation "Post to Bluesky" on target "The upcoming release...".
+
+The upcoming release of the PSBluesky `#PowerShell module will preview new posts when using -WhatIf
+```
+
+The preview will be formatted. If the `pwshSpectreConsole` module is installed, any images will also be displayed in the console.
+
 ## PARAMETERS
 
-### -Confirm
+### -Message
 
-Prompts you for confirmation before running the cmdlet.
+The text of the post.
 
 ```yaml
-Type: SwitchParameter
+Type: String
 Parameter Sets: (All)
-Aliases: cf
+Aliases:
 
-Required: False
-Position: Named
+Required: True
+Position: 0
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -123,17 +136,17 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### -Message
+### -Label
 
-The text of the post.
+When posting an image it can be labeled as e.g. for 'sexual' for sexually suggestive but non-nude, 'nudity' for artistic / non-erotic nude, and 'porn' for adult content. The label must be between 3 and 128 characters in length.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 0
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
@@ -156,19 +169,19 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Label
+### -Confirm
 
-When posting an image it can be labeled as e.g. for 'sexual' for sexually suggestive but non-nude, 'nudity' for artistic / non-erotic nude, and 'porn' for adult content. The label must be between 3 and 128 characters in length.
+Prompts you for confirmation before running the command.
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cf
 
 Required: False
 Position: Named
 Default value: None
-Accept pipeline input: True (ByPropertyName)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

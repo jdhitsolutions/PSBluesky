@@ -1,9 +1,9 @@
 #these are private helper functions
 
-Function _newFacetLink {
+function _newFacetLink {
     # https://docs.bsky.app/docs/advanced-guides/post-richtext
     [CmdletBinding()]
-    Param(
+    param(
         [Parameter(Mandatory, HelpMessage = 'The Bluesky message with the links')]
         [string]$Message,
         [Parameter(Mandatory, HelpMessage = 'The text of the link')]
@@ -20,7 +20,7 @@ Function _newFacetLink {
 
     $PSDefaultParameterValues['_verbose:block'] = 'PRIVATE'
     _verbose -Message ($strings.NewFacet -f $FacetType, $Text, $Message)
-    $feature = Switch ($FacetType) {
+    $feature = switch ($FacetType) {
         'link' {
             _verbose -Message ($strings.FacetLink -f $Uri)
             [PSCustomObject]@{
@@ -67,9 +67,9 @@ Function _newFacetLink {
     }
 }
 
-Function _convertDidToAt {
+function _convertDidToAt {
     [cmdletbinding()]
-    Param(
+    param(
         [parameter(Mandatory, HelpMessage = 'The DID to convert')]
         [ValidatePattern('^did:plc:')]
         [string]$did
@@ -80,9 +80,9 @@ Function _convertDidToAt {
     $at
 }
 
-Function _convertAT {
+function _convertAT {
     [cmdletbinding()]
-    Param(
+    param(
         [parameter(Mandatory, HelpMessage = 'The AT string to convert')]
         [ValidatePattern('^at://')]
         [string]$at,
@@ -122,7 +122,7 @@ function _getPostText {
     }
 }
 
-Function _newSessionObject {
+function _newSessionObject {
     <#
 Convert the API response into a structured and type object
 
@@ -141,7 +141,7 @@ Age             : 01:09:58.6486840
 #>
 
     [CmdletBinding()]
-    Param(
+    param(
         [Parameter(
             Position = 0,
             Mandatory,
@@ -150,10 +150,10 @@ Age             : 01:09:58.6486840
         )]
         [object]$InputObject
     )
-    Begin {
+    begin {
         #not used
     }
-    Process {
+    process {
         [PSCustomObject]@{
             PSTypeName     = 'PSBlueskySession'
             Handle         = $InputObject.handle
@@ -168,7 +168,7 @@ Age             : 01:09:58.6486840
             LogFile        = $InputObject.LogFile
         }
     } #process
-    End {
+    end {
         #11 Nov  2024 Move these definitions to the root module
         <#
         Update-TypeData -TypeName 'PSBlueskySession' -MemberType AliasProperty -MemberName UserName -Value handle -Force
@@ -180,10 +180,10 @@ Age             : 01:09:58.6486840
     }
 }
 
-Function _CreateSession {
+function _CreateSession {
     #there is an API limit of 300 per day for this endpoint
     [CmdletBinding()]
-    Param (
+    param (
         [Parameter(Mandatory, HelpMessage = 'A PSCredential with your Bluesky username and password')]
         [PSCredential]$Credential
     )
@@ -209,7 +209,7 @@ Function _CreateSession {
         Body        = $Body
         ErrorAction = 'Stop'
     }
-    Try {
+    try {
         # 11 Nov 2024 -create a synchronized hashtable and use a background runspace
         # to update the session every 15 minutes
 
@@ -257,9 +257,9 @@ Function _CreateSession {
         $script:PSCmd = [PowerShell]::Create().AddScript({
                 $PDSHOST = 'https://bsky.social'
                 $i = 0
-                Function _newLogData {
+                function _newLogData {
                     [CmdletBinding()]
-                    Param(
+                    param(
                         [Parameter(ValueFromPipeline, Mandatory)]
                         [string]$apiUrl,
                         [Parameter(Mandatory)]
@@ -279,14 +279,14 @@ Function _CreateSession {
                     }
                 }
 
-                Function _updateLog {
+                function _updateLog {
                     [CmdletBinding()]
-                    Param(
+                    param(
                         [Parameter(ValueFromPipeline, Mandatory)]
                         [object]$InputObject,
                         [string]$Path = $BskySession.LogFile
                     )
-                    Begin {
+                    begin {
                         if ($BskySession.LoggingEnabled) {
                             $existing = [System.Collections.Generic.List[object]]::new()
                             #import existing data if found
@@ -295,20 +295,20 @@ Function _CreateSession {
                             }
                         } #if Logging
                     }
-                    Process {
+                    process {
                         if ($BskySession.LoggingEnabled) {
                             $existing.Add($InputObject)
                         }
                     }
-                    End {
-                        If ($BskySession.LoggingEnabled) {
+                    end {
+                        if ($BskySession.LoggingEnabled) {
                             $existing | ConvertTo-Json | Out-File -FilePath $Path -Force -Encoding utf8
                         }
                     }
                 }
                 #!!!!!!! MY DEBUG CODE
                 # $debugFile = "d:\temp\debug.log"
-                Do {
+                do {
                     $ts = New-TimeSpan -Start $BskySession.Date -End (Get-Date)
                     if ($ts.TotalMinutes -ge 60) {
                         $i++
@@ -318,7 +318,7 @@ Function _CreateSession {
                             'Content-Type' = 'application/json'
                         }
                         $apiUrl = "$PDSHost/xrpc/com.atproto.server.refreshSession"
-                        Try {
+                        try {
                             $splat = @{
                                 Uri           = $apiUrl
                                 Method        = 'Post'
@@ -338,15 +338,15 @@ Function _CreateSession {
                             $BskySession.Date = Get-Date
                             $BskySession['RunspaceOperation'] = $i
                         } #try
-                        Catch {
+                        catch {
                             #!!!!!!! DEBUG CODE
                             #"[$(Get-Date)] Failed to authenticate or refresh the session. $($_.Exception.Message)" | out-file $debugFile -Append
                             #$e.message | out-file $debugFile -Append
                         } #catch
                     }
                     Start-Sleep -Seconds 60
-                } While ($True)
-                Exit
+                } while ($True)
+                exit
             })
 
         $script:PSCmd.runspace = $newRunspace
@@ -354,7 +354,7 @@ Function _CreateSession {
         [Void]($psCmd.BeginInvoke())
 
     } #try
-    Catch {
+    catch {
         throw $_
     }
     if ($null -eq $script:BskySession.accessjwt) {
@@ -397,11 +397,91 @@ function _verbose {
 
 }
 
+function _previewPost {
+    [CmdletBinding()]
+    param($Body, $ImagePath, $ImageAlt)
+
+    $post = $Body | ConvertFrom-Json
+    $txt = $Post.record.text
+    if ($Post.record.facets) {
+        $script:pad = 0
+        #sort the facets by start position
+        $facets = $post.record.facets | Sort-Object { $_.index.byteStart }
+        foreach ($f in $facets) {
+            switch -regex ($f.features.'$type') {
+                'link' {
+                    #get the word from the facet boundaries
+                    #Add the length of previous facets
+                    $start = $f.index.byteStart + $script:pad
+                    $end = ($f.index.byteEnd - 1) + $script:pad
+                    $len = ($end - $start) + 1
+                    $wd = $txt[$start..$end] -join ''
+                    #   Write-Host "LINK: $wd [$start to $end] - $($script:pad)" -ForegroundColor yellow
+                    $uri = $f.features.uri
+                    $link = "$($PSStyle.Foreground.Cyan)$($PSStyle.FormatHyperLink($wd,$uri))$($PSStyle.Reset)"
+                    #remove the word
+                    $txt = $txt.Remove($start, $len)
+                    #insert the formatted replacement
+                    $txt = $txt.Insert($start, $link)
+                    $script:pad = $script:pad + ($link.Length - $wd.length)
+                }
+                'tag' {
+                    $start = $f.index.byteStart + $script:pad
+                    $end = ($f.index.byteEnd - 1) + $script:pad
+                    $len = ($end - $start) + 1
+                    $wd = $txt[$start..$end] -join ''
+                    #   Write-Host "TAG:  $wd [$start to $end] - $($script:pad)" -ForegroundColor yellow
+
+                    $tag = "$($PSStyle.Foreground.BrightGreen)$wd$($PSStyle.Reset)"
+                    $txt = $txt.Remove($start, $len)
+                    #   write-Host "inserting $tag at $start" -ForegroundColor yellow
+                    $txt = $txt.Insert($start, $tag)
+                    $script:pad = $script:pad + ($tag.Length - $wd.length)
+                }
+                'mention' {
+                    #get the word from the facet boundaries
+                    #Add the length of previous facets
+                    $start = $f.index.byteStart + $script:pad
+                    $end = ($f.index.byteEnd - 1) + $script:pad
+                    $len = ($end - $start) + 1
+                    $wd = $txt[$start..$end] -join ''
+                    #Write-Host "MENTION:  $wd [$start to $end] - $($script:pad)" -ForegroundColor yellow
+                    $uri = "https://bsky.app/profile/$($f.features.did)"
+                    $link = "$($PSStyle.Foreground.magenta)$($PSStyle.FormatHyperLink($wd,$uri))$($PSStyle.Reset)"
+                    #remove the word
+                    $txt = $txt.Remove($start, $len)
+                    #insert the formatted replacement
+                    $txt = $txt.Insert($start, $link)
+                    $script:pad = $script:pad + ($link.Length - $wd.length)
+                }
+            } #switch
+
+        } #foreach facet
+    }
+
+    #preview the message and image
+    #insert a blank line before the text
+    "`n$txt"
+    Try {
+        [void](Get-Command Get-SpectreImage -ErrorAction Stop)
+        if ($ImagePath) {
+            Get-SpectreImage $imagePath -Width 25 | Out-SpectreHost
+        }
+        if ($ImageAlt) {
+            Write-SpectreHost "ALT: [italic]$imageAlt[/]" | Out-SpectreHost
+        }
+    }
+    Catch {
+        #ignore any errors
+    }
+
+}
+
 #this is a test and trouble shooting function
-Function __GetBskyVar {
+function __GetBskyVar {
     [cmdletbinding()]
     [OutputType('None')]
-    Param()
+    param()
 
     '**Script scope**'
     gv bsky* -Scope script

@@ -34,7 +34,7 @@ What if: Performing the operation "Remove File" on target "C:\temp\api.json".
 
 ### -Confirm
 
-Prompts you for confirmation before running the cmdlet.
+Prompts you for confirmation before running the command.
 
 ```yaml
 Type: SwitchParameter

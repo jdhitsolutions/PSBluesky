@@ -85,8 +85,8 @@ Describe "Module $ModuleName" -Tag Module {
             }
         }
         It 'Should have external help' {
-            '..\en-us' | Should -Exist
-            '..\en-us\PSBluesky-help.xml' | Should -Exist
+            '..\en-US' | Should -Exist
+            '..\en-US\PSBluesky-help.xml' | Should -Exist
         }
         It 'Should have a Pester test' {
             #this is probably silly since I'm using a Pester test.
